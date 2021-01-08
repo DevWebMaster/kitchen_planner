@@ -1,0 +1,123 @@
+.delete-selected-button, .gc-refresh{	width:100px;
+}
+
+.table-scroller-wrapper {
+    display: block;
+    max-height: 400px;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.gc-container .clear-search {
+  position: absolute;
+  margin-left: -18px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.gc-container .clear-all-search {
+  cursor: pointer;
+  margin-left: -11px;
+  margin-top: 3px;
+  position: absolute;
+}
+.gc-container .clear-search:hover, .gc-container .clear-all-search:hover {
+  color: #555 !important;
+}
+.gc-container .searchable-input.value-not-empty {
+  border-color: #444;
+  border-style: dashed;
+}
+
+.searchable-input{	font-size:12px!important;}
+
+
+.chosen-container {
+    margin-top: 50px;
+}
+
+.upload-success-url{	padding-top: 50px!important;}
+
+.report-div{	padding:10px;}
+
+.small-loading
+{
+	background: url('images/load.gif') no-repeat;
+	width:100%;
+	height:100px;
+	padding-left:25px;
+	padding-top:1px;
+	display: none;
+	text-align:center;
+}
+
+/* TEMPLATE STYLES */
+.top-nav-collapse {
+    background-color: #82b1ff !important;
+}
+
+.navbar:not(.top-nav-collapse) {
+    background: #82b1ff !important;
+}
+
+@media (max-width: 768px) {
+    .navbar:not(.top-nav-collapse) {
+        background: #82b1ff !important;
+    }
+}
+
+h5 {
+    letter-spacing: 3px;
+}
+
+
+.navbar.scrolling-navbar.top-nav-collapse >.nav-link{	color:#FFFFFF;}
+
+        main {
+            padding-top: 3rem;
+            padding-bottom: 2rem;
+        }
+
+        .widget-wrapper {
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 2rem;
+        }
+
+        .reviews {
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 1rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .price {
+            position: absolute;
+            left: 0;
+            top: 0;
+            margin-top: -2px;
+        }
+
+        .price .tag {
+            margin: 0;
+        }
+
+        .navbar {
+            background-color: #676b74;
+        }
+
+        footer.page-footer {
+            background-color: #676b74;
+            margin-top: 2rem;
+        }
+        .card {
+            font-weight: 300;
+        }
+        .navbar .btn-group .dropdown-menu a:hover {
+            color: #000 !important;
+        }
+        .navbar .btn-group .dropdown-menu a:active {
+            color: #fff !important;
+        }
+/* TEMPLATE STYLES */

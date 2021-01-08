@@ -1,0 +1,288 @@
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:400,500,500i,600,600i,700,700i |Cormorant+SC:400,500,600,700');
+
+/* ====================================
+General Styles
+==================================== */
+
+
+#home-slider {
+  height: calc( 100vh - 80px);
+  width: 100vw;
+  position: relative;
+}
+.swiper-container {
+  height: 100%;
+  width: 100%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+.swiper-image {
+	width: 50%;
+	height: 100%;
+	background-position:center !important;
+    background-size: cover !important;
+}
+/* .swiper-image-inner {
+  background-size: cover;
+  background-position: center center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.swiper-image-inner.swiper-image-left {
+  padding: 4rem;
+} */
+
+.swiper-slide.swiper-slide-active .swiper-image-left {
+  -webkit-filter: sepia(0%);
+          filter: sepia(0%);
+}
+
+
+.swiper-container {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  /* Fix of Webkit flickering */
+  z-index: 1;
+}
+.swiper-container-no-flexbox .swiper-slide {
+  float: left;
+}
+.swiper-container-vertical > .swiper-wrapper {
+  -webkit-box-orient: vertical;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.swiper-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transition-property: -webkit-transform;
+  transition-property: -webkit-transform;
+  transition-property: transform;
+  transition-property: transform, -webkit-transform;
+  box-sizing: content-box;
+}
+.swiper-container-android .swiper-slide, .swiper-wrapper {
+  -webkit-transform: translate3d(0px, 0, 0);
+  transform: translate3d(0px, 0, 0);
+}
+.swiper-container-multirow > .swiper-wrapper {
+  -webkit-box-lines: multiple;
+  -moz-box-lines: multiple;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.swiper-container-free-mode > .swiper-wrapper {
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+  margin: 0 auto;
+}
+.swiper-slide {
+  -webkit-flex-shrink: 0;
+  -ms-flex: 0 0 auto;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #fff;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  
+}
+/* Auto Height */
+.swiper-container-autoheight, .swiper-container-autoheight .swiper-slide {
+  height: auto;
+}
+.swiper-container-autoheight .swiper-wrapper {
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -webkit-transition-property: -webkit-transform, height;
+  -webkit-transition-property: height, -webkit-transform;
+  transition-property: height, -webkit-transform;
+  transition-property: transform, height;
+  transition-property: transform, height, -webkit-transform;
+}
+/* a11y */
+.swiper-container .swiper-notification {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  opacity: 0;
+  z-index: -1000;
+}
+/* IE10 Windows Phone 8 Fixes */
+.swiper-wp8-horizontal {
+  -ms-touch-action: pan-y;
+  touch-action: pan-y;
+}
+.swiper-wp8-vertical {
+  -ms-touch-action: pan-x;
+  touch-action: pan-x;
+}
+
+
+
+/*  */
+.swiper-content{
+	display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    height: 100%;
+	padding: 50px;
+	position: relative;
+	max-width: 600px;
+    margin: auto;
+}
+.swiper-content .title{
+	line-height: 60px;
+	font-size:50px;
+}
+.swiper-pagination{
+	position:fixed;
+	right:0;
+	top:50%;
+	z-index: 99999;
+	transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+}
+.swiper-pagination span{
+	display: block;
+    font-size: 14px;
+    color: #000;
+    text-align: center;
+    font-weight: 700;
+    opacity: 0.3;
+    padding: 5px 10px;
+	text-shadow: 1px 2px 0px rgba(255,255,255,0.5);
+}
+.swiper-pagination span.swiper-pagination-bullet-active{
+	opacity:1;
+}
+
+.swiper-pagination span:nth-child(1):after{
+	content:"01";
+}
+.swiper-pagination span:nth-child(2):after{
+	content:"02";
+}
+.swiper-pagination span:nth-child(3):after{
+	content:"03";
+}
+.swiper-pagination span:nth-child(4):after{
+	content:"04";
+}
+.swiper-pagination span:nth-child(5):after{
+	content:"05";
+}
+.swiper-pagination span:nth-child(6):after{
+	content:"06";
+}
+.swiper-pagination span:nth-child(7):after{
+	content:"07";
+}
+.swiper-pagination span:nth-child(8):after{
+	content:"08";
+}
+.swiper-pagination span:nth-child(9):after{
+	content:"09";
+}
+.swiper-pagination span:nth-child(10):after{
+	content:"10";
+}
+.swiper-bg{
+	position:relative;
+	z-index:1;
+}
+.swiper-bg:after{
+	background: #525252;
+    top:0;
+    content: "";
+    height: 100%;
+    left: 0;
+    mix-blend-mode: multiply;
+    opacity: 0.2;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+}
+.swiper-content p{
+	margin-bottom:35px;
+}
+.dark .swiper-image,
+.dark .swiper-content{
+	background:#111723;
+}
+.dark .swiper-pagination span,
+.dark .swiper-content .title{
+	color:#fff;
+}
+.dark .swiper-pagination span{
+	text-shadow:none;
+}
+.dark .swiper-content p{
+	color:#fff;
+	opacity:0.8;
+}
+
+@media only screen and (max-width: 991px) {
+	.swiper-content .title {
+		line-height: 40px;
+		font-size: 30px;
+	}
+	#home-slider {
+		height: calc( 100vh - 65px);
+	}
+}
+@media only screen and (max-width: 576px) {
+	.swiper-content{
+		padding: 20px 50px 20px 15px;
+	}
+	.swiper-image{
+		width: 100%;
+		height:75%;
+	}
+	.swiper-slide{
+		flex-direction: column;
+	}
+	.swiper-content .title{
+		line-height: 30px;
+		font-size: 24px;
+		margin-bottom: 15px;
+	}
+	.swiper-content .btn {
+		padding: 12px 30px;
+	}
+	.swiper-content p{
+		margin-bottom: 20px;
+	}
+	.swiper-bg{
+		height:25%;
+	}
+}
