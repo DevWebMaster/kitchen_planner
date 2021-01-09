@@ -9,15 +9,14 @@ require_once FCPATH . 'vendor'.DIRECTORY_SEPARATOR.'PHPMailer'.DIRECTORY_SEPARAT
 require_once FCPATH . 'vendor'.DIRECTORY_SEPARATOR.'PHPMailer'.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'Exception.php';
 require_once FCPATH . 'vendor'.DIRECTORY_SEPARATOR.'FPDI'.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'autoload.php';
 
-return;
 class Main extends CI_Controller
 {
 	public function __construct()
     {
         parent::__construct();
         // $this->load->database();
-        $this->load->model('customer/customer_model', 'customer_model');
-        $this->load->model('customer/pos_model', 'pos_model');
+        $this->load->model('customer/Customer_model', 'customer_model');
+        $this->load->model('customer/Pos_model', 'pos_model');
         $this->load->helper('url');
 
     }
