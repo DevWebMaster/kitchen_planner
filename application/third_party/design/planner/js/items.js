@@ -213,7 +213,6 @@ $(document).ready(function() {
       success: function(response){
         $('.search-group').show();
         $('.short-search-group').hide();
-        console.log(response);
         var thumbnail_menu = response.data
         if(thumbnail_menu && thumbnail_menu.length > 0){
           for (var i = 0; i < thumbnail_menu.length; i++) {
