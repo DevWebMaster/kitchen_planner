@@ -8,7 +8,7 @@ const fs = require('fs');
 
 const file_path = __dirname.split('application')[0]+'uploads/';
 
-
+// const hostname = 'localhost';
 //set up server port
 const port = process.env.PORT || 8080;
 
@@ -25,7 +25,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: "localhost",
   user: "root",
-  password: "123qweasdzxc!@#QWE",
+  password: "",
   database: "kitchen"
 });
 
@@ -83,7 +83,7 @@ app.post('/get_main_menu', function(req, res){
 
   pool.getConnection(function(err, connection) {
     if (err) throw err;
-    connection.query("SELECT * FROM tbl_main_menu", function (err, result) {
+    connection.query("SELECT a1.id, a1.name, concat('planner/', a1.image) as image FROM tbl_main_menu as a1", function (err, result) {
       if (err) throw err;
       connection.release();
       res.send({ data: result });
@@ -98,7 +98,7 @@ app.post('/get_sub_menu', function(req, res){
 
   pool.getConnection(function(err, connection) {
     if (err) throw err;
-    connection.query("SELECT * FROM tbl_sub_menu where main_id = "+main_menu_id, function (err, result) {
+    connection.query("SELECT a1.id, a1.main_id, a1.name, concat('planner/', a1.image) as image FROM tbl_sub_menu as a1 where main_id = "+main_menu_id, function (err, result) {
       if (err) throw err;
       // console.log(result);
       connection.release();
@@ -115,7 +115,7 @@ app.post('/get_shortkey_menu', function(req, res){
 
   pool.getConnection(function(err, connection) {
     if (err) throw err;
-    connection.query("SELECT a1.*, a2.name as main_menu, a3.name as sub_menu, a4.name as countertop_type, a4.price as countertop_type_price, a5.name as skirting_type, a5.price as skirting_type_price, a6.name as countertop_color, a6.price as countertop_color_price, a7.name as exterio_color, a7.price as exterio_color_price, a8.name as interior_color, a8.price as interior_color_price, a9.name as skirting_color, a9.price as skirting_color_price, a10.name as dooropen_type, a10.price as dooropen_type_price, a11.name as door_thickness, a11.price as door_thickness_price, a12.name as model_type FROM tbl_model_list as a1 "
+    connection.query("SELECT a1.model_id, a1.main_id, a1.sub_id, a1.name, concat('planner/', a1.image) as image, concat('planner/', a1.model) as model, a1.type, a1.countertop_type, a1.countertop_color, a1.exterio_color, a1.interior_color, a1.skirting_color, a1.skirting_type, a1.dooropen_type, a1.door_thickness, a1.cube_id, a1.summary, a2.name as main_menu, a3.name as sub_menu, a4.name as countertop_type, a4.price as countertop_type_price, a5.name as skirting_type, a5.price as skirting_type_price, a6.name as countertop_color, a6.price as countertop_color_price, a7.name as exterio_color, a7.price as exterio_color_price, a8.name as interior_color, a8.price as interior_color_price, a9.name as skirting_color, a9.price as skirting_color_price, a10.name as dooropen_type, a10.price as dooropen_type_price, a11.name as door_thickness, a11.price as door_thickness_price, a12.name as model_type FROM tbl_model_list as a1 "
                         +"LEFT JOIN tbl_main_menu as a2 ON a1.main_id = a2.id "
                         +"LEFT JOIN tbl_sub_menu as a3 ON a1.sub_id = a3.id "
                         +"LEFT JOIN tbl_material as a4 ON a1.countertop_type = a4.material_id "
@@ -146,7 +146,7 @@ app.post('/get_thumbnail_menu', function(req, res){
   pool.getConnection(function(err, connection) {
     if (err) throw err;
     if(search_str != undefined){
-      connection.query("SELECT a1.*, a2.name as main_menu, a3.name as sub_menu, a4.name as countertop_type, a4.price as countertop_type_price, a5.name as skirting_type, a5.price as skirting_type_price, a6.name as countertop_color, a6.price as countertop_color_price, a7.name as exterio_color, a7.price as exterio_color_price, a8.name as interior_color, a8.price as interior_color_price, a9.name as skirting_color, a9.price as skirting_color_price, a10.name as dooropen_type, a10.price as dooropen_type_price, a11.name as door_thickness, a11.price as door_thickness_price, a12.name as model_type FROM tbl_model_list as a1 "
+      connection.query("SELECT a1.model_id, a1.main_id, a1.sub_id, a1.name, concat('planner/', a1.image) as image, concat('planner/', a1.model) as model, a1.type, a1.countertop_type, a1.countertop_color, a1.exterio_color, a1.interior_color, a1.skirting_color, a1.skirting_type, a1.dooropen_type, a1.door_thickness, a1.cube_id, a1.summary, a2.name as main_menu, a3.name as sub_menu, a4.name as countertop_type, a4.price as countertop_type_price, a5.name as skirting_type, a5.price as skirting_type_price, a6.name as countertop_color, a6.price as countertop_color_price, a7.name as exterio_color, a7.price as exterio_color_price, a8.name as interior_color, a8.price as interior_color_price, a9.name as skirting_color, a9.price as skirting_color_price, a10.name as dooropen_type, a10.price as dooropen_type_price, a11.name as door_thickness, a11.price as door_thickness_price, a12.name as model_type FROM tbl_model_list as a1 "
                         +"LEFT JOIN tbl_main_menu as a2 ON a1.main_id = a2.id "
                         +"LEFT JOIN tbl_sub_menu as a3 ON a1.sub_id = a3.id "
                         +"LEFT JOIN tbl_material as a4 ON a1.countertop_type = a4.material_id "
@@ -165,7 +165,7 @@ app.post('/get_thumbnail_menu', function(req, res){
         res.send({ data: result });
       });
     }else{
-      connection.query("SELECT a1.*, a2.name as main_menu, a3.name as sub_menu, a4.name as countertop_type, a4.price as countertop_type_price, a5.name as skirting_type, a5.price as skirting_type_price, a6.name as countertop_color, a6.price as countertop_color_price, a7.name as exterio_color, a7.price as exterio_color_price, a8.name as interior_color, a8.price as interior_color_price, a9.name as skirting_color, a9.price as skirting_color_price, a10.name as dooropen_type, a10.price as dooropen_type_price, a11.name as door_thickness, a11.price as door_thickness_price, a12.name as model_type FROM tbl_model_list as a1 "
+      connection.query("SELECT a1.model_id, a1.main_id, a1.sub_id, a1.name, concat('planner/', a1.image) as image, concat('planner/', a1.model) as model, a1.type, a1.countertop_type, a1.countertop_color, a1.exterio_color, a1.interior_color, a1.skirting_color, a1.skirting_type, a1.dooropen_type, a1.door_thickness, a1.cube_id, a1.summary, a2.name as main_menu, a3.name as sub_menu, a4.name as countertop_type, a4.price as countertop_type_price, a5.name as skirting_type, a5.price as skirting_type_price, a6.name as countertop_color, a6.price as countertop_color_price, a7.name as exterio_color, a7.price as exterio_color_price, a8.name as interior_color, a8.price as interior_color_price, a9.name as skirting_color, a9.price as skirting_color_price, a10.name as dooropen_type, a10.price as dooropen_type_price, a11.name as door_thickness, a11.price as door_thickness_price, a12.name as model_type FROM tbl_model_list as a1 "
                         +"LEFT JOIN tbl_main_menu as a2 ON a1.main_id = a2.id "
                         +"LEFT JOIN tbl_sub_menu as a3 ON a1.sub_id = a3.id "
                         +"LEFT JOIN tbl_material as a4 ON a1.countertop_type = a4.material_id "
@@ -353,7 +353,7 @@ app.post('/get_observation', function(req, res){
   var user_type = req.body.user_type;
   var product_id = req.body.product_id;
   res.contentType('json');
-  var query = "SELECT a1.*, a4.name as countertop_type, a4.price as countertop_type_price, a5.name as skirting_type, a5.price as skirting_type_price, a6.name as countertop_color, a6.price as countertop_color_price, a7.name as exterio_color, a7.price as exterio_color_price, a8.name as interior_color, a8.price as interior_color_price, a9.name as skirting_color, a9.price as skirting_color_price, a10.name as dooropen_type, a10.price as dooropen_type_price, a11.name as door_thickness, a11.price as door_thickness_price, a12.name as model_type FROM tbl_model_select_log as a2 "
+  var query = "SELECT a1.model_id, a1.main_id, a1.sub_id, a1.name, concat('planner/', a1.image) as image, concat('planner/', a1.model) as model, a1.type, a1.countertop_type, a1.countertop_color, a1.exterio_color, a1.interior_color, a1.skirting_color, a1.skirting_type, a1.dooropen_type, a1.door_thickness, a1.cube_id, a1.summary, a4.name as countertop_type, a4.price as countertop_type_price, a5.name as skirting_type, a5.price as skirting_type_price, a6.name as countertop_color, a6.price as countertop_color_price, a7.name as exterio_color, a7.price as exterio_color_price, a8.name as interior_color, a8.price as interior_color_price, a9.name as skirting_color, a9.price as skirting_color_price, a10.name as dooropen_type, a10.price as dooropen_type_price, a11.name as door_thickness, a11.price as door_thickness_price, a12.name as model_type FROM tbl_model_select_log as a2 "
                         +"LEFT JOIN tbl_model_list as a1 ON a1.model_id = a2.model_id "
                         +"LEFT JOIN tbl_material as a4 ON a1.countertop_type = a4.material_id "
                         +"LEFT JOIN tbl_material as a5 ON a1.skirting_type = a5.material_id "
@@ -371,7 +371,6 @@ app.post('/get_observation', function(req, res){
       if (err) throw err;
       connection.release();
       res.send({ data: result })
-
     });
   });
 })
@@ -390,7 +389,7 @@ app.post('/get_customer', function(req, res){
 app.set("views", path.join(__dirname, "planner"));
 app.engine("html", require('ejs').renderFile);
 app.set('view engine', 'ejs');
-app.use(express.static(path.join(__dirname, 'planner')))
+app.use(express.static(path.join(__dirname, '')))
 router.get("/", (req, res)=>{
   res.render("index.html");
 });
