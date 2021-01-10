@@ -62,6 +62,7 @@
 			$this->db->from('tbl_order as a1');
 			$this->db->join('tbl_product_history_log as a2', 'a1.product_id = a2.product_id', 'left');
 			$this->db->join('tbl_customers as a3', 'a3.id = a1.customer_id', 'left');
+			$this->db->where('a1.pos_id <>', 0);
 			if($pos_id != 0){
 				$this->db->where('a1.pos_id', $pos_id);
 			}
@@ -75,6 +76,7 @@
 			$this->db->from('tbl_order as a1');
 			$this->db->join('tbl_product_history_log as a2', 'a1.product_id = a2.product_id', 'left');
 			$this->db->join('tbl_customers as a3', 'a1.customer_id = a3.id', 'left');
+			$this->db->where('a1.pos_id <>', 0);
 			if($pos_id != 0){
 				$this->db->where('a1.pos_id', $pos_id);
 			}

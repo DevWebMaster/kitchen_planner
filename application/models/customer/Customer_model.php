@@ -331,7 +331,7 @@ class Customer_model extends CI_Model{
 		$this->db->from('tbl_order as a1');
 		$this->db->join('tbl_product_history_log as a2', 'a1.product_id = a2.product_id', 'left');
 		$this->db->where('a1.customer_id', $customer_id);
-		$this->db->where('a2.pos_id', 0);
+		// $this->db->where('a2.pos_id', 0);
 
 		$query = $this->db->get();
 		return $query->num_rows();
@@ -341,7 +341,7 @@ class Customer_model extends CI_Model{
 		$this->db->from('tbl_order as a1');
 		$this->db->join('tbl_product_history_log as a2', 'a1.product_id = a2.product_id', 'left');
 		$this->db->where('a1.customer_id', $customer_id);
-		$this->db->where('a2.pos_id', 0);
+		// $this->db->where('a2.pos_id', 0);
 		if($search_key != ''){
 			$this->db->like('a2.product_name', $search_key);
 		}
