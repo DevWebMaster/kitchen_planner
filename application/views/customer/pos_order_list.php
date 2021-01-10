@@ -151,7 +151,7 @@
 				if(dzRes){
 					// window.location.href = "http://localhost:8080/?customer_id=<?=$this->session->userdata('user_id'); ?>";
 
-					window.open('http://localhost:8080/?customer_id=<?=$this->session->userdata('user_id'); ?>', '_blank');
+					window.open('http://207.154.243.81:8081/?designpkitchen<?=$this->session->userdata('user_id'); ?>', '_blank');
 				}else{
 					toastr.warning('Loading is failed.');
 					// msgDiv = '<p style="color: #EA4335">Failed to sending the EMAIL.</p>';

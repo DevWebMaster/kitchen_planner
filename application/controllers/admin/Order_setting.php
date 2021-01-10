@@ -46,9 +46,9 @@ class Order_setting extends My_Controller {
             $inx++;
             $row_inx = $inx + intval($start);
             if($value['check_flag'] == 2){
-                $action_str = '<!--a style="color:white;" disabled h_id="'.$value['id'].'" id="confirmed'.$value['id'].'" class="mr-1 btn-sm btn btn-info btn-confirmed">Confirmed</a--><a href="'.base_url().$value['pdf_file'].'" target="_blank" style="color:white;" class="mr-1 btn-sm btn btn-info btn-pdf">Order</a><a style="color:white;" href="http://localhost:8080/?customer_id=admin-'.$value['product_id'].'" target="_blank" class="btn btn-info btn-sm">3D Design</a>';
+                $action_str = '<!--a style="color:white;" disabled h_id="'.$value['id'].'" id="confirmed'.$value['id'].'" class="mr-1 btn-sm btn btn-info btn-confirmed">Confirmed</a--><a href="'.base_url().$value['pdf_file'].'" target="_blank" style="color:white;" class="mr-1 btn-sm btn btn-info btn-pdf">Order</a><a style="color:white;" href="http://207.154.243.81:8081/?designckitchenadminplanner'.$value['product_id'].'" target="_blank" class="btn btn-info btn-sm">3D Design</a>';
             }else if($value['check_flag'] == 1){
-                $action_str = '<a style="color:white;" h_id="'.$value['id'].'" id="confirm'.$value['id'].'" class="mr-1 btn-sm btn btn-info btn-confirm" data-toggle="modal" data-target="#ordermodal">Confirm</a><a style="color:white;" href="http://localhost:8080/?customer_id=admin-'.$value['product_id'].'" target="_blank" class="btn btn-info btn-sm">3D Design</a>';
+                $action_str = '<a style="color:white;" h_id="'.$value['id'].'" id="confirm'.$value['id'].'" class="mr-1 btn-sm btn btn-info btn-confirm" data-toggle="modal" data-target="#ordermodal">Confirm</a><a style="color:white;" href="http://207.154.243.81:8081/?designckitchenadminplanner'.$value['product_id'].'" target="_blank" class="btn btn-info btn-sm">3D Design</a>';
             }
             $data[] = array( 
               "no"=>$row_inx,
@@ -128,7 +128,7 @@ class Order_setting extends My_Controller {
               "furniture_cost"=>$value['estimated_furniture_cost'],
               "other_cost"=>($value['estimated_countertio_cost']-$value['estimated_furniture_cost']),
               "status"=>$value['status'],
-              "action"=>'<a style="color:white;" href="http://localhost:8080/?customer_id=admin-'.$value['product_id'].'" target="_blank" class="btn btn-info btn-sm mr-1">3D Design</a><a href="'.base_url().$value['pdf_file'].'" target="_blank" style="color:white;" class="mr-1 btn-sm btn btn-info btn-pdf">Order</a>'
+              "action"=>'<a style="color:white;" href="http://207.154.243.81:8081/?designckitchenadminplanner'.$value['product_id'].'" target="_blank" class="btn btn-info btn-sm mr-1">3D Design</a><a href="'.base_url().$value['pdf_file'].'" target="_blank" style="color:white;" class="mr-1 btn-sm btn btn-info btn-pdf">Order</a>'
            );
 
             

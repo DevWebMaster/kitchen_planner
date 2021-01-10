@@ -281,16 +281,16 @@ class Main extends CI_Controller
                 $act_str = '';
             }else if($value['check_order'] == 1){  //confirm
                 if($user_role == 1){
-                    $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="confirm'.$value['product_id'].'" class="btn btn-confirm mr-1">Confirm</a><a h_id="'.$value['product_id'].'" id="pdf'.$value['product_id'].'" class="btn btn-pdf mr-1">PDF</a><a h_id="'.$value['product_id'].'" id="email'.$value['product_id'].'" class="btn btn-email mr-1">EMail</a><a href="http://localhost:8080/?customer_id='.$user_id.'-'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
+                    $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="confirm'.$value['product_id'].'" class="btn btn-confirm mr-1">Confirm</a><a h_id="'.$value['product_id'].'" id="pdf'.$value['product_id'].'" class="btn btn-pdf mr-1">PDF</a><a h_id="'.$value['product_id'].'" id="email'.$value['product_id'].'" class="btn btn-email mr-1">EMail</a><a href="http://207.154.243.81:8081/?designckitchen'.$user_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
 
                 }else if($user_role == 2){
-                    $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="confirm'.$value['product_id'].'" class="btn btn-confirm mr-1">Confirm</a><a h_id="'.$value['product_id'].'" id="pdf'.$value['product_id'].'" class="btn btn-pdf mr-1">PDF</a><a h_id="'.$value['product_id'].'" id="email'.$value['product_id'].'" class="btn btn-email mr-1">EMail</a><a href="http://localhost:8080/?pos_id='.$user_id.'-'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
+                    $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="confirm'.$value['product_id'].'" class="btn btn-confirm mr-1">Confirm</a><a h_id="'.$value['product_id'].'" id="pdf'.$value['product_id'].'" class="btn btn-pdf mr-1">PDF</a><a h_id="'.$value['product_id'].'" id="email'.$value['product_id'].'" class="btn btn-email mr-1">EMail</a><a href="http://207.154.243.81:8081/?designpkitchen'.$user_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
                 }
             }else{  // 0: budget
                 if($user_role == 1){
-                    $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="budget'.$value['product_id'].'" class="btn btn-budget mr-1">Budget</a><a href="http://localhost:8080/?customer_id='.$user_id.'-'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
+                    $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="budget'.$value['product_id'].'" class="btn btn-budget mr-1">Budget</a><a href="http://207.154.243.81:8081/?designckitchen'.$user_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
                 }else if($user_role == 2){
-                    $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="budget'.$value['product_id'].'" class="btn btn-budget mr-1">Budget</a><a href="http://localhost:8080/?pos_id='.$user_id.'-'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
+                    $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="budget'.$value['product_id'].'" class="btn btn-budget mr-1">Budget</a><a href="http://207.154.243.81:8081/?designpkitchen'.$user_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
                 }
                 
             }
@@ -570,10 +570,10 @@ class Main extends CI_Controller
             $inx++;
             $row_inx = $inx + intval($start);
             if($value['check_flag'] == 2){
-                $action_str = '<div style="display: inline-flex;"><!--a disabled  style="background: green; color: white;" h_id="'.$value['id'].'" id="confirmed'.$value['id'].'" class="btn btn-confirm mr-1">Confirmed</a--><a href="'.base_url().$value['pdf_file'].'" class="btn btn-pdf mr-1">See Order</a><a href="http://localhost:8080/?customer_id='.$customer_id.'-'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
+                $action_str = '<div style="display: inline-flex;"><!--a disabled  style="background: green; color: white;" h_id="'.$value['id'].'" id="confirmed'.$value['id'].'" class="btn btn-confirm mr-1">Confirmed</a--><a href="'.base_url().$value['pdf_file'].'" class="btn btn-pdf mr-1">See Order</a><a href="http://207.154.243.81:8081/?designckitchen'.$customer_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
             }
             else if($value['check_flag'] == 1){
-                $action_str = '<div style="display: inline-flex;"><a disabled  style="background: green; color: white;" h_id="'.$value['id'].'" id="confirm'.$value['id'].'" class="btn btn-confirm mr-1">Ordered</a><a href="http://localhost:8080/?customer_id='.$customer_id.'-'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
+                $action_str = '<div style="display: inline-flex;"><a disabled  style="background: green; color: white;" h_id="'.$value['id'].'" id="confirm'.$value['id'].'" class="btn btn-confirm mr-1">Ordered</a><a href="http://207.154.243.81:8081/?designckitchen'.$customer_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
             }else if($value['check_flag'] == 0){
                 $action_str = '<div style="display:inline-flex;"><a h_id="'.$value['id'].'" id="order'.$value['id'].'" class="btn btn-order mr-1" data-toggle="modal" data-target="#ordermodal">Order</a></div>';
             }
@@ -637,9 +637,9 @@ class Main extends CI_Controller
             $inx++;
             $row_inx = $inx + intval($start);
             if($value['check_flag'] == 2){
-                $action_str = '<div style="display:inline-flex;"><!--a disabled  style="background: green; color: white;" h_id="'.$value['id'].'" id="confirmed'.$value['id'].'" class="btn btn-confirmed mr-1">Confirmed</a--><a href="'.base_url().$value['pdf_file'].'" class="btn btn-pdf mr-1" target="_blank">See Order</a><a href="http://localhost:8080/?pos_id='.$pos_id.'-'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
+                $action_str = '<div style="display:inline-flex;"><!--a disabled  style="background: green; color: white;" h_id="'.$value['id'].'" id="confirmed'.$value['id'].'" class="btn btn-confirmed mr-1">Confirmed</a--><a href="'.base_url().$value['pdf_file'].'" class="btn btn-pdf mr-1" target="_blank">See Order</a><a href="http://207.154.243.81:8081/?designpkitchen'.$pos_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
             }else if($value['check_flag'] == 0){
-                $action_str = '<div style="display:inline-flex;"><a h_id="'.$value['id'].'" id="confirm'.$value['id'].'" class="btn btn-confirm mr-1" data-toggle="modal" data-target="#ordermodal">Confirm</a><a target="_black" href="'.base_url().$value['pdf_file'].'" class="btn btn-pdf mr-1">See Order</a><a href="http://localhost:8080/?pos_id='.$pos_id.'-'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
+                $action_str = '<div style="display:inline-flex;"><a h_id="'.$value['id'].'" id="confirm'.$value['id'].'" class="btn btn-confirm mr-1" data-toggle="modal" data-target="#ordermodal">Confirm</a><a target="_black" href="'.base_url().$value['pdf_file'].'" class="btn btn-pdf mr-1">See Order</a><a href="http://207.154.243.81:8081/?designpkitchen'.$pos_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
             }
             $data[] = array( 
               "no"=>$row_inx,
