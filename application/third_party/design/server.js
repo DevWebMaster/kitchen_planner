@@ -8,7 +8,7 @@ const fs = require('fs');
 
 const file_path = __dirname.split('application')[0]+'uploads/';
 
-// const hostname = 'localhost';
+const hostname = 'localhost';
 //set up server port
 const port = process.env.PORT || 8080;
 
@@ -390,7 +390,7 @@ app.post('/get_customer', function(req, res){
 app.set("views", path.join(__dirname, "planner"));
 app.engine("html", require('ejs').renderFile);
 app.set('view engine', 'ejs');
-app.use(express.static(path.join(__dirname, '')))
+app.use(express.static(path.join(__dirname, 'planner')))
 router.get("/", (req, res)=>{
   res.render("index.html");
 });
@@ -398,7 +398,7 @@ router.get("/", (req, res)=>{
 app.use("/", router);
 
   // listen for requests
-const server = app.listen(port, () => {
+const server = app.listen(port,hostname, () => {
     console.log(`Server is listening on port ${port}`);
 });
 

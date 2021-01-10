@@ -2,8 +2,8 @@
 $(document).ready(function() {
   var url_str = window.location.search;
   if(url_str != '' && url_str != 'undefined'){
-    var user_id_tmp = url_str.split('=')[1];
-    var user_id = user_id_tmp.split('-')[0];
+    var user_id_tmp = url_str.split('kitchen')[1];
+    var user_id = user_id_tmp.split('planner')[0];
     // var product_id = user_id_tmp.split('-')[1];
     // if(product_id != 0){
     //   $.ajax({
@@ -23,10 +23,10 @@ $(document).ready(function() {
       $('#user_label').html('Admin User');
       localStorage.setItem("g_current_user_id", 'Admin User');
     }else{
-      var prefix = url_str.split('=')[0];
-      if(prefix == '?customer_id'){
+      var prefix = url_str.split('kitchen')[0];
+      if(prefix == '?designc'){
         var user_flag = 1;
-      }else if(prefix == '?pos_id'){
+      }else if(prefix == '?designp'){
         var user_flag = 2;
       }
       localStorage.setItem("g_current_user_id", user_id);

@@ -85,7 +85,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         		<li><a href="<?= base_url('customer/main/'); ?>">INICIO  </a></li>
                         	<?php } ?>
                         	<?php if(!empty($this->session->userdata('is_customer_logged'))){ ?>
-                        		<li><a href="http://207.154.243.81:8080/?customer_id=<?=$this->session->userdata('customer_id'); ?>-0" target="blank">DISEÑAR COCINA   </a></li>
+                        		<li><a href="http://207.154.243.81:8081/?designc=<?=$this->session->userdata('customer_id'); ?>-0" target="blank">DISEÑAR COCINA   </a></li>
                         	<?php } ?>
                         		<?php if($data == 'project'){ ?>
                         		<li class="active"><a href="<?php echo base_url('customer/main/project');?>">PROYECTOS </a></li>

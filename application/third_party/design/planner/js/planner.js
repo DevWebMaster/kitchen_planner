@@ -635,8 +635,8 @@ var mainControls = function(blueprint3d) {
     $("#budget1").click(getBudget);
     var url_str = window.location.search;
     if(url_str != '' && url_str != 'undefined'){
-      var user_id_tmp = url_str.split('=')[1];
-      var product_id = user_id_tmp.split('-')[1];
+      var user_id_tmp = url_str.split('kitchen')[1];
+      var product_id = user_id_tmp.split('planner')[1];
       if(product_id != 0){
         $.ajax({
           url: '/load_product',

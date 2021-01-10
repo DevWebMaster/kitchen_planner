@@ -90,9 +90,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         		<li><a href="<?= base_url('customer/main/'); ?>">INICIO  </a></li>
                         	<?php } ?>
                         	<?php if(!empty($this->session->userdata('is_customer_logged'))){ ?>
-                        		<li><a href="http://207.154.243.81:8080/?customer_id=<?=$this->session->userdata('user_id'); ?>-0" target="blank">DISEÑAR COCINA   </a></li>
+                        		<li><a href="http://localhost:8080/?designckitchen<?=$this->session->userdata('user_id'); ?>planner0" target="blank">DISEÑAR COCINA   </a></li>
                         	<?php }else if(!empty($this->session->userdata('is_pos_logged'))){ ?>
-                                <li><a href="http://207.154.243.81:8080/?pos_id=<?=$this->session->userdata('user_id'); ?>-0" target="blank">DISEÑAR COCINA   </a></li>
+                                <li><a href="http://localhost:8080/?designpkitchen<?=$this->session->userdata('user_id'); ?>planner0" target="blank">DISEÑAR COCINA   </a></li>
                             <?php }else{ ?>
 								<li><a id="modal-1">DISEÑAR COCINA   </a></li>
 							<?php }if($data == 'project'){ ?>
