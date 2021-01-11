@@ -102,6 +102,8 @@
             }else{
               toastr.success(result.message);
               init_sub_menu_list();
+              $('#sub_menu_name').val('');
+              $('#imageToUpload').val('');
             }
             
           }

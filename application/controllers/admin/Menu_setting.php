@@ -69,9 +69,7 @@ class Menu_setting extends My_Controller {
 		$res_str = '';
 		$menu_name = $this->input->post('menu_name');
 
-		$org_dir = BASEPATH;
-        $temp = explode('system', $org_dir);
-        $target_dir = $temp[0].PREFIX_MODEL_PATH.MAIN_MENU_PATH;
+        $target_dir = PREFIX_MODEL_PATH.MAIN_MENU_PATH;
         // $target_dir = 'uploads/';
         $target_file = $target_dir . basename($_FILES["imageToUpload"]["name"]);
 
@@ -107,6 +105,7 @@ class Menu_setting extends My_Controller {
 		    $res_str = "The file ". htmlspecialchars( basename( $_FILES["imageToUpload"]["name"])). " has been added.";
 		  } else {
 		    $res_str = "Sorry, there was an error adding your file.";
+		    $uploadOk = 0;
 		  }
 		}
 
@@ -138,10 +137,8 @@ class Menu_setting extends My_Controller {
 		$res_str = '';
 		$sub_menu_name = $this->input->post('sub_menu_name');
 		$parent_id = $this->input->post('main_menu_id');
-
-		$org_dir = BASEPATH;
-        $temp = explode('system', $org_dir);
-        $target_dir = $temp[0].PREFIX_MODEL_PATH.SUB_MENU_PATH;
+        
+        $target_dir = PREFIX_MODEL_PATH.SUB_MENU_PATH;
         // $target_dir = 'uploads/';
         $target_file = $target_dir . basename($_FILES["imageToUpload"]["name"]);
 
@@ -182,6 +179,7 @@ class Menu_setting extends My_Controller {
 		    $res_str = "The file ". htmlspecialchars( basename( $_FILES["imageToUpload"]["name"])). " has been added.";
 		  } else {
 		    $res_str = "Sorry, there was an error adding your file.";
+		    $uploadOk = 0;
 		  }
 		}
 
@@ -292,12 +290,9 @@ class Menu_setting extends My_Controller {
 		$door_thickness = $this->input->post('door_thickness');
 		$furniture_cube_id = $this->input->post('furniture_cube_id');
 
-
-		$org_dir = BASEPATH;
-        $temp = explode('system', $org_dir);
-        // $target_dir = $temp[0].MAIN_MENU_PATH.PREFIX_MODEL_PATH;
-        $target_dir_thumbnail = $temp[0].PREFIX_MODEL_PATH.THUMBNAIL_PATH;
-        $target_dir_model = $temp[0].PREFIX_MODEL_PATH.MODEL_PATH;
+        // $target_dir = MAIN_MENU_PATH.PREFIX_MODEL_PATH;
+        $target_dir_thumbnail = PREFIX_MODEL_PATH.THUMBNAIL_PATH;
+        $target_dir_model = PREFIX_MODEL_PATH.MODEL_PATH;
 
 		$uploadOk = 1;
 		$imageFileType = strtolower(pathinfo(basename($_FILES["imageToUpload"]["name"]),PATHINFO_EXTENSION));
@@ -497,9 +492,7 @@ class Menu_setting extends My_Controller {
 		$res_str = '';
 		$wall_texture_name = $this->input->post('wall_texture_name');
 
-		$org_dir = BASEPATH;
-        $temp = explode('system', $org_dir);
-        $target_dir = $temp[0].PREFIX_MODEL_PATH.WALL_TEXTURE_PATH;
+        $target_dir = PREFIX_MODEL_PATH.WALL_TEXTURE_PATH;
         // $target_dir = 'uploads/';
         $target_file = $target_dir . basename($_FILES["imageToUpload"]["name"]);
 
@@ -611,9 +604,7 @@ class Menu_setting extends My_Controller {
 		$floor_texture_name = $this->input->post('floor_texture_name');
 		$price = $this->input->post('price');
 
-		$org_dir = BASEPATH;
-        $temp = explode('system', $org_dir);
-        $target_dir = $temp[0].PREFIX_MODEL_PATH.FLOOR_TEXTURE_PATH;
+        $target_dir = PREFIX_MODEL_PATH.FLOOR_TEXTURE_PATH;
         // $target_dir = 'uploads/';
         $target_file = $target_dir . basename($_FILES["imageToUpload"]["name"]);
 

@@ -7,6 +7,7 @@ const router = express.Router();
 const fs = require('fs');
 
 const file_path = __dirname.split('application')[0]+'uploads/';
+console.log(__dirname);
 
 // const hostname = 'localhost';
 //set up server port

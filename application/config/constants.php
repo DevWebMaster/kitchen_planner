@@ -93,7 +93,7 @@ define('C_INVOICE_PRE',"inv-");
 define('C_CREDITNOTE_PRE',"inv-");
 
 define('MAIN_MENU_PATH',"models/main_menu/");
-define('PREFIX_MODEL_PATH', "application/third_party/design/planner/");
+define('PREFIX_MODEL_PATH', "/var/www/design/planner/");
 
 define('SUB_MENU_PATH',"models/sub_menu/");
 define('THUMBNAIL_PATH', "models/thumbnails/");

@@ -117,6 +117,8 @@
             init_main_menu_list();
           }else{
             toastr.warning("Deleting is failed.");
+            $('#menu_name').val('');
+            $('#imageToUpload').val('');
           }
         }
       })
