@@ -86,11 +86,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         	<?php } ?>
                         	<?php if(!empty($this->session->userdata('is_customer_logged'))){ ?>
                         		<li><a href="http://207.154.243.81:8081/?designckitchen<?=$this->session->userdata('user_id'); ?>planner0" target="blank">DISEÑAR COCINA   </a></li>
-                        	<?php } ?>
-                            <?php if(!empty($this->session->userdata('is_pos_logged'))){ ?>
+                            <?php }else if(!empty($this->session->userdata('is_pos_logged'))){ ?>
                                 <li><a href="http://207.154.243.81:8081/?designpkitchen<?=$this->session->userdata('user_id'); ?>planner0" target="blank">DISEÑAR COCINA   </a></li>
+                            <?php }else{ ?>
+                                <li><a id="modal-1">DISEÑAR COCINA   </a></li>
                             <?php } ?>
-                        		<?php if($data == 'project'){ ?>
+                        	<?php if($data == 'project'){ ?>
                         		<li class="active"><a href="<?php echo base_url('customer/main/project');?>">PROYECTOS </a></li>
                         	<?php }else { ?>
                         		<li><a href="<?php echo base_url('customer/main/project');?>">PROYECTOS </a></li>
@@ -135,3 +136,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <!-- main header END -->
     </header>
     <!-- header END -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="fire-modal-1">       
+        <div class="modal-dialog modal-md" role="document">         
+            <div class="modal-content">           
+                <div class="modal-header" style="background-color: #ffa200">             
+                    <h5 class="modal-title">ALERTA</h5>             
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>           
+                </div>           
+                <div class="modal-body">Por favor, para poder acceder al diseñador de cocinas, primero has de logearte.</div>         
+            </div>       
+        </div>    
+    </div>

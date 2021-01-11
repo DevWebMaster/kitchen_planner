@@ -14,13 +14,15 @@
 <script src="<?= base_url(); ?>plugins/owl-carousel/owl.carousel.js"></script><!-- OWL SLIDER -->
 <script src="<?= base_url(); ?>plugins/scroll/scrollbar.min.js"></script><!-- OWL SLIDER -->
 <script src="<?= base_url(); ?>js/custom.js"></script><!-- CUSTOM FUCTIONS  -->
+<script src="<?= base_url(); ?>js/stisla.js"></script>
+<script src="<?= base_url(); ?>js/scripts.js"></script>
+<script src="<?= base_url(); ?>js/bootstrap-modal.js"></script>
 <script src="<?= base_url(); ?>js/dz.carousel.js"></script><!-- SORTCODE FUCTIONS -->
 <script src="<?= base_url(); ?>js/dz.ajax.js"></script><!-- CONTACT JS  -->
 <script src="<?= base_url(); ?>plugins/loading/anime.js"></script><!-- LOADING JS -->
 <script src="<?= base_url(); ?>plugins/loading/anime-app.js"></script><!-- LOADING JS -->
 <script src="<?= base_url(); ?>plugins/rangeslider/rangeslider.js"></script><!-- SWITCHER JS -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.jquery.min.js'></script>
-<script src="<?= base_url(); ?>assets/plugins/toastr/toastr.min.js"></script>
 <script>
 var mySwiper = new Swiper(".swiper-container", {
   direction: "vertical",
