@@ -6,10 +6,11 @@ const path = require('path');
 const router = express.Router();
 const fs = require('fs');
 
-const file_path = __dirname.split('application')[0]+'uploads/';
-console.log(__dirname);
+// const file_path = __dirname.split('application')[0]+'uploads/';
+const file_path = path.join(__dirname, '..', 'kitchen_planner', 'uploads/')
+console.log(file_path)
 
-// const hostname = 'localhost';
+const hostname = 'localhost';
 //set up server port
 const port = process.env.PORT || 8080;
 
@@ -205,9 +206,9 @@ app.post('/save_product', function(req, res){
   }); 
   if(user_type == 1){
     var pos_id = 0;
-    var query1 = "INSERT tbl_product_history_log (product_name, customer_id, pos_id, created_at, created_by) VALUES ('"+filename+"', "+user_id+", "+pos_id+", '"+created_at+"', "+user_id+")";
+    var query1 = "INSERT INTO tbl_product_history_log (product_name, customer_id, pos_id, created_at, created_by) VALUES ('"+filename+"', "+user_id+", "+pos_id+", '"+created_at+"', "+user_id+")";
   }else{
-    var query1 = "INSERT tbl_product_history_log (product_name, pos_id, created_at, created_by) VALUES ('"+filename+"', "+user_id+", '"+created_at+"', "+user_id+")";
+    var query1 = "INSERT INTO tbl_product_history_log (product_name, pos_id, created_at, created_by) VALUES ('"+filename+"', "+user_id+", '"+created_at+"', "+user_id+")";
   }
 
   
@@ -398,7 +399,7 @@ router.get("/", (req, res)=>{
 app.use("/", router);
 
   // listen for requests
-const server = app.listen(port, () => {
+const server = app.listen(port,hostname, () => {
     console.log(`Server is listening on port ${port}`);
 });
 

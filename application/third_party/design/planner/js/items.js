@@ -93,7 +93,7 @@ $(document).ready(function() {
         var sub_menu = response.data
         if(sub_menu && sub_menu.length > 0){
           for (var j = 0; j < sub_menu.length; j++) {                                                                                                                  
-            var sub_html = '<div class="col-sm-4 menu-div" id="'+sub_menu[j].main_id+'-'+(j+1)+'">' +
+            var sub_html = '<div class="col-sm-4 menu-div" id="'+sub_menu[j].main_id+'-'+sub_menu[j].id+'">' +
                         '<a class="thumbnail select-submenu" style="border-color: #ffa200; color: #ffa200;"><img src="' +
                         sub_menu[j].image + 
                         '" alt="Select Menu"> '+
