@@ -77,7 +77,21 @@
 		    $insertId = $this->db->insert_id();
 	   		return  $insertId;
 		}
-
+		public function get_parent_menu($sub_menu_id){
+			$this->db->select('a1.name, a2.name as parent');
+			$this->db->from('tbl_sub_menu as a1');
+			$this->db->join('tbl_main_menu as a2', 'a1.main_id = a2.id', 'left');
+			$this->db->where('a1.id', $sub_menu_id);
+			$query = $this->db->get()->result_array();
+			return $query[0];
+		}
+		public function update_sub_menu($menu_name, $menu_id, $menu_image){
+			$data = array(
+				'name' => $menu_name,
+				'image' => $menu_image
+			);
+			return $this->db->update('tbl_sub_menu', $data, array('id' => $menu_id)); 
+		}
 		public function get_sub_menu_list($search_key, $start, $rowperpage) {
 			$this->db->select('a1.id, a1.name, a1.image, a2.name as parent');
 			$this->db->from('tbl_sub_menu as a1');

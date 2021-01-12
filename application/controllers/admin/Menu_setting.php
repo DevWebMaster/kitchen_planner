@@ -190,6 +190,64 @@ class Menu_setting extends My_Controller {
 		$response = array('status' => $uploadOk, 'message' => $res_str);
 		echo json_encode($response);
 	}
+	public function update_sub_menu_image()
+	{
+		$res_str = '';
+		$edit_sub_menu_name = $this->input->post('edit_sub_menu_name');
+		$edit_sub_menu_id = $this->input->post('edit_sub_menu_id');
+
+        $target_dir = PREFIX_MODEL_PATH.SUB_MENU_PATH;
+        // $target_dir = 'uploads/';
+        $target_file = $target_dir . basename($_FILES["edit_imageToUpload"]["name"]);
+
+		$uploadOk = 1;
+		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+		// Check if image file is a actual image or fake image
+		if(isset($_POST["submit"])) {
+		  $check = getimagesize($_FILES["edit_imageToUpload"]["tmp_name"]);
+		  if($check !== false) {
+		    $res_str = "File is an image - " . $check["mime"] . ".";
+		    $uploadOk = 1;
+		  } else {
+		    $res_str = "File is not an image.";
+		    $uploadOk = 0;
+		  }
+		}
+
+		// Check if file already exists
+		if (file_exists($target_file)) {
+		  $res_str = "Sorry, file already exists.";
+		  $uploadOk = 0;
+		}
+
+		// Allow certain file formats
+		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+		&& $imageFileType != "gif" ) {
+		  $res_str = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+		  $uploadOk = 0;
+		}
+
+		// Check if $uploadOk is set to 0 by an error
+		if ($uploadOk == 0) {
+		  $res_str = "Sorry, your file was not added.";
+		// if everything is ok, try to upload file
+		} else {
+		  if (move_uploaded_file($_FILES["edit_imageToUpload"]["tmp_name"], $target_file)) {
+		    $res_str = "The file ". htmlspecialchars( basename( $_FILES["edit_imageToUpload"]["name"])). " has been added.";
+		  } else {
+		    $res_str = "Sorry, there was an error adding your file.";
+		    $uploadOk = 0;
+		  }
+		}
+
+		if($uploadOk == 1){
+			$result = $this->menu_setting_model->update_sub_menu($edit_sub_menu_name, $edit_sub_menu_id, SUB_MENU_PATH.basename($_FILES["edit_imageToUpload"]["name"]));
+		}
+
+		$response = array('status' => $uploadOk, 'message' => $res_str);
+		echo json_encode($response);
+	}
 	public function get_sub_menu_list()
 	{
 		// $search_key = $this->input->post('search_key');
@@ -214,7 +272,7 @@ class Menu_setting extends My_Controller {
               "name"=>$value['name'],
               "parent"=>$value['parent'],
               "image"=>$value['image'],
-              "action"=>'<a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-danger delete-row"><i class="fa fa-times"></i></a>'
+              "action"=>'<a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-info edit-row" href="edit_sub_menu/'.$value['id'].'"><i class="fa fa-edit"></i></a><a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-danger delete-row"><i class="fa fa-times"></i></a>'
            );
         }
 
@@ -226,6 +284,18 @@ class Menu_setting extends My_Controller {
         );
 
         echo json_encode($result);
+	}
+	public function edit_sub_menu($sub_menu_id = 0){
+		$data['title'] = 'Edit Sub Menu';
+
+		$data['sub_menu_id'] = $sub_menu_id;
+		$data['sub_menu_info'] = $this->menu_setting_model->get_parent_menu($sub_menu_id);
+
+		$this->load->view('admin/includes/_header');
+
+    	$this->load->view('admin/menu_setting/edit_sub_menu', $data);
+
+    	$this->load->view('admin/includes/_footer');
 	}
 
 	public function delete_sub_menu_record()
@@ -473,7 +543,7 @@ class Menu_setting extends My_Controller {
             $data[] = array( 
               "name"=>$value['name'],
               "image"=>$value['image'],
-              "action"=>'<a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-info edit-row" data-toggle="modal" data-target="#wall_texture_edit_modal"><i class="fa fa-edit"></i></a><a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-danger delete-row"><i class="fa fa-times"></i></a>'
+              "action"=>'<!--a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-info edit-row" data-toggle="modal" data-target="#wall_texture_edit_modal"><i class="fa fa-edit"></i></a--><a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-danger delete-row"><i class="fa fa-times"></i></a>'
            );
         }
 
@@ -584,7 +654,7 @@ class Menu_setting extends My_Controller {
             $data[] = array( 
               "name"=>$value['name'],
               "image"=>$value['image'],
-              "action"=>'<a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-info edit-row" data-toggle="modal" data-target="#floor_texture_edit_modal"><i class="fa fa-edit"></i></a><a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-danger delete-row"><i class="fa fa-times"></i></a>'
+              "action"=>'<!--a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-info edit-row" data-toggle="modal" data-target="#floor_texture_edit_modal"><i class="fa fa-edit"></i></a--><a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-danger delete-row"><i class="fa fa-times"></i></a>'
            );
         }
 
