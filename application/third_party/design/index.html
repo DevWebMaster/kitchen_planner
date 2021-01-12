@@ -27,15 +27,15 @@
           <!-- Main Navigation -->
           <ul class="nav nav-sidebar">
             <li id="floorplan_tab"><a >
-              Generar espacio
-              <span class="glyphicon glyphicon-chevron-right pull-right"></span>
-            </a></li>
-            <li id="design_tab"><a >
-              Diseno 3D
+              1. Generar espacio
               <span class="glyphicon glyphicon-chevron-right pull-right"></span>
             </a></li>
             <li id="items_tab"><a >
-              Agregar muebles de cocina
+              2. Agregar muebles de cocina
+              <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+            </a></li>
+            <li id="design_tab"><a >
+              3. Diseno 3D
               <span class="glyphicon glyphicon-chevron-right pull-right"></span>
             </a></li>
           </ul>
@@ -394,6 +394,25 @@
             </div>
             </div>
             <!--end of observation modal-->
+            <!-- alert to floorplanner -->
+            <div class="modal fade" id="alertmodal" tabindex="-1" role="dialog" aria-labelledby="alertmodalLabel">
+            <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background: #ffa200;"><label style="color: white; font-size: x-large;">Notification</label></div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label><h3 style="color: #ffa200;">If you want to customize the floorplan, go to the floorplan!</h3></label>
+                    </div>       
+                  </div> 
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-sm btn-default" id="btn_close" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+            </div>
+            </div>
+            <!-- end of the floorplanner -->
           <!-- Add Items -->
           <div id="add-items">
             <div class="row" id="items-wrapper">

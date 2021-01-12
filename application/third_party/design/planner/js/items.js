@@ -1,5 +1,6 @@
 // add items to the "Add Items" tab
 $(document).ready(function() {
+  $('#alertmodal').modal('show');
   var url_str = window.location.search;
   if(url_str != '' && url_str != 'undefined'){
     var user_id_tmp = url_str.split('kitchen')[1];
@@ -280,7 +281,7 @@ $(document).ready(function() {
         }else{
           $("#btn_back").remove();
           btn_back_level = 2;
-          var btn_back = '<button class="btn btn-sm btn-default btn_back" id="btn_back" name="'+thumbnail_menu[0].main_id+'-'+thumbnail_menu[0].sub_id+'">Atrás</button>';
+          var btn_back = '<button class="btn btn-sm btn-default btn_back" id="btn_back" name="'+main_id+'-'+sub_id+'">Atrás</button>';
           $("#back-menu").append(btn_back);
         }
       }
@@ -443,7 +444,7 @@ $(document).ready(function() {
         }else{
           $("#btn_back").remove();
           btn_back_level = 2;
-          var btn_back = '<button class="btn btn-sm btn-default btn_back" id="btn_back" name="'+thumbnail_menu[0].main_id+'-'+thumbnail_menu[0].sub_id+'">Atrás</button>';
+          var btn_back = '<button class="btn btn-sm btn-default btn_back" id="btn_back" name="'+main_id+'-'+sub_id+'">Atrás</button>';
           $("#back-menu").append(btn_back);
         }
       }

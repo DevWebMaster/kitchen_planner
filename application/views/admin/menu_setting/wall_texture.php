@@ -65,7 +65,7 @@
 
     $('#uploadForm').submit(function(e) {
       e.preventDefault();
-      if($('#wall_texture_name').val() && $('#price').val()){
+      if($('#wall_texture_name').val()){
         var formData = new FormData(this);
         $.ajax({
           url: '<?= site_url(); ?>admin/menu_setting/save_wall_texture',
