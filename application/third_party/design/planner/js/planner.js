@@ -425,6 +425,32 @@ var TextureSelector = function (blueprint3d, sideMenu) {
   }
 
   function init() {
+    $.ajax({
+      url: '/get_wall_floor',
+      type: 'POST',
+      success: function(response){
+        console.log(response.data.wall_data);
+        var wall_data = response.data.wall_data
+        var wall_html = '';
+        for(var i = 0; i < wall_data.length; i++){
+          wall_html += '<div class="col-sm-6" style="padding: 3px">'
+                      +'<a class="thumbnail texture-select-thumbnail" texture-url="'+wall_data[i]['image']+'" texture-stretch="false" texture-scale="300">'
+                      +'<img alt="Thumbnail light fine wood" src="'+wall_data[i]['image']+'" />'+wall_data[i]['name']+'</a></div>'
+        }
+        $("#wall_panel").append(wall_html);
+
+        var floor_data = response.data.floor_data
+        var floor_html = ''
+        for(var j = 0; j < floor_data.length; j++){
+          floor_html += '<div class="col-sm-6" style="padding: 3px">'
+                       +'<a class="thumbnail texture-select-thumbnail" texture-url="'+floor_data[j]['image']+'" texture-stretch="false" texture-scale="300">'
+                       +'<img alt="Thumbnail marbletiles" src="'+floor_data[j]['image']+'" />'+floor_data[j]['name']+'</a></div>'
+        }
+        floor_html += '</div></div>'
+        $("#floor_panel").append(floor_html)
+
+      }
+    })
     three.wallClicked.add(wallClicked);
     three.floorClicked.add(floorClicked);
     three.itemSelectedCallbacks.add(reset);

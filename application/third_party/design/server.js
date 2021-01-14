@@ -78,7 +78,29 @@ app.post('/get_user_name', function(req, res){
   });
   
 })
-
+app.post('/get_wall_floor', function(req, res){
+  // console.log('body: ' + req.body.title);
+  res.contentType('json');
+  var wall_query = "SELECT name, image FROM tbl_wall_texture";
+  var floor_query = "SELECT name, image FROM tbl_floor_texture";
+  var wall_floor_arr = { 
+    wall_data: [],
+    floor_data: []
+  }
+  pool.getConnection(function(err, connection) {
+    if (err) throw err;
+    connection.query(wall_query, function (err, wall) {
+      if (err) throw err;
+      // connection.release();
+      wall_floor_arr.wall_data = wall;
+      connection.query(floor_query, function (err, floor) {
+        if (err) throw err;
+        wall_floor_arr.floor_data = floor;
+        res.send({ data: wall_floor_arr });
+      });
+    });
+  });
+})
 app.post('/get_main_menu', function(req, res){
   // console.log('body: ' + req.body.title);
   res.contentType('json');
