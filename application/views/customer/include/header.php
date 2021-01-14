@@ -43,7 +43,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/plugins/toastr/toastr.min.css">
 </head>
-<body id="bg">
+<body id="bg" onload="init();">
 <div class="page-wraper">
 <div id="loading-area"></div>
 	<!-- header -->

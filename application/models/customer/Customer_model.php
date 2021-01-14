@@ -465,5 +465,12 @@ class Customer_model extends CI_Model{
 		$query = $this->db->get()->result_array();
 		return $query[0]['pdf_file'];
 	}
+	public function get_locations()
+	{
+		$this->db->select('*');
+		$this->db->from('locations');
+		$query = $this->db->get()->result_array();
+		return $query;
+	}
 }
 ?>

@@ -102,9 +102,9 @@
 <script src="<?= base_url(); ?>js/scripts.js"></script>
 <script src="<?= base_url(); ?>js/bootstrap-modal.js"></script>
 <script src="<?= base_url(); ?>js/dz.carousel.js"></script><!-- SORTCODE FUCTIONS -->
-<script src="https://maps.google.com/maps/api/js?key=AIzaSyBjirg3UoMD5oUiFuZt3P9sErZD-2Rxc68&sensor=false"  ></script>
+<!-- <script src="https://maps.google.com/maps/api/js?key=AIzaSyBjirg3UoMD5oUiFuZt3P9sErZD-2Rxc68&sensor=false"  ></script> -->
 <script src='https://www.google.com/recaptcha/api.js'></script> <!-- Google API For Recaptcha  -->
-<script src="<?= base_url(); ?>js/map.script.js"></script><!-- CONTACT JS  -->
+<!--script src="<?= base_url(); ?>js/map.script.js"></script--><!-- CONTACT JS  -->
 <script src="<?= base_url(); ?>js/dz.ajax.js"></script><!-- CONTACT JS  -->
 <script src="<?= base_url(); ?>plugins/datatables/jquery.dataTables.min.js"></script><!-- WOW JS -->
 <script src="<?= base_url(); ?>js/register.js"></script>

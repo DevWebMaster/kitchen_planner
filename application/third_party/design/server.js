@@ -81,8 +81,8 @@ app.post('/get_user_name', function(req, res){
 app.post('/get_wall_floor', function(req, res){
   // console.log('body: ' + req.body.title);
   res.contentType('json');
-  var wall_query = "SELECT name, image FROM tbl_wall_texture";
-  var floor_query = "SELECT name, image FROM tbl_floor_texture";
+  var wall_query = "SELECT name, concat('planner/', image) as image FROM tbl_wall_texture";
+  var floor_query = "SELECT name, concat('planner/', image) as image FROM tbl_floor_texture";
   var wall_floor_arr = { 
     wall_data: [],
     floor_data: []

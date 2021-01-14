@@ -121,4 +121,87 @@
 		<!-- contact area END -->
     </div>
     <!-- Content END-->
+    <!-- <script src="https://maps.google.com/maps/api/js?key=AIzaSyBjirg3UoMD5oUiFuZt3P9sErZD-2Rxc68&sensor=false"  ></script> -->
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript">
+    	var map;
+    	// var iconBase = "https://developers.google.com/maps/documentation/javascript/examples/full/images/";
+    	// var iconBase = "http://maps.google.com/mapfiles/ms/icons/";
+    	var iconBase ="<?= base_url(); ?>images/";
+		// Ban Jelačić Square - Center of Zagreb, Croatia
+		var center = new google.maps.LatLng(45.812897, 15.97706);
+		// var center = new google.maps.LatLng(40.4167047, -3.7035825);  //madrid
+		var geocoder = new google.maps.Geocoder();
+		var infowindow = new google.maps.InfoWindow();
+
+		function init() {
+
+			var mapOptions = {
+			zoom: 13,
+			center: center,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+			}
+
+			map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+			var marker = new google.maps.Marker({
+				map: map,
+				position: center,
+			});
+			$.ajax({
+				method: "POST",
+				url: 'get_locations',
+				dataType: 'json',
+			  success: function(dzRes) {
+				for (var i = 0; i < dzRes.length; i++) {
+					displayLocation(dzRes[i]);
+				}
+			  }
+			})
+		}
+		function displayLocation(location) {
+
+			var content =   '<div class="infoWindow"><strong>'  + location.name + '</strong>'
+			+ '<br/>'     + location.address
+			+ '<br/>'     + location.description + '</div>';
+
+			if (parseInt(location.lat) == 0) {
+				geocoder.geocode( { 'address': location.address }, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+
+					var marker = new google.maps.Marker({
+						map: map,
+						position: results[0].geometry.location,
+						title: location.name,
+						// label: 'P',
+						icon: iconBase+"parking_lot.png",
+
+						animation: google.maps.Animation.DROP,
+					});
+
+					google.maps.event.addListener(marker, 'click', function() {
+						infowindow.setContent(content);
+						infowindow.open(map,marker);
+					});
+				}
+				});
+			} else {
+				var position = new google.maps.LatLng(parseFloat(location.lat), parseFloat(location.lon));
+				var marker = new google.maps.Marker({
+					map: map,
+					position: position,
+					title: location.name,
+					// label: 'P',
+					icon: iconBase+"parking_lot.png",
+					animation: google.maps.Animation.DROP,
+
+				});
+
+				google.maps.event.addListener(marker, 'click', function() {
+					infowindow.setContent(content);
+					infowindow.open(map,marker);
+				});
+			}
+		}
+    </script>
 
