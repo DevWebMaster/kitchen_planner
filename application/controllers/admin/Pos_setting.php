@@ -70,7 +70,11 @@ class Pos_setting extends My_Controller {
     foreach ($pos_location as $value) {
         $data[] = array( 
           "id"=>$value['id'],
-          "location"=>$value['location'],
+          "name"=>$value['name'],
+          "address"=>$value['address'],
+          "position_lat"=>$value['lat'],
+          "position_lon"=>$value['lon'],
+          "description"=>$value['description'],
           "action"=>'<!--<a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-info edit-row" data-toggle="modal" data-target="#color_edit_modal"><i class="fa fa-edit"></i></a> --><a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-danger delete-row"><i class="fa fa-times"></i></a>'
        );
     }

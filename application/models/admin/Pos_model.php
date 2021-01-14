@@ -8,10 +8,10 @@
 		}
 
         public function get_pos_location_list($search_key, $start, $rowperpage) {
-			$this->db->select('a1.id, a1.location');
-			$this->db->from('tbl_pos_location as a1');
+			$this->db->select('a1.*');
+			$this->db->from('tbl_pos_locations as a1');
 			if($search_key != ''){
-				$this->db->like('a1.location', $search_key);
+				$this->db->like('a1.address', $search_key);
 			}
 			$this->db->limit($rowperpage, $start);
 
@@ -21,8 +21,8 @@
 			  return $query;
 		}
 		public function get_pos_location_all_count() {
-			$this->db->select('a1.id, a1.location');
-			$this->db->from('tbl_pos_location as a1');
+			$this->db->select('a1.*');
+			$this->db->from('tbl_pos_locations as a1');
 			
 			// $this->db->order_by('created_at  DESC');
 
@@ -33,10 +33,10 @@
 
 		}
 		public function get_pos_location_all_count_with_filter($search_key, $start, $rowperpage) {
-			$this->db->select('a1.id, a1.location');
-			$this->db->from('tbl_pos_location as a1');
+			$this->db->select('a1.*');
+			$this->db->from('tbl_pos_locations as a1');
 			if($search_key != ''){
-				$this->db->like('a1.location', $search_key);
+				$this->db->like('a1.address', $search_key);
 			}
 			$this->db->limit($rowperpage, $start);
 			$query = $this->db->get();
@@ -48,7 +48,7 @@
 		public function delete_pos_location($id)
 		{
 		 	$this->db->where('id', $id);
-			return $this->db->delete('tbl_pos_location');
+			return $this->db->delete('tbl_pos_locations');
 		}
 
 		public function delete_pos($id)

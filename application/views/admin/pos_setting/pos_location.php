@@ -11,7 +11,11 @@
                     <thead>
                       <tr>
                         <th>Id</th>
-                        <th>Location</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Position_lat</th>
+                        <th>Position_lon</th>
+                        <th>Description</th>
                         <th width="10%">Action</th>
                       </tr>
                     </thead>
@@ -61,7 +65,11 @@
         },
         'columns': [
            { data: 'id' },
-           { data: 'location' },
+           { data: 'name' },
+           { data: 'address' },
+           { data: 'position_lat' },
+           { data: 'position_lon' },
+           { data: 'description' },
            { data: 'action', "width": "10%"},
         ]
       });

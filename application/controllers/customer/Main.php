@@ -707,9 +707,9 @@ class Main extends CI_Controller
         echo json_encode($response);
 
     }
-    public function get_locations()
+    public function get_pos_locations()
     {
-        $location_data = $this->customer_model->get_locations();
+        $location_data = $this->customer_model->get_pos_locations();
         echo json_encode($location_data);
     }
 }

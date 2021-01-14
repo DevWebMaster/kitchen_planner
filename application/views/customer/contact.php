@@ -150,7 +150,7 @@
 			});
 			$.ajax({
 				method: "POST",
-				url: 'get_locations',
+				url: 'get_pos_locations',
 				dataType: 'json',
 			  success: function(dzRes) {
 				for (var i = 0; i < dzRes.length; i++) {
