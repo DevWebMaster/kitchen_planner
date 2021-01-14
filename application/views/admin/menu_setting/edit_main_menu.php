@@ -21,7 +21,7 @@
                       <input type="hidden" name="flag_image" id="flag_image" value="0">
                     </div>
                   </div>
-                  <div class="col-12 col-md-2">
+                  <div class="col-12 col-md-4">
                     <div class="form-group mt-4">
                       <input type="submit" class="btn btn-sm btn-info add_label_no px-4" value="Update">
                       <a href="<?= site_url(); ?>admin/menu_setting/index" type="button" class="btn btn-sm btn-info px-4">Back</a>
