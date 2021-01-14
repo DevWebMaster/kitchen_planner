@@ -104,3 +104,32 @@ ERROR - 2021-01-12 16:58:03 --> $config['composer_autoload'] is set to TRUE but 
 ERROR - 2021-01-12 16:58:05 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
 ERROR - 2021-01-12 16:58:09 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
 ERROR - 2021-01-12 16:58:09 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 18:54:36 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 18:54:36 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 18:54:38 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 18:54:42 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 18:54:42 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 18:54:44 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 18:54:45 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 18:54:45 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 18:54:45 --> 404 Page Not Found: Plugins/images
+ERROR - 2021-01-12 18:54:45 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 18:54:45 --> 404 Page Not Found: Plugins/images
+ERROR - 2021-01-12 18:55:06 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 20:02:26 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 20:02:28 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 20:02:28 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 20:02:28 --> 404 Page Not Found: Assets/dist
+ERROR - 2021-01-12 20:02:33 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 20:02:34 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 20:02:37 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 20:02:37 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 20:15:02 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 20:15:03 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 20:19:03 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 20:19:04 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 20:19:51 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 20:19:51 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 20:19:59 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 20:19:59 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.
+ERROR - 2021-01-12 20:21:49 --> $config['composer_autoload'] is set to TRUE but E:\Git\kitchen_planner\application\vendor/autoload.php was not found.

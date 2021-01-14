@@ -39,6 +39,14 @@
 		
 
 		}
+		public function get_main_menu_info($id)
+		{
+			$this->db->select('*');
+			$this->db->from('tbl_main_menu');
+			$this->db->where('id', $id);
+			$query = $this->db->get()->result_array();
+			return $query[0];
+		}
 		public function save_main_menu($menu_name, $menu_image){
 			$data = array(
 				'name' => $menu_name,
@@ -47,6 +55,9 @@
 			$this->db->insert('tbl_main_menu', $data); 
 		    $insertId = $this->db->insert_id();
 	   		return  $insertId;
+		}
+		public function update_main_menu($id, $data){
+			return $this->db->update('tbl_main_menu', $data, array('id' => $id)); 
 		}
 		public function get_main_menu_ids(){
 			$this->db->select('a1.id, a1.name');
@@ -77,21 +88,12 @@
 		    $insertId = $this->db->insert_id();
 	   		return  $insertId;
 		}
-		public function get_parent_menu($sub_menu_id){
-			$this->db->select('a1.name, a2.name as parent');
-			$this->db->from('tbl_sub_menu as a1');
-			$this->db->join('tbl_main_menu as a2', 'a1.main_id = a2.id', 'left');
-			$this->db->where('a1.id', $sub_menu_id);
-			$query = $this->db->get()->result_array();
-			return $query[0];
-		}
-		public function update_sub_menu($menu_name, $menu_id, $menu_image){
-			$data = array(
-				'name' => $menu_name,
-				'image' => $menu_image
-			);
+
+		public function update_sub_menu($menu_id, $data){
+			
 			return $this->db->update('tbl_sub_menu', $data, array('id' => $menu_id)); 
 		}
+
 		public function get_sub_menu_list($search_key, $start, $rowperpage) {
 			$this->db->select('a1.id, a1.name, a1.image, a2.name as parent');
 			$this->db->from('tbl_sub_menu as a1');
@@ -132,6 +134,14 @@
 		    return $query->num_rows();
 		
 
+		}
+		public function get_parent_menu($sub_menu_id){
+			$this->db->select('a1.name, a2.name as parent');
+			$this->db->from('tbl_sub_menu as a1');
+			$this->db->join('tbl_main_menu as a2', 'a1.main_id = a2.id', 'left');
+			$this->db->where('a1.id', $sub_menu_id);
+			$query = $this->db->get()->result_array();
+			return $query[0];
 		}
 		public function delete_sub_menu($id)
 		{
@@ -196,6 +206,14 @@
 			$query = $this->db->get()->result_array();
 			return $query;
 		}
+		public function get_model_info($model_id)
+		{
+			$this->db->select('*');
+			$this->db->from('tbl_model_list');
+			$this->db->where('model_id', $model_id);
+			$query = $this->db->get()->result_array();
+			return $query[0];
+		}
 		public function delete_model_record($model_id)
 		{
 			$this->db->where('model_id', $model_id);
@@ -203,7 +221,7 @@
 		}
 
 		public function get_model_list($search_key, $start, $rowperpage) {
-			$this->db->select('a1.model_id, a1.name, a1.image, a2.name as main_menu, a3.name as sub_menu, a4.name as countertop_type, a4.price as countertop_type_price, a5.name as skirting_type, a5.price as skirting_type_price, a6.name as countertop_color, a6.price as countertop_color_price, a7.name as exterio_color, a7.price as exterio_color_price, a8.name as interior_color, a8.name as interior_color_price, a9.name as skirting_color, a9.price as skirting_color_price, a10.name as dooropen_type, a10.price as dooropen_type_price, a11.name as door_thickness, a11.price as door_thickness_price, a12.name as model_type, a13.name as cube_name');
+			$this->db->select('a1.model_id, a1.name, a1.image, a1.model, a1.texture_file, a2.name as main_menu, a3.name as sub_menu, a4.name as countertop_type, a4.price as countertop_type_price, a5.name as skirting_type, a5.price as skirting_type_price, a6.name as countertop_color, a6.price as countertop_color_price, a7.name as exterio_color, a7.price as exterio_color_price, a8.name as interior_color, a8.name as interior_color_price, a9.name as skirting_color, a9.price as skirting_color_price, a10.name as dooropen_type, a10.price as dooropen_type_price, a11.name as door_thickness, a11.price as door_thickness_price, a12.name as model_type, a13.name as cube_name');
 			$this->db->from('tbl_model_list as a1');
 			$this->db->join('tbl_main_menu as a2', 'a1.main_id = a2.id', 'left');
 			$this->db->join('tbl_sub_menu as a3', 'a1.sub_id = a3.id', 'left');
@@ -273,6 +291,7 @@
 				'name' => $model_name,
 				'image' => $target_image_file,
 				'model' => $target_js_file,
+				'texture_file' => $target_texture_file,
 				'type' => $model_type,
 				'countertop_type' => $countertop_type,
 				'countertop_color' => $countertop_color,
@@ -287,6 +306,11 @@
 			$this->db->insert('tbl_model_list', $data); 
 		    $insertId = $this->db->insert_id();
 	   		return  $insertId;
+		}
+
+		public function update_model($model_id, $data){
+			
+			return $this->db->update('tbl_model_list', $data, array('model_id' => $model_id)); 
 		}
 
 		public function get_wall_texture_list($search_key, $start, $rowperpage) {
@@ -327,7 +351,7 @@
 		
 
 		}
-		public function save_wall_texture($wall_texture_name, $wall_texture_price, $image){
+		public function save_wall_texture($wall_texture_name, $image){
 			$data = array(
 				'name' => $wall_texture_name,
 				'image' => $image,
@@ -335,6 +359,9 @@
 			$this->db->insert('tbl_wall_texture', $data); 
 		    $insertId = $this->db->insert_id();
 	   		return  $insertId;
+		}
+		public function update_wall_texture($id, $data){
+			return $this->db->update('tbl_wall_texture', $data, array('id'=>$id)); 
 		}
 		public function delete_wall_texture($wall_texture_id)
 		{
@@ -390,10 +417,29 @@
 		    $insertId = $this->db->insert_id();
 	   		return  $insertId;
 		}
+		public function update_floor_texture($id, $data){
+			return $this->db->update('tbl_floor_texture', $data, array('id'=>$id)); 
+		}
 		public function delete_floor_texture($floor_texture_id)
 		{
 		 	$this->db->where('id', $floor_texture_id);
 			return $this->db->delete('tbl_floor_texture');
+		}
+		public function get_wall_texture_info($id)
+		{
+			$this->db->select('id, name');
+			$this->db->from('tbl_wall_texture');
+			$this->db->where('id', $id);
+			$query = $this->db->get()->result_array();
+			return $query[0];
+		}
+		public function get_floor_texture_info($id)
+		{
+			$this->db->select('id, name');
+			$this->db->from('tbl_floor_texture');
+			$this->db->where('id', $id);
+			$query = $this->db->get()->result_array();
+			return $query[0];
 		}
 
 

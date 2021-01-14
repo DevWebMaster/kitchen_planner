@@ -1,57 +1,56 @@
 <div class="content-wrapper">
     <section class="content">
-      <label><h3><?= $title; ?></h3></label>
+      <label><h3>Edit Main Menu</h3></label>
       <div class="row">
         <div class="col-md-12">
           <div class="card">
             <div class="card-body">
-              <form method="post" enctype="multipart/form-data" id="uploadEditForm">
-                <input type="hidden" name="edit_sub_menu_id" id="edit_sub_menu_id" value="<?= $sub_menu_id; ?>">
+              <form method="post" enctype="multipart/form-data" id="uploadForm">
+                <input type="hidden" name="edit_main_menu_id" id="edit_main_menu_id" value="<?= $main_menu_id; ?>">
                 <div class="col-md-12" style="display: inline-flex;">
                   <div class="col-12 col-md-2 offset-1">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Sub Menu Name</label>:
-                      <input type="text" class="form-control form-control-sm" name="edit_sub_menu_name" id="edit_edit_sub_menu_name" value="<?= $sub_menu_info['name']; ?>">
+                      <label for="tracking_no" class="control-label mb-1">Menu Name</label>:
+                      <input type="text" class="form-control form-control-sm" name="edit_menu_name" id="edit_menu_name" value="<?= $main_menu_info['name']; ?>">
                     </div>
                   </div>
                   <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Parent Menu</label>:
-                      <input class="form-control form-control-sm" tabindex="1" value="<?= $sub_menu_info['parent']; ?>" readonly>
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-2">
-                    <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Sub Menu Image</label>:
+                      <label for="tracking_no" class="control-label mb-1">Menu Image</label>:
                       <input type="file" name="edit_imageToUpload" id="edit_imageToUpload">
+                      <input type="hidden" name="flag_image" id="flag_image" value="0">
                     </div>
                   </div>
-                  <div class="col-12 col-md-4">
+                  <div class="col-12 col-md-2">
                     <div class="form-group mt-4">
-                      <input type="submit" class="btn btn-sm btn-info px-5" value="Update">
-                      <a href="<?= site_url(); ?>admin/menu_setting/sub_menu" type="button" class="btn btn-sm btn-info px-5">Back</a>
+                      <input type="submit" class="btn btn-sm btn-info add_label_no px-4" value="Update">
+                      <a href="<?= site_url(); ?>admin/menu_setting/index" type="button" class="btn btn-sm btn-info px-4">Back</a>
                     </div>
                   </div>
                   
                 </div>
+                
               </form>
             </div>
           </div>
         </div>    
       </div><!--/ row --> 
+        
     </section>  
 </div>
 
 <script type="text/javascript">
   $(document).ready(function() {
-
-    $('#uploadEditForm').submit(function(e) {
+    $('#edit_imageToUpload').click(function () {
+      $('#flag_image').val(1);
+    })
+    $('#uploadForm').submit(function(e) {
       e.preventDefault();
-      if($('#edit_imageToUpload').val()){
+      if($('#edit_menu_name').val()){
         var formData = new FormData(this);
         console.log(formData);
         $.ajax({
-          url: '<?= site_url(); ?>admin/menu_setting/update_sub_menu_image',
+          url: '<?= site_url(); ?>admin/menu_setting/update_main_menu_image',
           type: 'POST',
           data: formData,       
           cache: false,
@@ -64,13 +63,12 @@
               toastr.warning(result.message);
             }else{
               toastr.success(result.message);
-              // window.location.href = "<?= site_url(); ?>admin/menu_setting/sub_menu";
             }
             
           }
         })
       }else{
-        toastr.warning('Please select the image for the sub menu.');
+        toastr.warning('Please select the image for the main menu.');
         return;
       }
       

@@ -279,7 +279,9 @@ class Main extends CI_Controller
             if($value['check_order'] == 2){  //comfirmed
                 // $act_str = '<a disabled  style="background: green; color: white;" h_id="'.$value['product_id'].'" id="confirmed'.$value['product_id'].'" class="btn btn-confirm">Confirmed</a>';
                 $act_str = '';
+                $status_str = 'Ordered';
             }else if($value['check_order'] == 1){  //confirm
+                $status_str ='Budget';
                 if($user_role == 1){
                     $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="confirm'.$value['product_id'].'" class="btn btn-confirm mr-1">Confirm</a><a h_id="'.$value['product_id'].'" id="pdf'.$value['product_id'].'" class="btn btn-pdf mr-1">PDF</a><a h_id="'.$value['product_id'].'" id="email'.$value['product_id'].'" class="btn btn-email mr-1">EMail</a><a href="http://207.154.243.81:8081/?designckitchen'.$user_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
 
@@ -287,6 +289,7 @@ class Main extends CI_Controller
                     $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="confirm'.$value['product_id'].'" class="btn btn-confirm mr-1">Confirm</a><a h_id="'.$value['product_id'].'" id="pdf'.$value['product_id'].'" class="btn btn-pdf mr-1">PDF</a><a h_id="'.$value['product_id'].'" id="email'.$value['product_id'].'" class="btn btn-email mr-1">EMail</a><a href="http://207.154.243.81:8081/?designpkitchen'.$user_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
                 }
             }else{  // 0: budget
+                $status_str = 'Pre-budget';
                 if($user_role == 1){
                     $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="budget'.$value['product_id'].'" class="btn btn-budget mr-1">Budget</a><a href="http://207.154.243.81:8081/?designckitchen'.$user_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
                 }else if($user_role == 2){
@@ -300,7 +303,7 @@ class Main extends CI_Controller
                   "product_name"=>$value['product_name'],
                   "furniture_cost"=>$value['estimated_furniture_cost'],
                   "other_cost"=>($value['estimated_countertio_cost']-$value['estimated_furniture_cost']),
-                  // "pos"=>$value['online_mode'] ? 'Company' :  $value['pos_name'],
+                  "status"=>$status_str,
                   "action"=>$act_str
                 );
             }else if($user_role == 2){

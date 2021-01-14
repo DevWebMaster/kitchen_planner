@@ -27,7 +27,7 @@
 								<th>Product Name</th>
 								<th>Furniture Cost</th>
 								<th>Other Cost</th>
-								<!-- <th>POS</th> -->
+								<th>Status</th>
 								<th>Action</th>
 		                    </tr>
 		                  </thead>
@@ -141,7 +141,7 @@
                  { data: 'product_name' },
                  { data: 'furniture_cost' },
                  { data: 'other_cost' },
-                 // { data: 'pos' },
+                 { data: 'status' },
                  { data: 'action', className: "text-center" },
               ]
             });
