@@ -21,8 +21,8 @@
                       <input type="hidden" name="h_model_type" id="h_model_type" value="<?= $model_info['type']; ?>">
                       <label for="" class="control-label mb-1">Model Type</label>:
                       <select class="form-control form-control-sm" tabindex="1" name="edit_model_type" id="edit_model_type">
-                        <?php for($i = 0; $i < count($model_type); $i++){ ?>
-                          <option value="<?= $main_menu_ids[$i]['id']; ?>"><?= $model_type[$i]['name']; ?></option>
+                        <?php for($i = 0; $i < count($model_types); $i++){ ?>
+                          <option value="<?= $model_types[$i]['type']; ?>"><?= $model_types[$i]['name']; ?></option>
                         <?php } ?>
                       </select>
                     </div>

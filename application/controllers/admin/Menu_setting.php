@@ -414,8 +414,8 @@ class Menu_setting extends My_Controller {
 		$data['title'] = 'Model List';
 
 		$data['main_menu_ids'] = $this->menu_setting_model->get_main_menu_ids();
-		$data['sub_menu_ids'] = $this->menu_setting_model->get_sub_menu_ids(1);
-		$data['model_type'] = $this->menu_setting_model->get_model_type();
+		$data['sub_menu_ids'] = $this->menu_setting_model->get_sub_menu_ids($data['main_menu_ids'][0]['id']);
+		$data['model_types'] = $this->menu_setting_model->get_model_type();
 		$data['countertop_type'] = $data['skirting_type'] = $this->menu_setting_model->get_model_style();
 		$data['countertop_color'] = $data['exterio_color'] = $data['interior_color'] = $data['skirting_color'] = $this->menu_setting_model->get_model_color();
 		$data['dooropen_type'] = $this->menu_setting_model->get_dooropen_type();
@@ -437,7 +437,7 @@ class Menu_setting extends My_Controller {
 		$data['model_info'] = $this->menu_setting_model->get_model_info($model_id);
 		$data['main_menu_ids'] = $this->menu_setting_model->get_main_menu_ids();
 		$data['sub_menu_ids'] = $this->menu_setting_model->get_sub_menu_ids($data['model_info']['main_id']);
-		$data['model_type'] = $this->menu_setting_model->get_model_type();
+		$data['model_types'] = $this->menu_setting_model->get_model_type();
 		$data['countertop_type'] = $data['skirting_type'] = $this->menu_setting_model->get_model_style();
 		$data['countertop_color'] = $data['exterio_color'] = $data['interior_color'] = $data['skirting_color'] = $this->menu_setting_model->get_model_color();
 		$data['dooropen_type'] = $this->menu_setting_model->get_dooropen_type();

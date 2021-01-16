@@ -67,7 +67,7 @@ $(document).ready(function() {
       // console.log(data.data);
       var main_main = response.data;
       for(var inx = 0; inx < main_main.length; inx++){
-        var main_html = '<div class="col-sm-4 menu-div" id="'+(inx+1)+'">' +
+        var main_html = '<div class="col-sm-4 menu-div" id="'+main_main[inx].id+'">' +
                       '<a class="thumbnail select-menu" style="border-color: #ffa200; color: #ffa200;"><img src="' +
                       main_main[inx].image + 
                       '" alt="Select Menu"> '+

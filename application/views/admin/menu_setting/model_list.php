@@ -19,8 +19,8 @@
                     <div class="form-group mb-2">
                       <label for="" class="control-label mb-1">Model Type</label>:
                       <select class="form-control form-control-sm" tabindex="1" name="model_type" id="model_type">
-                        <?php for($i = 0; $i < count($model_type); $i++){ ?>
-                          <option value="<?= $main_menu_ids[$i]['id']; ?>"><?= $model_type[$i]['name']; ?></option>
+                        <?php for($i = 0; $i < count($model_types); $i++){ ?>
+                          <option value="<?= $model_types[$i]['type']; ?>"><?= $model_types[$i]['name']; ?></option>
                         <?php } ?>
                       </select>
                     </div>

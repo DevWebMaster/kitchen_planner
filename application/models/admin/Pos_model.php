@@ -6,6 +6,22 @@
 		    $insertId = $this->db->insert_id();
 	   		return  $insertId;
 		}
+		public function edit_pos($id, $data)
+		{
+			return $this->db->update('tbl_pos', $data, array('pos_id'=>$id));
+		}
+		public function save_pos_location($data)
+		{
+			$this->db->insert('tbl_pos_locations', $data);
+			$insertId = $this->db->insert_id();
+			return $insertId;
+		}
+		public function get_pos_locations()
+		{
+			$this->db->select('*');
+			$this->db->from('tbl_pos_locations');
+			return $this->db->get()->result_array();
+		}
 
         public function get_pos_location_list($search_key, $start, $rowperpage) {
 			$this->db->select('a1.*');
@@ -70,8 +86,9 @@
 		}
 
 		public function get_pos_list($search_key, $start, $rowperpage) {
-			$this->db->select('a1.pos_id, a1.pos_name, a1.company_name, a1.CIF, a1.phone_num, a1.direction, a1.zipcode, a1.coordinates, a1.is_blocked');
+			$this->db->select('a1.pos_id, a1.pos_name, a1.company_name, a1.CIF, a1.phone_num, a1.zipcode, a1.coordinates, a1.is_blocked, a2.address, a2.lat as position_lat, a2.lon as position_lon, a1.pos_location, a1.password, a1.email');
 			$this->db->from('tbl_pos as a1');
+			$this->db->join('tbl_pos_locations as a2', 'a1.pos_location = a2.id', 'left');
 			$this->db->where('a1.is_deleted', 0);
 			if($search_key != ''){
 				$this->db->like('a1.pos_name', $search_key);
@@ -170,6 +187,10 @@
 				'price' => $edit_price
 			);
 			return $this->db->update('tbl_point_rate',$data, array('id' => $id ) );
+		}
+		public function edit_pos_location($id, $data)
+		{
+			return $this->db->update('tbl_pos_locations', $data, array('id'=>$id));
 		}
 
 		public function get_margin_spread_list($search_key, $start, $rowperpage) {

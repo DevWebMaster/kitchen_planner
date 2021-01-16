@@ -4,28 +4,28 @@
 
 class Pos_setting extends My_Controller {
 
-	public function __construct(){
+  public function __construct(){
 
-		parent::__construct();
+    parent::__construct();
 
-		auth_check(); // check login auth
+    auth_check(); // check login auth
 
-		$this->rbac->check_module_access();
+    $this->rbac->check_module_access();
 
-		$this->load->model('admin/pos_model', 'pos_model');
-	}
-	public function pos_location()
-	{
+    $this->load->model('admin/pos_model', 'pos_model');
+  }
+  public function pos_location()
+  {
 
-		$data['title'] = 'POS Location';
+    $data['title'] = 'POS Location';
 
-		$this->load->view('admin/includes/_header', $data);
+    $this->load->view('admin/includes/_header', $data);
 
-    	$this->load->view('admin/pos_setting/pos_location');
+      $this->load->view('admin/pos_setting/pos_location');
 
-    	$this->load->view('admin/includes/_footer');
+      $this->load->view('admin/includes/_footer');
 
-	}
+  }
 
   public function save_pos()
   {
@@ -37,7 +37,7 @@ class Pos_setting extends My_Controller {
       'password' => $req_data['password'],
       'CIF' => $req_data['cif'],
       'phone_num' => $req_data['phone_num'],
-      'direction' => $req_data['direction'],
+      'pos_location' => $req_data['pos_location'],
       'zipcode' => $req_data['zipcode'],
       'coordinates' => $req_data['coordinates']
     );
@@ -47,12 +47,67 @@ class Pos_setting extends My_Controller {
     $response = array('status' => $result);
     echo json_encode($response);
   }
+  public function edit_pos()
+  {
+    $req_data = $this->input->post();
+    $data = array(
+      'pos_name' => $req_data['edit_pos_name'],
+      'company_name' => $req_data['edit_company_name'],
+      'email' => $req_data['edit_email'],
+      'password' => $req_data['edit_password'],
+      'CIF' => $req_data['edit_cif'],
+      'phone_num' => $req_data['edit_phone_num'],
+      'pos_location' => $req_data['edit_pos_location'],
+      'zipcode' => $req_data['edit_zipcode'],
+      'coordinates' => $req_data['edit_coordinates']
+    );
 
-	public function get_pos_location()
-	{
-		// $search_key = $this->input->post('search_key');
+    $result = $this->pos_model->edit_pos($req_data['edit_pos_id'], $data);
 
-		$draw = $_POST['draw'];
+    $response = array('status' => $result);
+    echo json_encode($response);
+  }
+  public function save_pos_location()
+  {
+    $req_data = $this->input->post();
+    $data = array(
+      'name' => $req_data['location_name'],
+      'address' => $req_data['address'],
+      'lat' => $req_data['position_lat'],
+      'lon' => $req_data['position_lon'],
+      'description' => $req_data['description'],
+    );
+
+    $result = $this->pos_model->save_pos_location($data);
+
+    $response = array('status' => $result);
+    echo json_encode($response);
+  }
+  public function edit_pos_location()
+  {
+    $id = $this->input->post('pos_location_id');
+    $edit_location_name = $this->input->post('edit_location_name');
+    $edit_address = $this->input->post('edit_address');
+    $edit_position_lat = $this->input->post('edit_position_lat');
+    $edit_position_lon = $this->input->post('edit_position_lon');
+    $edit_description = $this->input->post('edit_description');
+    $update_data = array(
+      'name'=>$edit_location_name,
+      'address'=>$edit_address,
+      'lat'=>$edit_position_lat,
+      'lon'=>$edit_position_lon,
+      'description'=>$edit_description
+    );
+    $result = $this->pos_model->edit_pos_location($id, $update_data);
+
+    echo json_encode($result);
+  }
+
+  public function get_pos_location()
+  {
+    // $search_key = $this->input->post('search_key');
+
+    $draw = $_POST['draw'];
     $start = $_POST['start'];
     $rowperpage = $_POST['length']; // Rows display per page
     $columnIndex = $_POST['order'][0]['column']; // Column index
@@ -75,7 +130,7 @@ class Pos_setting extends My_Controller {
           "position_lat"=>$value['lat'],
           "position_lon"=>$value['lon'],
           "description"=>$value['description'],
-          "action"=>'<!--<a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-info edit-row" data-toggle="modal" data-target="#color_edit_modal"><i class="fa fa-edit"></i></a> --><a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-danger delete-row"><i class="fa fa-times"></i></a>'
+          "action"=>'<div style="display: inline-flex;"><a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-info edit-row" data-toggle="modal" data-target="#edit_pos_location_modal"><i class="fa fa-edit"></i></a><a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-danger delete-row"><i class="fa fa-times"></i></a></div>'
        );
     }
 
@@ -87,27 +142,28 @@ class Pos_setting extends My_Controller {
     );
 
     echo json_encode($result);
-	}
+  }
 
-	public function delete_pos_location_record()
-	{
-		$id = $this->input->post('id');
-		$result = $this->pos_model->delete_pos_location($id);
+  public function delete_pos_location_record()
+  {
+    $id = $this->input->post('id');
+    $result = $this->pos_model->delete_pos_location($id);
 
-		echo json_encode($result);
-	}
+    echo json_encode($result);
+  }
 
 
-	public function pos_management()
-	{
-		$data['title'] = 'POS Management';
+  public function pos_management()
+  {
+    $data['title'] = 'POS Management';
+    $data['pos_location_list'] = $this->pos_model->get_pos_locations();
 
-		$this->load->view('admin/includes/_header', $data);
+    $this->load->view('admin/includes/_header', $data);
 
-    	$this->load->view('admin/pos_setting/pos_management');
+      $this->load->view('admin/pos_setting/pos_management');
 
-    	$this->load->view('admin/includes/_footer');
-	}
+      $this->load->view('admin/includes/_footer');
+  }
 
   public function get_pos_list()
   {
@@ -127,6 +183,11 @@ class Pos_setting extends My_Controller {
     $data = array();
 
     foreach ($pos_list as $value) {
+        $extra_data = array(
+          'pos_location_id'=>$value['pos_location'],
+          'password'=>$value['password']
+        );
+        $json_data = json_encode($extra_data);
         if($value['is_blocked'] == 1){
           $toggle_btn = '<input class="tgl_checkbox tgl-ios" id="'.$value['pos_id'].'" type="checkbox" checked><label for="'.$value['pos_id'].'"></label>';
         }else{
@@ -136,13 +197,16 @@ class Pos_setting extends My_Controller {
         $data[] = array( 
           "pos_name"=>$value['pos_name'],
           "company_name"=>$value['company_name'],
+          "email"=>$value['email'],
           "CIF"=>$value['CIF'],
           "phone_num"=>$value['phone_num'],
-          "direction"=>$value['direction'],
+          "address"=>$value['address'],
+          "position_lat"=>$value['position_lat'],
+          "position_lon"=>$value['position_lon'],
           "zipcode"=>$value['zipcode'],
           "coordinates"=>$value['coordinates'],
           "block"=>$toggle_btn,
-          "action"=>'<a id="'.$value['pos_id'].'" class="mr-1 btn-sm btn btn-danger delete-row"><i class="fa fa-times"></i></a>'
+          "action"=>'<div style="display: inline-flex;"><a id="'.$value['pos_id'].'" class="mr-1 btn-sm btn btn-info edit-row" data-toggle="modal" data-target="#edit_pos_modal" json_data="'.htmlentities($json_data, ENT_QUOTES, 'UTF-8').'"><i class="fa fa-edit"></i></a><a id="'.$value['pos_id'].'" class="mr-1 btn-sm btn btn-danger delete-row"><i class="fa fa-times"></i></a></div>'
        );
     }
 
@@ -204,12 +268,12 @@ class Pos_setting extends My_Controller {
 
     $totalRecords = $this->pos_model->get_point_rate_all_count($pos_rate);
     $totalRecordwithFilter = $this->pos_model->get_point_rate_all_count_with_filter($search_key, $start, $rowperpage, $pos_rate);
-    $pos_location = $this->pos_model->get_point_rate_list($search_key, $start, $rowperpage, $pos_rate);
+    $point_list = $this->pos_model->get_point_rate_list($search_key, $start, $rowperpage, $pos_rate);
     //echo $this->db->last_query();
 
     $data = array();
 
-    foreach ($pos_location as $value) {
+    foreach ($point_list as $value) {
         $data[] = array( 
           "id"=>$value['id'],
           "min_point"=>$value['min_point'],
@@ -344,4 +408,4 @@ class Pos_setting extends My_Controller {
   }
 
 }
-?>	
+?>  
