@@ -7,7 +7,7 @@
             <div class="card-body">
               <form method="post" enctype="multipart/form-data" id="uploadForm">
                 <div class="col-md-12" style="display: inline-flex;">
-                  <div class="col-12 col-md-2 offset-1">
+                  <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
                       <label for="" class="control-label mb-1">POS Name</label>:
                       <input type="text" class="form-control form-control-sm" name="pos_name" id="pos_name">
@@ -39,7 +39,7 @@
                   </div>
                 </div>
                 <div class="col-md-12" style="display: inline-flex;">
-                  <div class="col-12 col-md-2 offset-1">
+                  <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
                       <label for="" class="control-label mb-1">POS Location</label>:
                       <select class="form-control form-control-sm" name="pos_location" id="pos_location">
@@ -83,7 +83,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-body">
-              <div class="col-12 col-md-10 offset-md-1">
+              <div class="col-12 col-md-10">
                 <div class="table-responsive">  
                   <table id='pos_list' class='table table-bordered table-striped text-center'>
                     <thead>

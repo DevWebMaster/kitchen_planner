@@ -17,13 +17,13 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-12 col-md-1">
+                  <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
                       <label for="" class="control-label mb-1">Model Width</label>:
                       <input type="number" class="form-control form-control-sm" name="model_width" id="model_width">
                     </div>
                   </div>
-                  <div class="col-12 col-md-1">
+                  <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
                       <label for="" class="control-label mb-1">Model Length</label>:
                       <input type="number" class="form-control form-control-sm" name="model_length" id="model_length">

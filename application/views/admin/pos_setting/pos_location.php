@@ -212,7 +212,7 @@
           var edit_status = JSON.parse(response);
           if(edit_status){
             toastr.success("Edited the row successfully.");
-            init_pos_location_list(pos_id);
+            init_pos_location_list();
           }else{
             toastr.warning("Editing is failed.");
           }

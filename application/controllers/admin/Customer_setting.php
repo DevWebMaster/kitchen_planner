@@ -4,28 +4,48 @@
 
 class Customer_setting extends My_Controller {
 
-	public function __construct(){
+  public function __construct(){
 
-		parent::__construct();
+    parent::__construct();
 
-		auth_check(); // check login auth
+    auth_check(); // check login auth
 
-		$this->rbac->check_module_access();
+    $this->rbac->check_module_access();
 
-		$this->load->model('admin/customer_model', 'customer_model');
-	}
+    $this->load->model('admin/customer_model', 'customer_model');
+  }
 
-	public function customer_management()
-	{
-		$data['title'] = 'Customer Management';
+  public function customer_management()
+  {
+    $data['title'] = 'Customer Management';
 
-		$this->load->view('admin/includes/_header', $data);
+    $this->load->view('admin/includes/_header', $data);
 
-    	$this->load->view('admin/customer_setting/customer_management');
+      $this->load->view('admin/customer_setting/customer_management');
 
-    	$this->load->view('admin/includes/_footer');
-	}
+      $this->load->view('admin/includes/_footer');
+  }
+  public function edit_customer()
+  {
+    $req_data = $this->input->post();
+    $data = array(
+      'customer_name' => $req_data['edit_customer_name'],
+      'last_name1' => $req_data['edit_last_name1'],
+      'last_name2' => $req_data['edit_last_name2'],
+      'DNI' => $req_data['edit_dni'],
+      'email' => $req_data['edit_email'],
+      'transaction' => $req_data['edit_transaction'],
+      'phone_num' => $req_data['edit_phone_num'],
+      'delivery_direction' => $req_data['edit_direction'],
+      'zipcode' => $req_data['edit_zipcode'],
+      'LOPD' => $req_data['edit_lopd']
+    );
 
+    $result = $this->customer_model->edit_customer($req_data['edit_customer_id'], $data);
+
+    $response = array('status' => $result);
+    echo json_encode($response);
+  }
   public function get_customer_list()
   {
     $draw = $_POST['draw'];
@@ -62,7 +82,7 @@ class Customer_setting extends My_Controller {
           "zipcode"=>$value['zipcode'],
           "LOPD"=>$value['LOPD'],
           "block"=>$toggle_btn,
-          "action"=>'<a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-danger delete-row"><i class="fa fa-times"></i></a>'
+          "action"=>'<div style="display: inline-flex;"><a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-info edit-row" data-toggle="modal" data-target="#edit_customer_modal"><i class="fa fa-edit"></i></a><a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-danger delete-row"><i class="fa fa-times"></i></a>'
        );
     }
 
@@ -253,4 +273,4 @@ class Customer_setting extends My_Controller {
   }
 
 }
-?>	
+?>  

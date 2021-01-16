@@ -18,6 +18,10 @@ class Customer_model extends CI_Model{
 		 	$this->db->where('id', $selected_customer_id);
 			return $this->db->update('tbl_customers', $data);
 		}
+		public function edit_customer($id, $data)
+		{
+			return $this->db->update('tbl_customers', $data, array('id'=>$id));
+		}
 		public function get_customer_list($search_key, $start, $rowperpage) {
 			$this->db->select('*');
 			$this->db->from('tbl_customers as a1');
