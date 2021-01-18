@@ -10,62 +10,6 @@
 		{
 			return $this->db->update('tbl_pos', $data, array('pos_id'=>$id));
 		}
-		public function save_pos_location($data)
-		{
-			$this->db->insert('tbl_pos_locations', $data);
-			$insertId = $this->db->insert_id();
-			return $insertId;
-		}
-		public function get_pos_locations()
-		{
-			$this->db->select('*');
-			$this->db->from('tbl_pos_locations');
-			return $this->db->get()->result_array();
-		}
-
-        public function get_pos_location_list($search_key, $start, $rowperpage) {
-			$this->db->select('a1.*');
-			$this->db->from('tbl_pos_locations as a1');
-			if($search_key != ''){
-				$this->db->like('a1.address', $search_key);
-			}
-			$this->db->limit($rowperpage, $start);
-
-			$query = $this->db->get()->result_array();
-
-			
-			  return $query;
-		}
-		public function get_pos_location_all_count() {
-			$this->db->select('a1.*');
-			$this->db->from('tbl_pos_locations as a1');
-			
-			// $this->db->order_by('created_at  DESC');
-
-			$query = $this->db->get();
-
-		    return $query->num_rows();
-		
-
-		}
-		public function get_pos_location_all_count_with_filter($search_key, $start, $rowperpage) {
-			$this->db->select('a1.*');
-			$this->db->from('tbl_pos_locations as a1');
-			if($search_key != ''){
-				$this->db->like('a1.address', $search_key);
-			}
-			$this->db->limit($rowperpage, $start);
-			$query = $this->db->get();
-
-		    return $query->num_rows();
-		
-
-		}
-		public function delete_pos_location($id)
-		{
-		 	$this->db->where('id', $id);
-			return $this->db->delete('tbl_pos_locations');
-		}
 
 		public function delete_pos($id)
 		{
@@ -86,9 +30,8 @@
 		}
 
 		public function get_pos_list($search_key, $start, $rowperpage) {
-			$this->db->select('a1.pos_id, a1.pos_name, a1.company_name, a1.CIF, a1.phone_num, a1.zipcode, a1.coordinates, a1.is_blocked, a2.address, a2.lat as position_lat, a2.lon as position_lon, a1.pos_location, a1.password, a1.email');
+			$this->db->select('a1.pos_id, a1.pos_name, a1.company_name, a1.CIF, a1.phone_num, a1.zipcode, a1.coordinates, a1.is_blocked, a1.address, a1.lat as position_lat, a1.lon as position_lon, a1.password, a1.email, a1.description');
 			$this->db->from('tbl_pos as a1');
-			$this->db->join('tbl_pos_locations as a2', 'a1.pos_location = a2.id', 'left');
 			$this->db->where('a1.is_deleted', 0);
 			if($search_key != ''){
 				$this->db->like('a1.pos_name', $search_key);

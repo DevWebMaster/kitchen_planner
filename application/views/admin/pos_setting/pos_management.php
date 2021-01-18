@@ -37,29 +37,36 @@
                       <input type="text" class="form-control form-control-sm" name="phone_num" id="phone_num">
                     </div>
                   </div>
-                </div>
-                <div class="col-md-12" style="display: inline-flex;">
-                  <div class="col-12 col-md-2">
-                    <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">POS Location</label>:
-                      <select class="form-control form-control-sm" name="pos_location" id="pos_location">
-                      <?php 
-                        foreach ($pos_location_list as $key => $value) { ?>
-                          <option value="<?= $value['id']; ?>"><?= $value['name'] ?></option>
-                      <?php } ?>                        
-                      </select>
-                    </div>
-                  </div>
                   <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
                       <label for="" class="control-label mb-1">zipcode</label>:
                       <input type="text" class="form-control form-control-sm" name="zipcode" id="zipcode">
                     </div>
                   </div>
+                </div>
+                <div class="col-md-12" style="display: inline-flex;">
                   <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Coordinates</label>:
-                      <input type="text" class="form-control form-control-sm" name="coordinates" id="coordinates">
+                      <label for="" class="control-label mb-1">Address</label>:
+                      <input type="text" class="form-control form-control-sm" name="address" id="address">
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-2">
+                    <div class="form-group mb-2">
+                      <label for="" class="control-label mb-1">Position_lat</label>:
+                      <input type="text" class="form-control form-control-sm" name="position_lat" id="position_lat">
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-2">
+                    <div class="form-group mb-2">
+                      <label for="" class="control-label mb-1">Position_lon</label>:
+                      <input type="text" class="form-control form-control-sm" name="position_lon" id="position_lon">
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-2">
+                    <div class="form-group mb-2">
+                      <label for="" class="control-label mb-1">Description</label>:
+                      <input type="text" class="form-control form-control-sm" name="description" id="description">
                     </div>
                   </div>
                   <div class="col-12 col-md-2">
@@ -83,21 +90,21 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-body">
-              <div class="col-12 col-md-10">
+              <div class="col-12 col-md-10 offset-md-1">
                 <div class="table-responsive">  
                   <table id='pos_list' class='table table-bordered table-striped text-center'>
                     <thead>
                       <tr>
                         <th>POS Name</th>
                         <th>Company Name</th>
+                        <th>Address</th>
                         <th>Email</th>
                         <th>CIF</th>
                         <th>Phone Number</th>
-                        <th>Address</th>
                         <th>Position_lat</th>
                         <th>Position_lon</th>
                         <th>Zipcode</th>
-                        <th>Coordinates</th>
+                        <th>Description</th>
                         <th>Block</th>
                         <th width="5%">Action</th>
                       </tr>
@@ -153,26 +160,34 @@
                   </div>
                   <div class="col-12 col-md-6">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">POS Location</label>:
-                      <select class="form-control form-control-sm" name="edit_pos_location" id="edit_pos_location">
-                      <?php 
-                        foreach ($pos_location_list as $key => $value) { ?>
-                          <option value="<?= $value['id']; ?>"><?= $value['name'] ?></option>
-                      <?php } ?>                        
-                      </select>
+                      <label for="" class="control-label mb-1">Zipcode</label>:
+                      <input type="text" class="form-control form-control-sm" name="edit_zipcode" id="edit_zipcode">
                     </div>
                   </div>
                   <br>
                   <div class="col-12 col-md-6">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Zipcode</label>:
-                      <input type="text" class="form-control form-control-sm" name="edit_zipcode" id="edit_zipcode">
+                      <label for="" class="control-label mb-1">Address</label>:
+                      <input type="text" class="form-control form-control-sm" name="address" id="edit_address">
                     </div>
                   </div>
                   <div class="col-12 col-md-6">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Coordinates</label>:
-                      <input type="text" class="form-control form-control-sm" name="edit_coordinates" id="edit_coordinates">
+                      <label for="" class="control-label mb-1">Description</label>:
+                      <input type="text" class="form-control form-control-sm" name="description" id="edit_description">
+                    </div>
+                  </div>
+                  <br>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group mb-2">
+                      <label for="" class="control-label mb-1">Position_lat</label>:
+                      <input type="text" class="form-control form-control-sm" name="position_lat" id="edit_position_lat">
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group mb-2">
+                      <label for="" class="control-label mb-1">Position_lon</label>:
+                      <input type="text" class="form-control form-control-sm" name="position_lon" id="edit_position_lon">
                     </div>
                   </div>
                   <br>
@@ -204,7 +219,7 @@
 
     $('#uploadForm').submit(function(e) {
       e.preventDefault();
-      if($('#pos_name').val() && $('#company_name').val() && $('#email').val() && $('#cif').val() && $('#phone_num').val() && $('#zipcode').val() && $('#coordinates').val() && $('#password').val()){
+      if($('#pos_name').val() != '' && $('#company_name').val() != '' && $('#email').val() != '' && $('#cif').val() != '' && $('#phone_num').val() != '' && $('#zipcode').val() != '' && $('#password').val() != '' && $('#address').val() != '' && $('#position_lat').val() != '' && $('#position_lon').val() != ''){
         var formData = new FormData(this);
         $.ajax({
           url: '<?= site_url(); ?>admin/pos_setting/save_pos',
@@ -227,8 +242,11 @@
               $('#phone_num').val('');
               $('#direction').val('');
               $('#zipcode').val('');
-              $('#coordinates').val('');
               $('#password').val('');
+              $('#address').val('');
+              $('#description').val('');
+              $('#position_lat').val('');
+              $('#position_lon').val('');
             }
             
           }
@@ -266,13 +284,15 @@
       $('#edit_pos_id').val(id);
       $('#edit_pos_name').val($(this).parent().parent().parent().find("td:eq(0)").text());
       $('#edit_company_name').val($(this).parent().parent().parent().find("td:eq(1)").text());
-      $('#edit_email').val($(this).parent().parent().parent().find("td:eq(2)").text());
-      $('#edit_cif').val($(this).parent().parent().parent().find("td:eq(3)").text());
-      $('#edit_phone_num').val($(this).parent().parent().parent().find("td:eq(4)").text());
-      $("#edit_pos_location option[value='"+json_data['pos_location_id']+"']").attr("selected", "selected");
+      $('#edit_email').val($(this).parent().parent().parent().find("td:eq(3)").text());
+      $('#edit_cif').val($(this).parent().parent().parent().find("td:eq(4)").text());
+      $('#edit_phone_num').val($(this).parent().parent().parent().find("td:eq(5)").text());
       $('#edit_zipcode').val($(this).parent().parent().parent().find("td:eq(8)").text());
-      $('#edit_coordinates').val($(this).parent().parent().parent().find("td:eq(9)").text());
       $('#edit_password').val(json_data['password']);
+      $('#edit_address').val($(this).parent().parent().parent().find("td:eq(2)").text());
+      $('#edit_position_lat').val($(this).parent().parent().parent().find("td:eq(6)").text());
+      $('#edit_position_lon').val($(this).parent().parent().parent().find("td:eq(7)").text());
+      $('#edit_description').val($(this).parent().parent().parent().find("td:eq(9)").text());
     });
 
     $('#btn_update').click(function(){
@@ -283,14 +303,17 @@
       var edit_phone_num = $('#edit_phone_num').val();
       var edit_pos_location = $('#edit_pos_location').val();
       var edit_zipcode = $('#edit_zipcode').val();
-      var edit_coordinates = $('#edit_coordinates').val();
       var edit_password = $('#edit_password').val();
+      var edit_address = $('#edit_address').val();
+      var edit_description = $('#edit_description').val();
+      var edit_position_lat = $('#edit_position_lat').val();
+      var edit_position_lon = $('#edit_position_lon').val();
 
       var edit_pos_id = $('#edit_pos_id').val();
       $.ajax({
         url: '<?= site_url(); ?>admin/pos_setting/edit_pos',
         type: 'POST',
-        data: {edit_pos_id: edit_pos_id, edit_pos_name: edit_pos_name, edit_company_name: edit_company_name, edit_email: edit_email, edit_cif: edit_cif, edit_phone_num: edit_phone_num, edit_pos_location: edit_pos_location, edit_zipcode: edit_zipcode, edit_coordinates: edit_coordinates, edit_password: edit_password},
+        data: {edit_pos_id: edit_pos_id, edit_pos_name: edit_pos_name, edit_company_name: edit_company_name, edit_email: edit_email, edit_cif: edit_cif, edit_phone_num: edit_phone_num, edit_pos_location: edit_pos_location, edit_zipcode: edit_zipcode, edit_password: edit_password, edit_address: edit_address, edit_description: edit_description, edit_position_lat: edit_position_lat, edit_position_lon: edit_position_lon},
         success: function(response){
           var edit_status = JSON.parse(response);
           if(edit_status){
@@ -329,14 +352,14 @@
         'columns': [
            { data: 'pos_name' },
            { data: 'company_name' },
+           { data: 'address' },
            { data: 'email' },
            { data: 'CIF' },
            { data: 'phone_num' },
-           { data: 'address' },
            { data: 'position_lat' },
            { data: 'position_lon' },
            { data: 'zipcode' },
-           { data: 'coordinates' },
+           { data: 'description' },
            { data: 'block' },
            { data: 'action', "width": "5%"},
         ]

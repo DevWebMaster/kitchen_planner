@@ -467,8 +467,8 @@ class Customer_model extends CI_Model{
 	}
 	public function get_pos_locations()
 	{
-		$this->db->select('*');
-		$this->db->from('tbl_pos_locations');
+		$this->db->select('pos_name as name, address, description, lat, lon');
+		$this->db->from('tbl_pos');
 		$query = $this->db->get()->result_array();
 		return $query;
 	}
