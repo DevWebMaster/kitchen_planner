@@ -1,5 +1,6 @@
 const express = require('express');
 const mysql = require('mysql');
+const cors = require('cors');
 //create express app
 const app = express();
 const path = require('path');
@@ -19,7 +20,7 @@ const port = process.env.PORT || 8080;
 
 //parse requests of content-type - application/json
 var bodyParser = require('body-parser');
-
+app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
 

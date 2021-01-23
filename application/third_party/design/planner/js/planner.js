@@ -427,6 +427,7 @@ var TextureSelector = function (blueprint3d, sideMenu) {
   function init() {
     $.ajax({
       url: '/get_wall_floor',
+      headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       success: function(response){
         console.log(response.data.wall_data);
@@ -638,6 +639,7 @@ var mainControls = function(blueprint3d) {
     console.log(summary_arr)
     $.ajax({
       url: '/get_budget',
+      headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       data: JSON.stringify({req_data: data, user_id: user_id, user_type: user_type, product_id: product_id, customer_id: customer_id, summary_arr: summary_arr}),
       contentType: 'application/json',
@@ -666,6 +668,7 @@ var mainControls = function(blueprint3d) {
       if(product_id != 0){
         $.ajax({
           url: '/load_product',
+          headers: {'Access-Control-Allow-Origin': '*'},
           type: 'POST',
           data: JSON.stringify({product_id: product_id}),
           contentType: 'application/json',
@@ -688,6 +691,7 @@ var mainControls = function(blueprint3d) {
     {
       $.ajax({
         url: '/save_product',
+        headers: {'Access-Control-Allow-Origin': '*'},
         type: 'POST',
         data: JSON.stringify({req_data: content, filename: filename, user_id: user_id, user_type: user_type}),
         contentType: 'application/json',

@@ -469,6 +469,7 @@ class Customer_model extends CI_Model{
 	{
 		$this->db->select('pos_name as name, address, description, lat, lon');
 		$this->db->from('tbl_pos');
+		$this->db->where('is_deleted', 0);
 		$query = $this->db->get()->result_array();
 		return $query;
 	}

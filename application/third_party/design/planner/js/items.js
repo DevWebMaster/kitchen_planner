@@ -38,6 +38,7 @@ $(document).ready(function() {
       $.ajax({
         url: '/get_user_name',
         type: 'POST',
+        headers: {'Access-Control-Allow-Origin': '*'},
         data: JSON.stringify(req_data),
         contentType: 'application/json',
         success: function(response){
@@ -62,6 +63,7 @@ $(document).ready(function() {
   var itemsDiv = $("#items-wrapper")
   $.ajax({
     url: '/get_main_menu',
+    headers: {'Access-Control-Allow-Origin': '*'},
     type: 'POST',
     success: function(response){
       // console.log(data.data);
@@ -87,6 +89,7 @@ $(document).ready(function() {
     req_data.main_menu_id = main_menu_id;
     $.ajax({
       url: '/get_sub_menu',
+      headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       data: JSON.stringify(req_data),
       contentType: 'application/json',
@@ -124,6 +127,7 @@ $(document).ready(function() {
     req_data.sub_id = sub_id;
     $.ajax({
       url: '/get_shortkey_menu',
+      headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       data: JSON.stringify(req_data),
       contentType: 'application/json',
@@ -208,6 +212,7 @@ $(document).ready(function() {
     $('#shortkey-menu').empty();
     $.ajax({
       url: '/get_thumbnail_menu',
+      headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       data: JSON.stringify(req_data),
       contentType: 'application/json',
@@ -295,12 +300,13 @@ $(document).ready(function() {
       itemsDiv.empty();
       $.ajax({
         url: '/get_main_menu',
+        headers: {'Access-Control-Allow-Origin': '*'},
         type: 'POST',
         success: function(response){
           // console.log(data.data);
           var main_main = response.data;
           for(var inx = 0; inx < main_main.length; inx++){
-            var html_main_clone = '<div class="col-sm-4 menu-div" id="'+(inx+1)+'">' +
+            var html_main_clone = '<div class="col-sm-4 menu-div" id="'+main_menu[inx].id+'">' +
                           '<a class="thumbnail select-menu" style="border-color: #ffa200; color: #ffa200;"><img src="' +
                           main_main[inx].image + 
                           '" alt="Select Menu"> '+
@@ -322,6 +328,7 @@ $(document).ready(function() {
       console.log("main_id: "+main_id);
       $.ajax({
         url: '/get_sub_menu',
+        headers: {'Access-Control-Allow-Origin': '*'},
         type: 'POST',
         data: JSON.stringify(req_data),
         contentType: 'application/json',
@@ -329,7 +336,7 @@ $(document).ready(function() {
           var sub_menu = response.data
           if(sub_menu && sub_menu.length > 0){
             for(var inx = 0; inx < sub_menu.length; inx++){
-              var html_sub_clone = '<div class="col-sm-4 menu-div" id="'+sub_menu[inx].main_id+'-'+(inx+1)+'">' +
+              var html_sub_clone = '<div class="col-sm-4 menu-div" id="'+sub_menu[inx].main_id+'-'+sub_menu[inx].id+'">' +
                             '<a class="thumbnail select-submenu" style="border-color: #ffa200; color: #ffa200;"><img src="' +
                             sub_menu[inx].image + 
                             '" alt="Select Menu"> '+
@@ -370,6 +377,7 @@ $(document).ready(function() {
   function get_search_result(search_data){
     $.ajax({
       url: '/get_thumbnail_menu',
+      headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       data: JSON.stringify(search_data),
       contentType: 'application/json',
@@ -456,6 +464,7 @@ $(document).ready(function() {
     var product_id = $('#product_id').val();
     $.ajax({
       url: '/get_observation',
+      headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       data: JSON.stringify({user_id: user_id, user_type: user_type, product_id: product_id}),
       contentType: 'application/json',
@@ -481,6 +490,7 @@ $(document).ready(function() {
   $('.design2').click(function(){
     $.ajax({
       url: '/get_customer',
+      headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       contentType: 'application/json',
       success: function(response){
