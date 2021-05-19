@@ -46,9 +46,9 @@ class Order_setting extends My_Controller {
             $inx++;
             $row_inx = $inx + intval($start);
             if($value['check_flag'] == 2){
-                $action_str = '<!--a style="color:white;" disabled h_id="'.$value['id'].'" id="confirmed'.$value['id'].'" class="mr-1 btn-sm btn btn-info btn-confirmed">Confirmed</a--><a href="'.base_url().$value['pdf_file'].'" target="_blank" style="color:white;" class="mr-1 btn-sm btn btn-info btn-pdf">Order</a><a style="color:white;" href="http://207.154.243.81:8081/?designckitchenadminplanner'.$value['product_id'].'" target="_blank" class="btn btn-info btn-sm">3D Design</a>';
+                $action_str = '<div style="display: inline-flex;"><!--a style="color:white;" disabled h_id="'.$value['id'].'" id="confirmed'.$value['id'].'" class="mr-1 btn-sm btn btn-info btn-confirmed">Confirmed</a--><a href="'.base_url().$value['pdf_file'].'" target="_blank" style="color:white;" class="mr-1 btn-sm btn btn-info btn-pdf">Order</a><a style="color:white;" href="http://207.154.243.81:8081/?designckitchenadminplanner'.$value['product_id'].'" target="_blank" class="mr-1 btn btn-info btn-sm">3D Design</a><a style="color:white;" h_id="'.$value['id'].'" id="return'.$value['id'].'" class="mr-1 btn-sm btn btn-info btn-return">Return</a><a style="color:white;" h_id="'.$value['id'].'" id="remove'.$value['id'].'" class="btn-sm btn btn-info btn-remove">Remove</a></div>';
             }else if($value['check_flag'] == 1){
-                $action_str = '<a style="color:white;" h_id="'.$value['id'].'" id="confirm'.$value['id'].'" class="mr-1 btn-sm btn btn-info btn-confirm" data-toggle="modal" data-target="#ordermodal">Confirm</a><a style="color:white;" href="http://207.154.243.81:8081/?designckitchenadminplanner'.$value['product_id'].'" target="_blank" class="btn btn-info btn-sm">3D Design</a>';
+                $action_str = '<div style="display: inline-flex;"><a style="color:white;" h_id="'.$value['id'].'" id="confirm'.$value['id'].'" class="mr-1 btn-sm btn btn-info btn-confirm" data-toggle="modal" data-target="#ordermodal">Confirm</a><a style="color:white;" href="http://207.154.243.81:8081/?designckitchenadminplanner'.$value['product_id'].'" target="_blank" class="mr-1 btn btn-info btn-sm">3D Design</a><a style="color:white;" h_id="'.$value['id'].'" id="remove'.$value['id'].'" class="btn-sm btn btn-info btn-remove">Remove</a></div>';
             }
             $data[] = array( 
               "no"=>$row_inx,
@@ -72,14 +72,26 @@ class Order_setting extends My_Controller {
         );
 
         echo json_encode($response);
-    }
+  }
+  public function remove_order()
+  {
+    $id = $this->input->post('id');
+    $result = $this->order_model->remove_order($id);
+    echo json_encode($result);
+  }
+  public function return_order()
+  {
+    $id = $this->input->post('id');
+    $result = $this->order_model->return_order($id);
+    echo json_encode($result);
+  }
   public function set_order_confirm_pos()
   {
       $order_no = $this->input->post('order_no');
 
-      $pos_id = $this->session->userdata('user_id');
-      $this->order_model->set_check_flag($order_no);
-      
+      // $pos_id = $this->session->userdata('user_id');
+      $result = $this->order_model->set_check_flag($order_no);
+
       echo json_encode($result);
   }
 
@@ -119,6 +131,13 @@ class Order_setting extends My_Controller {
             $inx++;
             $row_inx = $inx + intval($start);
 
+            $act_str = '';
+            if($value['check_flag'] == 1){
+              $act_str = '<div style="display: inline-flex;"><a style="color:white;" href="http://207.154.243.81:8081/?designckitchenadminplanner'.$value['product_id'].'" target="_blank" class="btn btn-info btn-sm mr-1">3D Design</a><a href="'.base_url().$value['pdf_file'].'" target="_blank" style="color:white;" class="mr-1 btn-sm btn btn-info btn-pdf">Order</a><a style="color:white;" h_id="'.$value['id'].'" id="remove'.$value['id'].'" class="btn-sm btn btn-info btn-remove">Remove</a></div>';
+            }else if($value['check_flag'] == 2){
+              $act_str = '<div style="display: inline-flex;"><a style="color:white;" href="http://207.154.243.81:8081/?designckitchenadminplanner'.$value['product_id'].'" target="_blank" class="btn btn-info btn-sm mr-1">3D Design</a><a href="'.base_url().$value['pdf_file'].'" target="_blank" style="color:white;" class="mr-1 btn-sm btn btn-info btn-pdf">Order</a><a style="color:white;" h_id="'.$value['id'].'" id="return'.$value['id'].'" class="mr-1 btn-sm btn btn-info btn-return">Return</a><a style="color:white;" h_id="'.$value['id'].'" id="remove'.$value['id'].'" class="btn-sm btn btn-info btn-remove">Remove</a></div>';
+            }
+
             $data[] = array( 
               "no"=>$row_inx,
               "order_no"=>$value['order_no'],
@@ -128,10 +147,8 @@ class Order_setting extends My_Controller {
               "furniture_cost"=>$value['estimated_furniture_cost'],
               "other_cost"=>($value['estimated_countertio_cost']-$value['estimated_furniture_cost']),
               "status"=>$value['status'],
-              "action"=>'<a style="color:white;" href="http://207.154.243.81:8081/?designckitchenadminplanner'.$value['product_id'].'" target="_blank" class="btn btn-info btn-sm mr-1">3D Design</a><a href="'.base_url().$value['pdf_file'].'" target="_blank" style="color:white;" class="mr-1 btn-sm btn btn-info btn-pdf">Order</a>'
+              "action"=>$act_str
            );
-
-            
         }
 
         $response = array(
@@ -151,6 +168,8 @@ class Order_setting extends My_Controller {
 
       echo json_encode($product_info);
     }
+
+    
 	
 }
 ?>	

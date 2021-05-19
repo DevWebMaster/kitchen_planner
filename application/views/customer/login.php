@@ -11,7 +11,7 @@
 					
 				
 					<div class="section-head text-center">
-						<h2 class="head-title">Welcome! </h2>
+						<h2 class="head-title">Bienvenido! </h2>
 						<!-- <p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud. Photo booth anim 8</p> -->
 					</div>
 					<div class="dzFormMsg"></div>
@@ -29,7 +29,7 @@
 							<div class="col-lg-3 col-md-3 col-sm-3"></div>
 							<div class="col-lg-6 col-md-6 col-sm-6">
 								<div class="form-group">
-									<input name="dzPassword" type="Password" class="form-control dzPassword" required placeholder="Password"></input>
+									<input name="dzPassword" type="Password" class="form-control dzPassword" required placeholder="Contraseña"></input>
 								</div>
 							</div>
 						</div>
@@ -37,12 +37,12 @@
 							<div class="col-lg-3 col-md-3 col-sm-3"></div>
 							<div class="col-lg-3 col-md-3 col-sm-3">
 								<div class="box">
-									<input type='radio' name='dzRole' ng-checked="true" class="dzCustomer" value='customer' id="dzRole"/><label class="dzRole" for="thing1"></label> <label >Customer</label>
+									<input type='radio' name='dzRole' ng-checked="true" class="dzCustomer" value='customer' id="dzRole"/><label class="dzRole" for="thing1"></label> <label >Usuario</label>
 								</div>
 							</div>
 							<div class="col-lg-3 col-md-3 col-sm-3">
 								<div class="box">
-									<input type='radio' name='dzRole' class="dzPOS" value='pos' id="dzRole"/><label class="dzRole" for="thing2"></label> <label >POS</label>
+									<input type='radio' name='dzRole' class="dzPOS" value='pos' id="dzRole"/><label class="dzRole" for="thing2"></label> <label >Tienda</label>
 								</div>
 							</div>
 							<div class="col-md-12 col-sm-12 text-center">

@@ -49,6 +49,43 @@
 			);
 			return $this->db->update('tbl_order',$data, array('order_no' => $order_no ) );
 		}
+		public function remove_order($id)
+		{
+			$this->db->select('product_id');
+			$this->db->from('tbl_order');
+			$this->db->where('id', $id);
+			$rtn = $this->db->get()->result_array()[0];
+
+			$data = array(
+				'check_order' => 3
+			);
+			$this->db->update('tbl_product_history_log', $data, array('product_id' => $rtn['product_id']));
+
+			$this->db->where('id', $id);
+			return $this->db->delete('tbl_order');
+		}
+		public function return_order($id)
+		{
+			$this->db->select('check_flag');
+			$this->db->from('tbl_order');
+			$this->db->where('id', $id);
+			$rtn = $this->db->get()->result_array()[0];
+
+			$status = '';
+			if($rtn['check_flag'] == 1)
+				$status = 'no-confirm';
+			else if($rtn['check_flag'] == 2)
+				$status = 'Pre-confirm';
+			if($rtn['check_flag'] != 0){
+				$data = array(
+					'check_flag' => $rtn['check_flag'] - 1,
+					'status' => $status
+				);
+				return $this->db->update('tbl_order', $data, array('id' => $id));
+			}else{
+				return false;
+			}
+		}
 		public function get_pos_list()
 		{
 			$this->db->select('*');
@@ -117,6 +154,7 @@
 			$query = $this->db->get()->result_array();
 			return $query[0];
 		}
+		
 		
 	}
 ?>

@@ -61,11 +61,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="extra-nav">
                         <div class="extra-cell">
                             <?php if(!empty($this->session->userdata('is_customer_logged'))) { ?>
-                                <a href="<?= base_url('customer/auth/logout'); ?>" class="btn" id="btn_log_out">Log out(<?php print_r($this->session->userdata('userfname')); ?>) </a>
+                                <a href="<?= base_url('customer/auth/logout'); ?>" class="btn" id="btn_log_out">Salir(<?php print_r($this->session->userdata('userfname')); ?>) </a>
                             <?php }else if(!empty($this->session->userdata('is_pos_logged'))) { ?>
-                                <a href="<?= base_url('customer/auth/logout'); ?>" class="btn" id="btn_log_out">Log out(<?php print_r($this->session->userdata('userfname')); ?>) </a>
+                                <a href="<?= base_url('customer/auth/logout'); ?>" class="btn" id="btn_log_out">Salir(<?php print_r($this->session->userdata('userfname')); ?>) </a>
                         	<?php }else if($data == 'register') { ?>
-                        		<a href="<?= base_url('customer/auth/register'); ?>" class="btn">Register </a>
+                        		<a href="<?= base_url('customer/auth/register'); ?>" class="btn">Registrarse </a>
                         	<?php }else { ?>
                             	<a href="<?= base_url('customer/auth/login'); ?>" class="btn">Login </a>
                         <?php } ?>
@@ -78,56 +78,59 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<div class="logo-header">
 							<a href="index.html"><img src="<?= base_url(); ?>images/logo.png" alt=""></a>
 						</div>
-                        <ul class="nav navbar-nav">	
-                        	<?php if($data == 'index'){ ?>
-                        		<li class="active"><a href="<?= base_url('customer/main/'); ?>">INICIO  </a></li>
-                        	<?php }else { ?>
-                        		<li><a href="<?= base_url('customer/main/'); ?>">INICIO  </a></li>
-                        	<?php } ?>
-                        	<?php if(!empty($this->session->userdata('is_customer_logged'))){ ?>
-                        		<li><a href="http://207.154.243.81:8081/?designckitchen<?=$this->session->userdata('user_id'); ?>planner0" target="blank">DISEÑAR COCINA   </a></li>
+                        <ul class="nav navbar-nav"> 
+                            <?php if($data == 'index'){ ?>
+                                <li class="active"><a href="<?= base_url('customer/main/'); ?>">INICIO  </a></li>
+                            <?php }else { ?>
+                                <li><a href="<?= base_url('customer/main/'); ?>">INICIO  </a></li>
+                            <?php } ?>
+                            <?php if(!empty($this->session->userdata('is_customer_logged'))){ ?>
+                                <li><a href="<?= base_url('customer/planner'); ?>" target="_blank">DISEÑAR COCINA   </a></li>
                             <?php }else if(!empty($this->session->userdata('is_pos_logged'))){ ?>
-                                <li><a href="http://207.154.243.81:8081/?designpkitchen<?=$this->session->userdata('user_id'); ?>planner0" target="blank">DISEÑAR COCINA   </a></li>
+                                <li><a href="<?= base_url('customer/planner'); ?>" target="_blank">DISEÑAR COCINA   </a></li>
                             <?php }else{ ?>
                                 <li><a id="modal-1">DISEÑAR COCINA   </a></li>
+                            <?php }if($data == 'project'){ ?>
+                                <li class="active"><a href="<?php echo base_url('customer/main/project');?>">PROYECTOS </a></li>
+                            <?php }else { ?>
+                                <li><a href="<?php echo base_url('customer/main/project');?>">PROYECTOS </a></li>
+                            <?php } ?><?php if($data == 'contact'){ ?>
+                                <li class="active"><a href="<?php echo base_url('customer/main/contact');?>">TIENDAS </a></li>
+                            <?php }else { ?>
+                                <li><a href="<?php echo base_url('customer/main/contact');?>">TIENDAS </a></li>
+                            <?php } ?><?php if($data == 'about'){ ?>
+                                <li class="active"><a href="<?php echo base_url('customer/main/about');?>">CONÓCENOS  </a></li>
+                            <?php }else { ?>
+                                <li><a href="<?php echo base_url('customer/main/about');?>">CONÓCENOS  </a></li>
                             <?php } ?>
-                        	<?php if($data == 'project'){ ?>
-                        		<li class="active"><a href="<?php echo base_url('customer/main/project');?>">PROYECTOS </a></li>
-                        	<?php }else { ?>
-                        		<li><a href="<?php echo base_url('customer/main/project');?>">PROYECTOS </a></li>
-                        	<?php } ?><?php if($data == 'contact'){ ?>
-                        		<li class="active"><a href="<?php echo base_url('customer/main/contact');?>">TIENDAS </a></li>
-                        	<?php }else { ?>
-                        		<li><a href="<?php echo base_url('customer/main/contact');?>">TIENDAS </a></li>
-                        	<?php } ?><?php if($data == 'about'){ ?>
-                        		<li class="active"><a href="<?php echo base_url('customer/main/about');?>">CONÓCENOS  </a></li>
-                        	<?php }else { ?>
-                        		<li><a href="<?php echo base_url('customer/main/about');?>">CONÓCENOS  </a></li>
-                        	<?php } ?>
                             <?php if(!empty($this->session->userdata('is_customer_logged'))) { ?>
                                 <?php if($data == 'budget'){ ?>
-                                    <li class="active"><a href="<?php echo base_url('customer/main/budget');?>">My Budgets  </a></li>
+                                    <li class="active"><a href="<?php echo base_url('customer/main/budget');?>">Mis presupuestos  </a></li>
                                 <?php }else { ?>
-                                    <li><a href="<?php echo base_url('customer/main/budget');?>">My Budgets  </a></li>
+                                    <li><a href="<?php echo base_url('customer/main/budget');?>">Mis presupuestos  </a></li>
                                 <?php }if($data == 'order'){ ?>
-                                    <li class="active"><a href="<?php echo base_url('customer/main/order');?>">My Orders  </a></li>
+                                    <li class="active"><a href="<?php echo base_url('customer/main/order');?>">Mis Pedidos  </a></li>
                                 <?php }else { ?>
-                                    <li><a href="<?php echo base_url('customer/main/order');?>">My Orders  </a></li>
+                                    <li><a href="<?php echo base_url('customer/main/order');?>">Mis Pedidos  </a></li>
                                 <?php }if($data == 'account'){ ?>
-                                    <li class="active"><a href="<?php echo base_url('customer/main/account');?>">My Account  </a></li>
+                                    <li class="active"><a href="<?php echo base_url('customer/main/account');?>">Mi Cuenta  </a></li>
                                 <?php }else { ?>
-                                    <li><a href="<?php echo base_url('customer/main/account');?>">My Account  </a></li>
+                                    <li><a href="<?php echo base_url('customer/main/account');?>">Mi Cuenta  </a></li>
                             <?php } }else if(!empty($this->session->userdata('is_pos_logged'))) { ?>
-                                <?php if($data == 'budget_list'){ ?>
+                                <?php if($data == 'product_list'){ ?>
+                                    <li class="active"><a href="<?php echo base_url('customer/main/pos_product_list');?>">Product List  </a></li>
+                                <?php }else { ?>
+                                    <li><a href="<?php echo base_url('customer/main/pos_product_list');?>">Product List  </a></li>
+                                <?php }if($data == 'order_list'){ ?>
                                     <li class="active"><a href="<?php echo base_url('customer/main/pos_order_list');?>">Order List  </a></li>
                                 <?php }else { ?>
                                     <li><a href="<?php echo base_url('customer/main/pos_order_list');?>">Order List  </a></li>
                                 <?php }if($data == 'clist'){ ?>
-                                <li class="active"><a href="<?php echo base_url('customer/main/clist');?>">Customer List  </a></li>
-                            <?php }else { ?>
-                                <li><a href="<?php echo base_url('customer/main/clist');?>">Customer List  </a></li>
-                            <?php } }?>
-						</ul>	
+                                    <li class="active"><a href="<?php echo base_url('customer/main/c_list');?>">Customer List  </a></li>
+                                <?php }else { ?>
+                                    <li><a href="<?php echo base_url('customer/main/c_list');?>">Customer List  </a></li>
+                                <?php } }?>
+                        </ul>   	
 
                     </div>
                 </div>
@@ -143,7 +146,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <h5 class="modal-title">ALERTA</h5>             
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>           
                 </div>           
-                <div class="modal-body">Por favor, para poder acceder al diseñador de cocinas, primero has de logearte.</div>         
+                <div class="modal-body">Por favor, para poder acceder al diseñador de cocinas, primero has de logearte.</div> 
+                <div class="modal-footer"><a href="<?php echo base_url('customer/auth/login');?>" class="button btn btn-primary">Login</a></div>         
             </div>       
         </div>    
     </div>

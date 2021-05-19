@@ -77,6 +77,32 @@
 			})
 
 		});
+		$('#product_list tbody').on('click', 'td a.btn-email', function (){
+			toastr.success('Please wait a few minutes. Sending email ...')
+			var product_id = $(this).attr('h_id');
+			$.ajax({
+				method: "POST",
+				url: 'send_email',
+				data: {product_id: product_id},
+				dataType: 'json',
+			  success: function(dzRes) {
+			  	// var response = JSON.parse(dzRes);
+				if(dzRes.status == 'S'){
+					toastr.success(dzRes.message);
+					// msgDiv = '<p style="color: #34A853">Sending the EMAIL...</p>';
+					// $('#'+id).css("background", "green");
+					// $('#'+id).css("color", "white");
+					// $('#'+id).prop("disabled",true);
+					// $('#'+id).val('Confirmed');
+				}else{
+					toastr.warning(dzRes.message);
+					// msgDiv = '<p style="color: #EA4335">Failed to sending the EMAIL.</p>';
+				}
+				init_product_list();
+			  }
+			})
+
+		});
 		
 		$('#product_list tbody').on('click', 'td a.btn-confirm', function (){
 			var id = $(this).attr('id');

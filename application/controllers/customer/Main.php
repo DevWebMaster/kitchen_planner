@@ -1,13 +1,5 @@
 <?php 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
-use setasign\Fpdi;
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require_once FCPATH . 'vendor'.DIRECTORY_SEPARATOR.'PHPMailer'.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'PHPMailer.php';
-require_once FCPATH . 'vendor'.DIRECTORY_SEPARATOR.'PHPMailer'.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'Exception.php';
-require_once FCPATH . 'vendor'.DIRECTORY_SEPARATOR.'FPDI'.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'autoload.php';
 
 class Main extends CI_Controller
 {
@@ -28,6 +20,7 @@ class Main extends CI_Controller
 
         $this->load->view('customer/include/footer.php');
     }
+
     public function project()
     {
         $data['data'] = 'project';
@@ -62,7 +55,7 @@ class Main extends CI_Controller
         if($role == 1) {
             $pdata['user_info'] = $this->customer_model->get_customer_info($current_email);
         }
-        $this->load->view('customer/include/header.php', $data);
+        $this->load->view('customer/include/header1.php', $data);
         $this->load->view('customer/account', $pdata);
 
         $this->load->view('customer/include/footer.php');
@@ -117,7 +110,7 @@ class Main extends CI_Controller
         $customer_list = $this->customer_model->get_customers();
         $data['customer_list'] = $customer_list;
      
-        $this->load->view('customer/include/header.php', $data);
+        $this->load->view('customer/include/header.php');
         $this->load->view('customer/pos_product_list', $data);
 
         $this->load->view('customer/include/footer.php');
@@ -133,9 +126,46 @@ class Main extends CI_Controller
             $pdata['user_info'] = $this->pos_model->get_pos_info($current_email);
         }
         $this->load->view('customer/include/header.php', $data);
-        $this->load->view('customer/c_list', $pdata);
+        $this->load->view('customer/pos_customer_list', $pdata);
 
         $this->load->view('customer/include/footer.php');
+    }
+    public function get_pos_customer_list()
+    {
+        $pos_id = $this->session->userdata('user_id');
+        $draw = $_POST['draw'];
+        $start = $_POST['start'];
+        $rowperpage = $_POST['length']; // Rows display per page
+        $columnIndex = $_POST['order'][0]['column']; // Column index
+        $columnName = $_POST['columns'][$columnIndex]['data']; // Column name
+        $columnSortOrder = $_POST['order'][0]['dir']; // asc or desc
+        $search_key = $_POST['search']['value'];
+
+        $totalRecords = $this->pos_model->get_all_customer_count($pos_id);
+        $totalRecordwithFilter = $this->pos_model->get_all_customer_count_with_filter($pos_id, $search_key);
+        $customer_lists = $this->pos_model->get_pos_customerlist($pos_id, $start, $rowperpage, $search_key);
+        $data = array();
+        $inx = 0;
+        foreach ($customer_lists as $value) {
+            $inx++;
+            $row_inx = $inx + intval($start);
+            $data[] = array( 
+              "no"=>$row_inx,
+              "customer_name"=>$value['customer_name'].$value['last_name1'].$value['last_name2'],
+              "phone_num"=>$value['phone_num'],
+              "delivery_direction"=>$value['delivery_direction'],
+              "status"=>$value['is_blocked'] ? "blocked" : "actived",
+           );
+        }
+
+        $response = array(
+          "draw" => intval($draw),
+          "iTotalRecords" => $totalRecords,
+          "iTotalDisplayRecords" => $totalRecordwithFilter,
+          "aaData" => $data
+        );
+
+        echo json_encode($response);
     }
     public function updateaccount()
     {
@@ -276,24 +306,28 @@ class Main extends CI_Controller
         foreach ($product_lists as $value) {
             $inx++;
             $row_inx = $inx + intval($start);
-            if($value['check_order'] == 2){  //comfirmed
+            if($value['check_order'] == 3){ //canceled by a admin
+                $act_str = 'Canceled it by a admin user.';
+                $status_str = 'Canceled';
+            }
+            else if($value['check_order'] == 2){  //comfirmed
                 // $act_str = '<a disabled  style="background: green; color: white;" h_id="'.$value['product_id'].'" id="confirmed'.$value['product_id'].'" class="btn btn-confirm">Confirmed</a>';
                 $act_str = '';
                 $status_str = 'Ordered';
             }else if($value['check_order'] == 1){  //confirm
                 $status_str ='Budget';
                 if($user_role == 1){
-                    $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="confirm'.$value['product_id'].'" class="btn btn-confirm mr-1">Confirm</a><a h_id="'.$value['product_id'].'" id="pdf'.$value['product_id'].'" class="btn btn-pdf mr-1">PDF</a><a h_id="'.$value['product_id'].'" id="email'.$value['product_id'].'" class="btn btn-email mr-1">EMail</a><a href="http://207.154.243.81:8081/?designckitchen'.$user_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
+                    $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="confirm'.$value['product_id'].'" class="btn btn-confirm mr-1">Confirmar</a><a h_id="'.$value['product_id'].'" id="pdf'.$value['product_id'].'" class="btn btn-pdf mr-1">PDF</a><a h_id="'.$value['product_id'].'" id="email'.$value['product_id'].'" class="btn btn-email mr-1">Enviar a mi email</a><a href="../planner/load_design/'.['product_id'].'" target="_blank" class="btn btn-design">Diseño 3D</a></div>';
 
                 }else if($user_role == 2){
-                    $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="confirm'.$value['product_id'].'" class="btn btn-confirm mr-1">Confirm</a><a h_id="'.$value['product_id'].'" id="pdf'.$value['product_id'].'" class="btn btn-pdf mr-1">PDF</a><a h_id="'.$value['product_id'].'" id="email'.$value['product_id'].'" class="btn btn-email mr-1">EMail</a><a href="http://207.154.243.81:8081/?designpkitchen'.$user_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
+                    $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="confirm'.$value['product_id'].'" class="btn btn-confirm mr-1">Confirmar</a><a h_id="'.$value['product_id'].'" id="pdf'.$value['product_id'].'" class="btn btn-pdf mr-1">PDF</a><a h_id="'.$value['product_id'].'" id="email'.$value['product_id'].'" class="btn btn-email mr-1">Enviar a mi email</a><a href="http://207.154.243.81:8081/?designpkitchen'.$user_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">Diseño 3D</a></div>';
                 }
             }else{  // 0: budget
                 $status_str = 'Pre-budget';
                 if($user_role == 1){
-                    $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="budget'.$value['product_id'].'" class="btn btn-budget mr-1">Budget</a><a href="http://207.154.243.81:8081/?designckitchen'.$user_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
+                    $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="budget'.$value['product_id'].'" class="btn btn-budget mr-1">Presupuesto</a><a href="../planner/load_design/'.['product_id'].'" target="_blank" class="btn btn-design">Diseño 3D</a></div>';
                 }else if($user_role == 2){
-                    $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="budget'.$value['product_id'].'" class="btn btn-budget mr-1">Budget</a><a href="http://207.154.243.81:8081/?designpkitchen'.$user_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
+                    $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="budget'.$value['product_id'].'" class="btn btn-budget mr-1">Presupuesto</a><a href="http://207.154.243.81:8081/?designpkitchen'.$user_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">Diseño 3D</a></div>';
                 }
                 
             }
@@ -573,10 +607,10 @@ class Main extends CI_Controller
             $inx++;
             $row_inx = $inx + intval($start);
             if($value['check_flag'] == 2){
-                $action_str = '<div style="display: inline-flex;"><!--a disabled  style="background: green; color: white;" h_id="'.$value['id'].'" id="confirmed'.$value['id'].'" class="btn btn-confirm mr-1">Confirmed</a--><a href="'.base_url().$value['pdf_file'].'" class="btn btn-pdf mr-1">See Order</a><a href="http://207.154.243.81:8081/?designckitchen'.$customer_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
+                $action_str = '<div style="display: inline-flex;"><!--a disabled  style="background: green; color: white;" h_id="'.$value['id'].'" id="confirmed'.$value['id'].'" class="btn btn-confirm mr-1">Confirmed</a--><a href="'.base_url().$value['pdf_file'].'" class="btn btn-pdf mr-1">See Order</a><a href="../planner/load_design/'.$value['product_id'].'" target="_blank" class="btn btn-design">Diseño 3D</a></div>';
             }
             else if($value['check_flag'] == 1){
-                $action_str = '<div style="display: inline-flex;"><a disabled  style="background: green; color: white;" h_id="'.$value['id'].'" id="confirm'.$value['id'].'" class="btn btn-confirm mr-1">Ordered</a><a href="http://207.154.243.81:8081/?designckitchen'.$customer_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
+                $action_str = '<div style="display: inline-flex;"><a disabled  style="background: green; color: white;" h_id="'.$value['id'].'" id="confirm'.$value['id'].'" class="btn btn-confirm mr-1">Pedido Confirmado</a><a href="../planner/load_design/'.$value['product_id'].'" target="_blank" class="btn btn-design">Diseño 3D</a></div>';
             }else if($value['check_flag'] == 0){
                 $action_str = '<div style="display:inline-flex;"><a h_id="'.$value['id'].'" id="order'.$value['id'].'" class="btn btn-order mr-1" data-toggle="modal" data-target="#ordermodal">Order</a></div>';
             }
@@ -640,9 +674,9 @@ class Main extends CI_Controller
             $inx++;
             $row_inx = $inx + intval($start);
             if($value['check_flag'] == 2){
-                $action_str = '<div style="display:inline-flex;"><!--a disabled  style="background: green; color: white;" h_id="'.$value['id'].'" id="confirmed'.$value['id'].'" class="btn btn-confirmed mr-1">Confirmed</a--><a href="'.base_url().$value['pdf_file'].'" class="btn btn-pdf mr-1" target="_blank">See Order</a><a href="http://207.154.243.81:8081/?designpkitchen'.$pos_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
-            }else if($value['check_flag'] == 0){
-                $action_str = '<div style="display:inline-flex;"><a h_id="'.$value['id'].'" id="confirm'.$value['id'].'" class="btn btn-confirm mr-1" data-toggle="modal" data-target="#ordermodal">Confirm</a><a target="_black" href="'.base_url().$value['pdf_file'].'" class="btn btn-pdf mr-1">See Order</a><a href="http://207.154.243.81:8081/?designpkitchen'.$pos_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">3D Design</a></div>';
+                $action_str = '<div style="display:inline-flex;"><!--a disabled  style="background: green; color: white;" h_id="'.$value['id'].'" id="confirmed'.$value['id'].'" class="btn btn-confirmed mr-1">Confirmed</a--><a href="'.base_url().$value['pdf_file'].'" class="btn btn-pdf mr-1" target="_blank">See Order</a><a href="http://207.154.243.81:8081/?designpkitchen'.$pos_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">Diseño 3D</a></div>';
+            }else if($value['check_flag'] == 1){
+                $action_str = '<div style="display:inline-flex;"><a h_id="'.$value['id'].'" id="confirm'.$value['id'].'" class="btn btn-confirm mr-1" data-toggle="modal" data-target="#ordermodal">Confirmar</a><a target="_black" href="'.base_url().$value['pdf_file'].'" class="btn btn-pdf mr-1">See Order</a><a href="http://207.154.243.81:8081/?designpkitchen'.$pos_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">Diseño 3D</a></div>';
             }
             $data[] = array( 
               "no"=>$row_inx,
@@ -679,20 +713,60 @@ class Main extends CI_Controller
     public function send_email()
     {
         $product_id = $this->input->post('product_id');
-        $email_address = $this->customer_model->get_emails($product_id);
+        $user_role = $this->session->userdata('user_role');
+
+        $email_info = $this->customer_model->get_emails($product_id);
+        // if($user_role == 1){
+        //     $from = $email_info['customer_email'];
+        //     // $to = 'infoweb@roure.es';
+        // }else if($user_role == 2){
+        //     $from = $email_info['pos_email'];
+
+        // }
         
+        $path = FCPATH . 'vendor'.DIRECTORY_SEPARATOR.'PHPMailer'.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR;
+        require($path."Exception.php");
+        require($path."PHPMailer.php");
+        require($path."SMTP.php");
 
-        $email = new PHPMailer();
+        $email = new PHPMailer\PHPMailer\PHPMailer();
+
+        $to = "bozokrkeljas0504@gmail.com";
+        $from = "infoweb@roure.es";
+
+        $email->isSMTP();
+        $email->Host = 'smtp.ionos.es';
+        $email->Port = 587;
+        $mail->SMTPOptions = array(
+          'ssl' => array(
+          'verify_peer' => false,
+          'verify_peer_name' => false,
+          'allow_self_signed' => true
+          )
+        );
+     	$email->SMTPSecure = false;
+        $email->SMTPAutoTLS = false;
+        $email->SMTPAuth = true;
+        $email->Username = 'infoweb@roure.es';
+        $email->Password = '#R0ure2021#';
+        $email->setFrom($from, 'infoweb@roure.es');
+        $email->addAddress($to, 'bozokrkeljas0504@gmail.com');
+        $email->Subject = 'Kitchen Planner';
+        $email->Body = 'Send the invoice file as a pdf attachment file.';
+        $file_to_attach = site_url().$email_info['pdf_file'];
+        $email->addAttachment( $file_to_attach , 'invoice.pdf' );
+
+        // $email->send();
         // $email->SetFrom($email_address['customer_email'], $email_address['customer_name']); //Name is optional
-        $email->SetFrom('kitchenplanner@site.com', 'bozo');
-        $email->Subject   = 'Message Subject';
-        $email->Body      = 'Send the invoice file as a pdf attachment file.';
-        // $email->AddAddress($email_address['pos_email']);
-        $email->AddAddress('bozokrkeljas0504@gmail.com');
+        // $email->SetFrom('kitchenplanner@site.com', 'bozo');
+        // $email->Subject   = 'Message Subject';
+        // $email->Body      = 'Send the invoice file as a pdf attachment file.';
+        // // $email->AddAddress($email_address['pos_email']);
+        // $email->AddAddress('bozokrkeljas0504@gmail.com');
 
-        $file_to_attach = site_url().$email_address['pdf_file'];
+        // $file_to_attach = site_url().$email_address['pdf_file'];
 
-        $email->AddAttachment( $file_to_attach , 'invoice.pdf' );
+        // $email->AddAttachment( $file_to_attach , 'invoice.pdf' );
 
         try {
             $email->send();
@@ -711,6 +785,28 @@ class Main extends CI_Controller
     {
         $location_data = $this->customer_model->get_pos_locations();
         echo json_encode($location_data);
+    }
+    public function verify()
+    {
+        $email = $_GET['email'];
+        $hash = $_GET['hash'];
+
+        $check = $this->customer_model->check_verification($email, $hash);
+        if($check > 0){
+            $data = array(
+                'verified' => 1
+            );
+            $this->customer_model->set_activity($data, $email, $hash);
+            $data['msg'] = 'Tu cuenta ha sido validada, ya puede diseñar su propia cocina.';
+            $data['status'] = 'S';
+        }else{
+            $data['msg'] = 'Verification is failed. Try it again!';
+            $data['status'] = 'E';
+        }
+        
+        $this->load->view('customer/include/header1.php', $data);
+        $this->load->view('customer/verify', $data);
+        $this->load->view('customer/include/footer.php');
     }
 }
 ?>

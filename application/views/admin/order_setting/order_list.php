@@ -67,33 +67,64 @@
 
     $('#order_list tbody').on('click', 'td a.btn-confirm', function (){
       // var order_id = $(this).attr('h_id');
-      var order_no = $(this).parent().parent().find("td:eq(1)").text();
+      var order_no = $(this).parent().parent().parent().find("td:eq(1)").text();
       $('#m_order_no').val(order_no);
       $('#ordermodalLabel').html('Order ID - '+order_no);
     });
+    $('#order_list tbody').on('click', 'td a.btn-remove', function (){
+      var id = $(this).attr('h_id')
+      $.ajax({
+        method: "POST",
+        url:'remove_order',
+        data: {id: id},
+        dataType: 'json',
+        success: function(response){
+          if(response){
+            toastr.success('Removed the selected order now.')
+          }else{
+            toastr.warning('Sorry, Removing the order is failed.');
+          }
+          init_order_list();
+        }
+      })
+
+    })
+    $('#order_list tbody').on('click', 'td a.btn-return', function (){
+      var id = $(this).attr('h_id')
+      $.ajax({
+        method: "POST",
+        url:'return_order',
+        data: {id: id},
+        dataType: 'json',
+        success: function(response){
+          if(response){
+            toastr.success('Returned the selected order now.')
+          }else{
+            toastr.warning('Sorry, Returning the order is failed.');
+          }
+          init_order_list();
+        }
+      })
+
+    })
     $('#btn_confirm').click(function(){
-      var id = $('#m_id').val();
+      // var id = $('#m_id').val();
       var order_no = $('#m_order_no').val();
       $.ajax({
         method: "POST",
         url: 'set_order_confirm_pos',
         data: {order_no: order_no},
         dataType: 'json',
-        success: function(dzRes) {
-        if(dzRes){
-          msgDiv = '<p style="color: #34A853">It is confirmed successfully.</p>';
+        success: function(response) {
+        if(response){
+          toastr.success('It is confirmed successfully.');
           // $('#'+id).css("background", "green");
           // $('#'+id).css("color", "white");
           // $('#'+id).prop("disabled",true);
           // $('#'+id).val('Ordered');
         }else{
-          msgDiv = '<p style="color: #EA4335">The confirm is failed.</p>';
+          toastr.warning('The confirm is failed.');
         }
-        $('.dzFormMsg_confirm').html(msgDiv);
-        $('.dzFormMsg_confirm').show();
-        setInterval(function(){
-          $('.dzFormMsg_confirm').hide(1000);
-        }, 4000);
         init_order_list();
         window.open('https://odoo.com', '_blank');
         }

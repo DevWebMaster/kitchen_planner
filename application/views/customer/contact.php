@@ -129,8 +129,8 @@
     	// var iconBase = "http://maps.google.com/mapfiles/ms/icons/";
     	var iconBase ="<?= base_url(); ?>images/";
 		// Ban Jelačić Square - Center of Zagreb, Croatia
-		var center = new google.maps.LatLng(45.812897, 15.97706);
-		// var center = new google.maps.LatLng(40.4167047, -3.7035825);  //madrid
+		// var center = new google.maps.LatLng(45.812897, 15.97706);
+		var center = new google.maps.LatLng(40.4167047, -3.7035825);  //madrid
 		var geocoder = new google.maps.Geocoder();
 		var infowindow = new google.maps.InfoWindow();
 

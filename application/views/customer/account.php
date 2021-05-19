@@ -29,7 +29,7 @@
 						</div>
 						<div class="row">
 							<div class="col-lg-3 col-md-3 col-sm-12"></div>
-							<div class="col-lg-1 col-md-1 col-sm-1" style="margin-top: 14px; padding-right: 0px; text-align: right;"><label>Name: </label></div>
+							<div class="col-lg-1 col-md-1 col-sm-1" style="margin-top: 14px; padding-right: 0px; text-align: right;"><label>Nombre: </label></div>
 							<div class="col-lg-5 col-md-5 col-sm-12">
 								<div class="form-group">
 									<input name="dzName" type="text" required class="form-control dzName" value="<?= $user_info->customer_name; ?>">
@@ -38,7 +38,7 @@
 						</div>
 						<div class="row">
 							<div class="col-lg-3 col-md-3 col-sm-12"></div>
-							<div class="col-lg-1 col-md-1 col-sm-1" style="margin-top: 14px; padding-right: 0px; text-align: right;"><label>Last Name: </label></div>
+							<div class="col-lg-1 col-md-1 col-sm-1" style="margin-top: 14px; padding-right: 0px; text-align: right;"><label>Apellidos: </label></div>
 							<div class="col-lg-2 col-md-2 col-sm-12">
 								<div class="form-group">
 									<input name="dzLastname1" type="text" required class="form-control dzLastname1" value="<?= $user_info->last_name1; ?>">
@@ -61,7 +61,7 @@
 						</div>
 						<div class="row">
 							<div class="col-lg-3 col-md-3 col-sm-3"></div>
-							<div class="col-lg-1 col-md-1 col-sm-1" style="margin-top: 14px; padding-right: 0px; text-align: right;"><label>PHONE: </label></div>
+							<div class="col-lg-1 col-md-1 col-sm-1" style="margin-top: 14px; padding-right: 0px; text-align: right;"><label>Móvil: </label></div>
 							<div class="col-lg-5 col-md-5 col-sm-6">
 								<div class="form-group">
 									<input name="dzPhone" type="text" required class="form-control dzPhone" value="<?= $user_info->phone; ?>">
@@ -70,7 +70,7 @@
 						</div>
 						<div class="row">
 							<div class="col-lg-3 col-md-3 col-sm-3"></div>
-							<div class="col-lg-1 col-md-1 col-sm-1" style="margin-top: 14px; padding-right: 0px; text-align: right;"><label>Direction: </label></div>
+							<div class="col-lg-1 col-md-1 col-sm-1" style="margin-top: 14px; padding-right: 0px; text-align: right;"><label>Dirección: </label></div>
 							<div class="col-lg-5 col-md-5 col-sm-6">
 								<div class="form-group">
 									<input name="dzd_location" type="text" required class="form-control dzd_location" value="<?= $user_info->delivery_direction; ?>">
@@ -79,7 +79,7 @@
 						</div>
 						<div class="row">
 							<div class="col-lg-3 col-md-3 col-sm-3"></div>
-							<div class="col-lg-1 col-md-1 col-sm-1" style="margin-top: 14px; padding-right: 0px; text-align: right;"><label>Zip code: </label></div>
+							<div class="col-lg-1 col-md-1 col-sm-1" style="margin-top: 14px; padding-right: 0px; text-align: right;"><label>Código Postal: </label></div>
 							<div class="col-lg-5 col-md-5 col-sm-6">
 								<div class="form-group">
 									<input name="dzZipcode" type="text" required class="form-control dzZipcode" value="<?= $user_info->Zip_code; ?>">
@@ -107,7 +107,7 @@
 							</div>
 
 							<div class="col-md-12 col-sm-12 text-center">
-								<button name="submit" type="submit" value="submit" class="btn radius-xl btn-lg outline outline-2 black btn-aware update">Update<span></span></button>
+								<button name="submit" type="submit" value="submit" class="btn radius-xl btn-lg outline outline-2 black btn-aware update">Actualizar<span></span></button>
 							</div>
 						</div>
 					</form>

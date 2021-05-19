@@ -4,7 +4,7 @@
         <div class="dlab-bnr-inr dlab-bnr-inr-sm overlay-black-middle bg-pt" style="background-image:url(<?= base_url(); ?>images/banner/bnr3.jpg);">
             <div class="container">
                 <div class="dlab-bnr-inr-entry">
-                    <h1 class="text-white">Product List</h1>
+                    <h1 class="text-white">Presupuestos</h1>
                 </div>
             </div>
         </div>
@@ -14,14 +14,16 @@
 			<div class="section-full content-inner-2 contact-box">
 				<div class="container">
 					<div class="section-head" style="margin-bottom: 0 !important">
-						<div class="col-12 col-md-2 offset-1">
-			                <div class="form-group mb-2">
-			                  <label for="" class="control-label mb-1">Customer List</label>:
+						<div class="col-12 col-md-4" style="display: flex; align-items: center;">
+							<div class="form-group mb-2 col-12 col-md-6">
+								<label for="" class="control-label mb-1">Customer List</label>:&nbsp;&nbsp;
+							</div>
+			                <div class="form-group mb-2 col-12 col-md-6">
 			                  <select name="customer_id" id="customer_id">
 			                    <?php for($i = 0; $i < count($customer_list); $i++){ ?>
 			                      <option value="<?= $customer_list[$i]['id']; ?>"><?= $customer_list[$i]['customer_name']; ?></option>
 			                    <?php } ?>
-			                  </select>
+			                  </select> 
 			                </div>
 			              </div>
 						<!-- <h2 class="head-title">Product List</h2> -->
@@ -33,10 +35,10 @@
 		                  <thead>
 		                    <tr>
 		                        <th>No</th>
-								<th>Product Name</th>
-								<th>Customer</th>
-								<th>Furniture Cost</th>
-								<th>Other Cost</th>
+								<th>Nombre del proyecto</th>
+								<th>Cliente</th>
+								<th>Precio Muebles Cocina</th>
+								<th>Otros costes</th>
 								<th>Action</th>
 		                    </tr>
 		                  </thead>

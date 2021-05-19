@@ -30,7 +30,7 @@
 		}
 
 		public function get_pos_list($search_key, $start, $rowperpage) {
-			$this->db->select('a1.pos_id, a1.pos_name, a1.company_name, a1.CIF, a1.phone_num, a1.zipcode, a1.is_blocked, a1.address, a1.lat as position_lat, a1.lon as position_lon, a1.password, a1.email, a1.description');
+			$this->db->select('a1.pos_id, a1.pos_name, a1.company_name, a1.CIF, a1.phone_num, a1.zipcode, a1.is_blocked, a1.address, a1.lat as position_lat, a1.lon as position_lon, a1.password, a1.email, a1.description, a1.planner_count');
 			$this->db->from('tbl_pos as a1');
 			$this->db->where('a1.is_deleted', 0);
 			if($search_key != ''){

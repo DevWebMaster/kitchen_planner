@@ -8,7 +8,7 @@
 							<div class="footer-logo">
 								<img src="<?= base_url(); ?>images/logo.png" alt="">
 							</div>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis.</p>
+							<p>Cocinas de Calidad y de diseño. Nuestra única preocupación es tu satisfacción. Diseña la cocina de tus sueños.</p>
 						</div>
 					</div>
 					<div class="col-lg-3 col-md-4">
@@ -27,11 +27,11 @@
 						<div class="widget widget-info">
 							<h6 class="title text-white text-uppercase">Mensajes recientes</h6>
 							<p class="post-date">September 08, 2015</p>
-							<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit orem ipsum dolor sit amet, consetetuer</p>
+							<p>ROURE dispone de una red de puntos de venta para asesorarte en la compra de tu cocina</p>
 						</div>
 					</div>
 					<div class="col-lg-3 col-md-4">
-						<div class="widget widget-newsletter">
+						<!-- <div class="widget widget-newsletter">
 							<h6 class="title text-white text-uppercase">Boletin informativo</h6>
 							<div class="message-bx">
 								<form class="dzSubscribe" action="script/mailchamp.php" method="post">
@@ -47,7 +47,7 @@
 									</div>
 								</form>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>	
@@ -59,13 +59,13 @@
 						<p>Copyright © 2019 Intera. All right reserved</p>
 					</div>
 					<div class="col-lg-4">
-						<ul class="social-link1 list-inline">
+						<!-- <ul class="social-link1 list-inline">
 							<li><a href="javascript:void(0);"><img src="<?= base_url(); ?>images/logo/social-logo/pic1.jpg" alt=""></a></li>
 							<li><a href="javascript:void(0);"><img src="<?= base_url(); ?>images/logo/social-logo/pic2.jpg" alt=""></a></li>
 							<li><a href="javascript:void(0);"><img src="<?= base_url(); ?>images/logo/social-logo/pic3.jpg" alt=""></a></li>
 							<li><a href="javascript:void(0);"><img src="<?= base_url(); ?>images/logo/social-logo/pic4.jpg" alt=""></a></li>
 							<li><a href="javascript:void(0);"><img src="<?= base_url(); ?>images/logo/social-logo/pic5.jpg" alt=""></a></li>
-						</ul>
+						</ul> -->
 					</div>
 					<div class="col-lg-2 align-self-center">
 						<ul class="list-inline">

@@ -66,6 +66,42 @@
       pos_id = $('#pos_id').val();
       init_order_list(pos_id);
     })
+    $('#order_list tbody').on('click', 'td a.btn-remove', function (){
+      var id = $(this).attr('h_id')
+      $.ajax({
+        method: "POST",
+        url:'remove_order',
+        data: {id: id},
+        dataType: 'json',
+        success: function(response){
+          if(response){
+            toastr.success('Removed the selected order now.')
+          }else{
+            toastr.warning('Sorry, Removing the order is failed.');
+          }
+          init_order_list();
+        }
+      })
+
+    })
+    $('#order_list tbody').on('click', 'td a.btn-return', function (){
+      var id = $(this).attr('h_id')
+      $.ajax({
+        method: "POST",
+        url:'return_order',
+        data: {id: id},
+        dataType: 'json',
+        success: function(response){
+          if(response){
+            toastr.success('Returned the selected order now.')
+          }else{
+            toastr.warning('Sorry, Returning the order is failed.');
+          }
+          init_order_list();
+        }
+      })
+
+    })
     $('#order_list tbody').on('click', 'td a.btn-design', function (){
       var product_id = $(this).attr('h_id');
       $.ajax({

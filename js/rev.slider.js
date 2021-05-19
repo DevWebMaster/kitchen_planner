@@ -1,5 +1,6 @@
 var dzrevapi;
 var dzQuery =jQuery;
+
 function dz_rev_slider_1(){
 	if(dzQuery("#welcome").revolution == undefined){
 		revslider_showDoubleJqueryError("#welcome");
@@ -87,8 +88,8 @@ function dz_rev_slider_1(){
 			},
 			shadow:0,
 			spinner:"spinner2",
-			stopLoop:"on",
-			stopAfterLoops:0,
+			stopLoop:"off",
+			stopAfterLoops:5,
 			stopAtSlide:1,
 			shuffle:"off",
 			autoHeight:"off",

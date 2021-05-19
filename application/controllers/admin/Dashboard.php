@@ -46,7 +46,7 @@ class Dashboard extends My_Controller {
 
 		$this->load->view('admin/includes/_header', $data);
 
-    	$this->load->view('admin/dashboard/index', $data);
+    	$this->load->view('admin/dashboard/general', $data);
 
     	$this->load->view('admin/includes/_footer');
 
@@ -63,7 +63,7 @@ class Dashboard extends My_Controller {
 
 		$this->load->view('admin/includes/_header');
 
-    	$this->load->view('admin/dashboard/index2');
+    	$this->load->view('admin/dashboard/general');
 
     	$this->load->view('admin/includes/_footer');
 
@@ -79,7 +79,7 @@ class Dashboard extends My_Controller {
 
 		$this->load->view('admin/includes/_header');
 
-    	$this->load->view('admin/dashboard/index3');
+    	$this->load->view('admin/dashboard/general');
 
     	$this->load->view('admin/includes/_footer');
 

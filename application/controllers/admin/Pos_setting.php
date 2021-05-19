@@ -28,6 +28,7 @@ class Pos_setting extends My_Controller {
       'zipcode' => $req_data['zipcode'],
       'address' => $req_data['address'],
       'description' => $req_data['description'],
+      'planner_count' => $req_data['plan_count'],
       'lat' => $req_data['position_lat'],
       'lon' => $req_data['position_lon']
     );
@@ -50,6 +51,7 @@ class Pos_setting extends My_Controller {
       'zipcode' => $req_data['edit_zipcode'],
       'address' => $req_data['edit_address'],
       'description' => $req_data['edit_description'],
+      'planner_count' => $req_data['edit_plan_count'],
       'lat' => $req_data['edit_position_lat'],
       'lon' => $req_data['edit_position_lon']
     );
@@ -110,6 +112,7 @@ class Pos_setting extends My_Controller {
           "position_lon"=>$value['position_lon'],
           "zipcode"=>$value['zipcode'],
           "description"=>$value['description'],
+          "plan_count"=>$value['planner_count'],
           "block"=>$toggle_btn,
           "action"=>'<div style="display: inline-flex;"><a id="'.$value['pos_id'].'" class="mr-1 btn-sm btn btn-info edit-row" data-toggle="modal" data-target="#edit_pos_modal" json_data="'.htmlentities($json_data, ENT_QUOTES, 'UTF-8').'"><i class="fa fa-edit"></i></a><a id="'.$value['pos_id'].'" class="mr-1 btn-sm btn btn-danger delete-row"><i class="fa fa-times"></i></a></div>'
        );

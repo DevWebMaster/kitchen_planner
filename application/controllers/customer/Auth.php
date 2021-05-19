@@ -22,7 +22,7 @@ class Auth extends CI_Controller
     public function login()
     {   
         $data['data'] = 'register';
-        $this->load->view('customer/include/header.php', $data);
+        $this->load->view('customer/include/header1.php', $data);
         $this->load->view('customer/login');
 
         $this->load->view('customer/include/footer.php');
@@ -30,7 +30,7 @@ class Auth extends CI_Controller
     public function register()
     {
         $data['data'] = 'login';
-        $this->load->view('customer/include/header.php', $data);
+        $this->load->view('customer/include/header1.php', $data);
         $this->load->view('customer/register');
 
         $this->load->view('customer/include/footer.php');
@@ -39,6 +39,7 @@ class Auth extends CI_Controller
     {
 
         $reg_data = $this->input->post();
+        $hash = md5(rand(0, 1000));
          // print_r($reg_data);
         $data = array(
             'customer_name' => $reg_data['name'],
@@ -52,12 +53,63 @@ class Auth extends CI_Controller
             'delivery_direction' => $reg_data['d_location'],
             'zipcode' => $reg_data['zipcode'],
             'LOPD' => $reg_data['lopd'],
+            'hash' => $hash,
             'created_date'=>date('Y-m-d H:i:s'),
             'updated_date'=>date('Y-m-d H:i:s'),
         );
-        $result = $this->customer_model->add_customer($data);
+        // $result = $this->customer_model->add_customer($data);
+        $result = 1;
+        if($result == 1){
+            $path = FCPATH . 'vendor'.DIRECTORY_SEPARATOR.'PHPMailer'.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR;
+            require($path."Exception.php");
+            require($path."PHPMailer.php");
+            require($path."SMTP.php");
+
+            $mail = new PHPMailer\PHPMailer\PHPMailer();
+            $to = "bozokrkeljas0504@gmail.com";
+            $from = "infoweb@roure.es";
+
+            $mail->isSMTP();
+            $mail->SMTPDebug = 2;
+            $mail->Host = 'smtp.ionos.es';
+            $mail->Port = 587;
+            $mail->SMTPOptions = array(
+              'ssl' => array(
+              'verify_peer' => false,
+              'verify_peer_name' => false,
+              'allow_self_signed' => true
+              )
+            );
+            $mail->SMTPSecure = false;
+            $mail->SMTPAutoTLS = false;
+            $mail->SMTPAuth = true;
+            $mail->Username = 'infoweb@roure.com';
+            $mail->Password = '#R0ure2021#';
+            $mail->setFrom($from, 'infoweb@roure.es');
+            $mail->addAddress($to, 'bozokrkeljas0504@gmail.com');
+            $mail->Subject = 'Kitchen Planner';
+            // $mail->Body = 'http://207.154.243.81/kitchen_planner/customer/verify/?mail='.$from.'&hash='.$hash;
+            $mail->Body = '<a href="http://127.0.0.1/kitchen_planner/customer/main/verify/?email='.$reg_data['email'].'&hash='.$hash.'"></a>';
+
+            try {
+                $mail->send();
+                $str = "Ahora recibirás un correo, por favor, pulse a en validar cuenta una vez lo recibas";
+                $status = 'S';
+            } catch (Exception $e) {
+                $str =  "Mailer Error: " . $mail->ErrorInfo;
+                $status = 'E';
+            }
+            if($result == 0){
+                $response = array('status' => 0, 'message' => 'Failed the registeration. Please try again!');
+            }else if($result == 1){
+                $response = array('status' => $status, 'message' => $str);
+            }else if($result == 2){
+                $response = array('status' => 2, 'message' => 'This user is already existed!');
+            }
+            echo json_encode($response);
+        }
         
-        echo json_encode($result);
+        // echo json_encode($result);
     }
     public function valid_email()
     {
@@ -111,13 +163,13 @@ class Auth extends CI_Controller
                         {                    
                             if($role == 'customer'){
                                 $row = $this->customer_model->get_row_c1($email, $password);
-                                $username = $row->customer_name . $row->last_name1 . $row->last_name2; 
+                                $username = $row->customer_name . ' ' . $row->last_name1 . $row->last_name2; 
                                 $customer_id = $this->customer_model->get_customer_id($row->email);
                                 // set session data 
                                 $session_data = array(                                      
                                 'userfname'                =>$username,
                                 'email'                    =>$email,
-                                'user_id'              =>$customer_id['id'],
+                                'user_id'                  =>$customer_id['id'],
                                 'is_customer_logged'       =>TRUE,                 
                                 'user_role'                =>1,  //customer:1, POS:2
                               
@@ -137,7 +189,7 @@ class Auth extends CI_Controller
                                 $session_data = array(                                      
                                 'userfname'                =>$username,
                                 'email'                    =>$email,
-                                'user_id'                   =>$pos_id['pos_id'],
+                                'user_id'                  =>$pos_id['pos_id'],
                                 'is_pos_logged'            =>TRUE,                 
                                 'user_role'                =>2,  //customer:1, POS:2
                               

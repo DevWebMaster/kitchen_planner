@@ -8,7 +8,7 @@
 					<div id="welcome_wrapper" class="rev_slider_wrapper fullscreen-container" data-alias="reveal-add-on36" data-source="gallery" style="background:#ffffff;padding:0px;">
 						<!-- START REVOLUTION SLIDER 5.4.7.2 fullscreen mode -->
 							<div id="welcome" class="rev_slider fullscreenbanner" style="display:none;" data-version="5.4.7.2">
-						<ul>	<!-- SLIDE  -->
+						<ul id="slideUL">	<!-- SLIDE  -->
 							<li data-index="rs-100" data-transition="fadethroughdark" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off"  data-easein="default" data-easeout="default" data-masterspeed="default"  data-thumb=""  data-rotate="0"  data-saveperformance="off"  data-title="Slide" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
 								<!-- MAIN IMAGE -->
 								<img src="<?= base_url(); ?>images/main-slider/dummy.png"  alt=""  data-lazyload="<?= base_url(); ?>images/main-slider/slide4.jpg" data-bgposition="center center" data-kenburns="on" data-duration="4000" data-ease="Power3.easeInOut" data-scalestart="150" data-scaleend="100" data-rotatestart="0" data-rotateend="0" data-blurstart="0" data-blurend="0" data-offsetstart="0 0" data-offsetend="0 0" data-bgparallax="4" class="rev-slidebg" data-no-retina>
@@ -81,7 +81,7 @@
 								</div>
 								<!-- LAYER NR. 5 -->
 								<a class="tp-caption rev-btn tc-btnshadow" 
-									href="split-slider.html" target="_blank"			 
+									href="main/project"			 
 									id="slide-100-layer-4" 
 									data-x="['center','center','center','center']" data-hoffset="['-110','-110','-110','0']" 
 									data-y="['middle','middle','middle','middle']" data-voffset="['140','140','100','100']" 
@@ -175,30 +175,55 @@
 										Crea tu propia cocina o recibe una atención personalizada en nuestras tiendas.
 								</div>
 								<!-- LAYER NR. 5 -->
-								<a class="tp-caption rev-btn tc-btnshadow" 
-									href="kitchenplanner.html" target="_blank"			 
-									id="slide-200-layer-4" 
-									data-x="['center','center','center','center']" data-hoffset="['-110','-110','-110','0']" 
-									data-y="['middle','middle','middle','middle']" data-voffset="['140','140','100','100']" 
-									data-lineheight="['60','60','50','50']"
-									data-width="['200','200','200','150']"
-									data-height="none"
-									data-whitespace="nowrap"
-									data-type="button" 
-									data-actions=''
-									data-responsive_offset="off" 
-									data-responsive="off"
-									data-frames='[{"delay":900,"speed":2000,"frame":"0","from":"y:50px;z:0;rX:0;rY:0;rZ:0;sX:1.1;sY:1.1;skX:0;skY:0;opacity:0;fbr:100;","bgcolor":"#fff","to":"o:1;fbr:100;","ease":"Power3.easeInOut"},{"delay":"wait","speed":500,"frame":"999","bgcolor":"#fff","to":"opacity:0;fbr:100;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"150","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;fbr:90%;","style":"c:rgba(255,255,255,0.8);"}]'
-									data-textAlign="['center','center','center','center']"
-									data-paddingtop="[0,0,0,0]"
-									data-paddingright="[30,30,20,20]"
-									data-paddingbottom="[0,0,0,0]"
-									data-paddingleft="[30,30,20,20]"
-									style="z-index: 9; min-width: 280px; max-width: 280px; letter-spacing: 2px; white-space: nowrap; font-size: 11px; line-height: 20px; font-weight: 600; color: black; font-family: Roboto; background-color: rgba(0,0,0,0); border-radius:30px 30px 30px 30px; border: 2px solid black; box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; cursor:pointer; text-decoration: none; text-transform: uppercase;">
-										Diseñar Cocina 
-								</a>
+								<?php if(!empty($this->session->userdata('is_customer_logged'))){ ?>
+									<a class="tp-caption rev-btn tc-btnshadow" 
+										href="../planner/index" target="_blank"			 
+										id="slide-200-layer-4" 
+										data-x="['center','center','center','center']" data-hoffset="['-110','-110','-110','0']" 
+										data-y="['middle','middle','middle','middle']" data-voffset="['140','140','100','100']" 
+										data-lineheight="['60','60','50','50']"
+										data-width="['200','200','200','150']"
+										data-height="none"
+										data-whitespace="nowrap"
+										data-type="button" 
+										data-actions=''
+										data-responsive_offset="off" 
+										data-responsive="off"
+										data-frames='[{"delay":900,"speed":2000,"frame":"0","from":"y:50px;z:0;rX:0;rY:0;rZ:0;sX:1.1;sY:1.1;skX:0;skY:0;opacity:0;fbr:100;","bgcolor":"#fff","to":"o:1;fbr:100;","ease":"Power3.easeInOut"},{"delay":"wait","speed":500,"frame":"999","bgcolor":"#fff","to":"opacity:0;fbr:100;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"150","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;fbr:90%;","style":"c:rgba(255,255,255,0.8);"}]'
+										data-textAlign="['center','center','center','center']"
+										data-paddingtop="[0,0,0,0]"
+										data-paddingright="[30,30,20,20]"
+										data-paddingbottom="[0,0,0,0]"
+										data-paddingleft="[30,30,20,20]"
+										style="z-index: 9; min-width: 280px; max-width: 280px; letter-spacing: 2px; white-space: nowrap; font-size: 11px; line-height: 20px; font-weight: 600; color: black; font-family: Roboto; background-color: rgba(0,0,0,0); border-radius:30px 30px 30px 30px; border: 2px solid black; box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; cursor:pointer; text-decoration: none; text-transform: uppercase;">
+											Diseñar Cocina 
+									</a>
+								<?php }else if(!empty($this->session->userdata('is_pos_logged'))){ ?>
+									<a class="tp-caption rev-btn tc-btnshadow" 
+										href="../planner/index" target="_blank"			 
+										id="slide-200-layer-4" 
+										data-x="['center','center','center','center']" data-hoffset="['-110','-110','-110','0']" 
+										data-y="['middle','middle','middle','middle']" data-voffset="['140','140','100','100']" 
+										data-lineheight="['60','60','50','50']"
+										data-width="['200','200','200','150']"
+										data-height="none"
+										data-whitespace="nowrap"
+										data-type="button" 
+										data-actions=''
+										data-responsive_offset="off" 
+										data-responsive="off"
+										data-frames='[{"delay":900,"speed":2000,"frame":"0","from":"y:50px;z:0;rX:0;rY:0;rZ:0;sX:1.1;sY:1.1;skX:0;skY:0;opacity:0;fbr:100;","bgcolor":"#fff","to":"o:1;fbr:100;","ease":"Power3.easeInOut"},{"delay":"wait","speed":500,"frame":"999","bgcolor":"#fff","to":"opacity:0;fbr:100;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"150","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;fbr:90%;","style":"c:rgba(255,255,255,0.8);"}]'
+										data-textAlign="['center','center','center','center']"
+										data-paddingtop="[0,0,0,0]"
+										data-paddingright="[30,30,20,20]"
+										data-paddingbottom="[0,0,0,0]"
+										data-paddingleft="[30,30,20,20]"
+										style="z-index: 9; min-width: 280px; max-width: 280px; letter-spacing: 2px; white-space: nowrap; font-size: 11px; line-height: 20px; font-weight: 600; color: black; font-family: Roboto; background-color: rgba(0,0,0,0); border-radius:30px 30px 30px 30px; border: 2px solid black; box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; cursor:pointer; text-decoration: none; text-transform: uppercase;">
+											Diseñar Cocina 
+									</a>
+	                            <?php } ?>
 								<!-- LAYER NR. 5 -->
-								<a class="tp-caption rev-btn tc-btnshadow" 
+								<!--a class="tp-caption rev-btn tc-btnshadow" 
 									href="pos_location.html" target="_blank"			 
 									id="slide-200-layer-5" 
 									data-x="['center','center','center','center']" data-hoffset="['110','110','110','0']" 
@@ -219,7 +244,7 @@
 									data-paddingleft="[30,30,20,20]"
 									style="z-index: 9; min-width: 280px; max-width: 280px; letter-spacing: 2px; white-space: nowrap; font-size: 11px; line-height: 20px; font-weight: 600; color: black; font-family: Roboto; background-color: rgba(0,0,0,0); border-radius:30px 30px 30px 30px; border: 2px solid black; box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; cursor:pointer; text-decoration: none; text-transform: uppercase;">
 										Localizar Tienda
-								</a>
+								</a-->
 							</li>
 							<li data-index="rs-300" data-transition="fadethroughdark" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off"  data-easein="default" data-easeout="default" data-masterspeed="default"  data-thumb=""  data-rotate="0"  data-saveperformance="off"  data-title="Slide" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
 								<!-- MAIN IMAGE -->
@@ -293,7 +318,7 @@
 								</div>
 								<!-- LAYER NR. 5 -->
 								<a class="tp-caption rev-btn tc-btnshadow" 
-									href="split-slider.html" target="_blank"			 
+									href="project"		 
 									id="slide-200-layer-4" 
 									data-x="['center','center','center','center']" data-hoffset="['-110','-110','-110','0']" 
 									data-y="['middle','middle','middle','middle']" data-voffset="['140','140','100','100']" 
@@ -416,7 +441,7 @@
 									<div class="portinner">
 										<span>July 3, 2016 in Travelling</span>
 										<h3 class="port-title"><a href="project-detail-1.html">El diseño, nuestra ciencia</a></h3>
-										<a href="project-detail-1.html" class="btn outline white outline-2 radius-xl">ver Proyecto</a>
+										<a href="project" class="btn outline white outline-2 radius-xl">ver Proyecto</a>
 									</div>
 								</div>
 							</div>
@@ -428,7 +453,7 @@
 									<div class="portinner">
 										<span>July 3, 2016 in Travelling</span>
 										<h3 class="port-title"><a href="project-detail-2.html">El diseño, nuestra ciencia</a></h3>
-										<a href="project-detail-2.html" class="btn outline white outline-2 radius-xl">ver Proyecto</a>
+										<a href="project" class="btn outline white outline-2 radius-xl">ver Proyecto</a>
 									</div>
 								</div>
 							</div>
@@ -440,7 +465,7 @@
 									<div class="portinner">
 										<span>July 3, 2016 in Travelling</span>
 										<h3 class="port-title"><a href="project-detail-3.html">El diseño, nuestra ciencia</a></h3>
-										<a href="project-detail-3.html" class="btn outline white outline-2 radius-xl">ver Proyecto</a>
+										<a href="project" class="btn outline white outline-2 radius-xl">ver Proyecto</a>
 									</div>
 								</div>
 							</div>
@@ -452,7 +477,7 @@
 									<div class="portinner">
 										<span>July 3, 2016 in Travelling</span>
 										<h3 class="port-title"><a href="project-detail-4.html">El diseño, nuestra ciencia</a></h3>
-										<a href="project-detail-4.html" class="btn outline white outline-2 radius-xl">ver Proyecto</a>
+										<a href="project" class="btn outline white outline-2 radius-xl">ver Proyecto</a>
 									</div>
 								</div>
 							</div>
@@ -464,7 +489,7 @@
 									<div class="portinner">
 										<span>July 3, 2016 in Travelling</span>
 										<h3 class="port-title"><a href="project-detail-1.html">El diseño, nuestra ciencia</a></h3>
-										<a href="project-detail-1.html" class="btn outline white outline-2 radius-xl">ver Proyecto</a>
+										<a href="project" class="btn outline white outline-2 radius-xl">ver Proyecto</a>
 									</div>
 								</div>
 							</div>
@@ -476,7 +501,7 @@
 									<div class="portinner">
 										<span>July 3, 2016 in Travelling</span>
 										<h3 class="port-title"><a href="project-detail-2.html">El diseño, nuestra ciencia</a></h3>
-										<a href="project-detail-2.html" class="btn outline white outline-2 radius-xl">ver Proyecto</a>
+										<a href="project" class="btn outline white outline-2 radius-xl">ver Proyecto</a>
 									</div>
 								</div>
 							</div>
@@ -488,7 +513,7 @@
 									<div class="portinner">
 										<span>July 3, 2016 in Travelling</span>
 										<h3 class="port-title"><a href="project-detail-3.html">El diseño, nuestra ciencia</a></h3>
-										<a href="project-detail-3.html" class="btn outline white outline-2 radius-xl">ver Proyecto</a>
+										<a href="project" class="btn outline white outline-2 radius-xl">ver Proyecto</a>
 									</div>
 								</div>
 							</div>
@@ -500,7 +525,7 @@
 									<div class="portinner">
 										<span>July 3, 2016 in Travelling</span>
 										<h3 class="port-title"><a href="project-detail-4.html">El diseño, nuestra ciencia</a></h3>
-										<a href="project-detail-4.html" class="btn outline white outline-2 radius-xl">ver Proyecto</a>
+										<a href="project" class="btn outline white outline-2 radius-xl">ver Proyecto</a>
 									</div>
 								</div>
 							</div>

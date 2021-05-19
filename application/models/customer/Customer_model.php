@@ -25,6 +25,7 @@ class Customer_model extends CI_Model{
 	    $this->db->where('email',$email);
 	    $this->db->where('password',$password);
 	    $this->db->where('is_blocked', 0);
+	    $this->db->where('verified', 1);
 
 
 	    $query = $this->db->get('tbl_customers');
@@ -405,7 +406,7 @@ class Customer_model extends CI_Model{
 			$query1 = $this->db->get()->result_array();
 			return $query1[0];
 		}else{
-			$this->db->select('a1.product_id, a2.customer_name, a2.delivery_direction as customer_direction, a2.zipcode as customer_zipcode, a3.pos_name, a3.direction as pos_direction, a3.zipcode as pos_zipcode');
+			$this->db->select('a1.product_id, a2.customer_name, a2.delivery_direction as customer_direction, a2.zipcode as customer_zipcode, a3.pos_name, a3.address as pos_direction, a3.zipcode as pos_zipcode');
 			$this->db->from('tbl_product_history_log as a1');
 			$this->db->join('tbl_customers as a2', 'a1.customer_id = a2.id', 'left');
 			$this->db->join('tbl_pos as a3', 'a1.pos_id = a3.pos_id', ' left');
@@ -472,6 +473,22 @@ class Customer_model extends CI_Model{
 		$this->db->where('is_deleted', 0);
 		$query = $this->db->get()->result_array();
 		return $query;
+	}
+	public function check_verification($email, $hash)
+	{
+		$this->db->select('id');
+		$this->db->from('tbl_customers');
+		$this->db->where('email', $email);
+		$this->db->where('hash', $hash);
+		$query = $this->db->get()->result_array();
+
+		return count($query);
+	}
+	public function set_activity($data, $email, $hash)
+	{
+		$this->db->where('email', $email);
+		$this->db->where('hash', $hash);
+		$this->db->update('tbl_customers', $data);
 	}
 }
 ?>

@@ -72,10 +72,16 @@
                   <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
                       <label for="" class="control-label mb-1">Password</label>:
-                      <input type="text" class="form-control form-control-sm" name="password" id="password">
+                      <input type="password" class="form-control form-control-sm" name="password" id="password">
                     </div>
                   </div>
-                  <div class="col-12 col-md-2">
+                  <div class="col-12 col-md-1">
+                    <div class="form-group mb-2">
+                      <label for="" class="control-label mb-1">Plan Count</label>:
+                      <input type="number" class="form-control form-control-sm" name="plan_count" id="plan_count">
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-1">
                     <div class="form-group mt-4">
                       <input type="submit" class="btn btn-sm btn-info add_label_no px-5" value="Add">
                     </div>
@@ -105,6 +111,7 @@
                         <th>Position_lon</th>
                         <th>Zipcode</th>
                         <th>Description</th>
+                        <th>Plan Count</th>
                         <th>Block</th>
                         <th width="5%">Action</th>
                       </tr>
@@ -194,7 +201,14 @@
                   <div class="col-12 col-md-6">
                     <div class="form-group mb-2">
                       <label for="" class="control-label mb-1">Passward</label>:
-                      <input type="text" class="form-control form-control-sm" name="edit_password" id="edit_password">
+                      <input type="password" class="form-control form-control-sm" name="edit_password" id="edit_password">
+                    </div>
+                  </div>
+                  <br>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group mb-2">
+                      <label for="" class="control-label mb-1">Plan Count</label>:
+                      <input type="text" class="form-control form-control-sm" name="edit_plan_count" id="edit_plan_count">
                     </div>
                   </div>
               </div>
@@ -219,7 +233,7 @@
 
     $('#uploadForm').submit(function(e) {
       e.preventDefault();
-      if($('#pos_name').val() != '' && $('#company_name').val() != '' && $('#email').val() != '' && $('#cif').val() != '' && $('#phone_num').val() != '' && $('#zipcode').val() != '' && $('#password').val() != '' && $('#address').val() != '' && $('#position_lat').val() != '' && $('#position_lon').val() != ''){
+      if($('#pos_name').val() != '' && $('#company_name').val() != '' && $('#email').val() != '' && $('#cif').val() != '' && $('#phone_num').val() != '' && $('#zipcode').val() != '' && $('#password').val() != '' && $('#address').val() != '' && $('#position_lat').val() != '' && $('#position_lon').val() != '' && $('#plan_count').val() != ''){
         var formData = new FormData(this);
         $.ajax({
           url: '<?= site_url(); ?>admin/pos_setting/save_pos',
@@ -247,6 +261,7 @@
               $('#description').val('');
               $('#position_lat').val('');
               $('#position_lon').val('');
+              $('#plan_count').val('');
             }
             
           }
@@ -293,6 +308,7 @@
       $('#edit_position_lat').val($(this).parent().parent().parent().find("td:eq(6)").text());
       $('#edit_position_lon').val($(this).parent().parent().parent().find("td:eq(7)").text());
       $('#edit_description').val($(this).parent().parent().parent().find("td:eq(9)").text());
+      $('#edit_plan_count').val($(this).parent().parent().parent().find("td:eq(10)").text());
     });
 
     $('#btn_update').click(function(){
@@ -306,6 +322,7 @@
       var edit_password = $('#edit_password').val();
       var edit_address = $('#edit_address').val();
       var edit_description = $('#edit_description').val();
+      var edit_plan_count = $('#edit_plan_count').val();
       var edit_position_lat = $('#edit_position_lat').val();
       var edit_position_lon = $('#edit_position_lon').val();
 
@@ -313,7 +330,7 @@
       $.ajax({
         url: '<?= site_url(); ?>admin/pos_setting/edit_pos',
         type: 'POST',
-        data: {edit_pos_id: edit_pos_id, edit_pos_name: edit_pos_name, edit_company_name: edit_company_name, edit_email: edit_email, edit_cif: edit_cif, edit_phone_num: edit_phone_num, edit_pos_location: edit_pos_location, edit_zipcode: edit_zipcode, edit_password: edit_password, edit_address: edit_address, edit_description: edit_description, edit_position_lat: edit_position_lat, edit_position_lon: edit_position_lon},
+        data: {edit_pos_id: edit_pos_id, edit_pos_name: edit_pos_name, edit_company_name: edit_company_name, edit_email: edit_email, edit_cif: edit_cif, edit_phone_num: edit_phone_num, edit_pos_location: edit_pos_location, edit_zipcode: edit_zipcode, edit_password: edit_password, edit_address: edit_address, edit_plan_count: edit_plan_count, edit_description: edit_description, edit_position_lat: edit_position_lat, edit_position_lon: edit_position_lon},
         success: function(response){
           var edit_status = JSON.parse(response);
           if(edit_status){
@@ -360,6 +377,7 @@
            { data: 'position_lon' },
            { data: 'zipcode' },
            { data: 'description' },
+           { data: 'plan_count'},
            { data: 'block' },
            { data: 'action', "width": "5%"},
         ]
