@@ -30,7 +30,7 @@
 								<th>Precio Muebles Cocina</th>
 								<th>Otros costes</th>
 								<th>Estado</th>
-								<th>Action</th>  <!-- load design button,     -->
+								<th>Acciones</th>  <!-- load design button,     -->
 		                    </tr>
 		                  </thead>
 		                  <tbody id="tbody">

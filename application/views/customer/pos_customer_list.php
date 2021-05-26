@@ -24,9 +24,9 @@
 		                  <thead>
 		                    <tr>
 		                        <th>No</th>
-            								<th>Customer Name</th>
-            								<th>Phone Number</th>
-            								<th>Delivery Direction</th>
+            								<th>Nombre del Cliente</th>
+            								<th>Teléfono Número</th>
+            								<th>Dirección</th>
             								<th>Status</th>
 		                    </tr>
 		                  </thead>

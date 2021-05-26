@@ -67,12 +67,13 @@ class Auth extends CI_Controller
 
             $mail = new PHPMailer\PHPMailer\PHPMailer();
             $to = "bozokrkeljas0504@gmail.com";
+            // $to = $reg_data['email'];
             $from = "infoweb@roure.es";
 
             $mail->isSMTP();
             $mail->SMTPDebug = 2;
-            $mail->Host = 'smtp.ionos.es';
-            $mail->Port = 587;
+            $mail->Host = 'smtp.1and1.es';
+            $mail->Port = 25;
             $mail->SMTPOptions = array(
               'ssl' => array(
               'verify_peer' => false,
@@ -82,9 +83,9 @@ class Auth extends CI_Controller
             );
             $mail->SMTPSecure = false;
             $mail->SMTPAutoTLS = false;
-            $mail->SMTPAuth = true;
-            $mail->Username = 'infoweb@roure.com';
-            $mail->Password = '#R0ure2021#';
+            $mail->SMTPAuth = false;
+            $mail->Username = 'm49828855-149998635';
+            $mail->Password = '#Roure2020#';
             $mail->setFrom($from, 'infoweb@roure.es');
             $mail->addAddress($to, 'bozokrkeljas0504@gmail.com');
             $mail->Subject = 'Kitchen Planner';
@@ -106,10 +107,11 @@ class Auth extends CI_Controller
             }else if($result == 2){
                 $response = array('status' => 2, 'message' => 'This user is already existed!');
             }
-            echo json_encode($response);
+        }else{
+            $response = array('status' => 0, 'message' => 'Failed the registeration. Please try again!');
         }
         
-        // echo json_encode($result);
+        echo json_encode($response);
     }
     public function valid_email()
     {

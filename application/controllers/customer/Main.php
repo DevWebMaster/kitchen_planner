@@ -177,9 +177,9 @@ class Main extends CI_Controller
             'last_name2' => $form_data['dzLastname2'],
             'DNI' => $form_data['dzDNI'],
             // 'transaction' => '', 
-            'phone' => $form_data['dzPhone'],
+            'phone_num' => $form_data['dzPhone'],
             'delivery_direction' => $form_data['dzd_location'],
-            'Zip_code' => $form_data['dzZipcode'],
+            'zipcode' => $form_data['dzZipcode'],
         );
         $result = $this->customer_model->update_customer($data, $email);
 

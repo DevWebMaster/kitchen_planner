@@ -85,9 +85,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</div>
                         <ul class="nav navbar-nav">	
                         	<?php if($data == 'index'){ ?>
-                        		<li class="active"><a href="<?= base_url('customer/main/'); ?>">INICIO  </a></li>
+                        		<li class="active"><a href="<?= base_url('customer/'); ?>">INICIO  </a></li>
                         	<?php }else { ?>
-                        		<li><a href="<?= base_url('customer/main/'); ?>">INICIO  </a></li>
+                        		<li><a href="<?= base_url('customer/'); ?>">INICIO  </a></li>
                         	<?php } ?>
                             <?php if(!empty($this->session->userdata('is_customer_logged'))){ ?>
                                 <li><a href="<?= base_url('customer/planner'); ?>" target="_blank">DISEÑAR COCINA   </a></li>
@@ -123,17 +123,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <li><a href="<?php echo base_url('customer/main/account');?>">Mi Cuenta  </a></li>
                             <?php } }else if(!empty($this->session->userdata('is_pos_logged'))) { ?>
                                 <?php if($data == 'product_list'){ ?>
-                                    <li class="active"><a href="<?php echo base_url('customer/main/pos_product_list');?>">Product List  </a></li>
+                                    <li class="active"><a href="<?php echo base_url('customer/main/pos_product_list');?>">Presupuestos  </a></li>
                                 <?php }else { ?>
-                                    <li><a href="<?php echo base_url('customer/main/pos_product_list');?>">Product List  </a></li>
+                                    <li><a href="<?php echo base_url('customer/main/pos_product_list');?>">Presupuestos  </a></li>
                                 <?php }if($data == 'order_list'){ ?>
-                                    <li class="active"><a href="<?php echo base_url('customer/main/pos_order_list');?>">Order List  </a></li>
+                                    <li class="active"><a href="<?php echo base_url('customer/main/pos_order_list');?>">Pedidos  </a></li>
                                 <?php }else { ?>
-                                    <li><a href="<?php echo base_url('customer/main/pos_order_list');?>">Order List  </a></li>
+                                    <li><a href="<?php echo base_url('customer/main/pos_order_list');?>">Pedidos  </a></li>
                                 <?php }if($data == 'clist'){ ?>
-                                    <li class="active"><a href="<?php echo base_url('customer/main/c_list');?>">Customer List  </a></li>
+                                    <li class="active"><a href="<?php echo base_url('customer/main/c_list');?>">Clientes  </a></li>
                                 <?php }else { ?>
-                                    <li><a href="<?php echo base_url('customer/main/c_list');?>">Customer List  </a></li>
+                                    <li><a href="<?php echo base_url('customer/main/c_list');?>">Clientes  </a></li>
                                 <?php } }?>
 						</ul>	
 

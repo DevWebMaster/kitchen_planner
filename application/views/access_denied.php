@@ -55,10 +55,10 @@
 <body>
 <div class="container">
   <div class="content">
-    <h2 class="color-white-shadow text-center">403 Forbidden<br><small>Access denied</small></h2>
-    <img src="https://images.unsplash.com/photo-1506202687253-52e1b29d3527?ixlib=rb-0.3.5&s=b43d68ed98b673427669234757d85e56&auto=format&fit=crop&w=300&q=80" width="300" height="140" class="mask">
-    <p class="color-white-shadow text-center">You are not allowed to access this operation<br>Because it's in private mode.</p>
-    <p class="text-center"><a href="#" onclick="window.history.go(-1); return false;">Go Back</a></p>
+    <h2 class="color-white-shadow text-center">Expired your account!<br><small>You can't use kitchen planner now.</small></h2>
+    <img src="https://images.unsplash.com/photo-1506202687253-52e1b29d3527?ixlib=rb-0.3.5&s=b43d68ed98b673427669234757d85e56&auto=format&fit=crop&w=300&q=80" width="300" height="140" class="mask" style="margin-left: auto; margin-right: auto;">
+    <p class="color-white-shadow text-center">Please contact the owner to use the kitchen planner again.</p>
+    <!-- <p class="text-center"><a href="#" onclick="window.history.go(-1); return false;">Go Back</a></p> -->
   </div>
 </div>
 

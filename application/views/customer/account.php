@@ -11,7 +11,7 @@
 					
 				
 					<div class="section-head text-center">
-						<h2 class="head-title">My Account </h2>
+						<h2 class="head-title">Mi cuenta  </h2>
 						<!-- <p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud. Photo booth anim 8</p> -->
 					</div>
 					<div class="dzFormMsg"></div>
@@ -64,7 +64,7 @@
 							<div class="col-lg-1 col-md-1 col-sm-1" style="margin-top: 14px; padding-right: 0px; text-align: right;"><label>Móvil: </label></div>
 							<div class="col-lg-5 col-md-5 col-sm-6">
 								<div class="form-group">
-									<input name="dzPhone" type="text" required class="form-control dzPhone" value="<?= $user_info->phone; ?>">
+									<input name="dzPhone" type="text" required class="form-control dzPhone" value="<?= $user_info->phone_num; ?>">
 								</div>
 							</div>
 						</div>
@@ -82,7 +82,7 @@
 							<div class="col-lg-1 col-md-1 col-sm-1" style="margin-top: 14px; padding-right: 0px; text-align: right;"><label>Código Postal: </label></div>
 							<div class="col-lg-5 col-md-5 col-sm-6">
 								<div class="form-group">
-									<input name="dzZipcode" type="text" required class="form-control dzZipcode" value="<?= $user_info->Zip_code; ?>">
+									<input name="dzZipcode" type="text" required class="form-control dzZipcode" value="<?= $user_info->zipcode; ?>">
 								</div>
 							</div>
 						</div>

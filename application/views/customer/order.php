@@ -5,7 +5,7 @@
         <div class="dlab-bnr-inr dlab-bnr-inr-sm overlay-black-middle bg-pt" style="background-image:url(<?= base_url(); ?>images/banner/bnr2.jpg);">
             <div class="container">
                 <div class="dlab-bnr-inr-entry">
-                    <h1 class="text-white">Order List</h1>
+                    <h1 class="text-white">Pedidos</h1>
                 </div>
             </div>
         </div>
@@ -24,12 +24,12 @@
 		                  <thead>
 		                    <tr>
 		                        <th>No</th>
-								<th>Order ID</th>
-								<th>Product Name</th>
-								<th>Furniture Cost</th>
-								<th>Other Cost</th>
+								<th>Referencia Pedido</th>
+								<th>Nombre del proyecto</th>
+								<th>Precio Muebles Cocina</th>
+								<th>Otros costes</th>
 								<th>Status</th>
-								<th>Action</th>  <!-- load design button,     -->
+								<th>Acciones</th>  <!-- load design button,     -->
 		                    </tr>
 		                  </thead>
 		                  <tbody id="tbody">
@@ -65,7 +65,7 @@
 
 		    </div><!--/body -->
 		    <div class="modal-footer">
-		    	<button type="button" class="btn btn-default" id="btn_confirm" data-dismiss="modal">Confirm</button>
+		    	<button type="button" class="btn btn-default" id="btn_confirm" data-dismiss="modal">Confirmar</button>
 			    <button type="button" class="btn btn-default" id="btn_close" data-dismiss="modal">Close</button>
 		    </div><!--/footer -->
 		</div>

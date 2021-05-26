@@ -1,6 +1,5 @@
 (function($) { 
 	"use strict";
-
 	/**
 Core script to handle the entire theme and core functions
 **/

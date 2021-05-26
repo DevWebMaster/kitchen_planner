@@ -4,7 +4,7 @@
         <div class="dlab-bnr-inr dlab-bnr-inr-sm overlay-black-middle bg-pt" style="background-image:url(<?= base_url(); ?>images/banner/bnr3.jpg);">
             <div class="container">
                 <div class="dlab-bnr-inr-entry">
-                    <h1 class="text-white">Budget List</h1>
+                    <h1 class="text-white">Presupuestos</h1>
                 </div>
             </div>
         </div>
@@ -24,11 +24,11 @@
 		                  <thead>
 		                    <tr>
 		                        <th>No</th>
-								<th>Product Name</th>
-								<th>Furniture Cost</th>
-								<th>Other Cost</th>
+								<th>Nombre del proyecto</th>
+								<th>Precio Muebles Cocina</th>
+								<th>Otros costes</th>
 								<th>Status</th>
-								<th>Action</th>
+								<th>Acciones</th>
 		                    </tr>
 		                  </thead>
 		                  <tbody id="tbody">

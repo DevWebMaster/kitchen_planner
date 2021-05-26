@@ -39,7 +39,7 @@
 								<th>Cliente</th>
 								<th>Precio Muebles Cocina</th>
 								<th>Otros costes</th>
-								<th>Action</th>
+								<th>Acciones</th>
 		                    </tr>
 		                  </thead>
 		                  <tbody id="tbody">

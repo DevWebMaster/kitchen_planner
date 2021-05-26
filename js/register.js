@@ -1,5 +1,12 @@
 $(document).ready(function(){
 
+	var d = new Date();
+	var month = d.toLocaleString('en-us', { month: 'short' })
+	var day = d.getDate();
+	var year = d.getFullYear();
+	$('span[id=portinner_date]').html(month+' '+day+' '+year+' in Travelling');
+
+
 	$('#thing').change(function(){
 		if(this.checked){
 			$('#LOPD_modal').modal('show');
