@@ -11,13 +11,13 @@
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>Order ID</th>
-                        <th>Product Name</th>
-                        <th>Customer</th>
-                        <th>Furniture Cost</th>
-                        <th>Other Cost</th>
+                        <th>Referencia Pedido</th>
+                        <th>Nombre del proyecto</th>
+                        <th>Clientes</th>
+                        <th>Precio Muebles Cocina</th>
+                        <th>Otros costes</th>
                         <th>Status</th>
-                        <th>Action</th>  <!-- load design button,     -->
+                        <th>Acciones</th>  <!-- load design button,     -->
                       </tr>
                     </thead>
                     <tbody id="tbody">
@@ -52,7 +52,7 @@
 
           </div><!--/body -->
           <div class="modal-footer">
-            <button type="button" class="btn btn-info" id="btn_confirm" data-dismiss="modal">Confirm</button>
+            <button type="button" class="btn btn-info" id="btn_confirm" data-dismiss="modal">Confirmar</button>
             <button type="button" class="btn btn-default" id="btn_close" data-dismiss="modal">Close</button>
           </div><!--/footer -->
       </div>

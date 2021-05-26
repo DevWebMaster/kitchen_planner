@@ -64,7 +64,7 @@ class Pos_setting extends My_Controller {
 
   public function pos_management()
   {
-    $data['title'] = 'POS Management';
+    $data['title'] = 'Tiendas Gestión de';
 
     $this->load->view('admin/includes/_header', $data);
 
@@ -150,7 +150,7 @@ class Pos_setting extends My_Controller {
   public function point_rate()
   {
 
-    $data['title'] = 'POS Point Rate List';
+    $data['title'] = 'Tiendas Precio por punto Listado';
 
     $data['pos_arr'] = $this->pos_model->get_pos();
 
@@ -235,7 +235,7 @@ class Pos_setting extends My_Controller {
 
   public function margin_spread()
   {
-    $data['title'] = 'Maring and Spread';
+    $data['title'] = 'Margen and Margen Fijo';
 
     $data['pos_arr'] = $this->pos_model->get_pos();
 

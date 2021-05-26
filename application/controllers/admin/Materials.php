@@ -17,7 +17,7 @@ class Materials extends My_Controller {
 	public function index()
 	{
 
-		$data['title'] = 'Materials';
+		$data['title'] = 'Materiales';
 
 		$this->load->view('admin/includes/_header', $data);
 

@@ -9,13 +9,13 @@
                 <div class="col-md-12" style="display: inline-flex;">
                   <div class="col-12 col-md-2 offset-1">
                     <div class="form-group mb-2">
-                      <label for="tracking_no" class="control-label mb-1">Floor Texture</label>:
+                      <label for="tracking_no" class="control-label mb-1">Textura Pisos</label>:
                       <input type="text" class="form-control form-control-sm" name="floor_texture_name" id="floor_texture_name">
                     </div>
                   </div>
                   <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
-                      <label for="tracking_no" class="control-label mb-1">Floor Image</label>:
+                      <label for="tracking_no" class="control-label mb-1">Pisos Image</label>:
                       <input type="file" name="imageToUpload" id="imageToUpload">
                     </div>
                   </div>
@@ -43,9 +43,9 @@
                   <table id='floor_texture_list' class='table table-bordered table-striped text-center'>
                     <thead>
                       <tr>
-                        <th>Floor Texture</th>
+                        <th>Textura Pisos</th>
                         <th>Image</th>
-                        <th width="10%">Action</th>
+                        <th width="10%">Acciones</th>
                       </tr>
                     </thead>
                   </table>

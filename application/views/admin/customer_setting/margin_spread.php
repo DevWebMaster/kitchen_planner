@@ -9,13 +9,13 @@
                 <div class="col-md-12" style="display: inline-flex;">
                    <div class="col-12 col-md-2 offset-md-1">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Customer Margin(%)</label>:
+                      <label for="" class="control-label mb-1">Clientes Margen(%)</label>:
                       <input type="number" min="0" oninput="validity.valid||(value='');" class="form-control form-control-sm" name="customer_margin" id="customer_margin">
                     </div>
                   </div>
                    <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Customer Spread(EUR)</label>:
+                      <label for="" class="control-label mb-1">Clientes Margen Fijo(EUR)</label>:
                       <input type="number" min="0" oninput="validity.valid||(value='');" class="form-control form-control-sm" name="customer_spread" id="customer_spread">
                     </div>
                   </div>
@@ -41,8 +41,8 @@
                   <table id='margin_spread_list' class='table table-bordered table-striped text-center'>
                     <thead>
                       <tr>
-                        <th>Customer Margin (%)</th>
-                        <th>Customer Spread (EUR)</th>
+                        <th>Clientes Margen (%)</th>
+                        <th>Clientes Margen Fijo (EUR)</th>
                       </tr>
                     </thead>
                   </table>

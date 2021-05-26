@@ -1,6 +1,6 @@
 <div class="content-wrapper">
     <section class="content">
-      <label><h3>Edit Wall Texture</h3></label>
+      <label><h3>Edit Textura Paredes</h3></label>
       <div class="row">
         <div class="col-md-12">
           <div class="card">
@@ -10,13 +10,13 @@
                 <div class="col-md-12" style="display: inline-flex;">
                   <div class="col-12 col-md-2 offset-1">
                     <div class="form-group mb-2">
-                      <label for="tracking_no" class="control-label mb-1">Wall Texture Name</label>:
+                      <label for="tracking_no" class="control-label mb-1">Textura Paredes Nombre</label>:
                       <input type="text" class="form-control form-control-sm" name="edit_wall_texture_name" id="edit_wall_texture_name" value="<?= $wall_texture_info['name']; ?>">
                     </div>
                   </div>
                   <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
-                      <label for="tracking_no" class="control-label mb-1">Wall Image</label>:
+                      <label for="tracking_no" class="control-label mb-1">Paredes Image</label>:
                       <input type="file" name="edit_imageToUpload" id="edit_imageToUpload">
                       <input type="hidden" name="flag_image" id="flag_image" value="0">
                     </div>

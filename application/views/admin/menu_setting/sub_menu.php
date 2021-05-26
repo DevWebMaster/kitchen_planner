@@ -59,7 +59,7 @@
                                 <th>Sub Menu Name</th>
                                 <th>Parent Menu Name</th>
                                 <th>Sub Menu Image</th>
-                                <th width="10%">Action</th>
+                                <th width="10%">Acciones</th>
                               </tr>
                             </thead>
                           </table>

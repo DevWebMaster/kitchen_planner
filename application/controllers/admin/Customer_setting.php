@@ -17,7 +17,7 @@ class Customer_setting extends My_Controller {
 
   public function customer_management()
   {
-    $data['title'] = 'Customer Management';
+    $data['title'] = 'Clientes Gestión de';
 
     $this->load->view('admin/includes/_header', $data);
 
@@ -119,7 +119,7 @@ class Customer_setting extends My_Controller {
   public function point_rate()
   {
 
-    $data['title'] = 'Online Customer Point Rate List';
+    $data['title'] = 'Clientes Online Precio por punto Listado';
 
     $this->load->view('admin/includes/_header', $data);
 
@@ -203,7 +203,7 @@ class Customer_setting extends My_Controller {
 
   public function margin_spread()
   {
-    $data['title'] = 'Maring and Spread';
+    $data['title'] = 'Margen and Margen Fijo';
 
     $data['is_exist'] = $this->customer_model->check_exist_row();
 

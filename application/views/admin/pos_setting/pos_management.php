@@ -9,13 +9,13 @@
                 <div class="col-md-12" style="display: inline-flex;">
                   <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">POS Name</label>:
+                      <label for="" class="control-label mb-1">Tiendas Nombre</label>:
                       <input type="text" class="form-control form-control-sm" name="pos_name" id="pos_name">
                     </div>
                   </div>
                   <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Company Name</label>:
+                      <label for="" class="control-label mb-1">Company Nombre</label>:
                       <input type="text" class="form-control form-control-sm" name="company_name" id="company_name">
                     </div>
                   </div>
@@ -33,13 +33,13 @@
                   </div>
                   <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Phone Number</label>:
+                      <label for="" class="control-label mb-1">Móvil Number</label>:
                       <input type="text" class="form-control form-control-sm" name="phone_num" id="phone_num">
                     </div>
                   </div>
                   <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">zipcode</label>:
+                      <label for="" class="control-label mb-1">Código Postal</label>:
                       <input type="text" class="form-control form-control-sm" name="zipcode" id="zipcode">
                     </div>
                   </div>
@@ -65,13 +65,13 @@
                   </div>
                   <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Description</label>:
+                      <label for="" class="control-label mb-1">Descripción</label>:
                       <input type="text" class="form-control form-control-sm" name="description" id="description">
                     </div>
                   </div>
                   <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Password</label>:
+                      <label for="" class="control-label mb-1">Contraseña</label>:
                       <input type="password" class="form-control form-control-sm" name="password" id="password">
                     </div>
                   </div>
@@ -101,19 +101,19 @@
                   <table id='pos_list' class='table table-bordered table-striped text-center'>
                     <thead>
                       <tr>
-                        <th>POS Name</th>
-                        <th>Company Name</th>
+                        <th>Tiendas Nombre</th>
+                        <th>Company Nombre</th>
                         <th>Address</th>
                         <th>Email</th>
                         <th>CIF</th>
-                        <th>Phone Number</th>
+                        <th>Móvil Number</th>
                         <th>Position_lat</th>
                         <th>Position_lon</th>
-                        <th>Zipcode</th>
-                        <th>Description</th>
+                        <th>Código Postal</th>
+                        <th>Descripción</th>
                         <th>Plan Count</th>
                         <th>Block</th>
-                        <th width="5%">Action</th>
+                        <th width="5%">Acciones</th>
                       </tr>
                     </thead>
                   </table>
@@ -135,13 +135,13 @@
             <div class="row">
                 <div class="col-12 col-md-6">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">POS Name</label>:
+                      <label for="" class="control-label mb-1">Tiendas Nombre</label>:
                       <input type="text" class="form-control form-control-sm" name="edit_pos_name" id="edit_pos_name">
                     </div>
                   </div>
                   <div class="col-12 col-md-6">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Company Name</label>:
+                      <label for="" class="control-label mb-1">Company Nombre</label>:
                       <input type="text" class="form-control form-control-sm" name="edit_company_name" id="edit_company_name">
                     </div>
                   </div>
@@ -161,13 +161,13 @@
                   <br>
                   <div class="col-12 col-md-6">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Phone Number</label>:
+                      <label for="" class="control-label mb-1">Móvil Number</label>:
                       <input type="text" class="form-control form-control-sm" name="edit_phone_num" id="edit_phone_num">
                     </div>
                   </div>
                   <div class="col-12 col-md-6">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Zipcode</label>:
+                      <label for="" class="control-label mb-1">Código Postal</label>:
                       <input type="text" class="form-control form-control-sm" name="edit_zipcode" id="edit_zipcode">
                     </div>
                   </div>
@@ -180,7 +180,7 @@
                   </div>
                   <div class="col-12 col-md-6">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Description</label>:
+                      <label for="" class="control-label mb-1">Descripción</label>:
                       <input type="text" class="form-control form-control-sm" name="description" id="edit_description">
                     </div>
                   </div>

@@ -17,7 +17,7 @@ class Door_setting extends My_Controller {
 	public function dooropen_style()
 	{
 
-		$data['title'] = 'Door Open Style';
+		$data['title'] = 'Estilo de Apertura';
 
 		$this->load->view('admin/includes/_header', $data);
 
@@ -97,7 +97,7 @@ class Door_setting extends My_Controller {
 	public function door_thickness()
 	{
 
-		$data['title'] = 'Door Thickness';
+		$data['title'] = 'Grosores';
 
 		$this->load->view('admin/includes/_header', $data);
 

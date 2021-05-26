@@ -7,7 +7,7 @@
             <div class="card-body">
               <div class="col-12 col-md-2 offset-1">
                 <div class="form-group mb-2">
-                  <label for="" class="control-label mb-1">POS List</label>:
+                  <label for="" class="control-label mb-1">Listado de Tiendas</label>:
                   <select class="form-control form-control-sm" tabindex="1" name="pos_id" id="pos_id">
                       <option value="0">All</option>
                     <?php for($i = 0; $i < count($pos_list); $i++){ ?>
@@ -35,14 +35,14 @@
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>Order ID</th>
-                        <th>Product Name</th>
-                        <th>Customer</th>
-                        <th>POS</th>
-                        <th>Furniture Cost</th>
-                        <th>Other Cost</th>
+                        <th>Referencia Pedido</th>
+                        <th>Nombre del proyecto</th>
+                        <th>Cliente</th>
+                        <th>Tiendas</th>
+                        <th>Precio Muebles Cocina</th>
+                        <th>Otros costes</th>
                         <th>Status</th>
-                        <th>Action</th>  <!-- load design button,     -->
+                        <th>Acciones</th>  <!-- load design button,     -->
                       </tr>
                     </thead>
                     <tbody id="tbody">

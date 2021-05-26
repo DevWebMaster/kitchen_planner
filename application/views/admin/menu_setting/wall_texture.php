@@ -9,13 +9,13 @@
                 <div class="col-md-12" style="display: inline-flex;">
                   <div class="col-12 col-md-2 offset-1">
                     <div class="form-group mb-2">
-                      <label for="tracking_no" class="control-label mb-1">Wall Texture</label>:
+                      <label for="tracking_no" class="control-label mb-1">Textura Paredes</label>:
                       <input type="text" class="form-control form-control-sm" name="wall_texture_name" id="wall_texture_name">
                     </div>
                   </div>
                   <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
-                      <label for="tracking_no" class="control-label mb-1">Wall Image</label>:
+                      <label for="tracking_no" class="control-label mb-1">Paredes Image</label>:
                       <input type="file" name="imageToUpload" id="imageToUpload">
                     </div>
                   </div>
@@ -43,9 +43,9 @@
                   <table id='wall_texture_list' class='table table-bordered table-striped text-center'>
                     <thead>
                       <tr>
-                        <th>Wall Texture</th>
+                        <th>Textura Paredes</th>
                         <th>Image</th>
-                        <th width="10%">Action</th>
+                        <th width="10%">Acciones</th>
                       </tr>
                     </thead>
                   </table>

@@ -9,7 +9,7 @@
                 <div class="col-md-12" style="display: inline-flex;">
                   <div class="col-12 col-md-2 offset-1">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Furniture Cube</label>:
+                      <label for="" class="control-label mb-1">Nombre del Cubo de precios</label>:
                       <input type="text" class="form-control form-control-sm" name="furniture_cube_name" id="furniture_cube_name">
                     </div>
                   </div>
@@ -37,8 +37,8 @@
                   <table id='furniture_cube_list' class='table table-bordered table-striped text-center'>
                     <thead>
                       <tr>
-                        <th>Furniture Cube</th>
-                        <th width="10%">Action</th>
+                        <th>Nombre del Cubo de precios</th>
+                        <th width="10%">Acciones</th>
                       </tr>
                     </thead>
                   </table>

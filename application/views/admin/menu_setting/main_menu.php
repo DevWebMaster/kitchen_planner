@@ -1,6 +1,6 @@
 <div class="content-wrapper">
     <section class="content">
-      <label><h3>Main Menu</h3></label>
+      <label><h3>Menu Principal</h3></label>
       <div class="row">
         <div class="col-md-12">
           <div class="card">
@@ -9,7 +9,7 @@
                 <div class="col-md-12" style="display: inline-flex;">
                   <div class="col-12 col-md-2 offset-1">
                     <div class="form-group mb-2">
-                      <label for="tracking_no" class="control-label mb-1">Menu Name</label>:
+                      <label for="tracking_no" class="control-label mb-1">Menu Nombre</label>:
                       <input type="text" class="form-control form-control-sm" name="menu_name" id="menu_name">
                     </div>
                   </div>
@@ -46,9 +46,9 @@
                           <table id='main_menu_list' class='table table-bordered table-striped'>
                             <thead>
                               <tr>
-                                <th>Menu Name</th>
+                                <th>Menu Nombre</th>
                                 <th>Menu Image</th>
-                                <th width="10%">Action</th>
+                                <th width="10%">Acciones</th>
                               </tr>
                             </thead>
                           </table>

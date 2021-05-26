@@ -9,7 +9,7 @@
                 <div class="col-md-12" style="display: inline-flex;">
                   <div class="col-12 col-md-2 offset-1">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Furniture Cube</label>:
+                      <label for="" class="control-label mb-1">Nombre del Cubo de precios</label>:
                       <select class="form-control form-control-sm" tabindex="1" name="furniture_cube_id" id="furniture_cube_id">
                         <?php for($i = 0; $i < count($furniture_cube); $i++){ ?>
                           <option value="<?= $furniture_cube[$i]['cube_id']; ?>"><?= $furniture_cube[$i]['name']; ?></option>
@@ -77,7 +77,7 @@
                         <th>1 Star(points)</th>
                         <th>3 Stars(points)</th>
                         <th>5 Stars(points)</th>
-                        <th width="10%">Action</th>
+                        <th width="10%">Acciones</th>
                       </tr>
                     </thead>
                   </table>

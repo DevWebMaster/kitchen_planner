@@ -30,7 +30,7 @@
                   <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
                       <input type="hidden" name="h_main_menu_id" id="h_main_menu_id" value="<?= $model_info['main_id']; ?>">
-                      <label for="" class="control-label mb-1">Main Menu</label>:
+                      <label for="" class="control-label mb-1">Menu Principal</label>:
                       <select class="form-control form-control-sm" tabindex="1" name="edit_main_menu_id" id="edit_main_menu_id">
                         <?php for($i = 0; $i < count($main_menu_ids); $i++){ ?>
                           <option value="<?= $main_menu_ids[$i]['id']; ?>"><?= $main_menu_ids[$i]['name']; ?></option>
@@ -120,7 +120,7 @@
                   <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
                       <input type="hidden" name="h_dooropen_type" id="h_dooropen_type" value="<?= $model_info['dooropen_type']; ?>">
-                      <label for="" class="control-label mb-1">DoorOpen Type</label>:
+                      <label for="" class="control-label mb-1">Estilo de Apertura</label>:
                       <select class="form-control form-control-sm" tabindex="1" name="edit_dooropen_type" id="edit_dooropen_type">
                         <?php for($i = 0; $i < count($dooropen_type); $i++){ ?>
                           <option value="<?= $dooropen_type[$i]['style_id']; ?>"><?= $dooropen_type[$i]['name']; ?></option>
@@ -133,7 +133,7 @@
                   <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
                       <input type="hidden" name="h_door_thickness" id="h_door_thickness" value="<?= $model_info['door_thickness']; ?>">
-                      <label for="" class="control-label mb-1">Door Thickness</label>:
+                      <label for="" class="control-label mb-1">Grosores</label>:
                       <select class="form-control form-control-sm" tabindex="1" name="edit_door_thickness" id="edit_door_thickness">
                         <?php for($i = 0; $i < count($door_thickness); $i++){ ?>
                           <option value="<?= $door_thickness[$i]['thickness_id']; ?>"><?= $door_thickness[$i]['name']; ?></option>
@@ -144,7 +144,7 @@
                   <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
                       <input type="hidden" name="h_furniture_cube_id" id="h_furniture_cube_id" value="<?= $model_info['cube_id']; ?>">
-                      <label for="" class="control-label mb-1">Furniture Cube</label>:
+                      <label for="" class="control-label mb-1">Nombre del Cubo de precios</label>:
                       <select class="form-control form-control-sm" tabindex="1" name="edit_furniture_cube_id" id="edit_furniture_cube_id">
                         <?php for($i = 0; $i < count($furniture_cube); $i++){ ?>
                           <option value="<?= $furniture_cube[$i]['cube_id']; ?>"><?= $furniture_cube[$i]['name']; ?></option>

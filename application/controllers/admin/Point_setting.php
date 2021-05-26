@@ -19,7 +19,7 @@ class Point_setting extends My_Controller {
   public function furniture_cube()
   {
 
-    $data['title'] = 'Furniture Cube';
+    $data['title'] = 'Nombre del Cubo de precios';
 
     $this->load->view('admin/includes/_header', $data);
 
@@ -97,7 +97,7 @@ class Point_setting extends My_Controller {
 
 	public function model_point()
 	{
-		$data['title'] = 'Model Points';
+		$data['title'] = 'Definir Cubo de precios';
 
     $data['furniture_cube'] = $this->menu_setting_model->get_furniture_cube();
 

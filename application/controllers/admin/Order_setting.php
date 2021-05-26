@@ -17,7 +17,7 @@ class Order_setting extends My_Controller {
 	public function order_list()
 	{
 
-		$data['title'] = 'Online Customer Order List';
+		$data['title'] = 'Clientes Online Listado de Pedidos';
 
 		$this->load->view('admin/includes/_header', $data);
 
@@ -98,7 +98,7 @@ class Order_setting extends My_Controller {
   public function pos_orders()
   {
 
-    $data['title'] = 'POS Orders';
+    $data['title'] = 'Tiendas';
 
     $pos_list = $this->order_model->get_pos_list();
 

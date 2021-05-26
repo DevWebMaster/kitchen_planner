@@ -17,7 +17,7 @@ class Colors extends My_Controller {
 	public function index()
 	{
 
-		$data['title'] = 'Model Colors';
+		$data['title'] = 'Modulos Colores';
 
 		$this->load->view('admin/includes/_header', $data);
 

@@ -10,18 +10,18 @@
                   <table id='customer_list' class='table table-bordered table-striped text-center'>
                     <thead>
                       <tr>
-                        <th>Customer Name</th>
-                        <th>Last Name1</th>
-                        <th>Last Name2</th>
+                        <th>Customer Nombre</th>
+                        <th>Primer Apellido</th>
+                        <th>Segundo Apellido</th>
                         <th>DNI</th>
                         <th>Email</th>
                         <th>Transaction</th>
-                        <th>Phone Number</th>
-                        <th>Direction</th>
-                        <th>Zipcode</th>
+                        <th>Móvil Number</th>
+                        <th>Dirección</th>
+                        <th>Código Postal</th>
                         <th>LOPD</th>
                         <th>Block</th>
-                        <th width="5%">Action</th>
+                        <th width="5%">Acciones</th>
                       </tr>
                     </thead>
                   </table>
@@ -43,20 +43,20 @@
             <div class="row">
                 <div class="col-12 col-md-6">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Customer Name</label>:
+                      <label for="" class="control-label mb-1">Customer Nombre</label>:
                       <input type="text" class="form-control form-control-sm" name="edit_customer_name" id="edit_customer_name">
                     </div>
                   </div>
                   <div class="col-12 col-md-6">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Last Name1</label>:
+                      <label for="" class="control-label mb-1">Primer Apellido</label>:
                       <input type="text" class="form-control form-control-sm" name="edit_last_name1" id="edit_last_name1">
                     </div>
                   </div>
                   <br>
                   <div class="col-12 col-md-6">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Last Name2</label>:
+                      <label for="" class="control-label mb-1">Segundo Apellido</label>:
                       <input type="text" class="form-control form-control-sm" name="edit_last_name2" id="edit_last_name2">
                     </div>
                   </div>
@@ -82,20 +82,20 @@
                   <br>
                   <div class="col-12 col-md-6">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Phone Number</label>:
+                      <label for="" class="control-label mb-1">Móvil Number</label>:
                       <input type="text" class="form-control form-control-sm" name="edit_phone_num" id="edit_phone_num">
                     </div>
                   </div>
                   <div class="col-12 col-md-6">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Direction</label>:
+                      <label for="" class="control-label mb-1">Dirección</label>:
                       <input type="text" class="form-control form-control-sm" name="edit_direction" id="edit_direction">
                     </div>
                   </div>
                   <br>
                   <div class="col-12 col-md-6">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Zipcode</label>:
+                      <label for="" class="control-label mb-1">Código Postal</label>:
                       <input type="text" class="form-control form-control-sm" name="edit_zipcode" id="edit_zipcode">
                     </div>
                   </div>

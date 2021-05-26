@@ -21,13 +21,13 @@
                   </div>
                   <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Price</label>:
+                      <label for="" class="control-label mb-1">Precios</label>:
                       <input type="number" min="0" oninput="validity.valid||(value='');" class="form-control form-control-sm" name="price" id="price">
                     </div>
                   </div>
                   <div class="col-12 col-md-2">
                     <div class="form-group mb-2">
-                      <label for="" class="control-label mb-1">Select the POS</label>:
+                      <label for="" class="control-label mb-1">Select the Tiendas</label>:
                       <select class="form-control form-control-sm" tabindex="1" name="pos_id" id="pos_id">
                         <?php for($i = 0; $i < count($pos_arr); $i++){ ?>
                           <option value="<?= $pos_arr[$i]['pos_id']; ?>"><?= $pos_arr[$i]['pos_name']; ?></option>
@@ -61,8 +61,8 @@
                       <tr>
                         <th>Min Point</th>
                         <th>Max Point</th>
-                        <th>Price(EUR)</th>
-                        <th width="10%">Action</th>
+                        <th>Precios(EUR)</th>
+                        <th width="10%">Acciones</th>
                       </tr>
                     </thead>
                   </table>
@@ -96,7 +96,7 @@
                 </div>
                 <div class="col-12 col-md-5 offset-1">
                   <div class="form-group mb-2">
-                    <label for="" class="control-label mb-1">Price</label>:
+                    <label for="" class="control-label mb-1">Precios</label>:
                     <input type="number" min="0" oninput="validity.valid||(value='');" class="form-control form-control-sm" name="edit_price" id="edit_price">
                   </div>
                 </div>

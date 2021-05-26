@@ -17,7 +17,7 @@ class Menu_setting extends My_Controller {
 	public function index()
 	{
 
-		$data['title'] = 'Main Menu';
+		$data['title'] = 'Menu Principal';
 
 		$this->load->view('admin/includes/_header', $data);
 
@@ -29,7 +29,7 @@ class Menu_setting extends My_Controller {
 	public function edit_main_menu($id = 0)
 	{
 
-		$data['title'] = 'Edit Main Menu';
+		$data['title'] = 'Edit Menu Principal';
 		$data['main_menu_info'] = $this->menu_setting_model->get_main_menu_info($id);
 		$data['main_menu_id'] = $id;
 
@@ -411,7 +411,7 @@ class Menu_setting extends My_Controller {
 	public function model_list()
 	{
 
-		$data['title'] = 'Model List';
+		$data['title'] = 'Modulos';
 
 		$data['main_menu_ids'] = $this->menu_setting_model->get_main_menu_ids();
 		$data['sub_menu_ids'] = $this->menu_setting_model->get_sub_menu_ids($data['main_menu_ids'][0]['id']);
@@ -433,7 +433,7 @@ class Menu_setting extends My_Controller {
 	public function edit_model_list($model_id = 0)
 	{
 
-		$data['title'] = 'Edit Model List';
+		$data['title'] = 'Edit Modulos';
 		$data['model_info'] = $this->menu_setting_model->get_model_info($model_id);
 		$data['main_menu_ids'] = $this->menu_setting_model->get_main_menu_ids();
 		$data['sub_menu_ids'] = $this->menu_setting_model->get_sub_menu_ids($data['model_info']['main_id']);
@@ -788,7 +788,7 @@ class Menu_setting extends My_Controller {
 	public function wall_texture()
 	{
 
-		$data['title'] = 'Wall Textures';
+		$data['title'] = 'Textura Paredes';
 
 		$this->load->view('admin/includes/_header', $data);
 
@@ -800,7 +800,7 @@ class Menu_setting extends My_Controller {
 	public function edit_wall_texture($id = 0)
 	{
 
-		$data['title'] = 'Edit Wall Textures';
+		$data['title'] = 'Edit Textura Paredes';
 		$data['wall_texture_info'] = $this->menu_setting_model->get_wall_texture_info($id);
 		$data['wall_texture_id'] = $id;
 
@@ -978,7 +978,7 @@ class Menu_setting extends My_Controller {
 	public function floor_texture()
 	{
 
-		$data['title'] = 'Floor Textures';
+		$data['title'] = 'Textura Pisos';
 
 		$this->load->view('admin/includes/_header', $data);
 
@@ -990,7 +990,7 @@ class Menu_setting extends My_Controller {
 	public function edit_floor_texture($id = 0)
 	{
 
-		$data['title'] = 'Edit Floor Textures';
+		$data['title'] = 'Edit Textura Pisos';
 		$data['floor_texture_info'] = $this->menu_setting_model->get_floor_texture_info($id);
 		$data['floor_texture_id'] = $id;
 
