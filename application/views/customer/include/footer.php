@@ -26,7 +26,7 @@
 					<div class="col-lg-3 col-md-4">
 						<div class="widget widget-info">
 							<h6 class="title text-white text-uppercase">Mensajes recientes</h6>
-							<p class="post-date">September 08, 2015</p>
+							<p class="post-date" id="post-date"></p>
 							<p>ROURE dispone de una red de puntos de venta para asesorarte en la compra de tu cocina</p>
 						</div>
 					</div>

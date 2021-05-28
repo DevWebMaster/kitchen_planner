@@ -615,11 +615,9 @@ var mainControls = function(blueprint3d) {
 
   function getBudget(){
     var data = JSON.parse(blueprint3d.model.exportSerialized());
-    var user_id = localStorage.getItem("g_current_user_id");
-    var user_type = localStorage.getItem("g_current_user_type");
     var product_id = $('#product_id').val();
     var customer_id = 0;
-    if(user_type == 2){
+    if(customer_id){
       customer_id = $('#customer_list').val();
     }
     var summary_count = $('#summary_count').val();
@@ -636,7 +634,7 @@ var mainControls = function(blueprint3d) {
       summary_arr[i].model_id = $('#summary'+i).attr('model_id');
       summary_arr[i].summary = $('#summary'+i).val();
     }
-    console.log(summary_arr)
+    console.log(user_type, customer_id)
     $.ajax({
       url: 'kitchen_planner/customer/planner/get_budget',
       headers: {'Access-Control-Allow-Origin': '*'},

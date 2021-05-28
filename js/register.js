@@ -5,7 +5,7 @@ $(document).ready(function(){
 	var day = d.getDate();
 	var year = d.getFullYear();
 	$('span[id=portinner_date]').html(month+' '+day+' '+year+' in Travelling');
-
+	$('#post-date').html(month+' '+day+' '+year);
 
 	$('#thing').change(function(){
 		if(this.checked){

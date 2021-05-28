@@ -72,8 +72,8 @@ class Auth extends CI_Controller
 
             $mail->isSMTP();
             $mail->SMTPDebug = 2;
-            $mail->Host = 'smtp.1and1.es';
-            $mail->Port = 25;
+            $mail->Host = 'smtp.ionos.es';
+            $mail->Port = 587;
             $mail->SMTPOptions = array(
               'ssl' => array(
               'verify_peer' => false,
@@ -84,8 +84,8 @@ class Auth extends CI_Controller
             $mail->SMTPSecure = false;
             $mail->SMTPAutoTLS = false;
             $mail->SMTPAuth = false;
-            $mail->Username = 'm49828855-149998635';
-            $mail->Password = '#Roure2020#';
+            $mail->Username = 'infoweb@roure.es';
+            $mail->Password = '#R0ure2021#';
             $mail->setFrom($from, 'infoweb@roure.es');
             $mail->addAddress($to, 'bozokrkeljas0504@gmail.com');
             $mail->Subject = 'Kitchen Planner';

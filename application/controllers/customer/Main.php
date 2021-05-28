@@ -325,9 +325,9 @@ class Main extends CI_Controller
             }else{  // 0: budget
                 $status_str = 'Pre-budget';
                 if($user_role == 1){
-                    $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="budget'.$value['product_id'].'" class="btn btn-budget mr-1">Presupuesto</a><a href="../planner/load_design/'.['product_id'].'" target="_blank" class="btn btn-design">Diseño 3D</a></div>';
+                    $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" c_id="'.$value['customer_id'].'" id="budget'.$value['product_id'].'" class="btn btn-budget mr-1">Presupuesto</a><a href="../planner/load_design/'.['product_id'].'" target="_blank" class="btn btn-design">Diseño 3D</a></div>';
                 }else if($user_role == 2){
-                    $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="budget'.$value['product_id'].'" class="btn btn-budget mr-1">Presupuesto</a><a href="http://207.154.243.81:8081/?designpkitchen'.$user_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">Diseño 3D</a></div>';
+                    $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" c_id="'.$value['customer_id'].'" id="budget'.$value['product_id'].'" class="btn btn-budget mr-1">Presupuesto</a><a href="http://207.154.243.81:8081/?designpkitchen'.$user_id.'planner'.$value['product_id'].'" target="_blank" class="btn btn-design">Diseño 3D</a></div>';
                 }
                 
             }

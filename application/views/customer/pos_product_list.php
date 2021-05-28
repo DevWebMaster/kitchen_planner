@@ -61,6 +61,7 @@
 		$('#product_list tbody').on('click', 'td a.btn-budget', function (){
 			var id = $(this).attr('id');
 			var h_id = $(this).attr('h_id');
+			// var customer_id = $(this).attr('c_id');
 			var customer_id = $('#customer_id').val();
 			$.ajax({
 				method: "POST",

@@ -121,8 +121,8 @@
 		<!-- contact area END -->
     </div>
     <!-- Content END-->
-    <!-- <script src="https://maps.google.com/maps/api/js?key=AIzaSyBjirg3UoMD5oUiFuZt3P9sErZD-2Rxc68&sensor=false"  ></script> -->
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyBjirg3UoMD5oUiFuZt3P9sErZD-2Rxc68&sensor=false"  ></script>
+    <!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
     <script type="text/javascript">
     	var map;
     	// var iconBase = "https://developers.google.com/maps/documentation/javascript/examples/full/images/";
@@ -130,7 +130,8 @@
     	var iconBase ="<?= base_url(); ?>images/";
 		// Ban Jelačić Square - Center of Zagreb, Croatia
 		// var center = new google.maps.LatLng(45.812897, 15.97706);
-		var center = new google.maps.LatLng(40.4167047, -3.7035825);  //madrid
+		var center = new google.maps.LatLng(38.6892374, -0.4848669);  //madrid 40.4167047, -3.7035825
+
 		var geocoder = new google.maps.Geocoder();
 		var infowindow = new google.maps.InfoWindow();
 

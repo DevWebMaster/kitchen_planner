@@ -175,28 +175,56 @@
 										Crea tu propia cocina o recibe una atención personalizada en nuestras tiendas.
 								</div>
 								<!-- LAYER NR. 5 -->
-								<a class="tp-caption rev-btn tc-btnshadow" 
-									href="<?= base_url(); ?>customer/planner" target="_blank"			 
-									id="slide-200-layer-4" 
-									data-x="['center','center','center','center']" data-hoffset="['-110','-110','-110','0']" 
-									data-y="['middle','middle','middle','middle']" data-voffset="['140','140','100','100']" 
-									data-lineheight="['60','60','50','50']"
-									data-width="['200','200','200','150']"
-									data-height="none"
-									data-whitespace="nowrap"
-									data-type="button" 
-									data-actions=''
-									data-responsive_offset="off" 
-									data-responsive="off"
-									data-frames='[{"delay":900,"speed":2000,"frame":"0","from":"y:50px;z:0;rX:0;rY:0;rZ:0;sX:1.1;sY:1.1;skX:0;skY:0;opacity:0;fbr:100;","bgcolor":"#fff","to":"o:1;fbr:100;","ease":"Power3.easeInOut"},{"delay":"wait","speed":500,"frame":"999","bgcolor":"#fff","to":"opacity:0;fbr:100;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"150","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;fbr:90%;","style":"c:rgba(255,255,255,0.8);"}]'
-									data-textAlign="['center','center','center','center']"
-									data-paddingtop="[0,0,0,0]"
-									data-paddingright="[30,30,20,20]"
-									data-paddingbottom="[0,0,0,0]"
-									data-paddingleft="[30,30,20,20]"
-									style="z-index: 9; min-width: 280px; max-width: 280px; letter-spacing: 2px; white-space: nowrap; font-size: 11px; line-height: 20px; font-weight: 600; color: black; font-family: Roboto; background-color: rgba(0,0,0,0); border-radius:30px 30px 30px 30px; border: 2px solid black; box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; cursor:pointer; text-decoration: none; text-transform: uppercase;">
-										Diseñar Cocina 
-								</a>
+								<?php 
+									if(!empty($this->session->userdata('user_id'))){ ?>
+										<a class="tp-caption rev-btn tc-btnshadow" 
+											href="<?= base_url(); ?>customer/planner" target="_blank"			 
+											id="slide-200-layer-4" 
+											data-x="['center','center','center','center']" data-hoffset="['-110','-110','-110','0']" 
+											data-y="['middle','middle','middle','middle']" data-voffset="['140','140','100','100']" 
+											data-lineheight="['60','60','50','50']"
+											data-width="['200','200','200','150']"
+											data-height="none"
+											data-whitespace="nowrap"
+											data-type="button" 
+											data-actions=''
+											data-responsive_offset="off" 
+											data-responsive="off"
+											data-frames='[{"delay":900,"speed":2000,"frame":"0","from":"y:50px;z:0;rX:0;rY:0;rZ:0;sX:1.1;sY:1.1;skX:0;skY:0;opacity:0;fbr:100;","bgcolor":"#fff","to":"o:1;fbr:100;","ease":"Power3.easeInOut"},{"delay":"wait","speed":500,"frame":"999","bgcolor":"#fff","to":"opacity:0;fbr:100;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"150","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;fbr:90%;","style":"c:rgba(255,255,255,0.8);"}]'
+											data-textAlign="['center','center','center','center']"
+											data-paddingtop="[0,0,0,0]"
+											data-paddingright="[30,30,20,20]"
+											data-paddingbottom="[0,0,0,0]"
+											data-paddingleft="[30,30,20,20]"
+											style="z-index: 9; min-width: 280px; max-width: 280px; letter-spacing: 2px; white-space: nowrap; font-size: 11px; line-height: 20px; font-weight: 600; color: black; font-family: Roboto; background-color: rgba(0,0,0,0); border-radius:30px 30px 30px 30px; border: 2px solid black; box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; cursor:pointer; text-decoration: none; text-transform: uppercase;">
+												Diseñar Cocina 
+										</a>
+								<?php
+									}else{ ?>
+										<a class="tp-caption rev-btn tc-btnshadow" 
+											id="modal-1" 
+											data-toggle="modal" 
+											data-target="#myModal"
+											data-x="['center','center','center','center']" data-hoffset="['-110','-110','-110','0']" 
+											data-y="['middle','middle','middle','middle']" data-voffset="['140','140','100','100']" 
+											data-lineheight="['60','60','50','50']"
+											data-width="['200','200','200','150']"
+											data-height="none"
+											data-whitespace="nowrap"
+											data-type="button" 
+											data-actions=''
+											data-responsive_offset="off" 
+											data-responsive="off"
+											data-frames='[{"delay":900,"speed":2000,"frame":"0","from":"y:50px;z:0;rX:0;rY:0;rZ:0;sX:1.1;sY:1.1;skX:0;skY:0;opacity:0;fbr:100;","bgcolor":"#fff","to":"o:1;fbr:100;","ease":"Power3.easeInOut"},{"delay":"wait","speed":500,"frame":"999","bgcolor":"#fff","to":"opacity:0;fbr:100;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"150","ease":"Power1.easeInOut","to":"o:1;rX:0;rY:0;rZ:0;z:0;fbr:90%;","style":"c:rgba(255,255,255,0.8);"}]'
+											data-textAlign="['center','center','center','center']"
+											data-paddingtop="[0,0,0,0]"
+											data-paddingright="[30,30,20,20]"
+											data-paddingbottom="[0,0,0,0]"
+											data-paddingleft="[30,30,20,20]"
+											style="z-index: 9; min-width: 280px; max-width: 280px; letter-spacing: 2px; white-space: nowrap; font-size: 11px; line-height: 20px; font-weight: 600; color: black; font-family: Roboto; background-color: rgba(0,0,0,0); border-radius:30px 30px 30px 30px; border: 2px solid black; box-sizing:border-box; -moz-box-sizing:border-box; -webkit-box-sizing:border-box; cursor:pointer; text-decoration: none; text-transform: uppercase;">
+												Diseñar Cocina 
+										</a>
+								<?php } ?>
 								
 								<!-- LAYER NR. 5 -->
 								<a class="tp-caption rev-btn tc-btnshadow" 
@@ -514,3 +542,15 @@
 		</div>
     </div>
 	<!-- Content END-->
+	<div class="modal fade" tabindex="-1" role="dialog" id="myModal">       
+		<div class="modal-dialog modal-md" role="document">         
+			<div class="modal-content">           
+				<div class="modal-header" style="background-color: #ffa200">             
+					<h5 class="modal-title">ALERTA</h5>             
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>           
+				</div>           
+				<div class="modal-body">Por favor, para poder acceder al diseñador de cocinas, primero has de logearte.</div>    
+                <div class="modal-footer"><a href="<?php echo base_url('customer/auth/login');?>" class="button btn btn-primary">Login</a></div>     
+			</div>       
+		</div>    
+	</div>

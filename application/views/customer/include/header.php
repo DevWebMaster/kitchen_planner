@@ -54,7 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="container clearfix" style="padding-right: 0px !important; padding-left: 0px !important;">
                     <!-- website logo -->
                     <div class="logo-header mostion">
-						<a href="index"><img src="<?= base_url(); ?>images/logo.png" alt=""></a>
+						<a href="<?= base_url('customer/'); ?>"><img src="<?= base_url(); ?>images/logo.png" alt=""></a>
 					</div>
                     <!-- nav toggle button -->
                     <button class="navbar-toggler collapsed navicon justify-content-end" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,7 +81,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <!-- main nav -->
                     <div class="header-nav navbar-collapse collapse justify-content-end" id="navbarNavDropdown">
 						<div class="logo-header">
-							<a href="index.html"><img src="<?= base_url(); ?>images/logo.png" alt=""></a>
+							<a href="<?= base_url('customer/'); ?>"><img src="<?= base_url(); ?>images/logo.png" alt=""></a>
 						</div>
                         <ul class="nav navbar-nav">	
                         	<?php if($data == 'index'){ ?>
