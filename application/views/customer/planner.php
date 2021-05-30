@@ -19,7 +19,7 @@
     </script>
   </head>
 
-  <body onbeforeunload="return myFunc()">
+  <body>
     <input type="hidden" name="product_id" id="product_id" value="<?= $product_id; ?>">
     <input type="hidden" name="product_name" id="product_name">
     <div class="container-fluid">
@@ -308,7 +308,7 @@
                 New Plan
               </a>
               <a class="btn btn-sm btn-default btn-file design">
-                <input type="file" class="hidden-input" id="loadFile">
+                <input type="file" accept=".kitchenplanner" class="hidden-input" id="loadFile">
                 Load Plan
               </a>
 
@@ -334,7 +334,7 @@
                   </div> 
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-sm btn-info btn_customer_select px-3" data-dismiss="modal" data-toggle="modal" data-target="#confirmmodal">Select</button>
+                  <button type="button" class="btn btn-sm btn-info btn_customer_select px-3" id="select_customer" data-dismiss="modal" data-toggle="modal" data-target="#confirmmodal">Select</button>
                   <a href="http://207.154.243.81/kitchen_planner/customer/auth/register" target="_blank" class="btn btn-sm btn-warning add_no px-3" data-toggle="modal">New Customer</a>
                   <button type="button" class="btn btn-sm btn-default" id="btn_close" data-dismiss="modal">Return</button>
                 </div>
@@ -386,12 +386,31 @@
                   </div> 
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-sm btn-default btn_gen" id="btn_gen" data-dismiss="modal">OK</button>
+                  <button type="button" class="btn btn-sm btn-default btn_gen" style="color: white; background-color: #ffa200;" id="btn_gen" data-dismiss="modal">OK</button>
                 </div>
             </div>
             </div>
             </div>
             <!-- end of the floorplanner -->
+            <!-- alert to new planner -->
+            <div class="modal fade" id="newplannermodal" tabindex="-1" role="dialog" aria-labelledby="newplannermodalLabel">
+            <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background: red;"><label style="color: white; font-size: x-large;">Warning</label></div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label><h3 style="color: #ffa200;">You can't create the new planner because your account is expired now!</h3></label>
+                    </div>       
+                  </div> 
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-sm btn-default" style="color: white; background-color: #ffa200;" data-dismiss="modal">Confirm</button>
+                </div>
+            </div>
+            </div>
+            </div>
+            <!-- end of the new planner -->
             <!-- alert to product name -->
             <div class="modal fade" id="productnameModal" tabindex="-1" role="dialog" aria-labelledby="productnameModal">
             <div class="modal-dialog modal-md" role="document">
@@ -433,6 +452,10 @@
   </body>
 </html>
 <script type="text/javascript">
+  window.onbeforeunload = function () {
+    myFunc();
+    return null;       
+  };
   function myFunc(){
     $.ajax({
       url: 'kitchen_planner/customer/planner/leave_planner',

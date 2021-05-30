@@ -34,6 +34,8 @@ class Planner extends CI_Controller
                 $this->planner_model->start_planner($data);
 
                 $this->load->view('customer/planner');
+            }else if($is_exist['status'] == 1){
+                $this->load->view('duplicate_planner');
             }else{
                 $this->load->view('access_denied');
             }
@@ -54,24 +56,12 @@ class Planner extends CI_Controller
                 $this->planner_model->start_planner($data);
 
                 $this->load->view('customer/planner');
+            }else if($is_exist['status'] == 1){
+                $this->load->view('duplicate_planner');
             }else{
                 $this->load->view('access_denied');
             }
         }
-        // if($is_exist['status'] == 0){
-        //     $data = array(
-        //         'user_id' => $user_id,
-        //         'user_role' => $user_role,
-        //         'start_date' => date('Y-m-d H:i:s'),
-        //         'status' => 1
-        //     );
-        //     //customer is logged in the planner
-        //     $this->planner_model->start_planner($data);
-
-        //     $this->load->view('customer/planner');
-        // }else{
-        //     $this->load->view('access_denied');
-        // }
     }
     public function leave_planner()
     {
@@ -83,6 +73,29 @@ class Planner extends CI_Controller
         );
         $result = $this->planner_model->end_planner($user_role, $user_id, $updated_data);
         echo json_encode($result);
+    }
+    public function validation_count()
+    {
+        $user_role = $this->session->userdata('user_role');
+        $user_id = $this->session->userdata('user_id');
+        if($user_role == 2){
+            $planner_count = $this->planner_model->get_planner_count($user_id);
+        }else if($user_role == 1){
+            $planner_count = $this->planner_model->get_planner_count_for_user($user_id);
+        }
+        if($planner_count['planner_count'] > 0){
+            $updated_data = array(
+                'planner_count' => $planner_count['planner_count'] - 1
+            );
+            if($user_role == 2)
+                $result = $this->planner_model->updated_planner_count($updated_data, $user_id);
+            else if($user_role == 1)
+                $result = $this->planner_model->updated_planner_count_for_user($updated_data, $user_id);
+            $rtn = true;
+        }else{
+            $rtn = false;
+        }
+        echo json_encode($rtn);
     }
     public function get_wall_floor()
     {
@@ -154,7 +167,9 @@ class Planner extends CI_Controller
         $customer_id = $this->input->post('customer_id');
         $summary_arr = $this->input->post('summary_arr');
 
-        $result = $this->planner_model->get_budget($user_role, $user_id, $req_data['item'], $product_id, $customer_id, $summary_arr);
+        $result = $this->planner_model->get_budget($user_role, $user_id, $req_data['items'], $product_id, $customer_id, $summary_arr);
+
+        echo json_encode($result);
     }
     public function load_product()
     {

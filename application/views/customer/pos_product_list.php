@@ -14,18 +14,6 @@
 			<div class="section-full content-inner-2 contact-box">
 				<div class="container">
 					<div class="section-head" style="margin-bottom: 0 !important">
-						<div class="col-12 col-md-4" style="display: flex; align-items: center;">
-							<div class="form-group mb-2 col-12 col-md-6">
-								<label for="" class="control-label mb-1">Customer List</label>:&nbsp;&nbsp;
-							</div>
-			                <div class="form-group mb-2 col-12 col-md-6">
-			                  <select name="customer_id" id="customer_id">
-			                    <?php for($i = 0; $i < count($customer_list); $i++){ ?>
-			                      <option value="<?= $customer_list[$i]['id']; ?>"><?= $customer_list[$i]['customer_name']; ?></option>
-			                    <?php } ?>
-			                  </select> 
-			                </div>
-			              </div>
 						<!-- <h2 class="head-title">Product List</h2> -->
 						<!-- <p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud. Photo booth anim 8</p> -->
 					</div>
@@ -61,8 +49,8 @@
 		$('#product_list tbody').on('click', 'td a.btn-budget', function (){
 			var id = $(this).attr('id');
 			var h_id = $(this).attr('h_id');
-			// var customer_id = $(this).attr('c_id');
-			var customer_id = $('#customer_id').val();
+			var customer_id = $(this).attr('c_id');
+			// var customer_id = $('#customer_id').val();
 			$.ajax({
 				method: "POST",
 				url: 'set_budget',

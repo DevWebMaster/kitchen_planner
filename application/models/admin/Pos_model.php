@@ -202,5 +202,41 @@
 			$query = $this->db->get()->result_array();
 			return $query;
 		}
+		public function get_all_customer_count($pos_id) {
+			$this->db->select('a1.*');
+			$this->db->from('tbl_customers as a1');
+			$this->db->join('tbl_product_history_log as a2', 'a1.id = a2.customer_id', 'left');
+			$this->db->where('a2.pos_id', $pos_id);
+			$this->db->group_by('a1.id');
+			$query = $this->db->get();
+			return $query->num_rows();
+		}
+		public function get_all_customer_count_with_filter($pos_id, $search_key) {
+			$this->db->select('a1.*');
+			$this->db->from('tbl_customers as a1');
+			$this->db->join('tbl_product_history_log as a2', 'a1.id = a2.customer_id', 'left');
+			$this->db->where('a2.pos_id', $pos_id);
+			if($search_key != ''){
+				$this->db->like('a2.product_name', $search_key);
+			}
+			$this->db->group_by('a1.id');
+			$query = $this->db->get();
+
+			return $query->num_rows();
+		}
+		public function get_pos_customerlist($pos_id, $start, $rowperpage, $search_key) {
+			$this->db->select('a1.*');
+			$this->db->from('tbl_customers as a1');
+			$this->db->join('tbl_product_history_log as a2', 'a1.id = a2.customer_id', 'left');
+			$this->db->where('a2.pos_id', $pos_id);
+			// $this->db->where('a1.check_flag <>', 0);
+			if($search_key != ''){
+				$this->db->like('a1.customer_name', $search_key);
+			}
+			$this->db->group_by('a1.id');
+			$this->db->limit($rowperpage, $start);
+			$query = $this->db->get()->result_array();
+			return $query;
+		}
 	}
 ?>

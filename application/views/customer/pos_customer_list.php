@@ -24,10 +24,10 @@
 		                  <thead>
 		                    <tr>
 		                        <th>No</th>
-            								<th>Nombre del Cliente</th>
-            								<th>Teléfono Número</th>
-            								<th>Dirección</th>
-            								<th>Status</th>
+								<th>Nombre del Cliente</th>
+								<th>Teléfono Número</th>
+								<th>Dirección</th>
+								<th>Status</th>
 		                    </tr>
 		                  </thead>
 		                  <tbody id="tbody">

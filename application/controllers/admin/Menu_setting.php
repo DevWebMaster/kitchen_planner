@@ -487,15 +487,15 @@ class Menu_setting extends My_Controller {
 		$textureFileType = strtolower(pathinfo(basename($_FILES["textureToUpload"]["name"]),PATHINFO_EXTENSION));
 
 		$jsFileType = strtolower(pathinfo(basename($_FILES["jsToUpload"]["name"]),PATHINFO_EXTENSION));
+		$rand_file_name = md5(uniqid(rand(), true));
+		$target_image_file = $target_dir_thumbnail.$rand_file_name.'.'.$imageFileType;
+		$save_image_file = THUMBNAIL_PATH.$rand_file_name.'.'.$imageFileType;
 
-		$target_image_file = $target_dir_thumbnail.$model_name.'.'.$imageFileType;
-		$save_image_file = THUMBNAIL_PATH.$model_name.'.'.$imageFileType;
+    $target_texture_file = $target_dir_model.$rand_file_name.'.'.$textureFileType;
+    $save_texture_file = MODEL_PATH.$rand_file_name.'.'.$textureFileType;
 
-        $target_texture_file = $target_dir_model.basename($_FILES["textureToUpload"]["name"]);
-        $save_texture_file = MODEL_PATH.basename($_FILES["textureToUpload"]["name"]);
-
-        $target_js_file = $target_dir_model.$model_name.'.'.$jsFileType;
-        $save_js_file = MODEL_PATH.$model_name.'.'.$jsFileType;
+    $target_js_file = $target_dir_model.$rand_file_name.'.'.$jsFileType;
+    $save_js_file = MODEL_PATH.$rand_file_name.'.'.$jsFileType;
 
 		$message = array();
 		// Check if file already exists
@@ -605,15 +605,15 @@ class Menu_setting extends My_Controller {
 				$textureFileType = strtolower(pathinfo(basename($_FILES["edit_textureToUpload"]["name"]),PATHINFO_EXTENSION));
 	
 				$jsFileType = strtolower(pathinfo(basename($_FILES["edit_jsToUpload"]["name"]),PATHINFO_EXTENSION));
+				$rand_file_name = md5(uniqid(rand(), true));
+				$target_image_file = $target_dir_thumbnail.$rand_file_name.'.'.$imageFileType;
+				$save_image_file = THUMBNAIL_PATH.$rand_file_name.'.'.$imageFileType;
 	
-				$target_image_file = $target_dir_thumbnail.$model_name.'.'.$imageFileType;
-				$save_image_file = THUMBNAIL_PATH.$model_name.'.'.$imageFileType;
-	
-		        $target_texture_file = $target_dir_model.basename($_FILES["edit_textureToUpload"]["name"]);
-		        $save_texture_file = MODEL_PATH.basename($_FILES["edit_textureToUpload"]["name"]);
-	
-		        $target_js_file = $target_dir_model.$model_name.'.'.$jsFileType;
-		        $save_js_file = MODEL_PATH.$model_name.'.'.$jsFileType;
+        $target_texture_file = $target_dir_model.$rand_file_name.'.'.$textureFileType;
+        $save_texture_file = MODEL_PATH.$rand_file_name.'.'.$textureFileType;
+
+        $target_js_file = $target_dir_model.$rand_file_name.'.'.$jsFileType;
+        $save_js_file = MODEL_PATH.$rand_file_name.'.'.$jsFileType;
 	
 				// Check if file already exists
 				if (file_exists($target_image_file)) {

@@ -162,8 +162,8 @@
 
 		    </div><!--/body -->
 		    <div class="modal-footer">
-		    	<button type="button" class="btn btn-default" id="btn_confirm" data-dismiss="modal">Confirm</button>
-			    <button type="button" class="btn btn-default" id="btn_close" data-dismiss="modal">Close</button>
+		    	<button type="button" class="btn btn-default" id="btn_confirm" data-dismiss="modal">Aceptar</button>
+			    <button type="button" class="btn btn-default" id="btn_close" data-dismiss="modal">Cancelar</button>
 		    </div><!--/footer -->
 		</div>
 		</div>

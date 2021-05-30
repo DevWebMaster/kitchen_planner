@@ -314,6 +314,58 @@ class Pos_setting extends My_Controller {
     $response = array('status' => $result);
     echo json_encode($response);
   }
+  public function customer_list_by_pos()
+  {
+    $data['title'] = 'Customer list';
+
+    $data['pos_arr'] = $this->pos_model->get_pos();
+
+    $this->load->view('admin/includes/_header');
+
+    $this->load->view('admin/pos_setting/customer_list', $data);
+
+    $this->load->view('admin/includes/_footer');
+  }
+  public function get_customer_list_by_pos()
+  {
+    $pos_id = $this->input->post('pos_id');
+    $draw = $_POST['draw'];
+    $start = $_POST['start'];
+    $rowperpage = $_POST['length']; // Rows display per page
+    $columnIndex = $_POST['order'][0]['column']; // Column index
+    $columnName = $_POST['columns'][$columnIndex]['data']; // Column name
+    $columnSortOrder = $_POST['order'][0]['dir']; // asc or desc
+    $search_key = $_POST['search']['value'];
+
+    $totalRecords = $this->pos_model->get_all_customer_count($pos_id);
+    $totalRecordwithFilter = $this->pos_model->get_all_customer_count_with_filter($pos_id, $search_key);
+    $customer_lists = $this->pos_model->get_pos_customerlist($pos_id, $start, $rowperpage, $search_key);
+    $data = array();
+    $inx = 0;
+    foreach ($customer_lists as $value) {
+        $inx++;
+        $row_inx = $inx + intval($start);
+        $data[] = array( 
+          "no"=>$row_inx,
+          "customer_name"=>$value['customer_name'].$value['last_name1'].$value['last_name2'],
+          "email"=>$value['email'],
+          "phone_num"=>$value['phone_num'],
+          "delivery_direction"=>$value['delivery_direction'],
+          "zipcode"=>$value['zipcode'],
+          "planner_count"=>$value['planner_count'],
+          "status"=>$value['is_blocked'] ? '<h6><span class="badge badge-pill badge-danger">blocked</span></h6>' : '<h6><span class="badge-pill badge-success">actived</span></h6>',
+       );
+    }
+
+    $response = array(
+      "draw" => intval($draw),
+      "iTotalRecords" => $totalRecords,
+      "iTotalDisplayRecords" => $totalRecordwithFilter,
+      "aaData" => $data
+    );
+
+    echo json_encode($response);
+  }
 
 }
 ?>  

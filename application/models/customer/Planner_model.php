@@ -150,7 +150,7 @@ class Planner_model extends CI_Model{
 				if($point_rate['min'] < $f_point)
 					$furniture_cost = $f_point*$point_rate['price'];
 
-				$total_urniture_cost += $furniture_cost;
+				$total_furniture_cost += $furniture_cost;
 
 				$this->db->select('a1.model_id, SUM(a2.price+a3.price+a4.price+a5.price+a6.price+a7.price+a8.price+a9.price) as extra_cost');
 				$this->db->from('tbl_model_list as a1');
@@ -193,7 +193,7 @@ class Planner_model extends CI_Model{
 				$online_mode = 1;
 				$data = array(
 					'estimated_furniture_cost' => $total_furniture_cost,
-					'estimated_countertio_cost' => ($total_funiture_cost+$total_extra_cost),
+					'estimated_countertio_cost' => ($total_furniture_cost+$total_extra_cost),
 					'check_order' => 1,
 					'online_mode' => $online_mode,
 					'updated_by' => $user_id

@@ -20,6 +20,7 @@
                         <th>Dirección</th>
                         <th>Código Postal</th>
                         <th>LOPD</th>
+                        <th>Planner Count</th>
                         <th>Block</th>
                         <th width="5%">Acciones</th>
                       </tr>
@@ -105,6 +106,12 @@
                       <input type="text" class="form-control form-control-sm" name="edit_lopd" id="edit_lopd">
                     </div>
                   </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group mb-2">
+                      <label for="" class="control-label mb-1">Planner Count</label>:
+                      <input type="text" class="form-control form-control-sm" name="edit_planner_count" id="edit_planner_count">
+                    </div>
+                  </div>
               </div>
 
           </div><!--/body -->
@@ -144,13 +151,15 @@
     });
     $('#customer_list tbody').on('click', 'td a.edit-row', function(){
       // var json_data = JSON.parse($(this).attr('json_data'));
-
+      var name = $(this).parent().parent().parent().find("td:eq(0)").text();
+      var lastname1 = $(this).parent().parent().parent().find("td:eq(1)").text();
+      var lastname2 =$(this).parent().parent().parent().find("td:eq(2)").text();
       var id = $(this).attr('id');  
-      $('#edit_customer_modalLabel').html('Edit Customer - '+id);
+      $('#edit_customer_modalLabel').html('Edit Customer - '+name+lastname1+lastname2);
       $('#edit_customer_id').val(id);
-      $('#edit_customer_name').val($(this).parent().parent().parent().find("td:eq(0)").text());
-      $('#edit_last_name1').val($(this).parent().parent().parent().find("td:eq(1)").text());
-      $('#edit_last_name2').val($(this).parent().parent().parent().find("td:eq(2)").text());
+      $('#edit_customer_name').val(name);
+      $('#edit_last_name1').val(lastname1);
+      $('#edit_last_name2').val(lastname2);
       $('#edit_dni').val($(this).parent().parent().parent().find("td:eq(3)").text());
       $('#edit_email').val($(this).parent().parent().parent().find("td:eq(4)").text());
       $('#edit_transaction').val($(this).parent().parent().parent().find("td:eq(5)").text());
@@ -158,6 +167,7 @@
       $('#edit_direction').val($(this).parent().parent().parent().find("td:eq(7)").text());
       $('#edit_zipcode').val($(this).parent().parent().parent().find("td:eq(8)").text());
       $('#edit_lopd').val($(this).parent().parent().parent().find("td:eq(9)").text());
+      $('#edit_planner_count').val($(this).parent().parent().parent().find("td:eq(10)").text());
     });
 
     $('#btn_update').click(function(){
@@ -171,12 +181,13 @@
       var edit_direction = $('#edit_direction').val();
       var edit_zipcode = $('#edit_zipcode').val();
       var edit_lopd = $('#edit_lopd').val();
+      var edit_planner_count = $('#edit_planner_count').val();
 
       var edit_customer_id = $('#edit_customer_id').val();
       $.ajax({
         url: '<?= site_url(); ?>admin/customer_setting/edit_customer',
         type: 'POST',
-        data: {edit_customer_id: edit_customer_id, edit_customer_name: edit_customer_name, edit_last_name1: edit_last_name1, edit_last_name2: edit_last_name2, edit_email: edit_email, edit_dni: edit_dni, edit_transaction: edit_transaction, edit_phone_num: edit_phone_num, edit_direction: edit_direction, edit_zipcode: edit_zipcode, edit_lopd: edit_lopd},
+        data: {edit_customer_id: edit_customer_id, edit_customer_name: edit_customer_name, edit_last_name1: edit_last_name1, edit_last_name2: edit_last_name2, edit_email: edit_email, edit_dni: edit_dni, edit_transaction: edit_transaction, edit_phone_num: edit_phone_num, edit_direction: edit_direction, edit_zipcode: edit_zipcode, edit_lopd: edit_lopd, edit_planner_count: edit_planner_count},
         success: function(response){
           var edit_status = JSON.parse(response);
           if(edit_status){
@@ -223,6 +234,7 @@
            { data: 'delivery_direction' },
            { data: 'zipcode' },
            { data: 'LOPD' },
+           { data: 'planner_count'},
            { data: 'block' },
            { data: 'action', "width": "5%"},
         ]

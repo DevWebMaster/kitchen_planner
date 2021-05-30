@@ -38,7 +38,8 @@ class Customer_setting extends My_Controller {
       'phone_num' => $req_data['edit_phone_num'],
       'delivery_direction' => $req_data['edit_direction'],
       'zipcode' => $req_data['edit_zipcode'],
-      'LOPD' => $req_data['edit_lopd']
+      'LOPD' => $req_data['edit_lopd'],
+      'planner_count' => $req_data['edit_planner_count']
     );
 
     $result = $this->customer_model->edit_customer($req_data['edit_customer_id'], $data);
@@ -82,6 +83,7 @@ class Customer_setting extends My_Controller {
           "zipcode"=>$value['zipcode'],
           "LOPD"=>$value['LOPD'],
           "block"=>$toggle_btn,
+          "planner_count"=>$value['planner_count'],
           "action"=>'<div style="display: inline-flex;"><a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-info edit-row" data-toggle="modal" data-target="#edit_customer_modal"><i class="fa fa-edit"></i></a><a id="'.$value['id'].'" class="mr-1 btn-sm btn btn-danger delete-row"><i class="fa fa-times"></i></a>'
        );
     }
