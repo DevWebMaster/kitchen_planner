@@ -452,10 +452,10 @@
   </body>
 </html>
 <script type="text/javascript">
-  window.onbeforeunload = function () {
-    myFunc();
-    return null;       
-  };
+  // window.onbeforeunload = function () {
+  //   myFunc();
+  //   return null;       
+  // };
   function myFunc(){
     $.ajax({
       url: 'kitchen_planner/customer/planner/leave_planner',
@@ -465,4 +465,34 @@
       }
     })
   }
+  function detectCancel(){
+    $.ajax({
+      url: 'kitchen_planner/customer/planner/detect_planner',
+      type: 'POST',
+      headers: {'Access-Control-Allow-Origin': '*'},
+      success: function(response) {
+      }
+    })
+  }
+  // window.onbeforeunload = function (event) {
+  //   // var message = 'Important: Please click on \'Save\' button to leave this page.';
+  //   // if (typeof event == 'undefined') {
+  //   //     event = window.event;
+  //   // }
+  //   if (event) {
+  //       event.returnValue = null;
+  //       myFunc();
+  //       console.log(event);
+  //   }
+  //   // return message;
+  // };
+  $(window).bind('beforeunload', function() {
+      setTimeout(function() {
+        myFunc();
+        setTimeout(function() {
+            detectCancel();
+        }, 1000);
+      },1);
+      return 'are you sure';
+  });
 </script>

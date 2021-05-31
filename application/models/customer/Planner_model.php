@@ -259,6 +259,17 @@ class Planner_model extends CI_Model{
 		$this->db->where('status', 1);
 		return $this->db->update('tbl_planner_status', $updated_data);
 	}
+	public function detect_planner($user_role, $user_id, $updated_data)
+	{
+		$this->db->select('id');
+		$this->db->from('tbl_planner_status');
+		$this->db->where('user_role', $user_role);
+		$this->db->where('user_id', $user_id);
+		$this->db->order_by('end_date', 'DESC');
+		$rtn = $this->db->get()->result_array()[0];
+
+		return $this->db->update('tbl_planner_status', $updated_data, array('id' => $rtn['id']));
+	}
 	public function get_planner_count($user_id) {
 		$this->db->select('planner_count');
 		$this->db->from('tbl_pos');

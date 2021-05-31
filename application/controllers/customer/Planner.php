@@ -74,6 +74,17 @@ class Planner extends CI_Controller
         $result = $this->planner_model->end_planner($user_role, $user_id, $updated_data);
         echo json_encode($result);
     }
+    public function detect_planner()
+    {
+        $user_role = $this->session->userdata('user_role');
+        $user_id = $this->session->userdata('user_id');
+        $updated_data = array(
+            'end_date' => date('Y-m-d H:i:s'),
+            'status' => 1,
+        );
+        $result = $this->planner_model->detect_planner($user_role, $user_id, $updated_data);
+        echo json_encode($result);
+    }
     public function validation_count()
     {
         $user_role = $this->session->userdata('user_role');
