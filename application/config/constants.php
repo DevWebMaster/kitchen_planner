@@ -103,6 +103,6 @@ define('WALL_TEXTURE_PATH', "rooms/textures/wall/");
 define('FLOOR_TEXTURE_PATH', "rooms/textures/floor/");
 
 define('SAVE_PDF_PATH', "uploads/pdfs/");
-define('PREFIX_IMAGE_PATH', "kitchen_planner/assets/design/planner/");
+define('PREFIX_IMAGE_PATH', "assets/design/planner/");
 
 define('PRODUCT_PATH', 'uploads/products/');

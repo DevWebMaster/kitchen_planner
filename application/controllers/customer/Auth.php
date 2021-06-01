@@ -74,15 +74,15 @@ class Auth extends CI_Controller
             $mail->SMTPDebug = 2;
             $mail->Host = 'smtp.ionos.es';
             $mail->Port = 587;
-            $mail->SMTPOptions = array(
-              'ssl' => array(
-              'verify_peer' => false,
-              'verify_peer_name' => false,
-              'allow_self_signed' => true
-              )
-            );
-            $mail->SMTPSecure = false;
-            $mail->SMTPAutoTLS = false;
+            // $mail->SMTPOptions = array(
+            //   'ssl' => array(
+            //   'verify_peer' => false,
+            //   'verify_peer_name' => false,
+            //   'allow_self_signed' => true
+            //   )
+            // );
+            // $mail->SMTPSecure = false;
+            // $mail->SMTPAutoTLS = false;
             $mail->SMTPAuth = false;
             $mail->Username = 'infoweb@roure.es';
             $mail->Password = '#R0ure2021#';
