@@ -3,17 +3,17 @@
   <head>
     <title>Design Kitchen</title>
     <base href="/">
-    <link href="<?php site_url(); ?>kitchen_planner/assets/design/planner/css/bootstrap.css" rel="stylesheet">
-    <link href="<?php site_url(); ?>kitchen_planner/assets/design/planner/css/planner.css" rel="stylesheet">
+    <link href="<?php site_url(); ?>assets/design/planner/css/bootstrap.css" rel="stylesheet">
+    <link href="<?php site_url(); ?>assets/design/planner/css/planner.css" rel="stylesheet">
 
-    <script src="<?php site_url(); ?>kitchen_planner/assets/design/planner/js/three.min.js"></script>
-    <script src="<?php site_url(); ?>kitchen_planner/assets/design/planner/js/blueprint3d.js"></script>
+    <script src="<?php site_url(); ?>assets/design/planner/js/three.min.js"></script>
+    <script src="<?php site_url(); ?>assets/design/planner/js/blueprint3d.js"></script>
 
-    <script src="<?php site_url(); ?>kitchen_planner/assets/design/planner/js/jquery.js"></script>
-    <script src="<?php site_url(); ?>kitchen_planner/assets/design/planner/js/bootstrap.js"></script>
+    <script src="<?php site_url(); ?>assets/design/planner/js/jquery.js"></script>
+    <script src="<?php site_url(); ?>assets/design/planner/js/bootstrap.js"></script>
     
-    <script src="<?php site_url(); ?>kitchen_planner/assets/design/planner/js/items.js"></script>
-    <script src="<?php site_url(); ?>kitchen_planner/assets/design/planner/js/planner.js"></script>
+    <script src="<?php site_url(); ?>assets/design/planner/js/items.js"></script>
+    <script src="<?php site_url(); ?>assets/design/planner/js/planner.js"></script>
     <script type="text/javascript">
       
     </script>
@@ -43,8 +43,86 @@
           </ul>
           <hr />
           <div class="form-group search-group" style="margin: 0 10px;">
+            <div class="form-group">
+              <label class="col-sm-5 control-label">
+                Countertop Type:
+              </label>
+              <div class="col-sm-6" style="margin-bottom: 10px;">
+                <select class="form-control" id="search_countertop_type">
+                  <?php 
+                    for($i = 0; $i < count($search_list['countertop_type']); $i++) { ?>
+                      <option value="<?= $search_list['countertop_type'][$i]['material_id']; ?>"><?= $search_list['countertop_type'][$i]['name']; ?></option>
+                  <?php } ?>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-5 control-label">
+                Countertop Color:
+              </label>
+              <div class="col-sm-6" style="margin-bottom: 10px;">
+                <select class="form-control" id="search_countertop_color">
+                  <?php 
+                    for($i = 0; $i < count($search_list['countertop_color']); $i++) { ?>
+                      <option value="<?= $search_list['countertop_color'][$i]['color_id']; ?>"><?= $search_list['countertop_color'][$i]['name']; ?></option>
+                  <?php } ?>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-5 control-label">
+                Exterio Color:
+              </label>
+              <div class="col-sm-6" style="margin-bottom: 10px;">
+                <select class="form-control" id="search_exterio_color">
+                  <?php 
+                    for($i = 0; $i < count($search_list['exterio_color']); $i++) { ?>
+                      <option value="<?= $search_list['exterio_color'][$i]['color_id']; ?>"><?= $search_list['exterio_color'][$i]['name']; ?></option>
+                  <?php } ?>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-5 control-label">
+                Interior Color:
+              </label>
+              <div class="col-sm-6" style="margin-bottom: 10px;">
+                <select class="form-control" id="search_interior_color">
+                  <?php 
+                    for($i = 0; $i < count($search_list['interior_color']); $i++) { ?>
+                      <option value="<?= $search_list['interior_color'][$i]['color_id']; ?>"><?= $search_list['interior_color'][$i]['name']; ?></option>
+                  <?php } ?>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-5 control-label">
+                Skirting Type:
+              </label>
+              <div class="col-sm-6" style="margin-bottom: 10px;">
+                <select class="form-control" id="search_skirting_type">
+                  <?php 
+                    for($i = 0; $i < count($search_list['skirting_type']); $i++) { ?>
+                      <option value="<?= $search_list['skirting_type'][$i]['material_id']; ?>"><?= $search_list['skirting_type'][$i]['name']; ?></option>
+                  <?php } ?>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-5 control-label">
+                Skirting Color:
+              </label>
+              <div class="col-sm-6" style="margin-bottom: 20px;">
+                <select class="form-control" id="search_skirting_color">
+                  <?php 
+                    for($i = 0; $i < count($search_list['skirting_color']); $i++) { ?>
+                      <option value="<?= $search_list['skirting_color'][$i]['color_id']; ?>"><?= $search_list['skirting_color'][$i]['name']; ?></option>
+                  <?php } ?>
+                </select>
+              </div>
+            </div>
             <div class="col-sm-7" style="margin-top: 5px;">
-              <input type="text" class="form-control" placeholder="Search..." id="search-box">
+              <input type="text" class="form-control" placeholder="Model name..." id="search-box">
             </div>
             <div class="col-sm-5">
               <button class="btn btn-block" id="context-menu-search">Buscar</button>
@@ -273,7 +351,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-sm btn-default" id="btn_close" data-dismiss="modal">Cancel</button>
-                  <a href="http://207.154.243.81/kitchen_planner/customer/main/budget" class="btn btn-warning btn-sm" target="_blank" style="color: red;">Go to budget menu</a>
+                  <a href="http://207.154.243.81/customer/main/budget" class="btn btn-warning btn-sm" target="_blank" style="color: red;">Go to budget menu</a>
                 </div>
             </div>
             </div>
@@ -335,7 +413,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-sm btn-info btn_customer_select px-3" id="select_customer" data-dismiss="modal" data-toggle="modal" data-target="#confirmmodal">Select</button>
-                  <a href="http://207.154.243.81/kitchen_planner/customer/auth/register" target="_blank" class="btn btn-sm btn-warning add_no px-3" data-toggle="modal">New Customer</a>
+                  <a href="http://207.154.243.81/customer/auth/register" target="_blank" class="btn btn-sm btn-warning add_no px-3" data-toggle="modal">New Customer</a>
                   <button type="button" class="btn btn-sm btn-default" id="btn_close" data-dismiss="modal">Return</button>
                 </div>
             </div>

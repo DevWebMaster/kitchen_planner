@@ -93,7 +93,7 @@ define('C_INVOICE_PRE',"inv-");
 define('C_CREDITNOTE_PRE',"inv-");
 
 define('MAIN_MENU_PATH',"models/main_menu/");
-define('PREFIX_MODEL_PATH', "/var/www/assets/design/planner/");
+define('PREFIX_MODEL_PATH', "/var/www/kitchen_planner/assets/design/planner/");
 // define('PREFIX_MODEL_PATH', "assets/design/planner/");
 
 define('SUB_MENU_PATH',"models/sub_menu/");
@@ -103,6 +103,6 @@ define('WALL_TEXTURE_PATH', "rooms/textures/wall/");
 define('FLOOR_TEXTURE_PATH', "rooms/textures/floor/");
 
 define('SAVE_PDF_PATH', "uploads/pdfs/");
-define('PREFIX_IMAGE_PATH', "assets/design/planner/");
+define('PREFIX_IMAGE_PATH', "kitchen_planner/assets/design/planner/");
 
 define('PRODUCT_PATH', 'uploads/products/');

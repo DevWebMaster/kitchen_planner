@@ -55,7 +55,7 @@ class Planner_model extends CI_Model{
 
 		return $rtn;
 	}
-	public function get_thumbnail_menu($main_id, $sub_id, $search_str) {
+	public function get_thumbnail_menu($main_id, $sub_id, $search_str, $search_countertop_type, $search_countertop_color, $search_exterio_color, $search_interior_color, $search_skirting_type, $search_skirting_color) {
 		$this->db->select('a1.model_id, a1.main_id, a1.sub_id, a1.name, concat("'.PREFIX_IMAGE_PATH.'", a1.image) as image, concat("'.PREFIX_IMAGE_PATH.'", a1.model) as model, a1.type, a1.countertop_type, a1.countertop_color, a1.exterio_color, a1.interior_color, a1.skirting_color, a1.skirting_type, a1.dooropen_type, a1.door_thickness, a1.cube_id, a1.summary, a2.name as main_menu, a3.name as sub_menu, a4.name as countertop_type, a4.price as countertop_type_price, a5.name as skirting_type, a5.price as skirting_type_price, a6.name as countertop_color, a6.price as countertop_color_price, a7.name as exterio_color, a7.price as exterio_color_price, a8.name as interior_color, a8.price as interior_color_price, a9.name as skirting_color, a9.price as skirting_color_price, a10.name as dooropen_type, a10.price as dooropen_type_price, a11.name as door_thickness, a11.price as door_thickness_price, a12.name as model_type');
 		$this->db->from('tbl_model_list as a1');
 		$this->db->join('tbl_main_menu as a2', 'a1.main_id = a2.id', 'left');
@@ -72,6 +72,24 @@ class Planner_model extends CI_Model{
 		$this->db->where('a1.main_id', $main_id);
 		$this->db->where('a1.sub_id', $sub_id);
 		$this->db->like('a1.name', $search_str);
+		if($search_countertop_type != ''){
+			$this->db->where('a4.material_id', $search_countertop_type);
+		}
+		if($search_countertop_color != ''){
+			$this->db->where('a6.color_id', $search_countertop_color);
+		}
+		if($search_exterio_color != ''){
+			$this->db->where('a7.color_id', $search_exterio_color);
+		}
+		if($search_interior_color != ''){
+			$this->db->where('a8.color_id', $search_interior_color);
+		}
+		if($search_skirting_type != ''){
+			$this->db->where('a5.material_id', $search_skirting_type);
+		}
+		if($search_skirting_color != ''){
+			$this->db->where('a9.color_id', $search_skirting_color);
+		}
 
 		$rtn = $this->db->get()->result_array();
 		return $rtn;
@@ -293,6 +311,16 @@ class Planner_model extends CI_Model{
 	public function updated_planner_count_for_user($updated_data, $user_id) {
 		$this->db->where('id', $user_id);
 		return $this->db->update('tbl_customers', $updated_data);
+	}
+	public function get_material_list() {
+		$this->db->select('material_id, name');
+		$this->db->from('tbl_material');
+		return $this->db->get()->result_array();
+	}
+	public function get_color_list() {
+		$this->db->select('color_id, name');
+		$this->db->from('tbl_color');
+		return $this->db->get()->result_array();
 	}
 }
 ?>

@@ -1,9 +1,12 @@
 // add items to the "Add Items" tab
 $(document).ready(function() {
-  $('#alertmodal').modal('show');
-  $('#btn_gen').click(function(){
+  // $('#alertmodal').modal('show');
+  // $('#btn_gen').click(function(){
+  //   $('#floorplan_tab').click()
+  // })
+  setTimeout(function() {
     $('#floorplan_tab').click()
-  })
+  },1);
 
   $('#confirm_product').click(function(){
     if($('#gen_product_name').val()){
@@ -28,7 +31,6 @@ $(document).ready(function() {
       
     }
   })
-
   var global_main_id = 0;
   var global_sub_id = 0;
   $('.search-group').hide();
@@ -52,6 +54,18 @@ $(document).ready(function() {
           itemsDiv.append(main_html);
       }
     }
+  })
+
+  $('#items_tab').click(function(){
+    if(btn_back_level == 2){
+      $('.search-group').show();
+    }
+  })
+  $('#design_tab').click(function(){
+    $('.search-group').hide();
+  })
+  $('#floorplan_tab').click(function(){
+    $('.search-group').hide();
   })
   
   $('div').delegate('a.select-menu', 'click',function() {  //click the main menu
@@ -315,16 +329,119 @@ $(document).ready(function() {
   });
   $('#context-menu-search').click(function(){
     var search_str = $('#search-box').val();
+    var search_countertop_type = $('#search_countertop_type').val();
+    var search_countertop_color = $('#search_countertop_color').val();
+    var search_exterio_color = $('#search_exterio_color').val();
+    var search_interior_color = $('#search_interior_color').val();
+    var search_skirting_type = $('#search_skirting_type').val();
+    var search_skirting_color = $('#search_skirting_color').val();
+
     itemsDiv.empty();
-    $('#shortkey-menu').empty();
-    get_search_result(global_main_id, global_sub_id, search_str);
+    // $('#shortkey-menu').empty();
+    get_advanced_search_result(global_main_id, global_sub_id, search_str, search_countertop_type, search_countertop_color, search_exterio_color, search_interior_color, search_skirting_type, search_skirting_color);
   })
   $('#short-menu-search').click(function(){
     var search_str = $('#short-search-box').val();
-    itemsDiv.empty();
+    // itemsDiv.empty();
     $('#shortkey-menu').empty();
     get_search_result(global_main_id, global_sub_id, search_str);
   })
+  function get_advanced_search_result(main_id, sub_id, search_str, search_countertop_type, search_countertop_color, search_exterio_color, search_interior_color, search_skirting_type, search_skirting_color){
+    $.ajax({
+      url: 'customer/planner/get_thumbnail_menu',
+      headers: {'Access-Control-Allow-Origin': '*'},
+      type: 'POST',
+      data: {
+        main_id: main_id, 
+        sub_id: sub_id, 
+        search_str: search_str, 
+        search_countertop_type: search_countertop_type, 
+        search_countertop_color: search_countertop_color,
+        search_exterio_color: search_exterio_color,
+        search_interior_color: search_interior_color,
+        search_skirting_type: search_skirting_type,
+        search_skirting_color: search_skirting_color
+      },
+      success: function(response){
+        var thumbnail_menu = JSON.parse(response)
+        if(thumbnail_menu && thumbnail_menu.length > 0){
+          for (var i = 0; i < thumbnail_menu.length; i++) {
+            var html = '<div class="col-sm-4">' +
+                        '<a class="thumbnail add-item" style="border-color: #ffa200; color: #ffa200;" model-name="' + 
+                        thumbnail_menu[i].name + 
+                        '" model_id="' +
+                        thumbnail_menu[i].model_id +
+                        '" short_menu_key="' +
+                        thumbnail_menu[i].main_id + '-' + thumbnail_menu[i].sub_id +
+                        '" model-url="' +
+                        thumbnail_menu[i].model +
+                        '" model-countertop="' +
+                        thumbnail_menu[i].countertop_type + '-' + thumbnail_menu[i].countertop_color +
+                        '" model-countertop_color="' +
+                        thumbnail_menu[i].countertop_color +
+                        '" model-exteriocolor="' +
+                        thumbnail_menu[i].exterio_color +
+                        '" model-interiorcolor="' +
+                        thumbnail_menu[i].interior_color +
+                        '" model-skirting="' +
+                        thumbnail_menu[i].skirting_type + '-' + thumbnail_menu[i].skirting_color +
+                        '" model-type="' +
+                        thumbnail_menu[i].type + 
+                        '"><img src="' +
+                        thumbnail_menu[i].image + 
+                        '" alt="Add Item"> '+
+                        thumbnail_menu[i].name +
+                        '<span class="tooltiptext">' +
+                        '<b>Countertop Type: </b>' +
+                        thumbnail_menu[i].countertop_type +
+                        '<br><b>Countertop Color: </b>' +
+                        thumbnail_menu[i].countertop_color +
+                        '<br><b>Exterio Color: </b>' +
+                        thumbnail_menu[i].exterio_color +
+                        '<br><b>Interior Color: </b>' +
+                        thumbnail_menu[i].interior_color +
+                        '<br><b>Skirting Color: </b>' +
+                        thumbnail_menu[i].skirting_color +
+                        '<br><b>Skirting Type: </b>' +
+                        thumbnail_menu[i].skirting_type +
+                        '<br><b>Dooropen Type: </b>' +
+                        thumbnail_menu[i].dooropen_type +
+                        '<br><b>Door Thickness: </b>' +
+                        thumbnail_menu[i].door_thickness +
+                        '<br><b>Furniture Price: </b>' +
+                        thumbnail_menu[i].furniture_price + 'EUR' +
+                        '<br><b>Countertio Price: </b>' +
+                        (thumbnail_menu[i].countertop_type_price+
+                         thumbnail_menu[i].countertop_color_price+
+                         thumbnail_menu[i].skirting_type_price+
+                         thumbnail_menu[i].skirting_color_price+
+                         thumbnail_menu[i].exterio_color_price+
+                         thumbnail_menu[i].interior_color_price+
+                         thumbnail_menu[i].dooropen_type_price+
+                         thumbnail_menu[i].door_thickness_price+
+                         thumbnail_menu[i].furniture_price) + 'EUR' +
+                        '</span>' +
+                        '</a></div>';
+            itemsDiv.append(html);
+            // $('#shortkey-menu').append(html);
+            // $('#search-box').val('');
+            console.log(html)
+          }
+          $("#btn_back").remove();
+          btn_back_level = 2;
+          var btn_back = '<button class="btn btn-sm btn-default btn_back" id="btn_back" name="'+thumbnail_menu[0].main_id+'-'+thumbnail_menu[0].sub_id+'">Atrás</button>';
+          $("#back-menu").append(btn_back);
+        }else{
+          itemsDiv.append('<div class="col-sm-12" style="color: #ffa200; text-align: center;">No results.</div>');
+          // $('#shortkey-menu').append('<div class="col-sm-12" style="color: #ffa200; text-align: center;">No results.</div>');
+          $("#btn_back").remove();
+          btn_back_level = 2;
+          var btn_back = '<button class="btn btn-sm btn-default btn_back" id="btn_back" name="'+main_id+'-'+sub_id+'">Atrás</button>';
+          $("#back-menu").append(btn_back);
+        }
+      }
+    })
+  }
   function get_search_result(main_id, sub_id, search_str){
     $.ajax({
       url: 'customer/planner/get_thumbnail_menu',
@@ -391,9 +508,9 @@ $(document).ready(function() {
                          thumbnail_menu[i].furniture_price) + 'EUR' +
                         '</span>' +
                         '</a></div>';
-            itemsDiv.append(html);
+            // itemsDiv.append(html);
             $('#shortkey-menu').append(html);
-            $('#search-box').val('');
+            // $('#short-search-box').val('');
             console.log(html)
           }
           $("#btn_back").remove();
@@ -401,6 +518,8 @@ $(document).ready(function() {
           var btn_back = '<button class="btn btn-sm btn-default btn_back" id="btn_back" name="'+thumbnail_menu[0].main_id+'-'+thumbnail_menu[0].sub_id+'">Atrás</button>';
           $("#back-menu").append(btn_back);
         }else{
+          // itemsDiv.append('<div class="col-sm-12" style="color: #ffa200; text-align: center;">No results.</div>');
+          $('#shortkey-menu').append('<div class="col-sm-12" style="color: #ffa200; text-align: center;">No results.</div>');
           $("#btn_back").remove();
           btn_back_level = 2;
           var btn_back = '<button class="btn btn-sm btn-default btn_back" id="btn_back" name="'+main_id+'-'+sub_id+'">Atrás</button>';
@@ -428,6 +547,7 @@ $(document).ready(function() {
                     '</tr>';
 
         }
+        
         $('#observation_list').html(html);
         $('#summary_count').val(furnitures.length);
        

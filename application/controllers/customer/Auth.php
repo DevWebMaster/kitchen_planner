@@ -74,23 +74,23 @@ class Auth extends CI_Controller
             $mail->SMTPDebug = 2;
             $mail->Host = 'smtp.ionos.es';
             $mail->Port = 587;
-            // $mail->SMTPOptions = array(
-            //   'ssl' => array(
-            //   'verify_peer' => false,
-            //   'verify_peer_name' => false,
-            //   'allow_self_signed' => true
-            //   )
-            // );
-            // $mail->SMTPSecure = false;
-            // $mail->SMTPAutoTLS = false;
+            $mail->SMTPOptions = array(
+              'ssl' => array(
+              'verify_peer' => false,
+              'verify_peer_name' => false,
+              'allow_self_signed' => true
+              )
+            );
+            $mail->SMTPSecure = false;
+            $mail->SMTPAutoTLS = false;
             $mail->SMTPAuth = false;
             $mail->Username = 'infoweb@roure.es';
             $mail->Password = '#R0ure2021#';
             $mail->setFrom($from, 'infoweb@roure.es');
             $mail->addAddress($to, 'bozokrkeljas0504@gmail.com');
             $mail->Subject = 'Kitchen Planner';
-            // $mail->Body = 'http://207.154.243.81/kitchen_planner/customer/verify/?mail='.$from.'&hash='.$hash;
-            $mail->Body = '<a href="http://127.0.0.1/kitchen_planner/customer/main/verify/?email='.$reg_data['email'].'&hash='.$hash.'"></a>';
+            // $mail->Body = 'http://207.154.243.81/customer/verify/?mail='.$from.'&hash='.$hash;
+            $mail->Body = '<a href="http://127.0.0.1/customer/main/verify/?email='.$reg_data['email'].'&hash='.$hash.'"></a>';
 
             try {
                 $mail->send();

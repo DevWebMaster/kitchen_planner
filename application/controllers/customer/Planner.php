@@ -33,7 +33,18 @@ class Planner extends CI_Controller
                 //customer is logged in the planner
                 $this->planner_model->start_planner($data);
 
-                $this->load->view('customer/planner');
+                $material_list = $this->planner_model->get_material_list();
+                $color_list = $this->planner_model->get_color_list();
+
+                $search_list = array(
+                    'countertop_type' => $material_list,
+                    'countertop_color' => $color_list,
+                    'exterio_color' => $color_list,
+                    'interior_color' => $color_list,
+                    'skirting_type' => $material_list,
+                    'skirting_color' => $color_list
+                );
+                $this->load->view('customer/planner', ['search_list' => $search_list]);
             }else if($is_exist['status'] == 1){
                 $this->load->view('duplicate_planner');
             }else{
@@ -54,8 +65,18 @@ class Planner extends CI_Controller
                 );
                 //customer is logged in the planner
                 $this->planner_model->start_planner($data);
+                $material_list = $this->planner_model->get_material_list();
+                $color_list = $this->planner_model->get_color_list();
 
-                $this->load->view('customer/planner');
+                $search_list = array(
+                    'countertop_type' => $material_list,
+                    'countertop_color' => $color_list,
+                    'exterio_color' => $color_list,
+                    'interior_color' => $color_list,
+                    'skirting_type' => $material_list,
+                    'skirting_color' => $color_list
+                );
+                $this->load->view('customer/planner', ['search_list' => $search_list]);
             }else if($is_exist['status'] == 1){
                 $this->load->view('duplicate_planner');
             }else{
@@ -147,7 +168,14 @@ class Planner extends CI_Controller
     	$sub_id = $this->input->post('sub_id');
     	$search_str = $this->input->post('search_str');
 
-    	$result = $this->planner_model->get_thumbnail_menu($main_id, $sub_id, $search_str);
+        $search_countertop_type = $this->input->post('search_countertop_type') ? $this->input->post('search_countertop_type') : '';
+        $search_countertop_color = $this->input->post('search_countertop_color') ? $this->input->post('search_countertop_color') : '';
+        $search_exterio_color = $this->input->post('search_exterio_color') ? $this->input->post('search_exterio_color') : '';
+        $search_interior_color = $this->input->post('search_interior_color') ? $this->input->post('search_interior_color') : '';
+        $search_skirting_type = $this->input->post('search_skirting_type') ? $this->input->post('search_skirting_type') : '';
+        $search_skirting_color = $this->input->post('search_skirting_color') ? $this->input->post('search_skirting_color') : '';
+
+    	$result = $this->planner_model->get_thumbnail_menu($main_id, $sub_id, $search_str, $search_countertop_type, $search_countertop_color, $search_exterio_color, $search_interior_color, $search_skirting_type, $search_skirting_color);
 
     	echo json_encode($result);
     }
