@@ -160,14 +160,14 @@ class Planner_model extends CI_Model{
 				$this->db->select('*');
 				$this->db->from('tbl_point_rate');
 				$this->db->where('pos_rate', $user_id);
-				$point_rate = $this->db->get()->result_array()[0];
+				$point_rate = $this->db->get()->result_array();
 
-				if($f_point < $point_rate['price'])
-					$furniture_cost = $f_point*$point_rate['price'];
-				if(($point_rate['max'] > $f_point) && ($f_point > $point_rate['min']))
-					$furniture_cost = $f_point*$point_rate['price'];
-				if($point_rate['min'] < $f_point)
-					$furniture_cost = $f_point*$point_rate['price'];
+				if($f_point < $point_rate[0]['max'])
+					$furniture_cost = $f_point*$point_rate[0]['price'];
+				if(($point_rate[1]['max'] > $f_point) && ($f_point > $point_rate[1]['min']))
+					$furniture_cost = $f_point*$point_rate[1]['price'];
+				if($point_rate[2]['min'] < $f_point)
+					$furniture_cost = $f_point*$point_rate[2]['price'];
 
 				$total_furniture_cost += $furniture_cost;
 

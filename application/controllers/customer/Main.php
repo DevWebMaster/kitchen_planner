@@ -379,9 +379,13 @@ class Main extends CI_Controller
             $value['width'] = $value['width'] - $value['width']%10;
             if($value['width'] > 80)
                 $value['width'] = 80;
+            if($value['width'] < 60)
+                $value['width'] = 60;
             $value['length'] = $value['length'] - $value['length']%10;
             if($value['length'] > 120)
                 $value['length'] = 120;
+            if($value['length'] < 60)
+                $value['length'] = 60;
 
             $furniture_point = $this->customer_model->get_model_point($value['model_id'], $value['width'], $value['length'], $value['model_level']);
             if($value['model_level'] == 'level1'){
@@ -409,24 +413,27 @@ class Main extends CI_Controller
             array_push($pdf_data, $pdf_temp);
             
          }
-         $pdf_file = $this->generate_pdf($pdf_data, $product_id, $total_extra_cost, $total_furniture_cost, $user_role, $pos_id);
+         // $margin_spread = 0;
          //get margin/spread by pos_id
          if($user_role == 1){  // online_customer method
             $customer_margin_spread = $this->customer_model->get_customer_margin_spread();
+            $margin_spread = $customer_margin_spread;
             $total_extra_cost = $total_extra_cost + $total_extra_cost*$customer_margin_spread['customer_margin']/100 + $customer_margin_spread['customer_spread'];
 
          }else if($user_role == 2){  //pos method
             $pos_margin_spread = $this->customer_model->get_pos_margin_spread($pos_id);
+            $margin_spread = $pos_margin_spread;
             $total_extra_cost = $total_extra_cost + $total_extra_cost*$pos_margin_spread['pos_margin']/100 + $pos_margin_spread['pos_spread'];
             $total_extra_cost = $total_extra_cost + $total_extra_cost*$pos_margin_spread['pos_customer_margin']/100 + $pos_margin_spread['pos_customer_spread'];
          }
+         $pdf_file = $this->generate_pdf($pdf_data, $product_id, $total_extra_cost, $total_furniture_cost, $user_role, $pos_id, $margin_spread);
          $result['total_cost'] = $total_furniture_cost+$total_extra_cost;
          $result['furniture_cost'] = $total_furniture_cost;
          $result['pdf_file'] = $pdf_file;
          return $result;
     }
 
-    private function generate_pdf($pdf_data, $product_id, $total_extra_cost, $total_furniture_cost, $user_role, $pos_id)
+    private function generate_pdf($pdf_data, $product_id, $total_extra_cost, $total_furniture_cost, $user_role, $pos_id, $margin_spread)
     {
         $invoice_data = array();
         $sel_models = $this->customer_model->get_sel_models($product_id);
@@ -500,7 +507,9 @@ class Main extends CI_Controller
         //filtering the countertop
         $countertop_data = array();
         $skirting_data = array();
+        $model_count = 0;
         for($i = 0; $i < count($invoice_data); $i++){
+            $model_count += $invoice_data[$i]['quantity'];
             if(count($countertop_data) == 0){
                 array_push($countertop_data, $invoice_data[$i]);
             }else{
@@ -536,8 +545,8 @@ class Main extends CI_Controller
             }
             $line = array( "Descripcion"    => $furniture_detail['furniture_name'].' chracteristics (interior color:'.$furniture_detail['interior_color'].', exterio color: '.$furniture_detail['exterio_color'].', dooropen type: '.$furniture_detail['dooropen_type'].', door thickness: '.$furniture_detail['door_thickness'].'), '.$summary,
                            "Cantidad"  => $invoice_data[$i]['quantity'],
-                           "Unitary Cost"     => ($invoice_data[$i]['furniture_cost']+$invoice_data[$i]['interior_color_price']+$invoice_data[$i]['exterio_color_price']+$invoice_data[$i]['dooropen_type_price']+$invoice_data[$i]['door_thickness_price']),
-                           "Amount"      => ($invoice_data[$i]['furniture_cost']+$invoice_data[$i]['interior_color_price']+$invoice_data[$i]['exterio_color_price']+$invoice_data[$i]['dooropen_type_price']+$invoice_data[$i]['door_thickness_price'])*$invoice_data[$i]['quantity'],
+                           "Unitary Cost"     => $user_role == 1 ? $invoice_data[$i]['furniture_cost']+$furniture_detail['interior_color_price']+$furniture_detail['exterio_color_price']+$furniture_detail['dooropen_type_price']+$furniture_detail['door_thickness_price']+($furniture_detail['interior_color_price']+$furniture_detail['exterio_color_price']+$furniture_detail['dooropen_type_price']+$furniture_detail['door_thickness_price'])*$margin_spread['customer_margin']/100 : $invoice_data[$i]['furniture_cost']+($furniture_detail['interior_color_price']+$furniture_detail['exterio_color_price']+$furniture_detail['dooropen_type_price']+$furniture_detail['door_thickness_price'])*(1+$margin_spread['pos_margin']/100+$margin_spread['pos_customer_margin']/100+$margin_spread['pos_margin']/100*$margin_spread['pos_customer_margin']/100),
+                           "Amount"      => $user_role == 1 ? ($invoice_data[$i]['furniture_cost']+$furniture_detail['interior_color_price']+$furniture_detail['exterio_color_price']+$furniture_detail['dooropen_type_price']+$furniture_detail['door_thickness_price']+($furniture_detail['interior_color_price']+$furniture_detail['exterio_color_price']+$furniture_detail['dooropen_type_price']+$furniture_detail['door_thickness_price'])*$margin_spread['customer_margin']/100)*$invoice_data[$i]['quantity'] : ($invoice_data[$i]['furniture_cost']+($furniture_detail['interior_color_price']+$furniture_detail['exterio_color_price']+$furniture_detail['dooropen_type_price']+$furniture_detail['door_thickness_price'])*(1+($margin_spread['pos_margin']/100)+($margin_spread['pos_customer_margin']/100)+($margin_spread['pos_margin']/100)*($margin_spread['pos_customer_margin']/100)))*$invoice_data[$i]['quantity'],
                            "Unit" => EURO);
             $size = $pdf->addLine( $start, $line );
             $start += $size+2;
@@ -547,8 +556,8 @@ class Main extends CI_Controller
             $furniture_detail = $this->customer_model->get_furniture_details($countertop_data[$i]['model_id'], $product_id);
             $line = array( "Descripcion"    => 'countertop: '.$furniture_detail['countertop_type'].', '.$furniture_detail['countertop_color'],
                            "Cantidad"  => $countertop_data[$i]['quantity'],
-                           "Unitary Cost"     => ($furniture_detail['countertop_type_price']+$furniture_detail['countertop_color_price']),
-                           "Amount"      => ($furniture_detail['countertop_type_price']+$furniture_detail['countertop_color_price'])*$countertop_data[$i]['quantity'],
+                           "Unitary Cost"     => $user_role == 1 ? $furniture_detail['countertop_type_price']+$furniture_detail['countertop_color_price']+($furniture_detail['countertop_type_price']+$furniture_detail['countertop_color_price'])*$margin_spread['customer_margin']/100 : ($furniture_detail['countertop_type_price']+$furniture_detail['countertop_color_price'])*(1+$margin_spread['pos_margin']/100+$margin_spread['pos_customer_margin']/100+$margin_spread['pos_margin']/100*$margin_spread['pos_customer_margin']/100),
+                           "Amount"      => $user_role == 1 ? ($furniture_detail['countertop_type_price']+$furniture_detail['countertop_color_price']+($furniture_detail['countertop_type_price']+$furniture_detail['countertop_color_price'])*$margin_spread['customer_margin']/100)*$countertop_data[$i]['quantity'] : (($furniture_detail['countertop_type_price']+$furniture_detail['countertop_color_price'])*(1+$margin_spread['pos_margin']/100+$margin_spread['pos_customer_margin']/100+$margin_spread['pos_margin']/100*$margin_spread['pos_customer_margin']/100))*$countertop_data[$i]['quantity'],
                            "Unit" => EURO);
             $size = $pdf->addLine( $start, $line );
             $start += $size+2;
@@ -557,8 +566,8 @@ class Main extends CI_Controller
             $furniture_detail = $this->customer_model->get_furniture_details($skirting_data[$i]['model_id'], $product_id);
             $line = array( "Descripcion"    => 'skirting: caracteristics('.$furniture_detail['skirting_type'].', '.$furniture_detail['skirting_color'].')',
                            "Cantidad"  => $skirting_data[$i]['quantity'],
-                           "Unitary Cost"     => ($furniture_detail['skirting_type_price']+$furniture_detail['skirting_color_price']),
-                           "Amount"      => ($furniture_detail['skirting_type_price']+$furniture_detail['skirting_color_price'])*$skirting_data[$i]['quantity'],
+                           "Unitary Cost"     => $user_role == 1 ? $furniture_detail['skirting_type_price']+$furniture_detail['skirting_color_price']+($furniture_detail['skirting_type_price']+$furniture_detail['skirting_color_price'])*$margin_spread['customer_margin']/100 : ($furniture_detail['skirting_type_price']+$furniture_detail['skirting_color_price'])*(1+$margin_spread['pos_margin']/100+$margin_spread['pos_customer_margin']/100+$margin_spread['pos_margin']/100*$margin_spread['pos_customer_margin']/100)+$margin_spread['pos_spread']+$margin_spread['pos_spread']*$margin_spread['pos_customer_margin']/100+$margin_spread['pos_customer_spread'],
+                           "Amount" => $user_role == 1 ? ($furniture_detail['skirting_type_price']+$furniture_detail['skirting_color_price']+($furniture_detail['skirting_type_price']+$furniture_detail['skirting_color_price'])*$margin_spread['customer_margin']/100)*$skirting_data[$i]['quantity'] : (($furniture_detail['skirting_type_price']+$furniture_detail['skirting_color_price'])*(1+$margin_spread['pos_margin']/100+$margin_spread['pos_customer_margin']/100+$margin_spread['pos_margin']/100*$margin_spread['pos_customer_margin']/100)+$margin_spread['pos_spread']/$model_count+$margin_spread['pos_spread']/$model_count*$margin_spread['pos_customer_margin']/100+$margin_spread['pos_customer_spread']/$model_count)*$skirting_data[$i]['quantity'],
                            "Unit" => EURO);
             $size = $pdf->addLine( $start, $line );
             $start += $size+2;
