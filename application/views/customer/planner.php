@@ -43,11 +43,13 @@
           </ul>
           <hr />
           <div class="form-group search-group" style="margin: 0 10px;">
-            <div class="form-group">
-              <label class="col-sm-5 control-label">
-                Countertop Type:
-              </label>
-              <div class="col-sm-6" style="margin-bottom: 10px;">
+            <div class="form-group" style="display: inline-flex; width: 100%;">
+              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                <label class="control-label">
+                  Countertop Type:
+                </label>
+              </div>
+              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
                 <select class="form-control" id="search_countertop_type">
                   <?php 
                     for($i = 0; $i < count($search_list['countertop_type']); $i++) { ?>
@@ -56,11 +58,14 @@
                 </select>
               </div>
             </div>
-            <div class="form-group">
-              <label class="col-sm-5 control-label">
-                Countertop Color:
-              </label>
-              <div class="col-sm-6" style="margin-bottom: 10px;">
+            <br>
+            <div class="form-group" style="display: inline-flex; width: 100%;">
+              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                <label class="control-label">
+                  Countertop Color:
+                </label>
+              </div>
+              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
                 <select class="form-control" id="search_countertop_color">
                   <?php 
                     for($i = 0; $i < count($search_list['countertop_color']); $i++) { ?>
@@ -69,11 +74,14 @@
                 </select>
               </div>
             </div>
-            <div class="form-group">
-              <label class="col-sm-5 control-label">
-                Exterio Color:
-              </label>
-              <div class="col-sm-6" style="margin-bottom: 10px;">
+            <br>
+            <div class="form-group" style="display: inline-flex; width: 100%;">
+              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                <label class="control-label">
+                  Exterio Color:
+                </label>
+              </div>
+              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
                 <select class="form-control" id="search_exterio_color">
                   <?php 
                     for($i = 0; $i < count($search_list['exterio_color']); $i++) { ?>
@@ -82,11 +90,14 @@
                 </select>
               </div>
             </div>
-            <div class="form-group">
-              <label class="col-sm-5 control-label">
-                Interior Color:
-              </label>
-              <div class="col-sm-6" style="margin-bottom: 10px;">
+            <br>
+            <div class="form-group" style="display: inline-flex; width: 100%;">
+              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                <label class="control-label">
+                  Interior Color:
+                </label>
+              </div>
+              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
                 <select class="form-control" id="search_interior_color">
                   <?php 
                     for($i = 0; $i < count($search_list['interior_color']); $i++) { ?>
@@ -95,11 +106,14 @@
                 </select>
               </div>
             </div>
-            <div class="form-group">
-              <label class="col-sm-5 control-label">
-                Skirting Type:
-              </label>
-              <div class="col-sm-6" style="margin-bottom: 10px;">
+            <br>
+            <div class="form-group" style="display: inline-flex; width: 100%;">
+              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                <label class="control-label">
+                  Skirting Type:
+                </label>
+              </div>
+              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
                 <select class="form-control" id="search_skirting_type">
                   <?php 
                     for($i = 0; $i < count($search_list['skirting_type']); $i++) { ?>
@@ -108,11 +122,14 @@
                 </select>
               </div>
             </div>
-            <div class="form-group">
-              <label class="col-sm-5 control-label">
-                Skirting Color:
-              </label>
-              <div class="col-sm-6" style="margin-bottom: 20px;">
+            <br>
+            <div class="form-group" style="display: inline-flex; width: 100%;">
+              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                <label class="control-label">
+                  Skirting Color:
+                </label>
+              </div>
+              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
                 <select class="form-control" id="search_skirting_color">
                   <?php 
                     for($i = 0; $i < count($search_list['skirting_color']); $i++) { ?>
@@ -121,6 +138,7 @@
                 </select>
               </div>
             </div>
+            <br>
             <div class="col-sm-7" style="margin-top: 5px;">
               <input type="text" class="form-control" placeholder="Model name..." id="search-box">
             </div>

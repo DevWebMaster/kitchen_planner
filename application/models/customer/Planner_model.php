@@ -116,6 +116,7 @@ class Planner_model extends CI_Model{
 	public function get_customer() {
 		$this->db->select('id, concat(customer_name, last_name1, last_name2) as name');
 		$this->db->from('tbl_customers');
+		$this->db->where('is_deleted', 0);
 
 		return $this->db->get()->result_array();
 	}

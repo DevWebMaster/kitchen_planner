@@ -198,6 +198,7 @@
 		{
 			$this->db->select('*');
 			$this->db->from('tbl_pos');
+			$this->db->where('is_deleted', 0);
 
 			$query = $this->db->get()->result_array();
 			return $query;
