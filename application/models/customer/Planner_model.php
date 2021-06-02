@@ -195,10 +195,10 @@ class Planner_model extends CI_Model{
 				$margin_spread = $this->db->get()->result_array()[0];
 
 				if($user_role == 2){
-					$extra_cost = $extra_cost+$extra_cost*$margin_spread['pos_margin']/100+$margin_spread['pos_spread'];
-					$extra_cost = $extra_cost+$extra_cost*$margin_spread['pos_customer_margin']/100+$margin_spread['pos_customer_spread'];
+					$extra_cost = $extra_cost+$extra_cost*$margin_spread['pos_margin']/100;
+					$extra_cost = $extra_cost+$extra_cost*$margin_spread['pos_customer_margin']/100;
 				}else if($user_role == 1){
-					$extra_cost = $extra_cost+$extra_cost*$margin_spread['customer_margin']/100+$margin_spread['customer_spread'];
+					$extra_cost = $extra_cost+$extra_cost*$margin_spread['customer_margin']/100;
 				}
 				$total_extra_cost += $extra_cost;
 			}
