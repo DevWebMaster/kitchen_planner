@@ -66,6 +66,10 @@
       pos_id = $('#pos_id').val();
       init_order_list(pos_id);
     })
+    $('#order_list tbody').on('click', 'td a.btn-design', function(){
+      var product_id = $(this).attr('id')
+      window.open("../../customer/planner/index/"+product_id,"_blank");
+    })
     $('#order_list tbody').on('click', 'td a.btn-remove', function (){
       var id = $(this).attr('h_id')
       $.ajax({

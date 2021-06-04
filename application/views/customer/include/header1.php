@@ -183,7 +183,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         $('#kitchen_planner').click(function(){
             $.ajax({
                 method: "POST",
-                url: '../planner/check_duplicate_planner',
+                url: base_url+'customer/planner/check_duplicate_planner',
               success: function(response) {
                 var result = JSON.parse(response)
                 if(result['status'] == 1){

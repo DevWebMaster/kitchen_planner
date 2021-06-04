@@ -71,6 +71,10 @@
       $('#m_order_no').val(order_no);
       $('#ordermodalLabel').html('Order ID - '+order_no);
     });
+    $('#order_list tbody').on('click', 'td a.btn-design', function(){
+      var product_id = $(this).attr('id')
+      window.open("../../customer/planner/index/"+product_id,"_blank");
+    })
     $('#order_list tbody').on('click', 'td a.btn-remove', function (){
       var id = $(this).attr('h_id')
       $.ajax({

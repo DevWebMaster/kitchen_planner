@@ -3,17 +3,17 @@
   <head>
     <title>Design Kitchen</title>
     <base href="/">
-    <link href="<?php site_url(); ?>assets/design/planner/css/bootstrap.css" rel="stylesheet">
-    <link href="<?php site_url(); ?>assets/design/planner/css/planner.css" rel="stylesheet">
+    <link href="<?php site_url(); ?>kitchen_planner/assets/design/planner/css/bootstrap.css" rel="stylesheet">
+    <link href="<?php site_url(); ?>kitchen_planner/assets/design/planner/css/planner.css" rel="stylesheet">
 
-    <script src="<?php site_url(); ?>assets/design/planner/js/three.min.js"></script>
-    <script src="<?php site_url(); ?>assets/design/planner/js/blueprint3d.js"></script>
+    <script src="<?php site_url(); ?>kitchen_planner/assets/design/planner/js/three.min.js"></script>
+    <script src="<?php site_url(); ?>kitchen_planner/assets/design/planner/js/blueprint3d.js"></script>
 
-    <script src="<?php site_url(); ?>assets/design/planner/js/jquery.js"></script>
-    <script src="<?php site_url(); ?>assets/design/planner/js/bootstrap.js"></script>
+    <script src="<?php site_url(); ?>kitchen_planner/assets/design/planner/js/jquery.js"></script>
+    <script src="<?php site_url(); ?>kitchen_planner/assets/design/planner/js/bootstrap.js"></script>
     
-    <script src="<?php site_url(); ?>assets/design/planner/js/items.js"></script>
-    <script src="<?php site_url(); ?>assets/design/planner/js/planner.js"></script>
+    <script src="<?php site_url(); ?>kitchen_planner/assets/design/planner/js/items.js"></script>
+    <script src="<?php site_url(); ?>kitchen_planner/assets/design/planner/js/planner.js"></script>
     <script type="text/javascript">
       
     </script>
@@ -439,7 +439,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-sm btn-info btn_customer_select px-3" id="select_customer" data-dismiss="modal" data-toggle="modal" data-target="#confirmmodal">Select</button>
-                  <a href="http://207.154.243.81/customer/auth/register" target="_blank" class="btn btn-sm btn-warning add_no px-3" data-toggle="modal">New Customer</a>
+                  <a href="http://207.154.243.81/kitchen_planner/customer/auth/register" target="_blank" class="btn btn-sm btn-warning add_no px-3" data-toggle="modal">New Customer</a>
                   <button type="button" class="btn btn-sm btn-default" id="btn_close" data-dismiss="modal">Return</button>
                 </div>
             </div>
@@ -559,7 +559,7 @@
 <script type="text/javascript">
   function myFunc(){
     $.ajax({
-      url: 'customer/planner/leave_planner',
+      url: 'kitchen_planner/customer/planner/leave_planner',
       type: 'POST',
       headers: {'Access-Control-Allow-Origin': '*'},
       success: function(response) {
@@ -568,7 +568,7 @@
   }
   function detectCancel(){
     $.ajax({
-      url: 'customer/planner/detect_planner',
+      url: 'kitchen_planner/customer/planner/detect_planner',
       type: 'POST',
       headers: {'Access-Control-Allow-Origin': '*'},
       success: function(response) {
