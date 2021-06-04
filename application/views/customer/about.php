@@ -57,12 +57,12 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-12 text-center text-white">
-							<div class="video-play">
+							<!-- <div class="video-play">
 								<a href="https://www.facebook.com/roure.es/videos/961415997645375/" class="popup-youtube video"><i class="fa fa-play"></i></a>
-							</div>
+							</div> -->
 							<h2 class="video-title">El poder de Crear la Cocina de tus Sueños</h2>
 							<p class="video-content">La cocina a medida que necesitas te esta esperando en ROURE. Nos caracterizamos por la Calidad, el Diseño y por tu Satisfacción.</p>
-							<a href="contact-us-1.html" class="btn primary radius-xl"><span class="text-white">Contact us</span></a>
+							<a href="<?= base_url(); ?>customer/contact" class="btn primary radius-xl"><span class="text-white">Contact us</span></a>
 						</div>
 					</div>
 				</div>

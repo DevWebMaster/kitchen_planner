@@ -37,6 +37,7 @@
 			if($search_key != ''){
 				$this->db->like('a2.product_name', $search_key);
 			}
+			$this->db->order_by('created_at', 'DESC');
 			$this->db->limit($rowperpage, $start);
 			$query = $this->db->get()->result_array();
 			return $query;
@@ -73,7 +74,7 @@
 
 			$status = '';
 			if($rtn['check_flag'] == 1)
-				$status = 'no-confirm';
+				$status = 'Order';
 			else if($rtn['check_flag'] == 2)
 				$status = 'Pre-confirm';
 			if($rtn['check_flag'] != 0){
@@ -136,10 +137,11 @@
 			if($pos_id != 0){
 				$this->db->where('a1.pos_id', $pos_id);
 			}
-			$this->db->where('a1.check_flag <>', 0);
+			// $this->db->where('a1.check_flag <>', 0);
 			if($search_key != ''){
 				$this->db->like('a2.product_name', $search_key);
 			}
+			$this->db->order_by('created_at', 'DESC');
 			$this->db->limit($rowperpage, $start);
 			$query = $this->db->get()->result_array();
 			return $query;

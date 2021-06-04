@@ -699,6 +699,58 @@ class Menu_setting extends My_Controller {
 					$result = $this->menu_setting_model->update_model($model_id, $data);
 				}
 
+			}else if($flag_image == 1 && $flag_js != 1 && $flag_texturefile != 1){
+				$imageFileType = strtolower(pathinfo(basename($_FILES["edit_imageToUpload"]["name"]),PATHINFO_EXTENSION));
+	
+				$rand_file_name = md5(uniqid(rand(), true));
+				$target_image_file = $target_dir_thumbnail.$rand_file_name.'.'.$imageFileType;
+				$save_image_file = THUMBNAIL_PATH.$rand_file_name.'.'.$imageFileType;
+	
+				// Check if file already exists
+				if (file_exists($target_image_file)) {
+				  $res_str = "Sorry, image file already exists.";
+				  array_push($message, $res_str);
+				  $uploadOk = 0;
+				}
+	
+				// Allow certain file formats
+				if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+						&& $imageFileType != "gif") {
+				  $res_str = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+				  array_push($message, $res_str);
+				  $uploadOk = 0;
+				}
+		
+				// Check if $uploadOk is set to 0 by an error
+	
+			    if (move_uploaded_file($_FILES["edit_imageToUpload"]["tmp_name"], $target_image_file)) {
+  			      $res_str = "The file ". htmlspecialchars( basename( $_FILES["edit_imageToUpload"]["name"])). " has been added.";
+			      array_push($message, $res_str);
+			    } else {
+			      $res_str = "Sorry, there was an error adding image file.";
+			      array_push($message, $res_str);
+			      $uploadOk = 0;
+			    }
+	
+			    if($uploadOk == 1){
+			    	$data = array(
+						'main_id' => $main_menu_id,
+						'sub_id' => $sub_menu_id,
+						'name' => $model_name,
+						'image' => $save_image_file,
+						'type' => $model_type,
+						'countertop_type' => $countertop_type,
+						'countertop_color' => $countertop_color,
+						'exterio_color' => $exterio_color,
+						'interior_color' => $interior_color,
+						'skirting_color' => $skirting_color,
+						'skirting_type' => $skirting_type,
+						'dooropen_type' => $dooropen_type,
+						'door_thickness' => $door_thickness,
+						'cube_id' => $furniture_cube_id
+					);
+					$result = $this->menu_setting_model->update_model($model_id, $data);
+				}
 			}else{
 				$data = array(
 					'main_id' => $main_menu_id,

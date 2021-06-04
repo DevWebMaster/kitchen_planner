@@ -42,6 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link rel="stylesheet" type="text/css" href="<?= base_url(); ?>plugins/revolution/revolution/css/navigation.css">
 
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/plugins/toastr/toastr.min.css">
+    <script src="<?= base_url(); ?>js/jquery.min.js"></script><!-- JQUERY.MIN JS -->
 </head>
 <body id="bg" onload="init();">
 <div class="page-wraper">
@@ -89,10 +90,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         	<?php }else { ?>
                         		<li><a href="<?= base_url('customer/'); ?>">INICIO  </a></li>
                         	<?php } ?>
-                            <?php if(!empty($this->session->userdata('is_customer_logged'))){ ?>
-                                <li><a href="<?= base_url('customer/planner'); ?>" target="_blank">DISEÑAR COCINA   </a></li>
-                            <?php }else if(!empty($this->session->userdata('is_pos_logged'))){ ?>
-                                <li><a href="<?= base_url('customer/planner'); ?>" target="_blank">DISEÑAR COCINA   </a></li>
+                           <?php if(!empty($this->session->userdata('is_customer_logged')) || !empty($this->session->userdata('is_pos_logged'))){ ?>
+                                <li><a id="kitchen_planner">DISEÑAR COCINA   </a></li>
                             <?php }else{ ?>
                                 <li><a id="modal-1">DISEÑAR COCINA   </a></li>
 							<?php }if($data == 'project'){ ?>
@@ -156,3 +155,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>       
 		</div>    
 	</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#kitchen_planner').click(function(){
+			window.plannerWin = window.open("../planner","_blank");
+		})
+		$('#btn_log_out').click(function(){
+			window.plannerWin.close()
+		})
+	})
+</script>

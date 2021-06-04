@@ -34,6 +34,15 @@ class Planner_model extends CI_Model{
 
 		return $rtn;
 	}
+	public function get_sub_menu_for_search($main_menu_id, $search_str){
+		$this->db->select('id, main_id, name, concat("'.PREFIX_IMAGE_PATH.'", image) as image');
+		$this->db->from('tbl_sub_menu');
+		$this->db->where('main_id', $main_menu_id);
+		$this->db->like('name', $search_str);
+		$rtn = $this->db->get()->result_array();
+
+		return $rtn;
+	}
 	public function get_shortkey_menu($main_id, $sub_id) {
 		$this->db->select('a1.model_id, a1.main_id, a1.sub_id, a1.name, concat("'.PREFIX_IMAGE_PATH.'", a1.image) as image, concat("'.PREFIX_IMAGE_PATH.'", a1.model) as model, a1.type, a1.countertop_type, a1.countertop_color, a1.exterio_color, a1.interior_color, a1.skirting_color, a1.skirting_type, a1.dooropen_type, a1.door_thickness, a1.cube_id, a1.summary, a2.name as main_menu, a3.name as sub_menu, a4.name as countertop_type, a4.price as countertop_type_price, a5.name as skirting_type, a5.price as skirting_type_price, a6.name as countertop_color, a6.price as countertop_color_price, a7.name as exterio_color, a7.price as exterio_color_price, a8.name as interior_color, a8.price as interior_color_price, a9.name as skirting_color, a9.price as skirting_color_price, a10.name as dooropen_type, a10.price as dooropen_type_price, a11.name as door_thickness, a11.price as door_thickness_price, a12.name as model_type');
 		$this->db->from('tbl_model_list as a1');
@@ -92,6 +101,7 @@ class Planner_model extends CI_Model{
 		}
 
 		$rtn = $this->db->get()->result_array();
+			
 		return $rtn;
 	}
 	public function get_observation($user_role, $user_id, $product_id) {
@@ -249,6 +259,14 @@ class Planner_model extends CI_Model{
 
 		return $insertId;
 	}
+	public function update_planner($data, $exist_product_id)
+	{
+		return $this->db->update('tbl_product_history_log', $data, array('product_id' => $exist_product_id));
+	}
+	public function bulk_delete_models($product_id){
+		$this->db->where('product_id', $product_id);
+		return $this->db->delete('tbl_model_select_log');
+	}
 	public function save_models($data) {
 		$this->db->insert('tbl_model_select_log', $data);
 		$insertId = $this->db->insert_id();
@@ -322,6 +340,26 @@ class Planner_model extends CI_Model{
 		$this->db->select('color_id, name');
 		$this->db->from('tbl_color');
 		return $this->db->get()->result_array();
+	}
+	public function check_product($filename, $user_role, $user_id)
+	{
+		$this->db->select('product_id, product_name');
+		$this->db->from('tbl_product_history_log');
+		// $this->db->where('product_name', $filename);
+		if($user_role == 1){
+			$this->db->where('customer_id', $user_id);
+		}else if($user_role == 2){
+			$this->db->where('pos_id', $user_id);
+		}
+		$this->db->order_by('created_at', 'DESC');
+		$result = $this->db->get()->result_array()[0];
+
+		$exist_file = explode('-', $result['product_name']);
+		if($exist_file[0] == $filename){
+			return $result;
+		}else{
+			return 0;
+		}
 	}
 }
 ?>

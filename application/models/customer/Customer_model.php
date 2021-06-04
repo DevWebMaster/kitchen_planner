@@ -179,11 +179,14 @@ class Customer_model extends CI_Model{
 
 		return $query->num_rows();
 	}
-	public function get_productlist($customer_id, $pos_id, $start, $rowperpage, $search_key) {
+	public function get_productlist($user_role, $customer_id, $pos_id, $start, $rowperpage, $search_key) {
 		$this->db->select('a1.*, a2.pos_name, concat(a3.customer_name, a3.last_name1, a3.last_name2) as customer_name');
 		$this->db->from('tbl_product_history_log as a1');
 		$this->db->join('tbl_pos as a2', 'a1.pos_id = a2.pos_id', 'left');
 		$this->db->join('tbl_customers as a3', 'a1.customer_id = a3.id', 'left');
+		if($user_role == 2){
+			$this->db->where('customer_id <>', '');
+		}
 		if($customer_id != 0){
 			$this->db->where('customer_id', $customer_id);
 		}
@@ -191,6 +194,7 @@ class Customer_model extends CI_Model{
 		if($search_key != ''){
 			$this->db->like('product_name', $search_key);
 		}
+		$this->db->order_by('created_at', 'DESC');
 		$this->db->limit($rowperpage, $start);
 		$query = $this->db->get()->result_array();
 		return $query;
@@ -360,6 +364,7 @@ class Customer_model extends CI_Model{
 		if($search_key != ''){
 			$this->db->like('a2.product_name', $search_key);
 		}
+		$this->db->order_by('created_at', 'DESC');
 		$this->db->limit($rowperpage, $start);
 		$query = $this->db->get()->result_array();
 		return $query;
@@ -489,6 +494,15 @@ class Customer_model extends CI_Model{
 		$this->db->where('email', $email);
 		$this->db->where('hash', $hash);
 		$this->db->update('tbl_customers', $data);
+	}
+	public function is_exist_product($product_id){
+		$this->db->select('product_id');
+		$this->db->from('tbl_product_history_log');
+		$this->db->where('product_id', $product_id);
+
+		$query = $this->db->get()->result_array();
+
+		return count($query);
 	}
 }
 ?>

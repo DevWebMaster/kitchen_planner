@@ -72,13 +72,15 @@ File : dz.ajax.js
 			dataType: 'json',
 			success: function(dzRes){
 				if(dzRes.status == 1){
-					msgDiv = '<div class="gen alert alert-success">'+dzRes.msg+'</div>';
+					// msgDiv = '<div class="gen alert alert-success">'+dzRes.msg+'</div>';
+					toastr.success(dzRes.msg);
 				}
 				
 				if(dzRes.status == 0){
-					msgDiv = '<div class="err alert alert-danger">'+dzRes.msg+'</div>';
+					// msgDiv = '<div class="err alert alert-danger">'+dzRes.msg+'</div>';
+					toastr.error(dzRes.msg);
 				}
-				$('.dzFormMsg').html(msgDiv);
+				// $('.dzFormMsg').html(msgDiv);
 				$('.dzLoginForm')[0].reset();
                 // grecaptcha.reset();
                 if(dzRes.type == 'login' && dzRes.status == 1){
@@ -103,13 +105,15 @@ File : dz.ajax.js
 			dataType: 'json',
 			success: function(dzRes){
 				if(dzRes.status == 1){
-					msgDiv = '<div class="gen alert alert-success">'+dzRes.msg+'</div>';
+					// msgDiv = '<div class="gen alert alert-success">'+dzRes.msg+'</div>';
+					toastr.success(dzRes.msg);
 				}
 				
 				if(dzRes.status == 0){
-					msgDiv = '<div class="err alert alert-danger">'+dzRes.msg+'</div>';
+					// msgDiv = '<div class="err alert alert-danger">'+dzRes.msg+'</div>';
+					toastr.error(dzRes.msg);
 				}
-				$('.dzFormMsg').html(msgDiv);
+				// $('.dzFormMsg').html(msgDiv);
 				$('.dzUpdateForm')[0].reset();
                 // grecaptcha.reset();
                 if(dzRes.type == 'update' && dzRes.status == 1){

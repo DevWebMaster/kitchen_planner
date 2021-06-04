@@ -120,6 +120,7 @@ class Pos_model extends CI_Model{
 		if($search_key != ''){
 			$this->db->like('a2.product_name', $search_key);
 		}
+		$this->db->order_by('created_at', 'DESC');
 		$this->db->limit($rowperpage, $start);
 		$query = $this->db->get()->result_array();
 		return $query;

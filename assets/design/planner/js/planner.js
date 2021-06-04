@@ -254,6 +254,7 @@ var SideMenu = function(blueprint3d, floorplanControls, modalEffects) {
     }
 
     $("#update-floorplan").click(floorplanUpdate);
+    $("#update-floorplan1").click(floorplanUpdate);
 
     initLeftMenu();
 
@@ -553,10 +554,14 @@ var mainControls = function(blueprint3d) {
   var blueprint3d = blueprint3d;
 
   function newDesign() {
+    var data = blueprint3d.model.exportSerialized();
+    var filename = $('#product_name').val()
+
     $.ajax({
       url: 'kitchen_planner/customer/planner/validation_count',
       headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
+      data: {content: data, filename: filename},
       success: function(response){
         var result = JSON.parse(response)
         if(result){
@@ -564,7 +569,7 @@ var mainControls = function(blueprint3d) {
           blueprint3d.model.loadSerialized('{"floorplan":{"corners":{},"walls":[],"wallTextures":[],"floorTextures":{},"newFloorTextures":{}},"items":[]}');
         }else{
           // alert("You can't create the new planner because your account is expired now.");
-          $('#newplannermodal').modal('show');
+          $('#expiredmodal').modal('show');
           return;
         }
       }
@@ -586,32 +591,16 @@ var mainControls = function(blueprint3d) {
     if(data.check_order == 2){
       $('#saveFile').hide();
     }
+    $('#product_name').val(data.product_name.split('-')[0])
   }
 
   function saveDesign() {
     var data = blueprint3d.model.exportSerialized();
     // var a = window.document.createElement('a');
     // var blob = new Blob([data], {type : 'text'});
-    var today = new Date();
-    var year = today.getFullYear();
-    var month = today.getMonth()+1;
-    var day = today.getDate();
-    if (month.toString().length < 2) 
-        month = '0' + month;
-    if (day.toString().length < 2) 
-        day = '0' + day;
-    var hour = today.getHours();
-    var minute = today.getMinutes();
-    var second = today.getSeconds();
-    if (hour.toString().length < 2) 
-        hour = '0' + hour;
-    if (minute.toString().length < 2) 
-        minute = '0' + minute;
-    if (second.toString().length < 2) 
-        second = '0' + second;    
     // a.href = window.URL.createObjectURL(blob);
     // var filename = 'design'+year+'-'+month+'-'+day+'-'+hour+'-'+minute+'-'+second+'.kitchenplanner';
-    var filename = $('#product_name').val()+year+'-'+month+'-'+day+'-'+hour+'-'+minute+'-'+second+'.kitchenplanner';
+    var filename = $('#product_name').val();
     // a.download = filename;
     // document.body.appendChild(a)
     // a.click();
@@ -676,6 +665,8 @@ var mainControls = function(blueprint3d) {
     $("#budget1").click(getBudget);
     var product_id = $('#product_id').val();
     if(product_id != 0){
+      $('.goto3DModal').hide()
+      $('.goto3DButton').show()
       $.ajax({
         url: 'kitchen_planner/customer/planner/load_product',
         headers: {'Access-Control-Allow-Origin': '*'},

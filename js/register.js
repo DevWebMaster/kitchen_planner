@@ -17,6 +17,10 @@ $(document).ready(function(){
 	$('#btn_confirm').click(function(){
 		$('#register').attr("disabled", false)
 	})
+	$('#btn_close').click(function(){
+		$('#register').attr("disabled", true)
+		$('#thing').prop("checked", false)
+	})
 	$("#register").click(function(){
 			var name = $(".dzName").val();
 			var lastname1 = $(".dzLastname1").val();
@@ -35,12 +39,14 @@ $(document).ready(function(){
 
 			
 			if(password != confirm) {
-				$('.dzFormMsg').html('<div class="gen alert alert-warning">Please check the password!</div>');
-				$('.dzForm')[0].reset();
+				// $('.dzFormMsg').html('<div class="gen alert alert-warning">Please check the password!</div>');
+				// $('.dzForm')[0].reset();
+				toastr.error('Please check the password!');
 			}
 			if(name == "" || email == "" || phone == "" || password == "" || confirm == "" || d_location == "" || lastname1 == "" || lastname2 == "" || dni == "" || zipcode == "" || lopd == ""){
-				$('.dzFormMsg').html('<div class="gen alert alert-warning">Please fill out all of the fileds!</div>');
-				$('.dzForm')[0].reset();
+				// $('.dzFormMsg').html('<div class="gen alert alert-warning">Please fill out all of the fileds!</div>');
+				// $('.dzForm')[0].reset();
+				toastr.error("Necesita rellanar todos los campos y firmar la LOPD para poder registrarse correctamente.");
 				return;
 			}else {
 				$.ajax({
@@ -57,7 +63,8 @@ $(document).ready(function(){
 							var href = window.location;
 							window.location = href.toString().replace('register', 'login');
 						}else{
-							$('.dzFormMsg').html('<div class="gen alert alert-warning">This user is already existed!</div>');
+							// $('.dzFormMsg').html('<div class="gen alert alert-warning">This user is already existed!</div>');
+							toastr.error('This user is already existed!');
 						}
 					}
 				})

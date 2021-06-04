@@ -7,25 +7,25 @@
             <div class="card-body">
               <form method="post" enctype="multipart/form-data" id="uploadForm">
                 <div class="col-md-12" style="display: inline-flex;">
-                  <div class="col-12 col-md-2 offset-1">
+                  <div class="col-12 col-md-3">
                     <div class="form-group mb-2">
                       <label for="" class="control-label mb-1">Tiendas Margen (%)</label>:
                       <input type="number" min="0" oninput="validity.valid||(value='');" class="form-control form-control-sm" name="pos_margin" id="pos_margin">
                     </div>
                   </div>
-                  <div class="col-12 col-md-2">
+                  <div class="col-12 col-md-3">
                     <div class="form-group mb-2">
                       <label for="" class="control-label mb-1">Tiendas Margen Fijo(EUR)</label>:
                       <input type="number" min="0" oninput="validity.valid||(value='');" class="form-control form-control-sm" name="pos_spread" id="pos_spread">
                     </div>
                   </div>
-                   <div class="col-12 col-md-2">
+                   <div class="col-12 col-md-3">
                     <div class="form-group mb-2">
                       <label for="" class="control-label mb-1">Tiendas Clientes Margen (%)</label>:
                       <input type="number" min="0" oninput="validity.valid||(value='');" class="form-control form-control-sm" name="pos_customer_margin" id="pos_customer_margin">
                     </div>
                   </div>
-                  <div class="col-12 col-md-2">
+                  <div class="col-12 col-md-3">
                     <div class="form-group mb-2">
                       <label for="" class="control-label mb-1">Tiendas Clientes Margen Fijo(EUR)</label>:
                       <input type="number" min="0" oninput="validity.valid||(value='');" class="form-control form-control-sm" name="pos_customer_spread" id="pos_customer_spread">
@@ -33,7 +33,7 @@
                   </div>
                 </div>
                 <div class="col-md-12" style="display: inline-flex;">
-                  <div class="col-12 col-md-2 offset-1">
+                  <div class="col-12 col-md-3 ">
                     <div class="form-group mb-2">
                       <label for="" class="control-label mb-1">Select the Tiendas</label>:
                       <select class="form-control form-control-sm" tabindex="1" name="pos_id" id="pos_id">
@@ -43,7 +43,7 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-12 col-md-2">
+                  <div class="col-12 col-md-3">
                     <div class="form-group mt-4">
                       <input type="submit" class="btn btn-sm btn-info add_label_no px-5" value="Add">
                     </div>

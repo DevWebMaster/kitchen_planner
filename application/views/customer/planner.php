@@ -43,102 +43,104 @@
           </ul>
           <hr />
           <div class="form-group search-group" style="margin: 0 10px;">
-            <div class="form-group" style="display: inline-flex; width: 100%;">
-              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
-                <label class="control-label">
-                  Countertop Type:
-                </label>
+            <div id="advanced_group">
+              <div class="form-group" style="display: inline-flex; width: 100%;">
+                <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                  <label class="control-label">
+                    Countertop Type:
+                  </label>
+                </div>
+                <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                  <select class="form-control" id="search_countertop_type">
+                    <?php 
+                      for($i = 0; $i < count($search_list['countertop_type']); $i++) { ?>
+                        <option value="<?= $search_list['countertop_type'][$i]['material_id']; ?>"><?= $search_list['countertop_type'][$i]['name']; ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
               </div>
-              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
-                <select class="form-control" id="search_countertop_type">
-                  <?php 
-                    for($i = 0; $i < count($search_list['countertop_type']); $i++) { ?>
-                      <option value="<?= $search_list['countertop_type'][$i]['material_id']; ?>"><?= $search_list['countertop_type'][$i]['name']; ?></option>
-                  <?php } ?>
-                </select>
+              <br>
+              <div class="form-group" style="display: inline-flex; width: 100%;">
+                <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                  <label class="control-label">
+                    Countertop Color:
+                  </label>
+                </div>
+                <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                  <select class="form-control" id="search_countertop_color">
+                    <?php 
+                      for($i = 0; $i < count($search_list['countertop_color']); $i++) { ?>
+                        <option value="<?= $search_list['countertop_color'][$i]['color_id']; ?>"><?= $search_list['countertop_color'][$i]['name']; ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
               </div>
+              <br>
+              <div class="form-group" style="display: inline-flex; width: 100%;">
+                <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                  <label class="control-label">
+                    Exterio Color:
+                  </label>
+                </div>
+                <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                  <select class="form-control" id="search_exterio_color">
+                    <?php 
+                      for($i = 0; $i < count($search_list['exterio_color']); $i++) { ?>
+                        <option value="<?= $search_list['exterio_color'][$i]['color_id']; ?>"><?= $search_list['exterio_color'][$i]['name']; ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+              </div>
+              <br>
+              <div class="form-group" style="display: inline-flex; width: 100%;">
+                <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                  <label class="control-label">
+                    Interior Color:
+                  </label>
+                </div>
+                <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                  <select class="form-control" id="search_interior_color">
+                    <?php 
+                      for($i = 0; $i < count($search_list['interior_color']); $i++) { ?>
+                        <option value="<?= $search_list['interior_color'][$i]['color_id']; ?>"><?= $search_list['interior_color'][$i]['name']; ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+              </div>
+              <br>
+              <div class="form-group" style="display: inline-flex; width: 100%;">
+                <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                  <label class="control-label">
+                    Skirting Type:
+                  </label>
+                </div>
+                <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                  <select class="form-control" id="search_skirting_type">
+                    <?php 
+                      for($i = 0; $i < count($search_list['skirting_type']); $i++) { ?>
+                        <option value="<?= $search_list['skirting_type'][$i]['material_id']; ?>"><?= $search_list['skirting_type'][$i]['name']; ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+              </div>
+              <br>
+              <div class="form-group" style="display: inline-flex; width: 100%;">
+                <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                  <label class="control-label">
+                    Skirting Color:
+                  </label>
+                </div>
+                <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
+                  <select class="form-control" id="search_skirting_color">
+                    <?php 
+                      for($i = 0; $i < count($search_list['skirting_color']); $i++) { ?>
+                        <option value="<?= $search_list['skirting_color'][$i]['color_id']; ?>"><?= $search_list['skirting_color'][$i]['name']; ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+              </div>
+              <br>
             </div>
-            <br>
-            <div class="form-group" style="display: inline-flex; width: 100%;">
-              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
-                <label class="control-label">
-                  Countertop Color:
-                </label>
-              </div>
-              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
-                <select class="form-control" id="search_countertop_color">
-                  <?php 
-                    for($i = 0; $i < count($search_list['countertop_color']); $i++) { ?>
-                      <option value="<?= $search_list['countertop_color'][$i]['color_id']; ?>"><?= $search_list['countertop_color'][$i]['name']; ?></option>
-                  <?php } ?>
-                </select>
-              </div>
-            </div>
-            <br>
-            <div class="form-group" style="display: inline-flex; width: 100%;">
-              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
-                <label class="control-label">
-                  Exterio Color:
-                </label>
-              </div>
-              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
-                <select class="form-control" id="search_exterio_color">
-                  <?php 
-                    for($i = 0; $i < count($search_list['exterio_color']); $i++) { ?>
-                      <option value="<?= $search_list['exterio_color'][$i]['color_id']; ?>"><?= $search_list['exterio_color'][$i]['name']; ?></option>
-                  <?php } ?>
-                </select>
-              </div>
-            </div>
-            <br>
-            <div class="form-group" style="display: inline-flex; width: 100%;">
-              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
-                <label class="control-label">
-                  Interior Color:
-                </label>
-              </div>
-              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
-                <select class="form-control" id="search_interior_color">
-                  <?php 
-                    for($i = 0; $i < count($search_list['interior_color']); $i++) { ?>
-                      <option value="<?= $search_list['interior_color'][$i]['color_id']; ?>"><?= $search_list['interior_color'][$i]['name']; ?></option>
-                  <?php } ?>
-                </select>
-              </div>
-            </div>
-            <br>
-            <div class="form-group" style="display: inline-flex; width: 100%;">
-              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
-                <label class="control-label">
-                  Skirting Type:
-                </label>
-              </div>
-              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
-                <select class="form-control" id="search_skirting_type">
-                  <?php 
-                    for($i = 0; $i < count($search_list['skirting_type']); $i++) { ?>
-                      <option value="<?= $search_list['skirting_type'][$i]['material_id']; ?>"><?= $search_list['skirting_type'][$i]['name']; ?></option>
-                  <?php } ?>
-                </select>
-              </div>
-            </div>
-            <br>
-            <div class="form-group" style="display: inline-flex; width: 100%;">
-              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
-                <label class="control-label">
-                  Skirting Color:
-                </label>
-              </div>
-              <div class="col-sm-6 col-md-6" style="padding-left: 0px; padding-right: 0px;">
-                <select class="form-control" id="search_skirting_color">
-                  <?php 
-                    for($i = 0; $i < count($search_list['skirting_color']); $i++) { ?>
-                      <option value="<?= $search_list['skirting_color'][$i]['color_id']; ?>"><?= $search_list['skirting_color'][$i]['name']; ?></option>
-                  <?php } ?>
-                </select>
-              </div>
-            </div>
-            <br>
             <div class="col-sm-7" style="margin-top: 5px;">
               <input type="text" class="form-control" placeholder="Model name..." id="search-box">
             </div>
@@ -284,7 +286,7 @@
                 New Plan
               </a> -->
               <input type="hidden" name="user_type" id="user_type" value="<?php print_r($this->session->userdata('user_role')); ?>">
-              <a class="btn btn-default btn-sm design1" id="productmodal" data-dismiss="modal" data-toggle="modal" data-target="#productnameModal">
+              <a class="btn btn-default btn-sm design1" id="save_planner">
                 Save Plan
               </a>
               <a class="btn btn-default btn-sm design1" id="saveFile" style="display: none;">
@@ -369,7 +371,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-sm btn-default" id="btn_close" data-dismiss="modal">Cancel</button>
-                  <a href="http://207.154.243.81/kitchen_planner/customer/main/budget" class="btn btn-warning btn-sm" target="_blank" style="color: red;">Go to budget menu</a>
+                  <a href="http://207.154.243.81/kitchen_planner/customer/main/budget" class="btn btn-warning btn-sm" id="gotobudgetmenu" target="_blank" style="color: red;">Go to budget menu</a>
                 </div>
             </div>
             </div>
@@ -382,32 +384,38 @@
           <div id="floorplanner">
             <canvas id="floorplanner-canvas"></canvas>
             <div id="floorplanner-controls">
+              <div id="control_btn_group">
+                <button id="move" class="btn btn-sm btn-default">
+                  <span class="glyphicon glyphicon-move"></span>
+                  Mover paredes
+                </button>
+                <button id="draw" class="btn btn-sm btn-default">
+                  <span class="glyphicon glyphicon-pencil"></span>
+                  Dibujar paredes
+                </button>
+                <button id="delete" class="btn btn-sm btn-default">
+                  <span class="glyphicon glyphicon-remove"></span>
+                  Eliminar Pared
+                </button>
+                
+                <!-- <span class="pull-right"> -->
+                  <button class="btn btn-primary btn-sm goto3DModal" id="goto3DModal" data-dismiss="modal" data-toggle="modal" data-target="#productnameModal">GUARDAR &raquo;</button>
 
-              <button id="move" class="btn btn-sm btn-default">
-                <span class="glyphicon glyphicon-move"></span>
-                Mover paredes
-              </button>
-              <button id="draw" class="btn btn-sm btn-default">
-                <span class="glyphicon glyphicon-pencil"></span>
-                Dibujar paredes
-              </button>
-              <button id="delete" class="btn btn-sm btn-default">
-                <span class="glyphicon glyphicon-remove"></span>
-                Eliminar Pared
-              </button>
-              
-              <!-- <span class="pull-right"> -->
-                <button class="btn btn-primary btn-sm" id="update-floorplan">GUARDAR &raquo;</button>
-              <!-- </span> -->
-
-              <a class="btn btn-default btn-sm design" id="new" style="margin-left: 15%;">
-                New Plan
-              </a>
-              <a class="btn btn-sm btn-default btn-file design">
-                <input type="file" accept=".kitchenplanner" class="hidden-input" id="loadFile">
-                Load Plan
-              </a>
-
+                  <button class="btn btn-primary btn-sm goto3DButton" id="update-floorplan" style="display: none;">GUARDAR &raquo;</button>
+                <!-- </span> -->
+              </div>
+              <div id="option_btn_group">
+                <a class="btn btn-default btn-sm design" style="margin-left: 20px;" data-dismiss="modal" data-toggle="modal" data-target="#newplannermodal">
+                  New Plan
+                </a>
+                <a class="btn btn-sm btn-default btn-file design">
+                  <input type="file" accept=".kitchenplanner" class="hidden-input" id="loadFile">
+                  Load Plan
+                </a>
+                <a class="btn btn-default btn-sm" id="exit">
+                  Exit
+                </a>
+              </div>
             </div>
             <div id="draw-walls-hint">
               Presiona la tecla "Esc" para dejar de dibujar muros
@@ -470,26 +478,27 @@
             </div>
             <!--end of observation modal-->
             <!-- alert to floorplanner -->
-            <div class="modal fade" id="alertmodal" tabindex="-1" role="dialog" aria-labelledby="alertmodalLabel">
+            <div class="modal fade" id="newplannermodal" tabindex="-1" role="dialog" aria-labelledby="newplannermodalLabel">
             <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="background: #ffa200;"><label style="color: white; font-size: x-large;">Notification</label></div>
                 <div class="modal-body">
                   <div class="row">
                     <div class="col-md-12">
-                      <label><h3 style="color: #ffa200;">If you want to customize the floorplan, go to the floorplan!</h3></label>
+                      <label><h3 style="color: #ffa200;">¿Has guardado el Proyecto? ¿Estás Seguro de querer empezar otro Proyecto?</h3></label>
                     </div>       
                   </div> 
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-sm btn-default btn_gen" style="color: white; background-color: #ffa200;" id="btn_gen" data-dismiss="modal">OK</button>
+                  <button type="button" class="btn btn-default btn-sm" id="new" style="color: white; background-color: #ffa200;" data-dismiss="modal">Aceptar</button>
+                  <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
             </div>
             </div>
             <!-- end of the floorplanner -->
             <!-- alert to new planner -->
-            <div class="modal fade" id="newplannermodal" tabindex="-1" role="dialog" aria-labelledby="newplannermodalLabel">
+            <div class="modal fade" id="expiredmodal" tabindex="-1" role="dialog" aria-labelledby="expiredmodalLabel">
             <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="background: red;"><label style="color: white; font-size: x-large;">Warning</label></div>
@@ -523,7 +532,7 @@
                   </div> 
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-sm btn-default" id="confirm_product" data-dismiss="modal">Confirm</button>
+                  <button type="button" class="btn btn-sm btn-default confirm_3d" id="update-floorplan1" data-dismiss="modal">Confirm</button>
                 </div>
             </div>
             </div>
@@ -566,13 +575,18 @@
       }
     })
   }
-  $(window).bind('beforeunload', function() {
-      myFunc();
-      setTimeout(function() {
-        setTimeout(function() {
-            detectCancel();
-        }, 1000);
-      },1);
-      return 'are you sure';
-  });
+  window.onbeforeunload = function(){
+    myFunc();
+
+    return null;
+  }
+  // $(window).bind('beforeunload', function(event) {
+  //     myFunc();
+  //     setTimeout(function() {
+  //       setTimeout(function() {
+  //           detectCancel();
+  //       }, 1000);
+  //     },1);
+  //     return 'are you sure';
+  // });
 </script>

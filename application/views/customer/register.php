@@ -11,7 +11,7 @@
 					
 				
 					<div class="section-head text-center">
-						<h2 class="head-title">Usuario Registration! </h2>
+						<h2 class="head-title">Alta Usuario </h2>
 						<!-- <p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud. Photo booth anim 8</p> -->
 					</div>
 					<div class="dzFormMsg"></div>
