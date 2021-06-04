@@ -15,7 +15,7 @@ module BP3D.Three {
     var basePlanes = []; // always visible
     var texture = null;
 
-    var lightMap = THREE.ImageUtils.loadTexture("kitchen_planner/assets/design/planner/rooms/textures/walllightmap.png");
+    var lightMap = THREE.ImageUtils.loadTexture("assets/design/planner/rooms/textures/walllightmap.png");
     var fillerColor = 0xdddddd;
     var sideColor = 0xcccccc;
     var baseColor = 0xdddddd;
