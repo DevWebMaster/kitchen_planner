@@ -30,54 +30,57 @@ class Planner extends CI_Controller
         if($product_id){
             $this->load->view('customer/planner', ['search_list' => $search_list, 'product_id' => $product_id]);
         }else {
-            $is_exist = $this->planner_model->get_planner_status($user_id, $user_role);
             if($user_role == 2){
                 $planner_count = $this->planner_model->get_planner_count($user_id);
-                if($planner_count['planner_count'] > 0 && $is_exist['status'] == 0){
-                    $updated_data = array(
-                        'planner_count' => $planner_count['planner_count'] - 1
-                    );
-                    $result = $this->planner_model->updated_planner_count($updated_data, $user_id);
-                    $data = array(
-                        'user_id' => $user_id,
-                        'user_role' => $user_role,
-                        'start_date' => date('Y-m-d H:i:s'),
-                        'status' => 1
-                    );
-                    //customer is logged in the planner
-                    $this->planner_model->start_planner($data);
-
-                    
-                    $this->load->view('customer/planner', ['search_list' => $search_list]);
-                }else if($is_exist['status'] == 1){
-                    $this->load->view('duplicate_planner');
-                }else{
-                    $this->load->view('access_denied');
-                }
+                $updated_data = array(
+                    'planner_count' => $planner_count['planner_count'] - 1
+                );
+                $result = $this->planner_model->updated_planner_count($updated_data, $user_id);
+                $data = array(
+                    'user_id' => $user_id,
+                    'user_role' => $user_role,
+                    'start_date' => date('Y-m-d H:i:s'),
+                    'status' => 1
+                );
+                //pos is logged in the planner
+                $this->planner_model->start_planner($data);
+                
+                $this->load->view('customer/planner', ['search_list' => $search_list]);
             }else if($user_role == 1){
                 $planner_count = $this->planner_model->get_planner_count_for_user($user_id);
-                if($planner_count['planner_count'] > 0 && $is_exist['status'] == 0){
-                    $updated_data = array(
-                        'planner_count' => $planner_count['planner_count'] - 1
-                    );
-                    $result = $this->planner_model->updated_planner_count_for_user($updated_data, $user_id);
-                    $data = array(
-                        'user_id' => $user_id,
-                        'user_role' => $user_role,
-                        'start_date' => date('Y-m-d H:i:s'),
-                        'status' => 1
-                    );
-                    //customer is logged in the planner
-                    $this->planner_model->start_planner($data);
-                    
-                    $this->load->view('customer/planner', ['search_list' => $search_list]);
-                }else if($is_exist['status'] == 1){
-                    $this->load->view('duplicate_planner');
-                }else{
-                    $this->load->view('access_denied');
-                }
+                $updated_data = array(
+                    'planner_count' => $planner_count['planner_count'] - 1
+                );
+                $result = $this->planner_model->updated_planner_count_for_user($updated_data, $user_id);
+                $data = array(
+                    'user_id' => $user_id,
+                    'user_role' => $user_role,
+                    'start_date' => date('Y-m-d H:i:s'),
+                    'status' => 1
+                );
+                //customer is logged in the planner
+                $this->planner_model->start_planner($data);
+                
+                $this->load->view('customer/planner', ['search_list' => $search_list]);
             }
         }
+    }
+    public function check_duplicate_planner()
+    {
+        $user_role = $this->session->userdata('user_role');
+        $user_id = $this->session->userdata('user_id');
+
+        $is_exist = $this->planner_model->get_planner_status($user_id, $user_role);
+        if($user_role == 1){
+            $planner_count = $this->planner_model->get_planner_count_for_user($user_id);
+        }else if($user_role == 2){
+            $planner_count = $this->planner_model->get_planner_count($user_id);
+        }
+        $data = array(
+            'status' => $is_exist['status'],
+            'planner_count' => $planner_count['planner_count']
+        );
+        echo json_encode($data);
     }
     public function leave_planner()
     {
@@ -270,9 +273,11 @@ class Planner extends CI_Controller
 
         $req_data = $this->input->post('req_data');
         $filename = $this->input->post('filename');
+        $product_id = $this->input->post('product_id');
+
         $full_filename = $filename.'-'.date('YmdHis').'.kitchenplanner';
 
-        $exist_product = $this->planner_model->check_product($filename, $user_role, $user_id);
+        $exist_product = $this->planner_model->check_product($filename, $user_role, $user_id, $product_id);
         if($exist_product == 0){
             $handle = fopen(PRODUCT_PATH.$full_filename, 'w+');
 

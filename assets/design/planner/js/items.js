@@ -490,7 +490,7 @@ $(document).ready(function() {
           $("#back-menu").append(btn_back);
         }else{
           itemsDiv.append('<div class="col-sm-12" style="color: #ffa200; text-align: center;">No results.</div>');
-          $('#shortkey-menu').append('<div class="col-sm-12" style="color: #ffa200; text-align: center;">No results.</div>');
+          // $('#shortkey-menu').append('<div class="col-sm-12" style="color: #ffa200; text-align: center;">No results.</div>');
           $("#btn_back").remove();
           if(advanced_filter_flag == 1){
             btn_back_level = 2;
@@ -584,7 +584,7 @@ $(document).ready(function() {
           var btn_back = '<button class="btn btn-sm btn-default btn_back" id="btn_back" name="'+thumbnail_menu[0].main_id+'-'+thumbnail_menu[0].sub_id+'">Atrás</button>';
           $("#back-menu").append(btn_back);
         }else{
-          itemsDiv.append('<div class="col-sm-12" style="color: #ffa200; text-align: center;">No results.</div>');
+          // itemsDiv.append('<div class="col-sm-12" style="color: #ffa200; text-align: center;">No results.</div>');
           $('#shortkey-menu').append('<div class="col-sm-12" style="color: #ffa200; text-align: center;">No results.</div>');
           $("#btn_back").remove();
           if(advanced_filter_flag == 1){

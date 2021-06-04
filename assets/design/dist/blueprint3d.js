@@ -1272,7 +1272,7 @@ var BP3D;
     (function (Model) {
         /** The default wall texture. */
         var defaultWallTexture = {
-            url: "assets/design/planner/rooms/textures/wallmap.png",
+            url: "kitchen_planner/assets/design/planner/rooms/textures/wallmap.png",
             stretch: true,
             scale: 0
         };
@@ -3605,7 +3605,7 @@ var BP3D;
             var planes = [];
             var basePlanes = []; // always visible
             var texture = null;
-            var lightMap = THREE.ImageUtils.loadTexture("assets/design/planner/rooms/textures/walllightmap.png");
+            var lightMap = THREE.ImageUtils.loadTexture("kitchen_planner/assets/design/planner/rooms/textures/walllightmap.png");
             var fillerColor = 0xdddddd;
             var sideColor = 0xcccccc;
             var baseColor = 0xdddddd;

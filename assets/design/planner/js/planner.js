@@ -601,12 +601,13 @@ var mainControls = function(blueprint3d) {
     // a.href = window.URL.createObjectURL(blob);
     // var filename = 'design'+year+'-'+month+'-'+day+'-'+hour+'-'+minute+'-'+second+'.kitchenplanner';
     var filename = $('#product_name').val();
+    var product_id = $('#product_id').val();
     // a.download = filename;
     // document.body.appendChild(a)
     // a.click();
     // document.body.removeChild(a)
     //insert the product row when click the save button.
-    save_result_product_table(data, filename);
+    save_result_product_table(data, filename, product_id);
     var user_type = $('#user_type').val();
     if(user_type == 1){
       $('#design1').show();
@@ -681,7 +682,7 @@ var mainControls = function(blueprint3d) {
   }
 
   init();
-  function save_result_product_table(content, filename)
+  function save_result_product_table(content, filename, product_id)
   {
     var data = JSON.parse(content);
     var items = data.items;
@@ -691,7 +692,7 @@ var mainControls = function(blueprint3d) {
         url: 'customer/planner/save_product',
         headers: {'Access-Control-Allow-Origin': '*'},
         type: 'POST',
-        data: {req_data: content, filename: filename},
+        data: {req_data: content, filename: filename, product_id: product_id},
         success: function(response){
           var product_id = JSON.parse(response)
           $('#product_id').val(product_id)

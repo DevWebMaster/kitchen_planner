@@ -64,8 +64,6 @@ class Main extends CI_Controller
     {
         $data['data'] = 'budget';
      
-        $data['pos_list'] = $this->customer_model->get_pos_list();
-
         // $invoice_info = $this->customer_model->get_invoice_info(78);
         // print_r($invoice_info);return;
 
@@ -107,9 +105,7 @@ class Main extends CI_Controller
     public function pos_product_list()
     {
         $data['data'] = 'product_list';
-        $customer_list = $this->customer_model->get_customers();
-        $data['customer_list'] = $customer_list;
-     
+        
         $this->load->view('customer/include/header.php');
         $this->load->view('customer/pos_product_list', $data);
 

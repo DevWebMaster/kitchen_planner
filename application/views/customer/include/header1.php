@@ -37,6 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link rel="stylesheet" type="text/css" href="<?= base_url(); ?>css/split-slider.css">
 	<link class="skin" rel="stylesheet" type="text/css" href="<?= base_url(); ?>css/skin/skin-1.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/plugins/toastr/toastr.min.css">
+    <script src="<?= base_url(); ?>js/jquery.min.js"></script><!-- JQUERY.MIN JS -->
 </head>
 <body id="bg">
 <div class="page-wraper">
@@ -148,14 +149,54 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="modal-footer"><a href="<?php echo base_url('customer/auth/login');?>" class="button btn btn-primary">Login</a></div>         
             </div>       
         </div>    
+        <input type="hidden" id="url" value="<?php echo base_url(); ?>">
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="duplicatePlannerModal">       
+        <div class="modal-dialog modal-md" role="document">         
+            <div class="modal-content">           
+                <div class="modal-header" style="background-color: #ffa200">             
+                    <h5 class="modal-title">ALERTA</h5>             
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>           
+                </div>           
+                <div class="modal-body" style="color: #ffa200; font-size: 20px;">The Planner is already opened.</div>    
+                <div class="modal-footer"><a data-dismiss="modal" class="button btn btn-primary" style="background-color: #ffa200; color: white;">OK</a></div>     
+            </div>       
+        </div>    
+        <input type="hidden" id="url" value="<?php echo base_url(); ?>">
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="counterPlannerModal">       
+        <div class="modal-dialog modal-md" role="document">         
+            <div class="modal-content">           
+                <div class="modal-header" style="background-color: #ffa200">             
+                    <h5 class="modal-title">ALERTA</h5>             
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>           
+                </div>           
+                <div class="modal-body" style="color: #ffa200; font-size: 20px;">Your Account is expired.</div>    
+                <div class="modal-footer"><a data-dismiss="modal" class="button btn btn-primary" style="background-color: #ffa200; color: white;">OK</a></div>     
+            </div>       
+        </div>    
+        <input type="hidden" id="url" value="<?php echo base_url(); ?>">
     </div>
 <script type="text/javascript">
     $(document).ready(function(){
+        var base_url = $('#url').val()
         $('#kitchen_planner').click(function(){
-            window.plannerWin = window.open("../planner","_blank");
-        })
-        $('#btn_log_out').click(function(){
-            window.plannerWin.close()
+            $.ajax({
+                method: "POST",
+                url: '../planner/check_duplicate_planner',
+              success: function(response) {
+                var result = JSON.parse(response)
+                if(result['status'] == 1){
+                    $('#duplicatePlannerModal').modal('show');
+                    return;
+                }else if(result['planner_count'] == 0){
+                    $('#counterPlannerModal').modal('show');
+                    return;
+                }else{
+                    window.open(base_url+"customer/planner", "_blank");
+                }
+              }
+            })
         })
     })
 </script>

@@ -371,7 +371,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-sm btn-default" id="btn_close" data-dismiss="modal">Cancel</button>
-                  <a href="http://207.154.243.81/customer/main/budget" class="btn btn-warning btn-sm" id="gotobudgetmenu" target="_blank" style="color: red;">Go to budget menu</a>
+                  <a class="btn btn-warning btn-sm" id="gotobudgetmenu" style="color: red;">Go to budget menu</a>
                 </div>
             </div>
             </div>

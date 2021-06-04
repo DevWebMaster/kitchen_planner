@@ -341,7 +341,7 @@ class Planner_model extends CI_Model{
 		$this->db->from('tbl_color');
 		return $this->db->get()->result_array();
 	}
-	public function check_product($filename, $user_role, $user_id)
+	public function check_product($filename, $user_role, $user_id, $product_id)
 	{
 		$this->db->select('product_id, product_name');
 		$this->db->from('tbl_product_history_log');
@@ -351,14 +351,22 @@ class Planner_model extends CI_Model{
 		}else if($user_role == 2){
 			$this->db->where('pos_id', $user_id);
 		}
+		if($product_id){
+			$this->db->where('product_id', $product_id);
+		}
 		$this->db->order_by('created_at', 'DESC');
 		$result = $this->db->get()->result_array()[0];
 
-		$exist_file = explode('-', $result['product_name']);
-		if($exist_file[0] == $filename){
-			return $result;
+		if(!$product_id){
+			$exist_file = explode('-', $result['product_name']);
+			if($exist_file[0] == $filename)
+				return $result;
 		}else{
-			return 0;
+			if($product_id){
+				return $result;
+			}else{
+				return 0;
+			}
 		}
 	}
 }
