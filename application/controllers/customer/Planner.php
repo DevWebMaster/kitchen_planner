@@ -27,41 +27,52 @@ class Planner extends CI_Controller
             'skirting_type' => $material_list,
             'skirting_color' => $color_list
         );
+        $is_exist = $this->planner_model->get_planner_status($user_id, $user_role);
         if($product_id){
             $this->load->view('customer/planner', ['search_list' => $search_list, 'product_id' => $product_id]);
         }else {
             if($user_role == 2){
                 $planner_count = $this->planner_model->get_planner_count($user_id);
-                $updated_data = array(
-                    'planner_count' => $planner_count['planner_count'] - 1
-                );
-                $result = $this->planner_model->updated_planner_count($updated_data, $user_id);
-                $data = array(
-                    'user_id' => $user_id,
-                    'user_role' => $user_role,
-                    'start_date' => date('Y-m-d H:i:s'),
-                    'status' => 1
-                );
-                //pos is logged in the planner
-                $this->planner_model->start_planner($data);
-                
-                $this->load->view('customer/planner', ['search_list' => $search_list]);
+                if($planner_count['planner_count'] > 0 && $is_exist['status'] == 0){
+                    $planner_count = $this->planner_model->get_planner_count($user_id);
+                    $updated_data = array(
+                        'planner_count' => $planner_count['planner_count'] - 1
+                    );
+                    $result = $this->planner_model->updated_planner_count($updated_data, $user_id);
+                    $data = array(
+                        'user_id' => $user_id,
+                        'user_role' => $user_role,
+                        'start_date' => date('Y-m-d H:i:s'),
+                        'status' => 1
+                    );
+                    //pos is logged in the planner
+                    $this->planner_model->start_planner($data);
+                    
+                    $this->load->view('customer/planner', ['search_list' => $search_list]);
+                }else{
+                    $this->load->view('access_denied');
+                }
             }else if($user_role == 1){
                 $planner_count = $this->planner_model->get_planner_count_for_user($user_id);
-                $updated_data = array(
-                    'planner_count' => $planner_count['planner_count'] - 1
-                );
-                $result = $this->planner_model->updated_planner_count_for_user($updated_data, $user_id);
-                $data = array(
-                    'user_id' => $user_id,
-                    'user_role' => $user_role,
-                    'start_date' => date('Y-m-d H:i:s'),
-                    'status' => 1
-                );
-                //customer is logged in the planner
-                $this->planner_model->start_planner($data);
-                
-                $this->load->view('customer/planner', ['search_list' => $search_list]);
+                if($planner_count['planner_count'] > 0 && $is_exist['status'] == 0){
+                    $planner_count = $this->planner_model->get_planner_count_for_user($user_id);
+                    $updated_data = array(
+                        'planner_count' => $planner_count['planner_count'] - 1
+                    );
+                    $result = $this->planner_model->updated_planner_count_for_user($updated_data, $user_id);
+                    $data = array(
+                        'user_id' => $user_id,
+                        'user_role' => $user_role,
+                        'start_date' => date('Y-m-d H:i:s'),
+                        'status' => 1
+                    );
+                    //customer is logged in the planner
+                    $this->planner_model->start_planner($data);
+                    
+                    $this->load->view('customer/planner', ['search_list' => $search_list]);
+                }else {
+                    $this->load->view('access_denied');
+                }
             }
         }
     }
@@ -346,6 +357,44 @@ class Planner extends CI_Controller
     public function load_design($product_id = '')
     {
         $this->load->view('customer/planner', ['product_id' => $product_id]);
+    }
+    public function get_product_list()
+    {
+        $user_id = $this->session->userdata('user_id');
+        $user_role = $this->session->userdata('user_role');
+
+        $draw = $_POST['draw'];
+        $start = $_POST['start'];
+        $rowperpage = $_POST['length']; // Rows display per page
+        $columnIndex = $_POST['order'][0]['column']; // Column index
+        $columnName = $_POST['columns'][$columnIndex]['data']; // Column name
+        $columnSortOrder = $_POST['order'][0]['dir']; // asc or desc
+        $search_key = $_POST['search']['value'];
+
+        $totalRecords = $this->planner_model->get_all_product_count($user_role, $user_id);
+        $totalRecordwithFilter = $this->planner_model->get_all_product_count_with_filter($user_role, $user_id, $search_key);
+        $product_lists = $this->planner_model->get_productlist($user_role, $user_id, $start, $rowperpage, $search_key);
+        $data = array();
+        $inx = 0;
+        foreach ($product_lists as $value) {
+            $inx++;
+            $row_inx = $inx + intval($start);
+            $data[] = array( 
+              "no"=>$row_inx,
+              "product_name"=>$value['product_name'],
+              "created_date"=>$value['created_at'],
+              "action"=>'<div><a id="'.$value['product_id'].'" class="btn btn-primary btn-design" style="background-color: #ffa200; color: white; border-color: #ffa200;" data-dismiss="modal">View</a></div>'
+           );
+        }
+
+        $response = array(
+          "draw" => intval($draw),
+          "iTotalRecords" => $totalRecords,
+          "iTotalDisplayRecords" => $totalRecordwithFilter,
+          "aaData" => $data
+        );
+
+        echo json_encode($response);
     }
 }
 ?>

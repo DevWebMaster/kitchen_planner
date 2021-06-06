@@ -3,17 +3,19 @@
   <head>
     <title>Design Kitchen</title>
     <base href="/">
-    <link href="<?php site_url(); ?>kitchen_planner/assets/design/planner/css/bootstrap.css" rel="stylesheet">
-    <link href="<?php site_url(); ?>kitchen_planner/assets/design/planner/css/planner.css" rel="stylesheet">
+    <link href="<?php base_url(); ?>assets/design/planner/css/bootstrap.css" rel="stylesheet">
+    <link href="<?php base_url(); ?>assets/design/planner/css/planner.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>plugins/datatables/jquery.dataTables.min.css">
 
-    <script src="<?php site_url(); ?>kitchen_planner/assets/design/planner/js/three.min.js"></script>
-    <script src="<?php site_url(); ?>kitchen_planner/assets/design/planner/js/blueprint3d.js"></script>
+    <script src="<?php base_url(); ?>assets/design/planner/js/three.min.js"></script>
+    <script src="<?php base_url(); ?>assets/design/planner/js/blueprint3d.js"></script>
 
-    <script src="<?php site_url(); ?>kitchen_planner/assets/design/planner/js/jquery.js"></script>
-    <script src="<?php site_url(); ?>kitchen_planner/assets/design/planner/js/bootstrap.js"></script>
+    <script src="<?php base_url(); ?>assets/design/planner/js/jquery.js"></script>
+    <script src="<?php base_url(); ?>assets/design/planner/js/bootstrap.js"></script>
     
-    <script src="<?php site_url(); ?>kitchen_planner/assets/design/planner/js/items.js"></script>
-    <script src="<?php site_url(); ?>kitchen_planner/assets/design/planner/js/planner.js"></script>
+    <script src="<?php base_url(); ?>assets/design/planner/js/items.js"></script>
+    <script src="<?php base_url(); ?>assets/design/planner/js/planner.js"></script>
+    <script src="<?= base_url(); ?>plugins/datatables/jquery.dataTables.min.js"></script><!-- WOW JS -->
     <script type="text/javascript">
       
     </script>
@@ -408,8 +410,8 @@
                 <a class="btn btn-default btn-sm design" style="margin-left: 20px;" data-dismiss="modal" data-toggle="modal" data-target="#newplannermodal">
                   New Plan
                 </a>
-                <a class="btn btn-sm btn-default btn-file design">
-                  <input type="file" accept=".kitchenplanner" class="hidden-input" id="loadFile">
+                <a class="btn btn-sm btn-default btn-file design" id="loadfiles" data-dismiss="modal" data-toggle="modal" data-target="#productlistModal">
+                  <!-- <input type="file" accept=".kitchenplanner" class="hidden-input" id="loadFile"> -->
                   Load Plan
                 </a>
                 <a class="btn btn-default btn-sm" id="exit">
@@ -439,7 +441,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-sm btn-info btn_customer_select px-3" id="select_customer" data-dismiss="modal" data-toggle="modal" data-target="#confirmmodal">Select</button>
-                  <a href="http://207.154.243.81/kitchen_planner/customer/auth/register" target="_blank" class="btn btn-sm btn-warning add_no px-3" data-toggle="modal">New Customer</a>
+                  <a href="http://207.154.243.81/customer/auth/register" target="_blank" class="btn btn-sm btn-warning add_no px-3" data-toggle="modal">New Customer</a>
                   <button type="button" class="btn btn-sm btn-default" id="btn_close" data-dismiss="modal">Return</button>
                 </div>
             </div>
@@ -538,6 +540,34 @@
             </div>
             </div>
             <!-- end of the product name -->
+            <!-- product list per user -->
+            <div class="modal fade" id="productlistModal" tabindex="-1" role="dialog" aria-labelledby="productlistModal">
+            <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background: #ffa200;"><label style="color: white; font-size: x-large;">Product List</label></div>
+                <div class="modal-body">
+                  <div class="row" style="padding-left: 15px; padding-right: 15px">
+                    <div class="table-responsive">  
+                      <table id='product_list' class='table table-bordered table-striped'>
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Product Name</th>
+                            <th>Created Date</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tbody">
+                          
+                        </tbody>
+                      </table>   
+                    </div>
+                  </div> 
+                </div>
+            </div>
+            </div>
+            </div>
+            <!-- end of product list per user -->
           <!-- Add Items -->
           <div id="add-items">
             <div class="row" id="items-wrapper">
@@ -559,7 +589,7 @@
 <script type="text/javascript">
   function myFunc(){
     $.ajax({
-      url: 'kitchen_planner/customer/planner/leave_planner',
+      url: 'customer/planner/leave_planner',
       type: 'POST',
       headers: {'Access-Control-Allow-Origin': '*'},
       success: function(response) {
@@ -568,7 +598,7 @@
   }
   function detectCancel(){
     $.ajax({
-      url: 'kitchen_planner/customer/planner/detect_planner',
+      url: 'customer/planner/detect_planner',
       type: 'POST',
       headers: {'Access-Control-Allow-Origin': '*'},
       success: function(response) {
@@ -580,13 +610,5 @@
 
     return null;
   }
-  // $(window).bind('beforeunload', function(event) {
-  //     myFunc();
-  //     setTimeout(function() {
-  //       setTimeout(function() {
-  //           detectCancel();
-  //       }, 1000);
-  //     },1);
-  //     return 'are you sure';
-  // });
+  
 </script>

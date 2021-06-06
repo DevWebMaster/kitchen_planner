@@ -369,5 +369,43 @@ class Planner_model extends CI_Model{
 			}
 		}
 	}
+	public function get_all_product_count($user_role, $user_id){
+		$this->db->select('*');
+		$this->db->from('tbl_product_history_log');
+		if($user_role == 1)
+			$this->db->where('customer_id', $user_id);
+		else if($user_role == 2)
+			$this->db->where('pos_id', $user_id);
+		
+		$query = $this->db->get();
+		return $query->num_rows();
+	}
+	public function get_all_product_count_with_filter($user_role, $user_id, $search_key){
+		$this->db->select('*');
+		$this->db->from('tbl_product_history_log');
+		if($user_role == 1)
+			$this->db->where('customer_id', $user_id);
+		else if($user_role == 2)
+			$this->db->where('pos_id', $user_id);
+
+		$this->db->like('product_name', $search_key);
+
+		$query = $this->db->get();
+		return $query->num_rows();
+	}
+	public function get_productlist($user_role, $user_id, $start, $rowperpage, $search_key){
+		$this->db->select('product_id, product_name, created_at');
+		$this->db->from('tbl_product_history_log');
+		if($user_role == 1)
+			$this->db->where('customer_id', $user_id);
+		else if($user_role == 2)
+			$this->db->where('pos_id', $user_id);
+
+		$this->db->like('product_name', $search_key);
+		$this->db->order_by('created_at', 'DESC');
+		$this->db->limit($rowperpage, $start);
+		$query = $this->db->get()->result_array();
+		return $query;
+	}
 }
 ?>
