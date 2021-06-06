@@ -78,7 +78,13 @@
 <script src="<?= base_url(); ?>plugins/datatables/jquery.dataTables.min.js"></script><!-- WOW JS -->
 <script type="text/javascript">
 	$(document).ready(function(){
-
+		$('#product_list tbody').on('click', 'td a.btn-design', function(){
+			var product_id = $(this).attr('id');
+			if(window.plannerWin)
+				window.plannerWin.close();
+			window.plannerWin = window.open("../planner/index/"+product_id,"_blank");
+			
+		})
 		$('#order_list tbody').on('click', 'td a.btn-confirm', function (){
 			// var order_id = $(this).attr('h_id');
 			var order_no = $(this).parent().parent().parent().find("td:eq(1)").text();
