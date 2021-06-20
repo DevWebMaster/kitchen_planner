@@ -391,7 +391,7 @@ class Main extends CI_Controller
             }else if($value['model_level'] == 'level3'){
                 $f_point = $furniture_point[0]['level3'];
             }
-            
+
             if($f_point < $point_rate[0]['max']){
                 $furniture_cost = intval($f_point)*$point_rate[0]['price'];
             }if($point_rate[1]['max'] > $f_point && $f_point > $point_rate[1]['min']){
@@ -401,9 +401,13 @@ class Main extends CI_Controller
             }
             $total_furniture_cost += $furniture_cost;
             //extra price
+            $price_countertop_skirting = $this->customer_model->get_price_countertop_skirting($value['model_id']);
+            $skirting_price = $value['length']*$value['width']*($price_countertop_skirting['skirting_type_price'] + $price_countertop_skirting['skirting_color_price'])/1000000;
+            $countertop_price = $value['length']*$value['width']*($price_countertop_skirting['countertop_type_price'] + $price_countertop_skirting['countertop_color_price'])/1000000;
+
             $extra_cost = $this->customer_model->get_extra_cost($value['model_id']);
-            $total_extra_cost += $extra_cost['extra_price'];
-            $pdf_temp = array('model_id' => $value['model_id'], 'furniture_cost' => $furniture_cost, 'extra_cost' => $extra_cost['extra_price']);
+            $total_extra_cost += ($extra_cost['extra_price'] + $skirting_price + $countertop_price);
+            $pdf_temp = array('model_id' => $value['model_id'], 'furniture_cost' => $furniture_cost, 'extra_cost' => $extra_cost['extra_price'], 'countertop_price' => $countertop_price, 'skirting_price' => $skirting_price, 'id' => $value['id']);
             
             //data to generate the pdf
             array_push($pdf_data, $pdf_temp);
@@ -435,8 +439,8 @@ class Main extends CI_Controller
         $sel_models = $this->customer_model->get_sel_models($product_id);
         for($i = 0; $i < count($sel_models); $i++){
             for($j = 0; $j < count($pdf_data); $j++){
-                if($pdf_data[$j]['model_id'] == $sel_models[$i]['model_id']){
-                    $tmp = array('model_id' => $sel_models[$i]['model_id'], 'quantity' => $sel_models[$i]['model_count'], 'furniture_cost' => $pdf_data[$j]['furniture_cost'], 'extra_cost' => $pdf_data[$j]['extra_cost']);
+                if($pdf_data[$j]['id'] == $sel_models[$i]['id']){
+                    $tmp = array('model_id' => $sel_models[$i]['model_id'], 'quantity' => $sel_models[$i]['model_count'], 'furniture_cost' => $pdf_data[$j]['furniture_cost'], 'extra_cost' => $pdf_data[$j]['extra_cost'], 'countertop_price' => $pdf_data[$j]['countertop_price'], 'skirting_price' => $pdf_data[$j]['skirting_price'], 'width' => $sel_models[$i]['width'], 'depth' => $sel_models[$i]['length']);
                     array_push($invoice_data, $tmp);
                     break;
                 }
@@ -503,33 +507,7 @@ class Main extends CI_Controller
         //filtering the countertop
         $countertop_data = array();
         $skirting_data = array();
-        $model_count = 0;
-        for($i = 0; $i < count($invoice_data); $i++){
-            $model_count += $invoice_data[$i]['quantity'];
-            if(count($countertop_data) == 0){
-                array_push($countertop_data, $invoice_data[$i]);
-            }else{
-                for($j = 0; $j < count($countertop_data); $j++){
-                    if(($countertop_data[$j]['countertop_type'] == $invoice_data[$i]['countertop_type']) && ($countertop_data[$j]['countertop_color'] == $invoice_data[$i]['countertop_color'])){
-                        $countertop_data[$j]['quantity'] += 1;
-                    }else{
-                        array_push($countertop_data, $invoice_data[$i]);
-                    }
-                }
-            }
-            if(count($skirting_data) == 0){
-                array_push($skirting_data, $invoice_data[$i]);
-            }else{
-                for($j = 0; $j < count($skirting_data); $j++){
-                    if(($skirting_data[$j]['skirting_type'] == $invoice_data[$i]['skirting_type']) && ($skirting_data[$j]['skirting_color'] == $invoice_data[$i]['skirting_color'])){
-                        $skirting_data[$j]['quantity'] += 1;
-                    }else{
-                        array_push($skirting_data, $invoice_data[$i]);
-                    }
-                }
-            }
 
-        }
         $start    = 109;
         $delta_y = 0;
         for($i = 0; $i < count($invoice_data); $i++){
@@ -539,7 +517,7 @@ class Main extends CI_Controller
             }else{
                 $summary = '';
             }
-            $line = array( "Descripcion"    => $furniture_detail['furniture_name'].' chracteristics (interior color:'.$furniture_detail['interior_color'].', exterio color: '.$furniture_detail['exterio_color'].', dooropen type: '.$furniture_detail['dooropen_type'].', door thickness: '.$furniture_detail['door_thickness'].'), '.$summary,
+            $line = array( "Descripcion"    => $furniture_detail['furniture_name'].'('.$invoice_data[$i]['width'].'*'.$invoice_data[$i]['depth'].')'.' chracteristics (interior color:'.$furniture_detail['interior_color'].', exterio color: '.$furniture_detail['exterio_color'].', dooropen type: '.$furniture_detail['dooropen_type'].', door thickness: '.$furniture_detail['door_thickness'].'), '.$summary,
                            "Cantidad"  => $invoice_data[$i]['quantity'],
                            "Unitary Cost"     => $user_role == 1 ? $invoice_data[$i]['furniture_cost']+$furniture_detail['interior_color_price']+$furniture_detail['exterio_color_price']+$furniture_detail['dooropen_type_price']+$furniture_detail['door_thickness_price']+($furniture_detail['interior_color_price']+$furniture_detail['exterio_color_price']+$furniture_detail['dooropen_type_price']+$furniture_detail['door_thickness_price'])*$margin_spread['customer_margin']/100 : $invoice_data[$i]['furniture_cost']+($furniture_detail['interior_color_price']+$furniture_detail['exterio_color_price']+$furniture_detail['dooropen_type_price']+$furniture_detail['door_thickness_price'])*(1+$margin_spread['pos_margin']/100+$margin_spread['pos_customer_margin']/100+$margin_spread['pos_margin']/100*$margin_spread['pos_customer_margin']/100),
                            "Amount"      => $user_role == 1 ? ($invoice_data[$i]['furniture_cost']+$furniture_detail['interior_color_price']+$furniture_detail['exterio_color_price']+$furniture_detail['dooropen_type_price']+$furniture_detail['door_thickness_price']+($furniture_detail['interior_color_price']+$furniture_detail['exterio_color_price']+$furniture_detail['dooropen_type_price']+$furniture_detail['door_thickness_price'])*$margin_spread['customer_margin']/100)*$invoice_data[$i]['quantity'] : ($invoice_data[$i]['furniture_cost']+($furniture_detail['interior_color_price']+$furniture_detail['exterio_color_price']+$furniture_detail['dooropen_type_price']+$furniture_detail['door_thickness_price'])*(1+($margin_spread['pos_margin']/100)+($margin_spread['pos_customer_margin']/100)+($margin_spread['pos_margin']/100)*($margin_spread['pos_customer_margin']/100)))*$invoice_data[$i]['quantity'],
@@ -548,22 +526,22 @@ class Main extends CI_Controller
             $start += $size+2;
         }
         // $start = $start+2;        
-        for($i = 0; $i < count($countertop_data); $i++){
-            $furniture_detail = $this->customer_model->get_furniture_details($countertop_data[$i]['model_id'], $product_id);
-            $line = array( "Descripcion"    => 'countertop: '.$furniture_detail['countertop_type'].', '.$furniture_detail['countertop_color'],
-                           "Cantidad"  => $countertop_data[$i]['quantity'],
-                           "Unitary Cost"     => $user_role == 1 ? $furniture_detail['countertop_type_price']+$furniture_detail['countertop_color_price']+($furniture_detail['countertop_type_price']+$furniture_detail['countertop_color_price'])*$margin_spread['customer_margin']/100 : ($furniture_detail['countertop_type_price']+$furniture_detail['countertop_color_price'])*(1+$margin_spread['pos_margin']/100+$margin_spread['pos_customer_margin']/100+$margin_spread['pos_margin']/100*$margin_spread['pos_customer_margin']/100),
-                           "Amount"      => $user_role == 1 ? ($furniture_detail['countertop_type_price']+$furniture_detail['countertop_color_price']+($furniture_detail['countertop_type_price']+$furniture_detail['countertop_color_price'])*$margin_spread['customer_margin']/100)*$countertop_data[$i]['quantity'] : (($furniture_detail['countertop_type_price']+$furniture_detail['countertop_color_price'])*(1+$margin_spread['pos_margin']/100+$margin_spread['pos_customer_margin']/100+$margin_spread['pos_margin']/100*$margin_spread['pos_customer_margin']/100))*$countertop_data[$i]['quantity'],
+        for($i = 0; $i < count($invoice_data); $i++){
+            $furniture_detail = $this->customer_model->get_furniture_details($invoice_data[$i]['model_id'], $product_id);
+            $line = array( "Descripcion"    => 'countertop: '.'('.$invoice_data[$i]['width'].'*'.$invoice_data[$i]['depth'].')'.$furniture_detail['countertop_type'].', '.$furniture_detail['countertop_color'],
+                           "Cantidad"  => $invoice_data[$i]['quantity'],
+                           "Unitary Cost"     => $user_role == 1 ? number_format($invoice_data[$i]['countertop_price']+($invoice_data[$i]['countertop_price'])*$margin_spread['customer_margin']/100, 2): number_format(($invoice_data[$i]['countertop_price'])*(1+$margin_spread['pos_margin']/100+$margin_spread['pos_customer_margin']/100+$margin_spread['pos_margin']/100*$margin_spread['pos_customer_margin']/100), 2),
+                           "Amount"      => $user_role == 1 ? number_format(($invoice_data[$i]['countertop_price']+($invoice_data[$i]['countertop_price'])*$margin_spread['customer_margin']/100)*$invoice_data[$i]['quantity'], 2) : number_format((($invoice_data[$i]['countertop_price'])*(1+$margin_spread['pos_margin']/100+$margin_spread['pos_customer_margin']/100+$margin_spread['pos_margin']/100*$margin_spread['pos_customer_margin']/100))*$invoice_data[$i]['quantity'], 2),
                            "Unit" => EURO);
             $size = $pdf->addLine( $start, $line );
             $start += $size+2;
         }
-        for($i = 0; $i < count($skirting_data); $i++){
-            $furniture_detail = $this->customer_model->get_furniture_details($skirting_data[$i]['model_id'], $product_id);
-            $line = array( "Descripcion"    => 'skirting: caracteristics('.$furniture_detail['skirting_type'].', '.$furniture_detail['skirting_color'].')',
-                           "Cantidad"  => $skirting_data[$i]['quantity'],
-                           "Unitary Cost"     => $user_role == 1 ? $furniture_detail['skirting_type_price']+$furniture_detail['skirting_color_price']+($furniture_detail['skirting_type_price']+$furniture_detail['skirting_color_price'])*$margin_spread['customer_margin']/100 : ($furniture_detail['skirting_type_price']+$furniture_detail['skirting_color_price'])*(1+$margin_spread['pos_margin']/100+$margin_spread['pos_customer_margin']/100+$margin_spread['pos_margin']/100*$margin_spread['pos_customer_margin']/100),
-                           "Amount" => $user_role == 1 ? ($furniture_detail['skirting_type_price']+$furniture_detail['skirting_color_price']+($furniture_detail['skirting_type_price']+$furniture_detail['skirting_color_price'])*$margin_spread['customer_margin']/100)*$skirting_data[$i]['quantity'] : (($furniture_detail['skirting_type_price']+$furniture_detail['skirting_color_price'])*(1+$margin_spread['pos_margin']/100+$margin_spread['pos_customer_margin']/100+$margin_spread['pos_margin']/100*$margin_spread['pos_customer_margin']/100))*$skirting_data[$i]['quantity'],
+        for($i = 0; $i < count($invoice_data); $i++){
+            $furniture_detail = $this->customer_model->get_furniture_details($invoice_data[$i]['model_id'], $product_id);
+            $line = array( "Descripcion"    => 'skirting:'.'('.$invoice_data[$i]['width'].'*'.$invoice_data[$i]['depth'].')'.' caracteristics('.$furniture_detail['skirting_type'].', '.$furniture_detail['skirting_color'].')',
+                           "Cantidad"  => $invoice_data[$i]['quantity'],
+                           "Unitary Cost"     => $user_role == 1 ? number_format($invoice_data[$i]['skirting_price']+($invoice_data[$i]['skirting_price'])*$margin_spread['customer_margin']/100, 2) : number_format(($invoice_data[$i]['skirting_price'])*(1+$margin_spread['pos_margin']/100+$margin_spread['pos_customer_margin']/100+$margin_spread['pos_margin']/100*$margin_spread['pos_customer_margin']/100), 2),
+                           "Amount" => $user_role == 1 ? number_format(($invoice_data[$i]['skirting_price']+($invoice_data[$i]['skirting_price'])*$margin_spread['customer_margin']/100)*$invoice_data[$i]['quantity'], 2) : number_format((($invoice_data[$i]['skirting_price'])*(1+$margin_spread['pos_margin']/100+$margin_spread['pos_customer_margin']/100+$margin_spread['pos_margin']/100*$margin_spread['pos_customer_margin']/100))*$invoice_data[$i]['quantity'], 2),
                            "Unit" => EURO);
             $size = $pdf->addLine( $start, $line );
             $start += $size+2;
@@ -573,15 +551,15 @@ class Main extends CI_Controller
         $pdf->SetTextColor(0,0,0);
         $pdf->setLeftMargin(135);
         $pdf->Write(9,'Subtotal Cost: ');
-        $pdf->Write(9, ($total_furniture_cost+$total_extra_cost));
+        $pdf->Write(9, number_format($total_furniture_cost+$total_extra_cost, 2));
         $pdf->Write(9, EURO);
         $pdf->Ln(5);
         $pdf->Write(9,'Taxes: ');
-        $pdf->Write(9, ($total_furniture_cost+$total_extra_cost)*0.21);
+        $pdf->Write(9, number_format(($total_furniture_cost+$total_extra_cost)*0.21, 2));
         $pdf->Write(9, EURO);
         $pdf->Ln(5);
         $pdf->Write(9, 'Total Cost: ');
-        $pdf->Write(9, ($total_furniture_cost+$total_extra_cost)+($total_furniture_cost+$total_extra_cost)*0.21);
+        $pdf->Write(9, number_format(($total_furniture_cost+$total_extra_cost)+($total_furniture_cost+$total_extra_cost)*0.21, 2));
         $pdf->Write(9, EURO);
         
         $pdf->setLeftMargin(0);
@@ -761,7 +739,7 @@ class Main extends CI_Controller
         $email->SMTPAuth = true;
         $email->Username = 'infoweb@roure.es';
         $email->Password = '#R0ure2021#';
-        $email->setFrom($from, 'infoweb@roure.es');
+        $email->setFrom($from, 'abgjens23@gmail.com');
         $email->addAddress($to, 'bozokrkeljas0504@gmail.com');
         $email->Subject = 'Kitchen Planner';
         $email->Body = 'Send the invoice file as a pdf attachment file.';

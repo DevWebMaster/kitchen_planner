@@ -49,7 +49,7 @@ class Materials extends My_Controller {
         foreach ($materials as $value) {
             $data[] = array( 
               "name"=>$value['name'],
-              "price"=>$value['point'],
+              "price"=>$value['price'],
               "action"=>'<a id="'.$value['material_id'].'" class="mr-1 btn-sm btn btn-info edit-row" data-toggle="modal" data-target="#material_edit_modal"><i class="fa fa-edit"></i></a><a id="'.$value['material_id'].'" class="mr-1 btn-sm btn btn-danger delete-row"><i class="fa fa-times"></i></a>'
            );
         }

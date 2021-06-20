@@ -107,6 +107,7 @@
 									</div>
 								</div>
 								<div class="col-md-12 col-sm-12 text-center">
+									<input type="hidden" id="pos" name="pos" value="<?= $pos; ?>">
 									<button disabled name="submit" type="button" id="register" class="btn radius-xl btn-lg outline outline-2 black btn-aware register">Registrarse<span></span></button>
 								</div>
 							</div>

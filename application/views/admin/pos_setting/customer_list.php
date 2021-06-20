@@ -11,6 +11,7 @@
                     <div class="form-group mb-2">
                       <label for="" class="control-label mb-1">POS</label>:
                       <select class="form-control form-control-sm" name="pos_id" id="pos_id">
+                        <option value="all">All</option>
                         <?php for($i = 0; $i < count($pos_arr); $i++){ ?>
                           <option value="<?= $pos_arr[$i]['pos_id']; ?>"><?= $pos_arr[$i]['pos_name']; ?></option>
                         <?php } ?>
@@ -46,6 +47,7 @@
                         <th>Teléfono Número</th>
                         <th>Dirección</th>
                         <th>Zipcode</th>
+                        <th>POS</th>
                         <th>Planner Count</th>
                         <th>Status</th>
                         <!-- <th width="10%">Acciones</th> -->
@@ -89,6 +91,7 @@
            { data: 'phone_num' },
            { data: 'delivery_direction' },
            { data: 'zipcode' },
+           { data: 'pos_name' },
            { data: 'planner_count' },
            { data: 'status' },
         ]

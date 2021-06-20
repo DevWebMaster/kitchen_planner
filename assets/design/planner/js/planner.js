@@ -426,7 +426,7 @@ var TextureSelector = function (blueprint3d, sideMenu) {
 
   function init() {
     $.ajax({
-      url: 'kitchen_planner/customer/planner/get_wall_floor',
+      url: 'customer/planner/get_wall_floor',
       headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       success: function(response){
@@ -556,16 +556,17 @@ var mainControls = function(blueprint3d) {
   function newDesign() {
     var data = blueprint3d.model.exportSerialized();
     var filename = $('#product_name').val()
+    var product_id = $('#product_id').val();
 
     $.ajax({
-      url: 'kitchen_planner/customer/planner/validation_count',
+      url: 'customer/planner/validation_count',
       headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
-      data: {content: data, filename: filename},
+      data: {content: data, filename: filename, product_id: product_id},
       success: function(response){
         var result = JSON.parse(response)
         if(result){
-          // blueprint3d.model.loadSerialized('{"floorplan":{"corners":{"f90da5e3-9e0e-eba7-173d-eb0b071e838e":{"x":204.85099999999989,"y":289.052},"da026c08-d76a-a944-8e7b-096b752da9ed":{"x":672.2109999999999,"y":289.052},"4e3d65cb-54c0-0681-28bf-bddcc7bdb571":{"x":672.2109999999999,"y":-178.308},"71d4f128-ae80-3d58-9bd2-711c6ce6cdf2":{"x":204.85099999999989,"y":-178.308}},"walls":[{"corner1":"71d4f128-ae80-3d58-9bd2-711c6ce6cdf2","corner2":"f90da5e3-9e0e-eba7-173d-eb0b071e838e","frontTexture":{"url":"kitchen_planner/assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0},"backTexture":{"url":"kitchen_planner/assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0}},{"corner1":"f90da5e3-9e0e-eba7-173d-eb0b071e838e","corner2":"da026c08-d76a-a944-8e7b-096b752da9ed","frontTexture":{"url":"kitchen_planner/assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0},"backTexture":{"url":"kitchen_planner/assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0}},{"corner1":"da026c08-d76a-a944-8e7b-096b752da9ed","corner2":"4e3d65cb-54c0-0681-28bf-bddcc7bdb571","frontTexture":{"url":"kitchen_planner/assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0},"backTexture":{"url":"kitchen_planner/assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0}},{"corner1":"4e3d65cb-54c0-0681-28bf-bddcc7bdb571","corner2":"71d4f128-ae80-3d58-9bd2-711c6ce6cdf2","frontTexture":{"url":"kitchen_planner/assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0},"backTexture":{"url":"kitchen_planner/assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0}}],"wallTextures":[],"floorTextures":{},"newFloorTextures":{}},"items":[]}');
+          // blueprint3d.model.loadSerialized('{"floorplan":{"corners":{"f90da5e3-9e0e-eba7-173d-eb0b071e838e":{"x":204.85099999999989,"y":289.052},"da026c08-d76a-a944-8e7b-096b752da9ed":{"x":672.2109999999999,"y":289.052},"4e3d65cb-54c0-0681-28bf-bddcc7bdb571":{"x":672.2109999999999,"y":-178.308},"71d4f128-ae80-3d58-9bd2-711c6ce6cdf2":{"x":204.85099999999989,"y":-178.308}},"walls":[{"corner1":"71d4f128-ae80-3d58-9bd2-711c6ce6cdf2","corner2":"f90da5e3-9e0e-eba7-173d-eb0b071e838e","frontTexture":{"url":"assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0},"backTexture":{"url":"assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0}},{"corner1":"f90da5e3-9e0e-eba7-173d-eb0b071e838e","corner2":"da026c08-d76a-a944-8e7b-096b752da9ed","frontTexture":{"url":"assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0},"backTexture":{"url":"assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0}},{"corner1":"da026c08-d76a-a944-8e7b-096b752da9ed","corner2":"4e3d65cb-54c0-0681-28bf-bddcc7bdb571","frontTexture":{"url":"assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0},"backTexture":{"url":"assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0}},{"corner1":"4e3d65cb-54c0-0681-28bf-bddcc7bdb571","corner2":"71d4f128-ae80-3d58-9bd2-711c6ce6cdf2","frontTexture":{"url":"assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0},"backTexture":{"url":"assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0}}],"wallTextures":[],"floorTextures":{},"newFloorTextures":{}},"items":[]}');
           blueprint3d.model.loadSerialized('{"floorplan":{"corners":{},"walls":[],"wallTextures":[],"floorTextures":{},"newFloorTextures":{}},"items":[]}');
         }else{
           // alert("You can't create the new planner because your account is expired now.");
@@ -584,7 +585,7 @@ var mainControls = function(blueprint3d) {
   })
   function loadDesign(product_id) {
     $.ajax({
-      url: 'kitchen_planner/customer/planner/load_product',
+      url: 'customer/planner/load_product',
       headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       data: {product_id: product_id},
@@ -616,6 +617,7 @@ var mainControls = function(blueprint3d) {
 
   function saveDesign() {
     var data = blueprint3d.model.exportSerialized();
+    console.log(data)
     // var a = window.document.createElement('a');
     // var blob = new Blob([data], {type : 'text'});
     // a.href = window.URL.createObjectURL(blob);
@@ -661,7 +663,7 @@ var mainControls = function(blueprint3d) {
       summary_arr[i].summary = $('#summary'+i).val();
     }
     $.ajax({
-      url: 'kitchen_planner/customer/planner/get_budget',
+      url: 'customer/planner/get_budget',
       headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       data: {req_data: data, product_id: product_id, customer_id: customer_id, summary_arr: summary_arr},
@@ -700,7 +702,7 @@ var mainControls = function(blueprint3d) {
     if(items.length > 0)
     {
       $.ajax({
-        url: 'kitchen_planner/customer/planner/save_product',
+        url: 'customer/planner/save_product',
         headers: {'Access-Control-Allow-Origin': '*'},
         type: 'POST',
         data: {req_data: content, filename: filename, product_id: product_id},
@@ -740,6 +742,6 @@ $(document).ready(function() {
 
   // This serialization format needs work
   // Load a simple rectangle room
-  // blueprint3d.model.loadSerialized('{"floorplan":{"corners":{"f90da5e3-9e0e-eba7-173d-eb0b071e838e":{"x":204.85099999999989,"y":289.052},"da026c08-d76a-a944-8e7b-096b752da9ed":{"x":672.2109999999999,"y":289.052},"4e3d65cb-54c0-0681-28bf-bddcc7bdb571":{"x":672.2109999999999,"y":-178.308},"71d4f128-ae80-3d58-9bd2-711c6ce6cdf2":{"x":204.85099999999989,"y":-178.308}},"walls":[{"corner1":"71d4f128-ae80-3d58-9bd2-711c6ce6cdf2","corner2":"f90da5e3-9e0e-eba7-173d-eb0b071e838e","frontTexture":{"url":"kitchen_planner/assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0},"backTexture":{"url":"kitchen_planner/assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0}},{"corner1":"f90da5e3-9e0e-eba7-173d-eb0b071e838e","corner2":"da026c08-d76a-a944-8e7b-096b752da9ed","frontTexture":{"url":"kitchen_planner/assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0},"backTexture":{"url":"kitchen_planner/assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0}},{"corner1":"da026c08-d76a-a944-8e7b-096b752da9ed","corner2":"4e3d65cb-54c0-0681-28bf-bddcc7bdb571","frontTexture":{"url":"kitchen_planner/assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0},"backTexture":{"url":"kitchen_planner/assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0}},{"corner1":"4e3d65cb-54c0-0681-28bf-bddcc7bdb571","corner2":"71d4f128-ae80-3d58-9bd2-711c6ce6cdf2","frontTexture":{"url":"kitchen_planner/assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0},"backTexture":{"url":"kitchen_planner/assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0}}],"wallTextures":[],"floorTextures":{},"newFloorTextures":{}},"items":[]}');
+  // blueprint3d.model.loadSerialized('{"floorplan":{"corners":{"f90da5e3-9e0e-eba7-173d-eb0b071e838e":{"x":204.85099999999989,"y":289.052},"da026c08-d76a-a944-8e7b-096b752da9ed":{"x":672.2109999999999,"y":289.052},"4e3d65cb-54c0-0681-28bf-bddcc7bdb571":{"x":672.2109999999999,"y":-178.308},"71d4f128-ae80-3d58-9bd2-711c6ce6cdf2":{"x":204.85099999999989,"y":-178.308}},"walls":[{"corner1":"71d4f128-ae80-3d58-9bd2-711c6ce6cdf2","corner2":"f90da5e3-9e0e-eba7-173d-eb0b071e838e","frontTexture":{"url":"assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0},"backTexture":{"url":"assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0}},{"corner1":"f90da5e3-9e0e-eba7-173d-eb0b071e838e","corner2":"da026c08-d76a-a944-8e7b-096b752da9ed","frontTexture":{"url":"assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0},"backTexture":{"url":"assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0}},{"corner1":"da026c08-d76a-a944-8e7b-096b752da9ed","corner2":"4e3d65cb-54c0-0681-28bf-bddcc7bdb571","frontTexture":{"url":"assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0},"backTexture":{"url":"assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0}},{"corner1":"4e3d65cb-54c0-0681-28bf-bddcc7bdb571","corner2":"71d4f128-ae80-3d58-9bd2-711c6ce6cdf2","frontTexture":{"url":"assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0},"backTexture":{"url":"assets/design/planner/rooms/textures/wallmap.png","stretch":true,"scale":0}}],"wallTextures":[],"floorTextures":{},"newFloorTextures":{}},"items":[]}');
   blueprint3d.model.loadSerialized('{"floorplan":{"corners":{},"walls":[],"wallTextures":[],"floorTextures":{},"newFloorTextures":{}},"items":[]}');
 });

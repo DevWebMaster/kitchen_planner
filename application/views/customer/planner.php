@@ -3,18 +3,18 @@
   <head>
     <title>Design Kitchen</title>
     <base href="/">
-    <link href="<?php base_url(); ?>kitchen_planner/assets/design/planner/css/bootstrap.css" rel="stylesheet">
-    <link href="<?php base_url(); ?>kitchen_planner/assets/design/planner/css/planner.css" rel="stylesheet">
+    <link href="<?php base_url(); ?>assets/design/planner/css/bootstrap.css" rel="stylesheet">
+    <link href="<?php base_url(); ?>assets/design/planner/css/planner.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>plugins/datatables/jquery.dataTables.min.css">
 
-    <script src="<?php base_url(); ?>kitchen_planner/assets/design/planner/js/three.min.js"></script>
-    <script src="<?php base_url(); ?>kitchen_planner/assets/design/planner/js/blueprint3d.js"></script>
+    <script src="<?php base_url(); ?>assets/design/planner/js/three.min.js"></script>
+    <script src="<?php base_url(); ?>assets/design/planner/js/blueprint3d.js"></script>
 
-    <script src="<?php base_url(); ?>kitchen_planner/assets/design/planner/js/jquery.js"></script>
-    <script src="<?php base_url(); ?>kitchen_planner/assets/design/planner/js/bootstrap.js"></script>
+    <script src="<?php base_url(); ?>assets/design/planner/js/jquery.js"></script>
+    <script src="<?php base_url(); ?>assets/design/planner/js/bootstrap.js"></script>
     
-    <script src="<?php base_url(); ?>kitchen_planner/assets/design/planner/js/items.js"></script>
-    <script src="<?php base_url(); ?>kitchen_planner/assets/design/planner/js/planner.js"></script>
+    <script src="<?php base_url(); ?>assets/design/planner/js/items.js"></script>
+    <script src="<?php base_url(); ?>assets/design/planner/js/planner.js"></script>
     <script src="<?= base_url(); ?>plugins/datatables/jquery.dataTables.min.js"></script><!-- WOW JS -->
     <script type="text/javascript">
       
@@ -163,7 +163,7 @@
                   <div class="form form-horizontal" class="lead">
                     <div class="form-group">
                       <label class="col-sm-5 control-label">
-                        Anchura:
+                        Profundidad:
                       </label>
                       <div class="col-sm-6">
                         <input type="number" class="form-control" id="item-width">
@@ -171,7 +171,7 @@
                     </div>
                     <div class="form-group">
                       <label class="col-sm-5 control-label">
-                        Profundidad:
+                        Anchura:
                       </label>
                       <div class="col-sm-6">
                         <input type="number" class="form-control" id="item-depth">
@@ -441,7 +441,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-sm btn-info btn_customer_select px-3" id="select_customer" data-dismiss="modal" data-toggle="modal" data-target="#confirmmodal">Select</button>
-                  <a href="http://207.154.243.81/kitchen_planner/customer/auth/register" target="_blank" class="btn btn-sm btn-warning add_no px-3" data-toggle="modal">New Customer</a>
+                  <a href="http://207.154.243.81/customer/auth/register/1" target="_blank" class="btn btn-sm btn-warning add_no px-3" data-toggle="modal">New Customer</a>
                   <button type="button" class="btn btn-sm btn-default" id="btn_close" data-dismiss="modal">Return</button>
                 </div>
             </div>
@@ -589,7 +589,7 @@
 <script type="text/javascript">
   function myFunc(){
     $.ajax({
-      url: 'kitchen_planner/customer/planner/leave_planner',
+      url: 'customer/planner/leave_planner',
       type: 'POST',
       headers: {'Access-Control-Allow-Origin': '*'},
       success: function(response) {
@@ -598,7 +598,7 @@
   }
   function detectCancel(){
     $.ajax({
-      url: 'kitchen_planner/customer/planner/detect_planner',
+      url: 'customer/planner/detect_planner',
       type: 'POST',
       headers: {'Access-Control-Allow-Origin': '*'},
       success: function(response) {

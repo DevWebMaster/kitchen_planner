@@ -9,7 +9,7 @@
 module BP3D.Model {
   /** The default wall texture. */
   const defaultWallTexture = {
-    url: "kitchen_planner/assets/design/planner/rooms/textures/wallmap.png",
+    url: "assets/design/planner/rooms/textures/wallmap.png",
     stretch: true,
     scale: 0
   }

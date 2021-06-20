@@ -121,9 +121,10 @@ class Planner extends CI_Controller
         $user_id = $this->session->userdata('user_id');
         $content = $this->input->post('content');
         $filename = $this->input->post('filename');
+        $product_id = $this->input->post('product_id');
 
-        //download the file on the local pc.
-        $this->download_file($content, $filename);
+        //save the current design
+        $this->save_current_product($user_role, $user_id, $content, $filename, $product_id);
         if($user_role == 2){
             $planner_count = $this->planner_model->get_planner_count($user_id);
         }else if($user_role == 1){
@@ -137,26 +138,12 @@ class Planner extends CI_Controller
                 $result = $this->planner_model->updated_planner_count($updated_data, $user_id);
             else if($user_role == 1)
                 $result = $this->planner_model->updated_planner_count_for_user($updated_data, $user_id);
-            $rtn = true;
         }else{
-            $rtn = false;
+            $result = false;
         }
-        echo json_encode($rtn);
+        echo json_encode($result);
     }
-    private function download_file($content, $filename)
-    {   
-        $today = date('Y-m-d');
 
-        //create the file path to save
-        $path = "D:\kitchen_planner/".$today;
-        if (!is_dir($path)) {
-            @mkdir($path, 0755, true);
-        }
-        // file_put_contents($path.'/'.$filename.'.kitchenplanner', $content);
-        write_file($path.'/'.$filename.'-'.date('YmdHis').'.kitchenplanner', $content);
-
-        force_download($filename.date('YmdHis').'.kitchenplanner', $content); 
-    }
     public function get_wall_floor()
     {
         $result = $this->planner_model->get_wall_floor();
@@ -192,6 +179,7 @@ class Planner extends CI_Controller
     }
     public function get_thumbnail_menu()
     {
+        $search_main = $this->input->post('search_main');
     	$main_id = $this->input->post('main_id');
     	$sub_id = $this->input->post('sub_id');
     	$search_str = $this->input->post('search_str');
@@ -207,7 +195,11 @@ class Planner extends CI_Controller
         if($advanced_filter_flag == 1){
             $result = $this->planner_model->get_thumbnail_menu($main_id, $sub_id, $search_str, $search_countertop_type, $search_countertop_color, $search_exterio_color, $search_interior_color, $search_skirting_type, $search_skirting_color);
         }else {
-            $result = $this->planner_model->get_sub_menu_for_search($main_id, $search_str);
+            if($search_main == 0){
+                $result = $this->planner_model->get_main_menu_for_search($search_str);
+            }else{
+                $result = $this->planner_model->get_sub_menu_for_search($main_id, $search_str);
+            }
         }
 
     	echo json_encode($result);
@@ -268,7 +260,8 @@ class Planner extends CI_Controller
         $user_role = $this->session->userdata('user_role');
         $user_id = $this->session->userdata('user_id');
         $filename = $this->input->post('filename');
-        $exist_product = $this->planner_model->check_product($filename, $user_role, $user_id);
+        $product_id = '';
+        $exist_product = $this->planner_model->check_product($filename, $user_role, $user_id, $product_id);
 
         if($exist_product == 0){
             $rtn = false;
@@ -277,22 +270,15 @@ class Planner extends CI_Controller
         }
         echo json_encode($rtn);
     }
-    public function save_product()
+    private function save_current_product($user_role, $user_id, $contents, $filename, $product_id)
     {
-        $user_role = $this->session->userdata('user_role');
-        $user_id = $this->session->userdata('user_id');
-
-        $req_data = $this->input->post('req_data');
-        $filename = $this->input->post('filename');
-        $product_id = $this->input->post('product_id');
-
         $full_filename = $filename.'-'.date('YmdHis').'.kitchenplanner';
 
         $exist_product = $this->planner_model->check_product($filename, $user_role, $user_id, $product_id);
         if($exist_product == 0){
             $handle = fopen(PRODUCT_PATH.$full_filename, 'w+');
 
-            fwrite($handle, $req_data);
+            fwrite($handle, $contents);
 
             fclose($handle);
 
@@ -320,7 +306,7 @@ class Planner extends CI_Controller
             $handle = fopen(PRODUCT_PATH.$exist_product['product_name'], 'w');
             //make the file as a empty
 
-            fwrite($handle, $req_data);
+            fwrite($handle, $contents);
 
             fclose($handle);
 
@@ -337,7 +323,7 @@ class Planner extends CI_Controller
 
         
         if($product_id){
-            $items = json_decode($req_data)->items;
+            $items = json_decode($contents)->items;
             foreach ($items as $key => $value) {
                 $data = array(
                     'product_id' => $product_id,
@@ -352,7 +338,20 @@ class Planner extends CI_Controller
             }
         }
 
-        echo json_encode($product_id);
+        return $product_id;
+    }
+    public function save_product()
+    {
+        $user_role = $this->session->userdata('user_role');
+        $user_id = $this->session->userdata('user_id');
+
+        $req_data = $this->input->post('req_data');
+        $filename = $this->input->post('filename');
+        $product_id = $this->input->post('product_id');
+
+        $result = $this->save_current_product($user_role, $user_id, $req_data, $filename, $product_id);
+
+        echo json_encode($result);
     }
     public function load_design($product_id = '')
     {

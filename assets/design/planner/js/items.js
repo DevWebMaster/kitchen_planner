@@ -9,7 +9,7 @@ $(document).ready(function() {
     if($('#gen_product_name').val()){
       var filename = $('#gen_product_name').val()
       $.ajax({
-        url: 'kitchen_planner/customer/planner/check_product_duplication',
+        url: 'customer/planner/check_product_duplication',
         type: 'POST',
         headers: {'Access-Control-Allow-Origin': '*'},
         data: {filename: filename},
@@ -50,7 +50,7 @@ $(document).ready(function() {
       'pagingType': "simple",
       'serverMethod': 'post',
       'ajax': {
-          'url':'kitchen_planner/customer/planner/get_product_list',
+          'url':'customer/planner/get_product_list',
       },
       'columns': [
          { data: 'no' },
@@ -61,7 +61,7 @@ $(document).ready(function() {
     });
   })
   $.ajax({
-    url: 'kitchen_planner/customer/planner/get_user_name',
+    url: 'customer/planner/get_user_name',
     type: 'POST',
     headers: {'Access-Control-Allow-Origin': '*'},
     success: function(response){
@@ -76,16 +76,18 @@ $(document).ready(function() {
   var advanced_filter_flag = 0;
   var global_main_id = 0;
   var global_sub_id = 0;
+  var search_main = 0;
   $('.search-group').hide();
   $('#advanced_group').hide();
   $('.short-search-group').hide();
   var btn_back_level = 0;
   var itemsDiv = $("#items-wrapper")
   $.ajax({
-    url: 'kitchen_planner/customer/planner/get_main_menu',
+    url: 'customer/planner/get_main_menu',
     headers: {'Access-Control-Allow-Origin': '*'},
     type: 'POST',
     success: function(response){
+      search_main = 0;
       // console.log(data.data);
       var main_menu = JSON.parse(response);
       for(var inx = 0; inx < main_menu.length; inx++){
@@ -102,13 +104,20 @@ $(document).ready(function() {
 
   $('#items_tab').click(function(){
     if(btn_back_level == 2){
+      search_main = 1;
       $('.search-group').show();
       $('#advanced_group').show();
       advanced_filter_flag = 1;
     }else if(btn_back_level == 1){
       $('.search-group').show();
       $('#advanced_group').hide();
+      search_main = 1;
+    }else{
+      search_main = 0;
+      $('.search-group').show();
+      $('#advanced_group').hide();
     }
+    console.log(search_main)
   })
   console.log('btn_back_level', btn_back_level)
   $('#design_tab').click(function(){
@@ -124,11 +133,12 @@ $(document).ready(function() {
     $('.search-group').show();
     $('#advanced_group').hide();
     $('.short-search-group').hide();
+    search_main = 1;
     itemsDiv.empty();
     var main_menu_id = $(this).parents('div').attr('id');
     global_main_id = main_menu_id;
     $.ajax({
-      url: 'kitchen_planner/customer/planner/get_sub_menu',
+      url: 'customer/planner/get_sub_menu',
       headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       data: {main_menu_id: main_menu_id},
@@ -162,7 +172,7 @@ $(document).ready(function() {
     var main_id = global_main_id = new_status.split('-')[0];
     var sub_id = global_sub_id = new_status.split('-')[1];
     $.ajax({
-      url: 'kitchen_planner/customer/planner/get_shortkey_menu',
+      url: 'customer/planner/get_shortkey_menu',
       headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       data: {main_id: main_id, sub_id: sub_id},
@@ -237,13 +247,14 @@ $(document).ready(function() {
   });
   
   $('div').delegate('a.select-submenu', 'click',function() {
+    search_main = 1;
     var tmp_id = $(this).parents('div').attr('id');
     var sub_id = global_sub_id = tmp_id.split('-')[1];
     var main_id = global_main_id = tmp_id.split('-')[0];
     itemsDiv.empty();
     $('#shortkey-menu').empty();
     $.ajax({
-      url: 'kitchen_planner/customer/planner/get_thumbnail_menu',
+      url: 'customer/planner/get_thumbnail_menu',
       headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       data: {advanced_filter_flag: 1, main_id: main_id, sub_id: sub_id},
@@ -331,9 +342,11 @@ $(document).ready(function() {
     $('.search-group').hide();
       $('#advanced_group').hide();
     if(btn_back_level == 1){
+      $('.search-group').show();
+      search_main = 0;
       itemsDiv.empty();
       $.ajax({
-        url: 'kitchen_planner/customer/planner/get_main_menu',
+        url: 'customer/planner/get_main_menu',
         headers: {'Access-Control-Allow-Origin': '*'},
         type: 'POST',
         success: function(response){
@@ -354,13 +367,14 @@ $(document).ready(function() {
     }
     else if(btn_back_level == 2){
       advanced_filter_flag = 0;
+      search_main = 1;
       itemsDiv.empty();
       $('.search-group').show();
       $('#advanced_group').hide();
       var btn_id = $(this).attr('name');
       var main_id = btn_id.split('-')[0];
       $.ajax({
-        url: 'kitchen_planner/customer/planner/get_sub_menu',
+        url: 'customer/planner/get_sub_menu',
         headers: {'Access-Control-Allow-Origin': '*'},
         type: 'POST',
         data: {main_menu_id: main_id},
@@ -384,7 +398,7 @@ $(document).ready(function() {
         }
       });
     }
-
+console.log(search_main);
   });
   $('#context-menu-search').click(function(){
     var search_str = $('#search-box').val();
@@ -397,7 +411,7 @@ $(document).ready(function() {
 
     itemsDiv.empty();
     // $('#shortkey-menu').empty();
-    get_advanced_search_result(global_main_id, global_sub_id, search_str, search_countertop_type, search_countertop_color, search_exterio_color, search_interior_color, search_skirting_type, search_skirting_color);
+    get_advanced_search_result(search_main, global_main_id, global_sub_id, search_str, search_countertop_type, search_countertop_color, search_exterio_color, search_interior_color, search_skirting_type, search_skirting_color);
   })
   $('#short-menu-search').click(function(){
     var search_str = $('#short-search-box').val();
@@ -405,12 +419,13 @@ $(document).ready(function() {
     $('#shortkey-menu').empty();
     get_search_result(global_main_id, global_sub_id, search_str);
   })
-  function get_advanced_search_result(main_id, sub_id, search_str, search_countertop_type, search_countertop_color, search_exterio_color, search_interior_color, search_skirting_type, search_skirting_color){
+  function get_advanced_search_result(search_main, main_id, sub_id, search_str, search_countertop_type, search_countertop_color, search_exterio_color, search_interior_color, search_skirting_type, search_skirting_color){
     $.ajax({
-      url: 'kitchen_planner/customer/planner/get_thumbnail_menu',
+      url: 'customer/planner/get_thumbnail_menu',
       headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       data: {
+        search_main: search_main,
         advanced_filter_flag: advanced_filter_flag,
         main_id: main_id, 
         sub_id: sub_id, 
@@ -484,12 +499,21 @@ $(document).ready(function() {
                           '</span>' +
                           '</a></div>';
             }else {
-              var html = '<div class="col-sm-4 menu-div" id="'+thumbnail_menu[i].main_id+'-'+thumbnail_menu[i].id+'">' +
+              if(search_main == 0){
+                var html = '<div class="col-sm-4 menu-div" id="'+thumbnail_menu[i].id+'">' +
+                      '<a class="thumbnail select-menu" style="border-color: #ffa200; color: #ffa200;"><img src="' +
+                      thumbnail_menu[i].image + 
+                      '" alt="Select Menu"> '+
+                      thumbnail_menu[i].name +
+                      '</a></div>';
+              }else{
+                var html = '<div class="col-sm-4 menu-div" id="'+thumbnail_menu[i].main_id+'-'+thumbnail_menu[i].id+'">' +
                         '<a class="thumbnail select-submenu" style="border-color: #ffa200; color: #ffa200;"><img src="' +
                         thumbnail_menu[i].image + 
                         '" alt="Select Menu"> '+
                         thumbnail_menu[i].name +
                         '</a></div>';
+              }
             }
               
             itemsDiv.append(html);
@@ -498,13 +522,16 @@ $(document).ready(function() {
             console.log(html)
           }
           $("#btn_back").remove();
-          if(advanced_filter_flag == 1){
-            btn_back_level = 2;
-          }else{
-            btn_back_level = 1;
+          if(search_main != 0){
+            if(advanced_filter_flag == 1){
+              btn_back_level = 2;
+            }else{
+              btn_back_level = 1;
+            }
+            var btn_back = '<button class="btn btn-sm btn-default btn_back" id="btn_back" name="'+thumbnail_menu[0].main_id+'-'+thumbnail_menu[0].sub_id+'">Atrás</button>';
+            $("#back-menu").append(btn_back);
+            console.log("mainmain")
           }
-          var btn_back = '<button class="btn btn-sm btn-default btn_back" id="btn_back" name="'+thumbnail_menu[0].main_id+'-'+thumbnail_menu[0].sub_id+'">Atrás</button>';
-          $("#back-menu").append(btn_back);
         }else{
           itemsDiv.append('<div class="col-sm-12" style="color: #ffa200; text-align: center;">No results.</div>');
           // $('#shortkey-menu').append('<div class="col-sm-12" style="color: #ffa200; text-align: center;">No results.</div>');
@@ -516,6 +543,9 @@ $(document).ready(function() {
           }
           var btn_back = '<button class="btn btn-sm btn-default btn_back" id="btn_back" name="'+main_id+'-'+sub_id+'">Atrás</button>';
           $("#back-menu").append(btn_back);
+          if(search_main == 0){
+            $("#btn_back").remove();
+          }
         }
       }
     })
@@ -523,7 +553,7 @@ $(document).ready(function() {
   console.log('advanced_filter_flag', advanced_filter_flag);
   function get_search_result(main_id, sub_id, search_str){
     $.ajax({
-      url: 'kitchen_planner/customer/planner/get_thumbnail_menu',
+      url: 'customer/planner/get_thumbnail_menu',
       headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       data: {advanced_filter_flag: 1, main_id: main_id, sub_id: sub_id, search_str: search_str},
@@ -618,7 +648,7 @@ $(document).ready(function() {
   $('.btn_show_observation').click(function(){
     var product_id = $('#product_id').val();
     $.ajax({
-      url: 'kitchen_planner/customer/planner/get_observation',
+      url: 'customer/planner/get_observation',
       headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       data: {product_id: product_id},
@@ -644,7 +674,7 @@ $(document).ready(function() {
 
   $('.design2').click(function(){
     $.ajax({
-      url: 'kitchen_planner/customer/planner/get_customer',
+      url: 'customer/planner/get_customer',
       headers: {'Access-Control-Allow-Origin': '*'},
       type: 'POST',
       success: function(response){

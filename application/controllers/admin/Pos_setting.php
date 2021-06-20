@@ -352,6 +352,7 @@ class Pos_setting extends My_Controller {
           "phone_num"=>$value['phone_num'],
           "delivery_direction"=>$value['delivery_direction'],
           "zipcode"=>$value['zipcode'],
+          "pos_name"=>$value['pos_name'],
           "planner_count"=>$value['planner_count'],
           "status"=>$value['is_blocked'] ? '<h6><span class="badge badge-pill badge-danger">blocked</span></h6>' : '<h6><span class="badge-pill badge-success">actived</span></h6>',
        );

@@ -201,7 +201,7 @@ class Customer_model extends CI_Model{
 	}
 	public function get_selected_models($product_id)
 	{
-		$this->db->select('model_id, width, length, model_level');
+		$this->db->select('model_id, width, length, model_level, id');
 		$this->db->from('tbl_model_select_log');
 		$this->db->where('product_id', $product_id);
 		$query = $this->db->get()->result_array();
@@ -210,10 +210,10 @@ class Customer_model extends CI_Model{
 	}
 	public function get_sel_models($product_id)
 	{
-		$this->db->select('count(model_id) as model_count, model_id');
+		$this->db->select('count(model_id) as model_count, model_id, id, width, length');
 		$this->db->from('tbl_model_select_log');
 		$this->db->where('product_id', $product_id);
-		$this->db->group_by('model_id');
+		$this->db->group_by(array('model_id', 'width', 'length'));
 		$query = $this->db->get()->result_array();
 		return $query;
 	}
@@ -239,17 +239,30 @@ class Customer_model extends CI_Model{
 
 		return $query;
 	}
-	public function get_extra_cost($model_id)
+	public function get_price_countertop_skirting($model_id)
 	{
-
-		$this->db->select('a1.model_id, SUM(a2.price+a3.price+a4.price+a5.price+a6.price+a7.price+a8.price+a9.price) as extra_price');
+		$this->db->select('a1.model_id, a2.price as countertop_type_price, a3.price as skirting_type_price, a4.price as countertop_color_price, a5.price as skirting_color_price');
 		$this->db->from('tbl_model_list as a1');
 		$this->db->join('tbl_material as a2', 'a2.material_id = a1.countertop_type', 'left');
 		$this->db->join('tbl_material as a3', 'a3.material_id = a1.skirting_type', 'left');
 		$this->db->join('tbl_color as a4', 'a4.color_id = a1.countertop_color', 'left');
+		$this->db->join('tbl_color as a5', 'a5.color_id = a1.skirting_color', 'left');
+
+		$this->db->where('a1.model_id', $model_id);
+		$query = $this->db->get()->result_array();
+		return $query[0];
+	}
+	public function get_extra_cost($model_id)
+	{
+
+		$this->db->select('a1.model_id, SUM(a5.price+a6.price+a8.price+a9.price) as extra_price');
+		$this->db->from('tbl_model_list as a1');
+		// $this->db->join('tbl_material as a2', 'a2.material_id = a1.countertop_type', 'left');
+		// $this->db->join('tbl_material as a3', 'a3.material_id = a1.skirting_type', 'left');
+		// $this->db->join('tbl_color as a4', 'a4.color_id = a1.countertop_color', 'left');
 		$this->db->join('tbl_color as a5', 'a5.color_id = a1.exterio_color', 'left');
 		$this->db->join('tbl_color as a6', 'a6.color_id = a1.interior_color', 'left');
-		$this->db->join('tbl_color as a7', 'a7.color_id = a1.skirting_color', 'left');
+		// $this->db->join('tbl_color as a7', 'a7.color_id = a1.skirting_color', 'left');
 		$this->db->join('tbl_door_style as a8', 'a8.style_id = a1.dooropen_type', 'left');
 		$this->db->join('tbl_door_thickness as a9', 'a9.thickness_id = a1.door_thickness', 'left');
 		$this->db->where('a1.model_id', $model_id);

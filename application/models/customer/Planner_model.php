@@ -26,6 +26,14 @@ class Planner_model extends CI_Model{
 
 		return $rtn;
 	}
+	public function get_main_menu_for_search($search_str) {
+		$this->db->select('id, name, concat("'.PREFIX_IMAGE_PATH.'", image) as image');
+		$this->db->from('tbl_main_menu');
+		$this->db->like('name', $search_str);
+		$rtn = $this->db->get()->result_array();
+
+		return $rtn;
+	}
 	public function get_sub_menu($main_menu_id){
 		$this->db->select('id, main_id, name, concat("'.PREFIX_IMAGE_PATH.'", image) as image');
 		$this->db->from('tbl_sub_menu');
@@ -118,13 +126,13 @@ class Planner_model extends CI_Model{
 		$this->db->join('tbl_door_thickness as a11', 'a1.door_thickness = a11.thickness_id', 'left');
 		$this->db->join('tbl_model_type as a12', 'a1.type = a12.type', 'left');
 		$this->db->where('a2.product_id', $product_id);
-		$this->db->group_by('a2.model_id');
+		$this->db->group_by(array('a2.model_id', 'a2.width', 'a2.length'));
 
 		return $this->db->get()->result_array();
 
 	}
 	public function get_customer() {
-		$this->db->select('id, concat(customer_name, last_name1, last_name2) as name');
+		$this->db->select('id, concat(customer_name, last_name1, last_name2, "-", DNI) as name');
 		$this->db->from('tbl_customers');
 		$this->db->where('is_deleted', 0);
 
@@ -181,7 +189,7 @@ class Planner_model extends CI_Model{
 
 				$total_furniture_cost += $furniture_cost;
 
-				$this->db->select('a1.model_id, SUM(a2.price+a3.price+a4.price+a5.price+a6.price+a7.price+a8.price+a9.price) as extra_cost');
+				$this->db->select('a1.model_id, a2.price as countertop_type_price, a3.price as skirting_type_price, a4.price as countertop_color_price, a7.price as skirting_color_price, SUM(a5.price+a6.price+a8.price+a9.price) as extra_cost');
 				$this->db->from('tbl_model_list as a1');
 				$this->db->join('tbl_material as a2', 'a1.countertop_type = a2.material_id', 'left');
 				$this->db->join('tbl_material as a3', 'a1.skirting_type = a3.material_id', 'left');
@@ -193,7 +201,12 @@ class Planner_model extends CI_Model{
 				$this->db->join('tbl_door_thickness as a9', 'a1.door_thickness = a9.thickness_id', 'left');
 				$this->db->where('a1.model_id', $item['model_id']);
 
-				$extra_cost = $this->db->get()->result_array()[0]['extra_cost'];
+				$query = $this->db->get()->result_array()[0];
+
+				$extra_cost = $query['extra_cost'];
+
+				$countertop_price = $item['width']*$item['depth']*($query['countertop_type_price'] + $query['countertop_color_price'])/1000000;
+				$skirting_price = $item['width']*$item['depth']*($query['skirting_type_price'] + $query['skirting_color_price'])/1000000;
 
 				$this->db->select('*');
 				if($user_role == 2){
@@ -205,10 +218,10 @@ class Planner_model extends CI_Model{
 				$margin_spread = $this->db->get()->result_array()[0];
 
 				if($user_role == 2){
-					$extra_cost = $extra_cost+$extra_cost*$margin_spread['pos_margin']/100;
+					$extra_cost = ($extra_cost+$countertop_price+$skirting_price)+($extra_cost+$countertop_price+$skirting_price)*$margin_spread['pos_margin']/100;
 					$extra_cost = $extra_cost+$extra_cost*$margin_spread['pos_customer_margin']/100;
 				}else if($user_role == 1){
-					$extra_cost = $extra_cost+$extra_cost*$margin_spread['customer_margin']/100;
+					$extra_cost = ($extra_cost+$countertop_price+$skirting_price)+($extra_cost+$countertop_price+$skirting_price)*$margin_spread['customer_margin']/100;
 				}
 				$total_extra_cost += $extra_cost;
 			}

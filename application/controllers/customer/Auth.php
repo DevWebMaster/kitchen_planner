@@ -27,11 +27,12 @@ class Auth extends CI_Controller
 
         $this->load->view('customer/include/footer.php');
     }
-    public function register()
+    public function register($pos = '')
     {
         $data['data'] = 'login';
-        $this->load->view('customer/include/header1.php', $data);
-        $this->load->view('customer/register');
+        $data['pos'] = $pos;
+        $this->load->view('customer/include/header1.php');
+        $this->load->view('customer/register', $data);
 
         $this->load->view('customer/include/footer.php');
     }
@@ -58,57 +59,61 @@ class Auth extends CI_Controller
             'updated_date'=>date('Y-m-d H:i:s'),
         );
         // $result = $this->customer_model->add_customer($data);
-        $result = 1;
-        if($result == 1){
-            $path = FCPATH . 'vendor'.DIRECTORY_SEPARATOR.'PHPMailer'.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR;
-            require($path."Exception.php");
-            require($path."PHPMailer.php");
-            require($path."SMTP.php");
-
-            $mail = new PHPMailer\PHPMailer\PHPMailer();
-            $to = "bozokrkeljas0504@gmail.com";
-            // $to = $reg_data['email'];
-            $from = "infoweb@roure.es";
-
-            $mail->isSMTP();
-            $mail->SMTPDebug = 2;
-            $mail->Host = 'smtp.ionos.es';
-            $mail->Port = 587;
-            $mail->SMTPOptions = array(
-              'ssl' => array(
-              'verify_peer' => false,
-              'verify_peer_name' => false,
-              'allow_self_signed' => true
-              )
-            );
-            $mail->SMTPSecure = false;
-            $mail->SMTPAutoTLS = false;
-            $mail->SMTPAuth = false;
-            $mail->Username = 'infoweb@roure.es';
-            $mail->Password = '#R0ure2021#';
-            $mail->setFrom($from, 'infoweb@roure.es');
-            $mail->addAddress($to, 'bozokrkeljas0504@gmail.com');
-            $mail->Subject = 'Kitchen Planner';
-            // $mail->Body = 'http://207.154.243.81/kitchen_planner/customer/verify/?mail='.$from.'&hash='.$hash;
-            $mail->Body = '<a href="http://127.0.0.1/kitchen_planner/customer/main/verify/?email='.$reg_data['email'].'&hash='.$hash.'"></a>';
-
-            try {
-                $mail->send();
-                $str = "Ahora recibirás un correo, por favor, pulse a en validar cuenta una vez lo recibas";
-                $status = 'S';
-            } catch (Exception $e) {
-                $str =  "Mailer Error: " . $mail->ErrorInfo;
-                $status = 'E';
-            }
-            if($result == 0){
-                $response = array('status' => 0, 'message' => 'Failed the registeration. Please try again!');
-            }else if($result == 1){
-                $response = array('status' => $status, 'message' => $str);
-            }else if($result == 2){
-                $response = array('status' => 2, 'message' => 'This user is already existed!');
-            }
+        if($reg_data['pos']){
+            $response = array('status' => $status, 'message' => 'registered successfully.'); 
         }else{
-            $response = array('status' => 0, 'message' => 'Failed the registeration. Please try again!');
+            $result = 1;
+            if($result == 1){
+                $path = FCPATH . 'vendor'.DIRECTORY_SEPARATOR.'PHPMailer'.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR;
+                require($path."Exception.php");
+                require($path."PHPMailer.php");
+                require($path."SMTP.php");
+
+                $mail = new PHPMailer\PHPMailer\PHPMailer();
+                $to = "bozokrkeljas0504@gmail.com";
+                // $to = $reg_data['email'];
+                $from = "infoweb@roure.es";
+
+                $mail->isSMTP();
+                $mail->SMTPDebug = 2;
+                $mail->Host = 'smtp.ionos.es';
+                $mail->Port = 587;
+                $mail->SMTPOptions = array(
+                  'ssl' => array(
+                  'verify_peer' => false,
+                  'verify_peer_name' => false,
+                  'allow_self_signed' => true
+                  )
+                );
+                $mail->SMTPSecure = false;
+                $mail->SMTPAutoTLS = false;
+                $mail->SMTPAuth = false;
+                $mail->Username = 'infoweb@roure.es';
+                $mail->Password = '#R0ure2021#';
+                $mail->setFrom($from, 'infoweb@roure.es');
+                $mail->addAddress($to, 'bozokrkeljas0504@gmail.com');
+                $mail->Subject = 'Kitchen Planner';
+                // $mail->Body = 'http://207.154.243.81/kitchen_planner/customer/verify/?mail='.$from.'&hash='.$hash;
+                $mail->Body = '<a href="http://127.0.0.1/kitchen_planner/customer/main/verify/?email='.$reg_data['email'].'&hash='.$hash.'"></a>';
+
+                try {
+                    $mail->send();
+                    $str = "Ahora recibirás un correo, por favor, pulse a en validar cuenta una vez lo recibas";
+                    $status = 'S';
+                } catch (Exception $e) {
+                    $str =  "Mailer Error: " . $mail->ErrorInfo;
+                    $status = 'E';
+                }
+                if($result == 0){
+                    $response = array('status' => 0, 'message' => 'Failed the registeration. Please try again!');
+                }else if($result == 1){
+                    $response = array('status' => $status, 'message' => $str);
+                }else if($result == 2){
+                    $response = array('status' => 2, 'message' => 'This user is already existed!');
+                }
+            }else{
+                $response = array('status' => 0, 'message' => 'Failed the registeration. Please try again!');
+            }
         }
         
         echo json_encode($response);

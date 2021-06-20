@@ -48,7 +48,7 @@ class Order_setting extends My_Controller {
             if($value['check_flag'] == 2){
                 $action_str = '<div style="display: inline-flex;"><!--a style="color:white;" disabled h_id="'.$value['id'].'" id="confirmed'.$value['id'].'" class="mr-1 btn-sm btn btn-info btn-confirmed">Confirmed</a--><a href="'.base_url().$value['pdf_file'].'" target="_blank" style="color:white;" class="mr-1 btn-sm btn btn-info btn-pdf">Order</a><a id="'.$value['product_id'].'" class="btn btn-design btn-info mr-1" style="color: white;">3D Design</a><a style="color:white;" h_id="'.$value['id'].'" id="return'.$value['id'].'" class="mr-1 btn-sm btn btn-info btn-return">Return</a><a style="color:white;" h_id="'.$value['id'].'" id="remove'.$value['id'].'" class="btn-sm btn btn-info btn-remove">Remove</a></div>';
             }else if($value['check_flag'] == 1){
-                $action_str = '<div style="display: inline-flex;"><a style="color:white;" h_id="'.$value['id'].'" id="confirm'.$value['id'].'" class="mr-1 btn-sm btn btn-info btn-confirm" data-toggle="modal" data-target="#ordermodal">Confirm</a><a id="'.$value['product_id'].'" class="btn btn-design btn-info mr-1" style="color: white;">3D Design</a><a style="color:white;" h_id="'.$value['id'].'" id="remove'.$value['id'].'" class="btn-sm btn btn-info btn-remove">Remove</a></div>';
+                $action_str = '<div style="display: inline-flex;"><a style="color:white;" h_id="'.$value['id'].'" id="confirm'.$value['id'].'" class="mr-1 btn-sm btn btn-info btn-confirm" data-toggle="modal" data-target="#ordermodal">Confirm</a><a id="'.$value['product_id'].'" class="btn btn-design btn-info mr-1" style="color: white;">3D Design</a><a href="'.base_url().$value['pdf_file'].'" target="_blank" style="color:white;" class="mr-1 btn-sm btn btn-info btn-pdf">Order</a><a style="color:white;" h_id="'.$value['id'].'" id="remove'.$value['id'].'" class="btn-sm btn btn-info btn-remove">Remove</a></div>';
             }
             $data[] = array( 
               "no"=>$row_inx,
@@ -137,7 +137,7 @@ class Order_setting extends My_Controller {
             }else if($value['check_flag'] == 2){
               $act_str = '<div style="display: inline-flex;"><a id="'.$value['product_id'].'" class="btn btn-design btn-info mr-1" style="color: white;">3D Design</a><a href="'.base_url().$value['pdf_file'].'" target="_blank" style="color:white;" class="mr-1 btn-sm btn btn-info btn-pdf">Order</a><a style="color:white;" h_id="'.$value['id'].'" id="return'.$value['id'].'" class="mr-1 btn-sm btn btn-info btn-return">Return</a><a style="color:white;" h_id="'.$value['id'].'" id="remove'.$value['id'].'" class="btn-sm btn btn-info btn-remove">Remove</a></div>';
             }else if($value['check_flag'] == 0){
-              $act_str = '<div style="display: inline-flex;"><a id="'.$value['product_id'].'" class="btn btn-design btn-info mr-1" style="color: white;">3D Design</a><a style="color:white;" h_id="'.$value['id'].'" id="remove'.$value['id'].'" class="btn-sm btn btn-info btn-remove">Remove</a></div>';
+              $act_str = '<div style="display: inline-flex;"><a id="'.$value['product_id'].'" class="btn btn-design btn-info mr-1" style="color: white;">3D Design</a><a href="'.base_url().$value['pdf_file'].'" target="_blank" style="color:white;" class="mr-1 btn-sm btn btn-info btn-pdf">Order</a><a style="color:white;" h_id="'.$value['id'].'" id="remove'.$value['id'].'" class="btn-sm btn btn-info btn-remove">Remove</a></div>';
             }
 
             $data[] = array( 
