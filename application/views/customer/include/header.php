@@ -52,7 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<!-- main header -->
         <div class="sticky-header main-bar-wraper navbar-expand-lg">
             <div class="main-bar clearfix ">
-                <div class="container clearfix" style="padding-right: 0px !important; padding-left: 0px !important;">
+                <div class="container clearfix">
                     <!-- website logo -->
                     <div class="logo-header mostion">
 						<a href="<?= base_url('customer/'); ?>"><img src="<?= base_url(); ?>images/logo.png" alt=""></a>
@@ -109,13 +109,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         	<?php } ?>
                             <?php if(!empty($this->session->userdata('is_customer_logged'))) { ?>
                                 <?php if($data == 'budget'){ ?>
-                                    <li class="active"><a href="<?php echo base_url('customer/main/budget');?>">Mis presupuestos  </a></li>
+                                    <li class="active"><a href="<?php echo base_url('customer/main/budget');?>">Presupuestos  </a></li>
                                 <?php }else { ?>
-                                    <li><a href="<?php echo base_url('customer/main/budget');?>">Mis presupuestos  </a></li>
+                                    <li><a href="<?php echo base_url('customer/main/budget');?>">Presupuestos  </a></li>
                                 <?php }if($data == 'order'){ ?>
-                                    <li class="active"><a href="<?php echo base_url('customer/main/order');?>">Mis Pedidos  </a></li>
+                                    <li class="active"><a href="<?php echo base_url('customer/main/order');?>">Pedidos  </a></li>
                                 <?php }else { ?>
-                                    <li><a href="<?php echo base_url('customer/main/order');?>">Mis Pedidos  </a></li>
+                                    <li><a href="<?php echo base_url('customer/main/order');?>">Pedidos  </a></li>
                                 <?php }if($data == 'account'){ ?>
                                     <li class="active"><a href="<?php echo base_url('customer/main/account');?>">Mi Cuenta  </a></li>
                                 <?php }else { ?>
@@ -198,7 +198,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					$('#counterPlannerModal').modal('show');
 					return;
 				}else{
-					window.open(base_url+"customer/planner", "_blank");
+					window.plannerWin = window.open(base_url+"customer/planner", "_blank");
 				}
 			  }
 			})

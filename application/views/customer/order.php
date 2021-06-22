@@ -28,7 +28,7 @@
 								<th>Nombre del proyecto</th>
 								<th>Precio Muebles Cocina</th>
 								<th>Otros costes</th>
-								<th>Status</th>
+								<th>Estado</th>
 								<th>Acciones</th>  <!-- load design button,     -->
 		                    </tr>
 		                  </thead>

@@ -14087,3 +14087,7 @@ pre {
 .btn-order, .btn-confirm, .btn-pdf, .btn-email, .btn-design, .btn-conform, .btn-budget {
     color: white !important;
 }
+
+.container {
+    max-width: 1470px !important;
+}

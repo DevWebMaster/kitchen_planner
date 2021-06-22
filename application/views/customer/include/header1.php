@@ -104,13 +104,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php } ?>
                             <?php if(!empty($this->session->userdata('is_customer_logged'))) { ?>
                                 <?php if($data == 'budget'){ ?>
-                                    <li class="active"><a href="<?php echo base_url('customer/main/budget');?>">Mis presupuestos  </a></li>
+                                    <li class="active"><a href="<?php echo base_url('customer/main/budget');?>">Presupuestos  </a></li>
                                 <?php }else { ?>
-                                    <li><a href="<?php echo base_url('customer/main/budget');?>">Mis presupuestos  </a></li>
+                                    <li><a href="<?php echo base_url('customer/main/budget');?>">Presupuestos  </a></li>
                                 <?php }if($data == 'order'){ ?>
-                                    <li class="active"><a href="<?php echo base_url('customer/main/order');?>">Mis Pedidos  </a></li>
+                                    <li class="active"><a href="<?php echo base_url('customer/main/order');?>">Pedidos  </a></li>
                                 <?php }else { ?>
-                                    <li><a href="<?php echo base_url('customer/main/order');?>">Mis Pedidos  </a></li>
+                                    <li><a href="<?php echo base_url('customer/main/order');?>">Pedidos  </a></li>
                                 <?php }if($data == 'account'){ ?>
                                     <li class="active"><a href="<?php echo base_url('customer/main/account');?>">Mi Cuenta  </a></li>
                                 <?php }else { ?>

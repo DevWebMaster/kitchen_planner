@@ -304,14 +304,14 @@ class Main extends CI_Controller
             $row_inx = $inx + intval($start);
             if($value['check_order'] == 3){ //canceled by a admin
                 $act_str = 'Canceled it by a admin user.';
-                $status_str = 'Canceled';
+                $status_str = 'Cancelado';
             }
             else if($value['check_order'] == 2){  //comfirmed
                 // $act_str = '<a disabled  style="background: green; color: white;" h_id="'.$value['product_id'].'" id="confirmed'.$value['product_id'].'" class="btn btn-confirm">Confirmed</a>';
                 $act_str = '';
-                $status_str = 'Ordered';
+                $status_str = 'Pedido';
             }else if($value['check_order'] == 1){  //confirm
-                $status_str ='Budget';
+                $status_str ='Presupuestado';
                 if($user_role == 1){
                     $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="confirm'.$value['product_id'].'" class="btn btn-confirm mr-1">Confirmar</a><a h_id="'.$value['product_id'].'" id="pdf'.$value['product_id'].'" class="btn btn-pdf mr-1">PDF</a><a h_id="'.$value['product_id'].'" id="email'.$value['product_id'].'" class="btn btn-email mr-1">Enviar a mi email</a><a id="'.$value['product_id'].'" class="btn btn-design">Diseño 3D</a></div>';
 
@@ -319,7 +319,7 @@ class Main extends CI_Controller
                     $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" id="confirm'.$value['product_id'].'" class="btn btn-confirm mr-1">Confirmar</a><a h_id="'.$value['product_id'].'" id="pdf'.$value['product_id'].'" class="btn btn-pdf mr-1">PDF</a><a h_id="'.$value['product_id'].'" id="email'.$value['product_id'].'" class="btn btn-email mr-1">Enviar a mi email</a><a id="'.$value['product_id'].'" class="btn btn-design">Diseño 3D</a></div>';
                 }
             }else{  // 0: budget
-                $status_str = 'Pre-budget';
+                $status_str = 'Sin Presupuesto';
                 if($user_role == 1){
                     $act_str = '<div style="display:inline-flex;"><a h_id="'.$value['product_id'].'" c_id="'.$value['customer_id'].'" id="budget'.$value['product_id'].'" class="btn btn-budget mr-1">Presupuesto</a><a id="'.$value['product_id'].'" class="btn btn-design">Diseño 3D</a></div>';
                 }else if($user_role == 2){
@@ -331,8 +331,8 @@ class Main extends CI_Controller
                 $data[] = array( 
                   "no"=>$row_inx,
                   "product_name"=>$value['product_name'],
-                  "furniture_cost"=>$value['estimated_furniture_cost'],
-                  "other_cost"=>($value['estimated_countertio_cost']-$value['estimated_furniture_cost']),
+                  "furniture_cost"=>number_format($value['estimated_furniture_cost'], 2),
+                  "other_cost"=>number_format($value['estimated_countertio_cost']-$value['estimated_furniture_cost'], 2),
                   "status"=>$status_str,
                   "action"=>$act_str
                 );
@@ -341,8 +341,8 @@ class Main extends CI_Controller
                   "no"=>$row_inx,
                   "product_name"=>$value['product_name'],
                   "customer"=>$value['customer_name'],
-                  "furniture_cost"=>$value['estimated_furniture_cost'],
-                  "other_cost"=>($value['estimated_countertio_cost']-$value['estimated_furniture_cost']),
+                  "furniture_cost"=>number_format($value['estimated_furniture_cost'], 2),
+                  "other_cost"=>number_format($value['estimated_countertio_cost']-$value['estimated_furniture_cost'], 2),
                   "action"=>$act_str
                 );
             }
@@ -550,15 +550,15 @@ class Main extends CI_Controller
         $pdf->SetFont('Arial','B',11);
         $pdf->SetTextColor(0,0,0);
         $pdf->setLeftMargin(135);
-        $pdf->Write(9,'Subtotal Cost: ');
+        $pdf->Write(9,'Subtotal: ');
         $pdf->Write(9, number_format($total_furniture_cost+$total_extra_cost, 2));
         $pdf->Write(9, EURO);
         $pdf->Ln(5);
-        $pdf->Write(9,'Taxes: ');
+        $pdf->Write(9,'Impuestos: ');
         $pdf->Write(9, number_format(($total_furniture_cost+$total_extra_cost)*0.21, 2));
         $pdf->Write(9, EURO);
         $pdf->Ln(5);
-        $pdf->Write(9, 'Total Cost: ');
+        $pdf->Write(9, 'Precio Total: ');
         $pdf->Write(9, number_format(($total_furniture_cost+$total_extra_cost)+($total_furniture_cost+$total_extra_cost)*0.21, 2));
         $pdf->Write(9, EURO);
         
