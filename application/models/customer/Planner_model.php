@@ -236,7 +236,7 @@ class Planner_model extends CI_Model{
 				$data = array(
 					'estimated_furniture_cost' => $total_furniture_cost,
 					'estimated_countertio_cost' => ($total_furniture_cost+$total_extra_cost),
-					'check_order' => 1,
+					// 'check_order' => 1,
 					'online_mode' => $online_mode,
 					'updated_by' => $user_id
 				);
@@ -247,7 +247,7 @@ class Planner_model extends CI_Model{
 					'estimated_furniture_cost' => $total_furniture_cost,
 					'estimated_countertio_cost' => ($total_furniture_cost+$total_extra_cost),
 					'customer_id' => $customer_id,
-					'check_order' => 1,
+					// 'check_order' => 1,
 					'online_mode' => $online_mode,
 					'updated_by' => $user_id,
 				);

@@ -24,6 +24,7 @@
   <body>
     <input type="hidden" name="product_id" id="product_id" value="<?= $product_id; ?>">
     <input type="hidden" name="product_name" id="product_name">
+    <input type="hidden" name="flag" id="flag" value="<?= $flag; ?>">
     <div class="container-fluid">
       <div class="row main-row">
         <!-- Left Column -->
@@ -587,6 +588,10 @@
   </body>
 </html>
 <script type="text/javascript">
+  if($('#flag').val() == 2){
+    $('#save_planner').hide();
+  }
+console.log($('#flag').val())
   function myFunc(){
     $.ajax({
       url: 'customer/planner/leave_planner',

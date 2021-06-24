@@ -590,10 +590,10 @@ class Main extends CI_Controller
             $inx++;
             $row_inx = $inx + intval($start);
             if($value['check_flag'] == 2){
-                $action_str = '<div style="display: inline-flex;"><!--a disabled  style="background: green; color: white;" h_id="'.$value['id'].'" id="confirmed'.$value['id'].'" class="btn btn-confirm mr-1">Confirmed</a--><a href="'.base_url().$value['pdf_file'].'" class="btn btn-pdf mr-1">See Order</a><a id="'.$value['product_id'].'" class="btn btn-design">Diseño 3D</a></div>';
+                $action_str = '<div style="display: inline-flex;"><!--a disabled  style="background: green; color: white;" h_id="'.$value['id'].'" id="confirmed'.$value['id'].'" class="btn btn-confirm mr-1">Confirmed</a--><a href="'.base_url().$value['pdf_file'].'" class="btn btn-pdf mr-1">See Order</a><a id="'.$value['product_id'].'" f_id="'.$value['check_flag'].'" class="btn btn-design">Diseño 3D</a></div>';
             }
             else if($value['check_flag'] == 1){
-                $action_str = '<div style="display: inline-flex;"><a disabled  style="background: green; color: white;" h_id="'.$value['id'].'" id="confirm'.$value['id'].'" class="btn btn-confirm mr-1">Pedido Confirmado</a><a id="'.$value['product_id'].'" class="btn btn-design">Diseño 3D</a></div>';
+                $action_str = '<div style="display: inline-flex;"><a disabled  style="background: green; color: white;" h_id="'.$value['id'].'" id="confirm'.$value['id'].'" class="btn btn-confirm mr-1">Pedido Confirmado</a><a id="'.$value['product_id'].'" f_id="'.$value['check_flag'].'" class="btn btn-design">Diseño 3D</a></div>';
             }else if($value['check_flag'] == 0){
                 $action_str = '<div style="display:inline-flex;"><a h_id="'.$value['id'].'" id="order'.$value['id'].'" class="btn btn-order mr-1" data-toggle="modal" data-target="#ordermodal">Order</a></div>';
             }
@@ -601,8 +601,8 @@ class Main extends CI_Controller
               "no"=>$row_inx,
               "order_no"=>$value['order_no'],
               "product_name"=>$value['product_name'],
-              "furniture_cost"=>$value['estimated_furniture_cost'],
-              "other_cost"=>($value['estimated_countertio_cost']-$value['estimated_furniture_cost']),
+              "furniture_cost"=>number_format($value['estimated_furniture_cost'], 2),
+              "other_cost"=>number_format($value['estimated_countertio_cost']-$value['estimated_furniture_cost'], 2),
               "status"=>$value['status'],
               "action"=>$action_str
            );
@@ -673,8 +673,8 @@ class Main extends CI_Controller
               "order_no"=>$value['order_no'],
               "product_name"=>$value['product_name'],
               "customer"=>$value['customer_name'],
-              "furniture_cost"=>$value['estimated_furniture_cost'],
-              "other_cost"=>($value['estimated_countertio_cost']-$value['estimated_furniture_cost']),
+              "furniture_cost"=>number_format($value['estimated_furniture_cost'], 2),
+              "other_cost"=>number_format($value['estimated_countertio_cost']-$value['estimated_furniture_cost'], 2),
               "status"=>$value['status'],
               "action"=>$action_str
            );

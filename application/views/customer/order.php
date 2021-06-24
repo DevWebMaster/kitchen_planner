@@ -80,9 +80,10 @@
 	$(document).ready(function(){
 		$('#order_list tbody').on('click', 'td a.btn-design', function(){
 			var product_id = $(this).attr('id');
+			var flag = $(this).attr('f_id');
 			if(window.plannerWin)
 				window.plannerWin.close();
-			window.plannerWin = window.open("../planner/index/"+product_id,"_blank");
+			window.plannerWin = window.open("../planner/index/"+product_id+"/"+flag, "_blank");
 			
 		})
 		$('#order_list tbody').on('click', 'td a.btn-order', function (){
